@@ -7,18 +7,10 @@ left:
     menu:
       - text: "About Course Content"
         href: CourseContent.html
-      - text: "00 Course Introduction"
-        href: 00_CourseIntroductionFrame.html
-      - text: "01 First Steps"
+      - text: "01 R Intro"
         href: 01_Rintro.html
       - text: "02 Data Wrangling"
         href: 02_DataWrangling.html
-      - text: "04 Spatial Data"
-        href: 04_Spatial.html
-      - text: "05 Spatial Raster Data"
-        href: 05_Raster.html
-      - text: "06 More Raster Data"
-        href: 06_RasterTwo.html
 right:
   - icon: fa-github fa-lg
     href: https://cmerow.github.io/RDataScience/

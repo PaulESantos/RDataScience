@@ -1,16 +1,15 @@
-title: "GEO 503: R Spatial Data Science"
+title: "Ecology, Statistics, and Data Science with R"
 type: inverse
 left:
   - text: "Home"
     href: index.html
-  - text: "Syllabus"
-    href: Syllabus.html
   - text: "Schedule"
     href: Schedule.html
   - text: "Content"
     menu:
       - text: "About Course Content"
         href: CourseContent.html
+      - text: "-----------------"
       - text: "Module 1: Introduction to R"
       - text: "00 Course Introduction"
         href: 00_CourseIntroductionFrame.html
@@ -29,22 +28,11 @@ left:
       - text: "06 More Raster Data"
         href: 06_RasterTwo.html
       - text: "-----------------"
-      - text: "Module 2: Advanced Programming"
+      - text: "Module 3: Advanced Programming"
       - text: "07 Reproducible Research"
         href: 07_Reproducibile.html
-      - text: "08 Weather Data Processing"
-        href: 08_WeatherData.html
-      - text: "-----------------"
-  - text: "Assignments"
-    menu:
-      - text: "Homeworks"
-        href: Homework.html
-      - text: "Package Introduction"
-        href: PackageIntro.html
-      - text: "Final Project"
-        href: Project.html
   - text: "Resources"
     href: Resources.html
 right:
   - icon: fa-github fa-lg
-    href: https://github.com/adammwilson/RDataScience
+    href: https://cmerow.github.io/RDataScience

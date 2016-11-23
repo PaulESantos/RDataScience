@@ -5,6 +5,8 @@
 
 [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](05_Raster.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
 
+This tutorial has been forked from awesome classes developed by Adam Wilson here: http://adamwilson.us/RDataScience/
+
 ## Libraries
 
 
@@ -561,6 +563,10 @@ gplot(clim[[13:19]])+geom_raster(aes(fill=value))+
   coord_equal()
 ```
 
+```
+## Warning: Transformation introduced infinite values in discrete y-axis
+```
+
 ![](05_Raster_files/figure-html/unnamed-chunk-28-1.png)<!-- -->
 
 
@@ -583,7 +589,7 @@ object.size(clim)
 ```
 
 ```
-## 226400 bytes
+## 227920 bytes
 ```
 
 ```r
@@ -617,13 +623,13 @@ r1
 
 ```
 ## class       : RasterLayer 
-## dimensions  : 90, 150, 13500  (nrow, ncol, ncell)
+## dimensions  : 76, 98, 7448  (nrow, ncol, ncell)
 ## resolution  : 0.1666667, 0.1666667  (x, y)
-## extent      : 10, 35, -35, -20  (xmin, xmax, ymin, ymax)
+## extent      : 16.5, 32.83333, -34.83333, -22.16667  (xmin, xmax, ymin, ymax)
 ## coord. ref. : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0 
 ## data source : in memory
 ## names       : bio1 
-## values      : 5.8, 24.8  (min, max)
+## values      : 5.8, 24.6  (min, max)
 ```
 
 ```r
@@ -720,7 +726,7 @@ cellStats(r1,range)
 ```
 
 ```
-## [1]  5.8 24.8
+## [1]  5.8 24.6
 ```
 
 ```r
@@ -730,7 +736,7 @@ cellStats(s,range)
 ```
 
 ```
-## [1] 15.8 34.8
+## [1] 15.8 34.6
 ```
 
 
@@ -743,7 +749,7 @@ cellStats(s,range)
 ```
 
 ```
-## [1] 2.408319 4.979960
+## [1] 2.408319 4.959839
 ```
 
 ```r
@@ -775,7 +781,7 @@ cellStats(s,range)
 ```
 
 ```
-## [1]  18.96825 128.50300
+## [1]  18.96825 127.01203
 ```
 
 ## Extracting Raster Data
@@ -812,13 +818,13 @@ head(pts_data)
 ```
 
 ```
-##   ID  bio1 bio2 bio3   bio4
-## 1  1 -11.9  6.7  1.5 1286.7
-## 2  2   4.4 12.1  2.3 1418.4
-## 3  3  11.3  9.4  3.1  706.5
-## 4  4 -10.1  6.6  2.2  829.3
-## 5  5  26.2  7.6  7.3   98.8
-## 6  6  -5.4  7.0  2.1  897.1
+##   ID bio1 bio2 bio3   bio4
+## 1  1 25.8 12.3  6.1  222.1
+## 2  2 26.1 10.7  8.0   51.6
+## 3  3 21.9 13.1  6.4  258.9
+## 4  4 20.7 10.0  3.6  599.6
+## 5  5 27.7 17.6  4.5  736.2
+## 6  6 -1.3 12.9  2.4 1394.7
 ```
 > Use `package::function` to avoid confusion with similar functions.
 
@@ -849,12 +855,12 @@ head(d2)
 
 ```
 ##   cell   ID value
-## 1    1 bio1 -11.9
-## 2    2 bio1   4.4
-## 3    3 bio1  11.3
-## 4    4 bio1 -10.1
-## 5    5 bio1  26.2
-## 6    6 bio1  -5.4
+## 1    1 bio1  25.8
+## 2    2 bio1  26.1
+## 3    3 bio1  21.9
+## 4    4 bio1  20.7
+## 5    5 bio1  27.7
+## 6    6 bio1  -1.3
 ```
 
 And plot density plots (like histograms).
@@ -1130,6 +1136,10 @@ gplot(tmax_crop)+
 
 ```
 ## Regions defined for each Polygons
+```
+
+```
+## Warning: Ignoring unknown aesthetics: order
 ```
 
 ![](05_Raster_files/figure-html/unnamed-chunk-57-1.png)<!-- -->

@@ -178,7 +178,7 @@ The text and R code are interwoven in the output:
 
 The time is `` `r time` ``
 
-The time is Sun 06 Nov 21:21:29 2016
+The time is Tue 22 Nov 19:06:49 2016
 
 
 
@@ -422,6 +422,10 @@ ggplot(d,aes(x=longitude,y=latitude))+
   geom_polygon(aes(x=long,y=lat,group=group,order=order),data=map)+
   geom_point(col="red")+
   coord_equal()
+```
+
+```
+## Warning: Ignoring unknown aesthetics: order
 ```
 
 ![](07_Reproducibile_files/figure-html/unnamed-chunk-5-1.png)<!-- -->

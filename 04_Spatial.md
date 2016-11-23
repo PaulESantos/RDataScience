@@ -4,6 +4,8 @@
 
 [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](04_Spatial.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
 
+This tutorial has been forked from awesome classes developed by Adam Wilson here: http://adamwilson.us/RDataScience/
+
 # Setup
 
 ## Load packages
@@ -11,10 +13,27 @@
 ```r
 library(sp)
 library(rgdal)
+```
+
+```
+## rgdal: version: 1.2-4, (SVN revision 643)
+##  Geospatial Data Abstraction Library extensions to R successfully loaded
+##  Loaded GDAL runtime: GDAL 1.11.4, released 2016/01/25
+##  Path to GDAL shared files: /Library/Frameworks/R.framework/Versions/3.3/Resources/library/rgdal/gdal
+##  Loaded PROJ.4 runtime: Rel. 4.9.1, 04 March 2015, [PJ_VERSION: 491]
+##  Path to PROJ.4 shared files: /Library/Frameworks/R.framework/Versions/3.3/Resources/library/rgdal/proj
+##  Linking to sp version: 1.2-3
+```
+
+```r
 library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(maptools)
+```
+
+```
+## Checking rgeos availability: TRUE
 ```
 
 # Point data

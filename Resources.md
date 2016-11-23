@@ -1,9 +1,5 @@
 # Resources
 
-## Data Science
-* [What classes should I take if I want to become a data scientist?](https://www.quora.com/What-classes-should-I-take-if-I-want-to-become-a-data-scientist)
-
-
 ## Getting Started with R
 
 <div style="height: 10px;"></div>

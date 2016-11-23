@@ -14,6 +14,8 @@ knitr::opts_chunk$set(eval=T)
 
 [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](`r output`).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
 
+This tutorial has been forked from awesome classes developed by Adam Wilson here: http://adamwilson.us/RDataScience/
+
 ## Libraries
 
 ```{r message=F,warning=FALSE, results='hide'}

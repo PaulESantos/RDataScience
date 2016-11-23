@@ -19,13 +19,12 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
-<link rel="stylesheet"
-      href="site_libs/highlight/textmate.css"
-      type="text/css" />
-<script src="site_libs/highlight/highlight.js"></script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -153,7 +152,6 @@ $(document).ready(function () {
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
@@ -175,15 +173,12 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">GEO 503: R Spatial Data Science</a>
+      <a class="navbar-brand" href="index.html">Ecology, Statistics, and Data Science with R</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
   <a href="index.html">Home</a>
-</li>
-<li>
-  <a href="Syllabus.html">Syllabus</a>
 </li>
 <li>
   <a href="Schedule.html">Schedule</a>
@@ -198,6 +193,7 @@ $(document).ready(function () {
     <li>
       <a href="CourseContent.html">About Course Content</a>
     </li>
+    <li class="divider"></li>
     <li class="dropdown-header">Module 1: Introduction to R</li>
     <li>
       <a href="00_CourseIntroductionFrame.html">00 Course Introduction</a>
@@ -223,31 +219,9 @@ $(document).ready(function () {
       <a href="06_RasterTwo.html">06 More Raster Data</a>
     </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Module 2: Advanced Programming</li>
+    <li class="dropdown-header">Module 3: Advanced Programming</li>
     <li>
       <a href="07_Reproducibile.html">07 Reproducible Research</a>
-    </li>
-    <li>
-      <a href="08_WeatherData.html">08 Weather Data Processing</a>
-    </li>
-    <li class="divider"></li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Assignments
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="Homework.html">Homeworks</a>
-    </li>
-    <li>
-      <a href="PackageIntro.html">Package Introduction</a>
-    </li>
-    <li>
-      <a href="Project.html">Final Project</a>
     </li>
   </ul>
 </li>
@@ -257,7 +231,7 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/adammwilson/RDataScience">
+  <a href="https://cmerow.github.io/RDataScience">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -276,148 +250,63 @@ $(document).ready(function () {
 </div>
 
 
-<p>Course content is designed to be flexible to accommodate student interest and abilities. The order and timing of course topics may change as the semester progresses.</p>
+<p>Course content is designed to be flexible to accommodate student interest and abilities.</p>
 <table style="width:89%;">
 <colgroup>
 <col width="5%" />
-<col width="5%" />
+<col width="8%" />
+<col width="8%" />
+<col width="8%" />
 <col width="58%" />
-<col width="19%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th align="left">Date</th>
+<th align="left">Time</th>
+<th align="left">Location</th>
 <th align="left">Title</th>
 <th align="left">Description</th>
-<th align="left">Assignment</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">8/29</td>
-<td align="left"><strong>Introduction &amp; Overview</strong></td>
-<td align="left">Course Motivation &amp; Objectives. Workflow &amp; repeatable research in an era of big data for spatial environmental analysis. Getting started with the R Project for Statistical Computing &amp; RStudio.</td>
-<td align="left"></td>
+<td align="left">Tues, Nov 29</td>
+<td align="left">ESC110</td>
+<td align="left">4-530pm</td>
+<td align="left"><strong>Spatial Data Analysis with R</strong></td>
+<td align="left">We’ll use spatial data to introduce fundamental concepts for the R programming language and teach best coding practices useful for beginners and experienced alike. Goals include: (1) Experience useful for future, more specific workshops with BGC; (2) Setting up a workflow to make sure coding isn’t annoying; (3) Loops; (4) Writing functions; (5) Using raster (spatial) data; (6) Customizable pretty plots.</td>
 </tr>
 <tr class="even">
-<td align="left">9/5</td>
-<td align="left"><strong>Labor day</strong></td>
-<td align="left">(no class)</td>
-<td align="left">Read <a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf">Introduction to R</a></td>
-</tr>
-<tr class="odd">
-<td align="left">9/12</td>
-<td align="left"><strong>Data Wrangling </strong></td>
-<td align="left">Data structures (vectors, matrices, data frames). Base graphics. Reading and writing data (from disk and internet).</td>
-<td align="left">Practice homework submitted during class.</td>
-</tr>
-<tr class="even">
-<td align="left">9/19</td>
-<td align="left"><strong>Data Wrangling 2</strong></td>
-<td align="left">Filtering, selecting, joining data sets. Data gymnastics with dplyr.</td>
-<td align="left">Homework #1</td>
-</tr>
-<tr class="odd">
-<td align="left">9/26</td>
-<td align="left"><strong>Graphics</strong></td>
-<td align="left">More base graphics (scatterplots, histograms). The <em>grammar of graphics</em>: ggplot2 and extensions (ggmap, rasterVis, etc.).</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">10/3</td>
-<td align="left"><strong>Spatial Data</strong></td>
-<td align="left">Spatial Libraries: raster, sp, rgeos, rgdal. Integrating ‘traditional GIS’ analyses with statistical modelling. Data intersection (e.g. connecting points with polygons and rasters), overlays, zonal statistics</td>
-<td align="left">Homework # 2</td>
-</tr>
-<tr class="odd">
-<td align="left">10/10</td>
-<td align="left"><strong>Spatial Raster I</strong></td>
-<td align="left">Working with gridded spatial data</td>
-<td align="left">Project Proposal Due</td>
-</tr>
-<tr class="even">
-<td align="left">10/17</td>
-<td align="left"><strong>Spatial Raster II</strong></td>
-<td align="left">Raster calculations, working with climate datasets.</td>
-<td align="left">Homework # 3</td>
-</tr>
-<tr class="odd">
-<td align="left">10/24</td>
-<td align="left"><strong>Spatial Raster III</strong></td>
-<td align="left">A ‘mini’ project - looking at sea level rise in Bangladesh</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">10/31</td>
-<td align="left"><strong>Reproducible Research &amp; Literate Programming &amp; Version Control</strong></td>
-<td align="left">RMarkdown to create dynamic research outputs. Publishing to github/word/html/etc. Managing code with “version control” using Github. Figshare and other data repositories.</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">11/7</td>
-<td align="left"><strong>Weather/Climate Data Processing </strong></td>
-<td align="left">Processing daily weather data from NOAA</td>
-<td align="left">First draft of project for peer assessment</td>
-</tr>
-<tr class="even">
-<td align="left">11/14</td>
-<td align="left"><strong>Satellite Data Processing</strong></td>
-<td align="left">Working with MODIS Satellite data</td>
-<td align="left">Peer Evaluation Due</td>
-</tr>
-<tr class="odd">
-<td align="left">11/21</td>
-<td align="left"><strong>High Performance Computing &amp; Software Integration</strong></td>
-<td align="left">Parallel processing and high performance computing in R, Calling other programs from within R.</td>
-<td align="left">Homework # 4</td>
-</tr>
-<tr class="even">
-<td align="left">11/21</td>
-<td align="left"><strong>Package Development</strong></td>
-<td align="left">Package structure and necessary components. Things to consider when developing an R package. <a href="http://www.htmlwidgets.org">HTML Widgets</a></td>
-<td align="left">Second draft of project</td>
-</tr>
-<tr class="odd">
-<td align="left">11/28</td>
-<td align="left"><strong>Final Project Presentations</strong></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">12/5</td>
-<td align="left"><strong>Final Project Presentations</strong></td>
-<td align="left"></td>
-<td align="left"></td>
+<td align="left">Thurs, Jan 26</td>
+<td align="left">ESC110</td>
+<td align="left">4-530pm</td>
+<td align="left"><strong>Mapping Species Ranges</strong></td>
+<td align="left">We’ll use a complete workflow – from data download to pretty maps of predictions – to model a species geographic distribution (range). Goals include learning how to use:(1) Understand modeling decisions; (2) Statistical regression techniques; (3) Machine learning techniques; (4) Manipulate rasters; (5) Customize plots; (6) Write a workflow that others can use.</td>
 </tr>
 </tbody>
 </table>
+<!-- 
+| Date    | Time  | Location  | Title   | Description |
+|:--|:-----|:----|:---------|:-----------------------------------------------------|
+| Tues, Nov 29 | 4-530pm | ESC110  | **Spatial Data Analysis with R** | 
+We'll use spatial data to introduce fundamental concepts for the R programming language and teach best coding practices useful for beginners and experienced alike. Goals include: (1) Experience useful for future, more specific workshops with BGC; (2) Setting up a workflow to make sure coding isn't annoying; (3) Loops; (4) Writing functions; (5) Using raster (spatial) data; (6) Customizable pretty plots.|   
 
-<!-- Google Analytics -->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-2684666-2', 'auto');
-  ga('send', 'pageview');
-</script>
+| Thurs, Jan 26 | 4-530pm | ESC110  | **Mapping Species Ranges** | We’ll use a complete workflow – from data download to pretty maps of predictions – to model a species geographic distribution (range). Goals include learning how to use:(1) Understand modeling decisions; (2) Statistical regression techniques; (3) Machine learning techniques; (4) Manipulate rasters; (5) Customize plots; (6) Write a workflow that others can use.
 
-<!-- disqus -->
-<div id="disqus_thread" style="margin-top: 45px;"></div>
-<script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'rdataanalysis'; // required: replace example with your forum shortname
-        var disqus_identifier = "{{ page.url }}";
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq         );
-        })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">
-              comments powered by Disqus.</a>
-</noscript>
+| 9/12 | **Data Wrangling ** | Data structures (vectors, matrices, data frames). Base graphics. Reading and writing data (from disk and internet). |  Practice homework submitted during class. |
+| 9/19 | **Data Wrangling 2** | Filtering, selecting, joining data sets. Data gymnastics with dplyr. |  Homework #1  |
+| 9/26 | **Graphics** | More base graphics (scatterplots, histograms).  The _grammar of graphics_: ggplot2 and extensions (ggmap, rasterVis, etc.). |  |
+| 10/3 | **Spatial Data** | Spatial Libraries: raster, sp, rgeos, rgdal. Integrating ‘traditional GIS’ analyses with statistical modelling.  Data intersection (e.g. connecting points with polygons and rasters), overlays, zonal statistics | Homework # 2 |
+| 10/10 | **Spatial Raster I** | Working with gridded spatial data | Project Proposal Due |
+| 10/17 | **Spatial Raster II** | Raster calculations, working with climate datasets.  | Homework # 3    |
+| 10/24 | **Spatial Raster III** | A 'mini' project - looking at sea level rise in Bangladesh | |
+| 10/31 | **Reproducible Research & Literate Programming & Version Control** | RMarkdown to create dynamic research outputs.  Publishing to github/word/html/etc. Managing code with "version control"" using Github. Figshare and other data repositories. |  |
+| 11/7 | **Weather/Climate Data Processing ** | Processing daily weather data from NOAA  |  First draft of project for peer assessment   |
+| 11/14 | **Satellite Data Processing** | Working with MODIS Satellite data | Peer Evaluation Due |
+| 11/21 | **High Performance Computing & Software Integration** | Parallel processing and high performance computing in R, Calling other programs from within R. | Homework # 4 |
+| 11/28 |  **Package Development** |  Package structure and necessary components.  Things to consider when developing an R package. [HTML Widgets](http://www.htmlwidgets.org) | Second draft of project |
+| 12/5 | **Final Project Presentations** | | |
+-->
 
 
 <!-- give the footer some space -->
@@ -426,10 +315,12 @@ $(document).ready(function () {
 
 <footer id="site-footer">
   <div id="footer1">
-  <a href="http://www.adamwilson.us"><img src="img/wilson.png" alt="logo" width=40px></a>
+  <a href="https://cmerow.github.io"><img src="img/cory.png" alt="logo" width=40px></a>
+  <!--
   <a href="http://adamwilson.us/#contact"><i class="fa fa-envelope fa-2x"></i></a> 
   <a href="https://twitter.com/AdamWilsonLab"><i class="fa fa-twitter fa-2x"></i></a> 
   <a href="https://github.com/AdamMWilson"><i class="fa fa-github fa-2x"></i></a>
+  -->
   </div>
   <div id="footer2">
   <a rel="license" property="http://creativecommons.org/ns#license"
@@ -444,8 +335,11 @@ $(document).ready(function () {
 <script>
 
 // add bootstrap table styles to pandoc tables
-$(document).ready(function () {
+function bootstrapStylePandocTables() {
   $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
 });
 
 

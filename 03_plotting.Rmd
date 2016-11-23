@@ -12,6 +12,8 @@ knitr::opts_chunk$set(cache=T, warnings=F, messages=F)
 options(width=50)
 ```
 
+This tutorial has been forked from awesome classes developed by Adam Wilson here: http://adamwilson.us/RDataScience/
+
 <div>
 <object data="03_assets/03_Plotting.pdf" type="application/pdf" width="100%" height="600px"> 
   <p>It appears you don't have a PDF plugin for this browser.

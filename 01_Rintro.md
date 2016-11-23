@@ -13,6 +13,7 @@
 
 
 # First Steps
+This tutorial has been forked from awesome classes developed by Adam Wilson here: http://adamwilson.us/RDataScience/
 
 [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](01_Rintro.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
 
@@ -469,9 +470,9 @@ matrix(rnorm(9),nrow=3)
 
 ```
 ##            [,1]       [,2]       [,3]
-## [1,]  0.2167471 1.70177257  0.9103663
-## [2,]  0.8249060 0.00395252 -1.7969127
-## [3,] -1.4223906 0.74245759  1.2705074
+## [1,]  2.3748814 -0.2872916 -1.2369010
+## [2,] -0.1540487 -0.9569000 -1.4039846
+## [3,] -1.0165249  0.9468491  0.1216067
 ```
 </div>
 </div>

@@ -11,6 +11,8 @@
  </div>
  <p><a href="02_assets/02_DataWrangling.pdf">Download the PDF of the presentation</a></p>  
 
+This tutorial has been forked from awesome classes developed by Adam Wilson here: http://adamwilson.us/RDataScience/
+
 [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](02_DataWrangling.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
 
 
@@ -947,7 +949,7 @@ library(rgeos)
 ```
 
 ```
-## rgeos version: 0.3-20, (SVN revision 535)
+## rgeos version: 0.3-21, (SVN revision 540)
 ##  GEOS runtime version: 3.4.2-CAPI-1.8.2 r3921 
 ##  Linking to sp version: 1.2-3 
 ##  Polygon checking: TRUE
@@ -1042,6 +1044,10 @@ base + wrld +
   theme(panel.background = element_rect(fill = 'white', colour = 'white')) +
   labs(y = "Latitude", x = "Longitude",
        title = "Count of Flights from New York in 2013")
+```
+
+```
+## Warning: Ignoring unknown aesthetics: order
 ```
 
 ![](02_DataWrangling_files/figure-html/unnamed-chunk-36-1.png)<!-- -->

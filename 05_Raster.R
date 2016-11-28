@@ -1,14 +1,18 @@
 #' ---
-#' title: "Introduction to Raster Package"
+#' title: "A quick introduction to spatial data analysis"
 #' ---
 #' 
 #' 
 #' 
+#' <div>
+#' <iframe src="05_presentation/05_Spatial.html" width="100%" height="700px"> </iframe>
+#' </div>
+#' 
 #' [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](`r output`).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
 #' 
-#' This tutorial has been forked from awesome classes developed by Adam Wilson here: http://adamwilson.us/RDataScience/
+#' This tutorial has been forked from awesome classes developed by Adam Wilson [here]( http://adamwilson.us/RDataScience/)
 #' 
-#' ## Libraries
+#' # Setup
 #' 
 ## ----message=F,warning=FALSE, results='hide'-----------------------------
 library(dplyr)
@@ -17,11 +21,166 @@ library(sp)
 library(ggplot2)
 library(rgeos)
 library(maptools)
-
-# New libraries
+library(rgdal)
 library(raster)
 library(rasterVis)  #visualization library for raster
 
+#' 
+#' # Point data
+#' 
+#' ## Generate some random data
+## ------------------------------------------------------------------------
+coords = data.frame(
+  x=rnorm(100),
+  y=rnorm(100)
+)
+str(coords)
+
+#' 
+#' 
+## ------------------------------------------------------------------------
+plot(coords)
+
+#' 
+#' 
+#' ## Convert to `SpatialPoints`
+#' 
+#' Many tools are designed in R to work specifically with spatial point data, so we need a special object of class *SpatialPoints*. The important thing is that it has a *slot* to store coordinates.
+#' 
+## ------------------------------------------------------------------------
+sp = SpatialPoints(coords)
+str(sp)
+
+#' 
+#' 
+#' ## Create a `SpatialPointsDataFrame`
+#' 
+#' First generate a dataframe (analagous to the _attribute table_ in a shapefile)
+## ------------------------------------------------------------------------
+data=data.frame(ID=1:100,group=letters[1:20])
+head(data)
+
+#' 
+#' 
+#' Combine the coordinates with the data
+## ------------------------------------------------------------------------
+spdf = SpatialPointsDataFrame(coords, data)
+spdf = SpatialPointsDataFrame(sp, data)
+
+str(spdf)
+
+#' Note the use of _slots_ designated with a `@`.  See `?slot` for more. 
+#' 
+#' 
+#' ## Promote a data frame with `coordinates()` to a `SpatialPoints` object
+## ------------------------------------------------------------------------
+coordinates(data) = cbind(coords$x, coords$y) 
+
+#' 
+## ------------------------------------------------------------------------
+str(spdf)
+
+#' 
+#' ## Subset data
+#' 
+## ------------------------------------------------------------------------
+subset(spdf, group=="a")
+
+#' 
+#' Or using `[]`
+## ------------------------------------------------------------------------
+spdf[spdf$group=="a",]
+
+#' 
+#' <!-- Unfortunately, `dplyr` functions do not directly filter spatial objects. -->
+#' 
+#' 
+#' <div class="well">
+#' ## Your turn
+#' 
+#' Convert the following `data.frame` into a SpatialPointsDataFrame using the `coordinates()` method and then plot the points with `plot()`.
+#' 
+## ------------------------------------------------------------------------
+df=data.frame(
+  lat=c(12,15,17,12),
+  lon=c(-35,-35,-32,-32),
+  id=c(1,2,3,4))
+
+#' 
+#' 
+#' <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo1">Show Solution</button>
+#' <div id="demo1" class="collapse">
+#' 
+#' 
+#' </div>
+#' </div>
+#' 
+#' ## Examine topsoil quality in the Meuse river data set
+#' 
+## ------------------------------------------------------------------------
+## Load the data
+data(meuse)
+str(meuse)
+
+#' 
+#' <div class="well">
+#' ## Your turn
+#' _Promote_ the `meuse` object to a spatial points data.frame with `coordinates()`.
+#' 
+#' <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo2">Show Solution</button>
+#' <div id="demo2" class="collapse">
+#' 
+#' 
+#' </div>
+#' </div>
+#' 
+#' Plot it with ggplot:
+## ---- fig.height=4-------------------------------------------------------
+  ggplot(as.data.frame(meuse),aes(x=x,y=y))+
+    geom_point(col="red")+
+    coord_equal()
+
+#' 
+#' Note that `ggplot` works only with data.frames.  Convert with `as.data.frame()` or `fortify()`.
+#' 
+#' ## ggplot 
+#' If you're not familiar with ggplot, here's a quick digression. For a more detailed version, see the ggplot section in Lesson 03: Plotting.
+#' # [`ggplot2`](http://ggplot2.org)
+#' The _grammar of graphics_ consists of specifying a number of key elements of a plot. These are the same elements you'd put in any base graphics plot; this approach just provides a consisent way of defining them 
+#' 
+#' 
+#' 1.	Data: 		The raw data
+#' 2.	`geom_`: The geometric shapes representing data (e.g. use a circle or triangle)
+#' 3.	`aes()`:	Aesthetics of the geometric and statistical objects (color, size, shape, and position)
+#' 4.	`scale_`:	Maps between the data and the aesthetic dimensions (e.g. x- and y-limits)
+#' 
+#' ```
+#' data
+#' + geometry,
+#' + aesthetic mappings like position, color and size
+#' + scaling of ranges of the data to ranges of the aesthetics
+#' ```
+#' 
+#'  Additional settings
+#' 
+#' 5.	`stat_`:	Statistical summaries of the data that can be plotted, such as quantiles, fitted curves (loess, linear models), etc.
+#' 6.	`coord_`:	Transformation for mapping data coordinates into the plane of the data rectangle
+#' 7.	`facet_`:	Arrangement of data into grid of plots (e.g. a grid with one plot for each species, location, or time)
+#' 8.	`theme`:	Visual defaults (background, grids, axes, typeface, colors, etc.)
+#' 
+#' 
+## ------------------------------------------------------------------------
+# Old Faithful Geyser Data on duration and waiting times.
+library("MASS")
+data(geyser)
+m <- ggplot(geyser, aes(x = duration, y = waiting)) # define data
+m + # reference the data
+  geom_point() +  # add points
+  stat_density2d(geom="contour") + # add a contour plot
+  xlim(0.5, 6) + ylim(40, 110) # define plot limits
+
+#' 
+#' And now back to spatial data ...
 #' 
 #' # Raster Package
 #' 
@@ -51,15 +210,18 @@ getData("ISO3")%>%
   as.data.frame%>%
   filter(NAME=="South Africa")
 
+#' > Note that `%>%` is a *pipe*, defined by the `dplyr` package that says 'Use the previous thing as the first argument in this function. So this is equivalent to `temp1 = getData("ISO3")` followed by `temp2 = as.data.frame(temp1)` followed by `output=filter(temp2,NAME==South Africa')`.
 #' 
 #' Download data for South Africa
 ## ------------------------------------------------------------------------
 za=getData('GADM', country='ZAF', level=1)
 
 #' 
-## ------------------------------------------------------------------------
-plot(za)
+## ----eval=FALSE----------------------------------------------------------
+## plot(za) # this can be a little slow
 
+#' <img src="05_assets/za_vector.png" alt="alt text" width="70%">
+#' 
 #' 
 #' Danger: `plot()` works, but can be slow for complex polygons.
 #' 
@@ -69,14 +231,10 @@ plot(za)
 za@data
 
 #' 
-#' 
-## ------------------------------------------------------------------------
-za=subset(za,NAME_1!="Prince Edward Islands")
+## ---- eval=FALSE---------------------------------------------------------
+## za=subset(za,NAME_1=="Eastern Cape")
+## plot(za)
 
-plot(za)
-
-#' 
-#' 
 #' 
 #' <div class="well">
 #' ## Your turn
@@ -104,17 +262,20 @@ plot(za)
 #' * `rasterStack`: Multiple Bands
 #' * `rasterBrick`: Multiple Bands of _same_ thing.
 #' 
+#' Normally, you'll obtain rasters data by downloading it from somewhere (e.g. global climate data below), but to get a better understanding of rasters, let's build one from scratch.
 #' 
 ## ---- echo=TRUE----------------------------------------------------------
 x <- raster()
 x
 
 #' 
+#' There are lots of slots to handle all the ways one might need to use a raster; fortunately you won't have to dig into the majority of these.
+#' 
 ## ------------------------------------------------------------------------
 str(x)
 
 #' 
-#' 
+#' The most useful functions for accessing slots are `values()` to get data values, `extent()` to get the bounding box, `crs()` to get the projection.
 #' 
 ## ---- echo=T, results=T--------------------------------------------------
 x <- raster(ncol=36, nrow=18, xmn=-1000, xmx=1000, ymn=-100, ymx=900)
@@ -123,8 +284,6 @@ res(x) <- 100
 res(x)
 ncol(x)
 
-#' 
-#' 
 #' 
 ## ------------------------------------------------------------------------
 # change the numer of columns (affects resolution)
@@ -172,7 +331,9 @@ values(r)[1:10]
 #' 
 #' 
 #' 
-#' Raster memory usage
+#' ## Raster memory usage
+#' 
+#' Raster data files can be very large, especially when cells are at high resolution, so it becomes important to think about how much RAM is required to work with a raster to avoid slowing your computer to a crawl. The `raster` package cleverly avoids reading full rasters into memory to instead just provides pointers to the relevant raster files.
 #' 
 ## ------------------------------------------------------------------------
 inMemory(r)
@@ -194,8 +355,8 @@ plot(r, main='Raster with 100 cells')
 #' rasterVis package has `gplot()` for plotting raster data in the `ggplot()` framework.
 #' 
 ## ------------------------------------------------------------------------
-gplot(r,maxpixels=50000)+
-  geom_raster(aes(fill=value))
+gplot(r,maxpixels=50000)+ # reference the data
+  geom_raster(aes(fill=value)) # cell's data value determines its color
 
 #' 
 #' 
@@ -211,10 +372,10 @@ gplot(r,maxpixels=10)+
 #' Can use all the `ggplot` color ramps, etc.
 #' 
 ## ------------------------------------------------------------------------
-gplot(r)+geom_raster(aes(fill=value))+
-    scale_fill_distiller(palette="OrRd")
+gplot(r)+ # reference the data
+  geom_raster(aes(fill=value))+ # cell's data value determines its color
+  scale_fill_distiller(palette="OrRd") # specify the color pallette
 
-#' 
 #' 
 #' ## Spatial Projections
 #' 
@@ -225,19 +386,6 @@ gplot(r)+geom_raster(aes(fill=value))+
 projection(r)
 
 #' 
-#' ## Warping rasters
-#' 
-#' Use `projectRaster()` to _warp_ to a different projection.
-#' 
-#' `method=` `ngb` (for categorical) or `bilinear` (continuous)
-#' 
-## ------------------------------------------------------------------------
-r2=projectRaster(r,crs="+proj=sinu +lon_0=0",method = )
-
-par(mfrow=c(1,2));plot(r);plot(r2)
-
-
-#' 
 #' 
 #' # WorldClim
 #' 
@@ -245,8 +393,6 @@ par(mfrow=c(1,2));plot(r);plot(r2)
 #' 
 #' Mean monthly climate and derived variables interpolated from weather stations on a 30 arc-second (~1km) grid.
 #' See [worldclim.org](http://www.worldclim.org/methods)
-#' 
-#' 
 #' 
 #' ## Bioclim variables
 #' 
@@ -306,7 +452,7 @@ gain(clim)=0.1
 #' ### Plot with `plot()`
 #' 
 ## ------------------------------------------------------------------------
-plot(clim)
+plot(clim[[1:3]]) # just the first 3, since its slow
 
 #' 
 #'  
@@ -315,7 +461,7 @@ plot(clim)
 #' 
 #' Or use `rasterVis` methods with gplot
 ## ------------------------------------------------------------------------
-gplot(clim[[13:19]])+geom_raster(aes(fill=value))+
+gplot(clim[[1:3]])+geom_raster(aes(fill=value))+
   facet_wrap(~variable)+
   scale_fill_gradientn(colours=c("brown","red","yellow","darkgreen","green"),trans="log10")+
   coord_equal()
@@ -371,16 +517,12 @@ aggregate(r1, 3, fun=mean) %>%
 #' </div>
 #' </div>
 #' 
-#' 
-#' 
 #' ## Focal ("moving window")
 ## ------------------------------------------------------------------------
 ## apply a function over a moving window
 focal(r1, w=matrix(1,3,3), fun=mean) %>% 
   plot()
 
-#' 
-#' 
 #' 
 ## ------------------------------------------------------------------------
 ## apply a function over a moving window
@@ -392,7 +534,6 @@ rf_range=rf_max-rf_min
 rf_range2 <- focal(r1, w=matrix(1,11,11), fun=range)
 plot(rf_range2)
 
-#' 
 #' 
 #' <div class="well">
 #' ## Your turn
@@ -410,7 +551,7 @@ plot(rf_range2)
 #' 
 #' ## Raster calculations
 #' 
-#' the `raster` package has many options for _raster algebra_, including `+`, `-`, `*`, `/`, logical operators such as `>`, `>=`, `<`, `==`, `!` and functions such as `abs`, `round`, `ceiling`, `floor`, `trunc`, `sqrt`, `log`, `log10`, `exp`, `cos`, `sin`, `max`, `min`, `range`, `prod`, `sum`, `any`, `all`.
+#' The `raster` package has many options for _raster algebra_, including `+`, `-`, `*`, `/`, logical operators such as `>`, `>=`, `<`, `==`, `!` and functions such as `abs`, `round`, `ceiling`, `floor`, `trunc`, `sqrt`, `log`, `log10`, `exp`, `cos`, `sin`, `max`, `min`, `range`, `prod`, `sum`, `any`, `all`.
 #' 
 #' So, for example, you can 
 ## ------------------------------------------------------------------------
@@ -420,8 +561,6 @@ cellStats(r1,range)
 s = r1 + 10
 cellStats(s,range)
 
-#' 
-#' 
 #' 
 ## ------------------------------------------------------------------------
 ## take the square root
@@ -572,25 +711,26 @@ rsp=raster::extract(x=r1,
 #spplot(rsp,zcol="bio1")
 
 #' 
-## ------------------------------------------------------------------------
-## add the ID to the dataframe itself for easier indexing in the map
-rsp$id=as.numeric(rownames(rsp@data))
-## create fortified version for plotting with ggplot()
-frsp=fortify(rsp,region="id")
+## ----eval=FALSE----------------------------------------------------------
+## ## add the ID to the dataframe itself for easier indexing in the map
+## rsp$id=as.numeric(rownames(rsp@data))
+## ## create fortified version for plotting with ggplot()
+## frsp=fortify(rsp,region="id")
+## 
+## ggplot(rsp@data, aes(map_id = id, fill=bio1)) +
+##     expand_limits(x = frsp$long, y = frsp$lat)+
+##     scale_fill_gradientn(
+##       colours = c("grey","goldenrod","darkgreen","green"))+
+##     coord_map()+
+##     geom_map(map = frsp)
+## 
 
-ggplot(rsp@data, aes(map_id = id, fill=bio1)) +
-    expand_limits(x = frsp$long, y = frsp$lat)+
-    scale_fill_gradientn(
-      colours = c("grey","goldenrod","darkgreen","green"))+
-    coord_map()+
-    geom_map(map = frsp)
-
-
+#' <img src="05_assets//slow_zonal_plot.png" alt="alt text" width="75%"> 
 #' 
-#' > For more details about plotting spatialPolygons, see [here](https://github.com/hadley/ggplot2/wiki/plotting-polygon-shapefiles)
+#' 
+#' > Not a very exciting plot, but then again, we did just ask for the mean value across the province. For more details about plotting spatialPolygons, see [here](https://github.com/hadley/ggplot2/wiki/plotting-polygon-shapefiles)
 #' 
 #' ## Example Workflow
-#' 
 #' 
 #' 1. Download the Maximum Temperature dataset using `getData()`
 #' 2. Set the gain to 0.1 (to convert to degrees Celcius)
@@ -645,24 +785,24 @@ transect=SpatialLinesDataFrame(
 #' 
 #' 
 #' ## Plot the timeseries of climate data
-## ----fig.width=20,fig.height=20------------------------------------------
-gplot(tmax_crop)+
-  geom_tile(aes(fill=value))+
-  scale_fill_gradientn(
-    colours=c("brown","red","yellow","darkgreen","green"),
-    name="Temp")+
-  facet_wrap(~variable)+
-  ## now add country overlays
-  geom_path(data=fortify(country),
-            mapping=aes(x=long,y=lat,
-                        group=group,
-                        order=order))+
-  # now add transect line
-  geom_line(aes(x=long,y=lat),
-            data=fortify(transect),col="red",size=3)+
-  coord_map()
+## ---- eval=FALSE,fig.width=20,fig.height=20------------------------------
+## gplot(tmax_crop)+
+##   geom_tile(aes(fill=value))+
+##   scale_fill_gradientn(
+##     colours=c("brown","red","yellow","darkgreen","green"),
+##     name="Temp")+
+##   facet_wrap(~variable)+
+##   ## now add country overlays
+##   geom_path(data=fortify(country),
+##             mapping=aes(x=long,y=lat,
+##                         group=group,
+##                         order=order))+
+##   # now add transect line
+##   geom_line(aes(x=long,y=lat),
+##             data=fortify(transect),col="red",size=3)+
+##   coord_map()
 
-#' 
+#' <img src="05_assets//slow_time_series_plot.png" alt="alt text" width="75%">
 #' 
 #' ## Extract and clean up the transect data
 ## ------------------------------------------------------------------------
@@ -713,6 +853,7 @@ ggplot(transl,
 
 #' 
 #' 
+#' <!--
 #' ## Raster Processing
 #' 
 #' Things to consider:
@@ -721,3 +862,4 @@ ggplot(transl,
 #' * Disk space and temporary files
 #' * Use of external programs (e.g. GDAL)
 #' * Use of external GIS viewer (e.g. QGIS)
+#' -->

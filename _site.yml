@@ -1,13 +1,15 @@
 output_dir: '.'
 output:
   html_document:
-    theme: cosmo
+    theme: readable
     highlight: textmate
     mathjax: null
     toc_depth: 3
-    toc_float:
-      collapsed: true
+    toc_float: true
+    number_sections: true
     includes:
       after_body: include/after_body.html
     css: styles.css
     keep_md: true
+    
+    

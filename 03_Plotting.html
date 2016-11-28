@@ -15,7 +15,7 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -99,34 +99,34 @@ button.code-folding-btn:focus {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 51px;
+  padding-top: 64px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 
 .section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 </style>
 
@@ -264,7 +264,7 @@ It appears you don’t have a PDF plugin for this browser. No biggie… you can 
 </p>
 <p><a href="03_plotting.R"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here</a>. Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.</p>
 <div id="data" class="section level2">
-<h2>Data</h2>
+<h2><span class="header-section-number">0.1</span> Data</h2>
 <p>In this module, we’ll primarily use the <code>mtcars</code> data object. The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).</p>
 <p>A data frame with 32 observations on 11 variables.</p>
 <table>
@@ -431,9 +431,9 @@ kable(head(mtcars))</code></pre>
 </table>
 </div>
 <div id="base-graphics" class="section level1">
-<h1>Base graphics</h1>
+<h1><span class="header-section-number">1</span> Base graphics</h1>
 <div id="base-plot" class="section level2">
-<h2>Base <code>plot()</code></h2>
+<h2><span class="header-section-number">1.1</span> Base <code>plot()</code></h2>
 <p>R has a set of ‘base graphics’ that can do many plotting tasks (scatterplots, line plots, histograms, etc.)</p>
 <pre class="r"><code>plot(y=mtcars$mpg,x=mtcars$wt)</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-3-1.png" /><!-- --></p>
@@ -460,7 +460,7 @@ kable(head(mtcars))</code></pre>
 <p>See <code>?plot</code> for details.</p>
 </div>
 <div id="histograms" class="section level2">
-<h2>Histograms</h2>
+<h2><span class="header-section-number">1.2</span> Histograms</h2>
 <p>Check out the help for basic histograms.</p>
 <pre class="r"><code>?hist</code></pre>
 <p>Plot a histogram of the fuel efficiencies in the <code>mtcars</code> dataset.</p>
@@ -469,7 +469,7 @@ kable(head(mtcars))</code></pre>
 </div>
 </div>
 <div id="ggplot2" class="section level1">
-<h1><a href="http://ggplot2.org"><code>ggplot2</code></a></h1>
+<h1><span class="header-section-number">2</span> <a href="http://ggplot2.org"><code>ggplot2</code></a></h1>
 <p>The <em>grammar of graphics</em>: consistent aesthetics, multidimensional conditioning, and step-by-step plot building.</p>
 <ol style="list-style-type: decimal">
 <li>Data: The raw data</li>
@@ -482,7 +482,7 @@ kable(head(mtcars))</code></pre>
 + aesthetic mappings like position, color and size
 + scaling of ranges of the data to ranges of the aesthetics</code></pre>
 <div id="additional-settings" class="section level3">
-<h3>Additional settings</h3>
+<h3><span class="header-section-number">2.0.1</span> Additional settings</h3>
 <ol start="5" style="list-style-type: decimal">
 <li><code>stat_</code>: Statistical summaries of the data that can be plotted, such as quantiles, fitted curves (loess, linear models), etc.</li>
 <li><code>coord_</code>: Transformation for mapping data coordinates into the plane of the data rectangle</li>
@@ -493,7 +493,7 @@ kable(head(mtcars))</code></pre>
 <p>Add variable colors and sizes: <img src="03_assets/ggplot_intro2.png" alt="alt text" width="100%"></p>
 </div>
 <div id="simple-scatterplot" class="section level2">
-<h2>Simple scatterplot</h2>
+<h2><span class="header-section-number">2.1</span> Simple scatterplot</h2>
 <p>First, create a <em>blank</em> ggplot object with the data and x-y geometry set up.</p>
 <pre class="r"><code>p &lt;- ggplot(mtcars, aes(x=wt, y=mpg))
 summary(p)</code></pre>
@@ -531,91 +531,91 @@ summary(p)</code></pre>
   geom_point()</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-11-1.png" /><!-- --></p>
 <div id="aesthetic-map-color-by-of-cylinders" class="section level3">
-<h3>Aesthetic map: color by # of cylinders</h3>
+<h3><span class="header-section-number">2.1.1</span> Aesthetic map: color by # of cylinders</h3>
 <pre class="r"><code>p + 
   geom_point(aes(colour = factor(cyl)))</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-12-1.png" /><!-- --></p>
 </div>
 <div id="set-shape-using-of-cylinders" class="section level3">
-<h3>Set shape using # of cylinders</h3>
+<h3><span class="header-section-number">2.1.2</span> Set shape using # of cylinders</h3>
 <pre class="r"><code>p + 
   geom_point(aes(shape = factor(cyl)))</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-13-1.png" /><!-- --></p>
 </div>
 <div id="adjust-size-by-qsec" class="section level3">
-<h3>Adjust size by <code>qsec</code></h3>
+<h3><span class="header-section-number">2.1.3</span> Adjust size by <code>qsec</code></h3>
 <pre class="r"><code>p + 
   geom_point(aes(size = qsec))</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-14-1.png" /><!-- --></p>
 </div>
 <div id="color-by-cylinders-and-size-by-qsec" class="section level3">
-<h3>Color by cylinders and size by <code>qsec</code></h3>
+<h3><span class="header-section-number">2.1.4</span> Color by cylinders and size by <code>qsec</code></h3>
 <pre class="r"><code>p + 
   geom_point(aes(colour = factor(cyl),size = qsec))</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-15-1.png" /><!-- --></p>
 </div>
 <div id="multiple-aesthetics" class="section level3">
-<h3>Multiple aesthetics</h3>
+<h3><span class="header-section-number">2.1.5</span> Multiple aesthetics</h3>
 <pre class="r"><code>p + 
   geom_point(aes(colour = factor(cyl),size = qsec,shape=factor(gear)))</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-16-1.png" /><!-- --></p>
 </div>
 <div id="add-a-linear-model" class="section level3">
-<h3>Add a linear model</h3>
+<h3><span class="header-section-number">2.1.6</span> Add a linear model</h3>
 <pre class="r"><code>p + geom_point() + 
   geom_smooth(method=&quot;lm&quot;)</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-17-1.png" /><!-- --></p>
 </div>
 <div id="add-a-loess-smooth" class="section level3">
-<h3>Add a LOESS smooth</h3>
+<h3><span class="header-section-number">2.1.7</span> Add a LOESS smooth</h3>
 <pre class="r"><code>p + geom_point() + 
   geom_smooth(method=&quot;loess&quot;)</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-18-1.png" /><!-- --></p>
 </div>
 <div id="change-scale-color" class="section level3">
-<h3>Change scale color</h3>
+<h3><span class="header-section-number">2.1.8</span> Change scale color</h3>
 <pre class="r"><code>p + geom_point(aes(colour = cyl)) + 
   scale_colour_gradient(low = &quot;blue&quot;)</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-19-1.png" /><!-- --></p>
 </div>
 <div id="change-scale-shapes" class="section level3">
-<h3>Change scale shapes</h3>
+<h3><span class="header-section-number">2.1.9</span> Change scale shapes</h3>
 <pre class="r"><code>p + geom_point(aes(shape = factor(cyl))) + 
   scale_shape(solid = FALSE)</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-20-1.png" /><!-- --></p>
 </div>
 <div id="set-aesthetics-to-fixed-value" class="section level3">
-<h3>Set aesthetics to fixed value</h3>
+<h3><span class="header-section-number">2.1.10</span> Set aesthetics to fixed value</h3>
 <pre class="r"><code>ggplot(mtcars, aes(wt, mpg)) + 
   geom_point(colour = &quot;red&quot;, size = 3)</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-21-1.png" /><!-- --></p>
 </div>
 <div id="transparancy-alpha0.2" class="section level3">
-<h3>Transparancy: alpha=0.2</h3>
+<h3><span class="header-section-number">2.1.11</span> Transparancy: alpha=0.2</h3>
 <pre class="r"><code>d &lt;- ggplot(diamonds, aes(carat, price))
 d + geom_point(alpha = 0.2)</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-22-1.png" /><!-- --></p>
 <p>Varying alpha useful for large data sets</p>
 </div>
 <div id="transparancy-alpha0.1" class="section level3">
-<h3>Transparancy: alpha=0.1</h3>
+<h3><span class="header-section-number">2.1.12</span> Transparancy: alpha=0.1</h3>
 <pre class="r"><code>d + 
   geom_point(alpha = 0.1)</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-23-1.png" /><!-- --></p>
 </div>
 <div id="transparancy-alpha0.01" class="section level3">
-<h3>Transparancy: alpha=0.01</h3>
+<h3><span class="header-section-number">2.1.13</span> Transparancy: alpha=0.01</h3>
 <pre class="r"><code>d + 
   geom_point(alpha = 0.01)</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-24-1.png" /><!-- --></p>
 </div>
 </div>
 <div id="building-ggplots" class="section level2">
-<h2>Building ggplots</h2>
+<h2><span class="header-section-number">2.2</span> Building ggplots</h2>
 <p><img src="03_assets/ggplotSyntax.png" alt="alt text" width="90%"></p>
 </div>
 <div id="other-plot-types" class="section level2">
-<h2>Other Plot types</h2>
+<h2><span class="header-section-number">2.3</span> Other Plot types</h2>
 <p><img src="03_assets/ggplot01.png" alt="alt text" width="70%"></p>
 <div class="well">
 <p>Edit plot <code>p</code> to include:</p>
@@ -640,37 +640,37 @@ Show Solution
 <p><img src="03_assets/ggplot03.png" alt="alt text" width="70%"></p>
 <p><img src="03_assets/ggplot05.png" alt="alt text" width="80%"></p>
 <div id="discrete-x-continuous-y" class="section level3">
-<h3>Discrete X, Continuous Y</h3>
+<h3><span class="header-section-number">2.3.1</span> Discrete X, Continuous Y</h3>
 <pre class="r"><code>p &lt;- ggplot(mtcars, aes(factor(cyl), mpg))
 p + geom_point()</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-26-1.png" /><!-- --></p>
 </div>
 <div id="discrete-x-continuous-y-geom_jitter" class="section level3">
-<h3>Discrete X, Continuous Y + geom_jitter()</h3>
+<h3><span class="header-section-number">2.3.2</span> Discrete X, Continuous Y + geom_jitter()</h3>
 <pre class="r"><code>p + 
   geom_jitter()</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-27-1.png" /><!-- --></p>
 </div>
 <div id="discrete-x-continuous-y-geom_violin" class="section level3">
-<h3>Discrete X, Continuous Y + geom_violin()</h3>
+<h3><span class="header-section-number">2.3.3</span> Discrete X, Continuous Y + geom_violin()</h3>
 <pre class="r"><code>p + 
   geom_violin()</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-28-1.png" /><!-- --></p>
 </div>
 <div id="discrete-x-continuous-y-geom_violin-1" class="section level3">
-<h3>Discrete X, Continuous Y + geom_violin()</h3>
+<h3><span class="header-section-number">2.3.4</span> Discrete X, Continuous Y + geom_violin()</h3>
 <pre class="r"><code>p + 
   geom_violin() + geom_jitter(position = position_jitter(width = .1))</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-29-1.png" /><!-- --></p>
 <p><img src="03_assets/ggplot06.png" alt="alt text" width="100%"></p>
 </div>
 <div id="three-variables" class="section level3">
-<h3>Three Variables</h3>
+<h3><span class="header-section-number">2.3.5</span> Three Variables</h3>
 <p><img src="03_assets/ggplot07.png" alt="alt text" width="120%"></p>
 <p>Will return to this when we start working with raster maps.</p>
 </div>
 <div id="stats" class="section level3">
-<h3>Stats</h3>
+<h3><span class="header-section-number">2.3.6</span> Stats</h3>
 <p>Visualize a data transformation</p>
 <p><img src="03_assets/ggplotStat01.png" alt="alt text" width="100%"></p>
 <ul>
@@ -680,7 +680,7 @@ p + geom_point()</code></pre>
 <p><img src="03_assets/ggplotStat02.png" alt="alt text" width="100%"></p>
 </div>
 <div id="d-kernel-density-estimation" class="section level3">
-<h3>2D kernel density estimation</h3>
+<h3><span class="header-section-number">2.3.7</span> 2D kernel density estimation</h3>
 <p>Old Faithful Geyser Data on duration and waiting times.</p>
 <pre class="r"><code>library(&quot;MASS&quot;)</code></pre>
 <pre><code>## 
@@ -713,7 +713,7 @@ m &lt;- ggplot(geyser, aes(x = duration, y = waiting))</code></pre>
 <p>Check <code>?geom_density2d()</code> for details</p>
 <p><img src="03_assets/ggplotStat03.png" alt="alt text" width="80%"></p>
 <div class="well">
-<h2 id="your-turn">Your turn</h2>
+<h2 id="your-turn"><span class="header-section-number">2.3.7</span> Your turn</h2>
 <p>Edit plot <code>m</code> to include:</p>
 <ul>
 <li>The point data (with red points) on top</li>
@@ -734,64 +734,64 @@ Show Solution
 </div>
 </div>
 <div id="specifying-scales" class="section level2">
-<h2>Specifying Scales</h2>
+<h2><span class="header-section-number">2.4</span> Specifying Scales</h2>
 <p><img src="03_assets/ggplotScales01.png" alt="alt text" width="100%"></p>
 <div id="discrete-color-default" class="section level3">
-<h3>Discrete color: default</h3>
+<h3><span class="header-section-number">2.4.1</span> Discrete color: default</h3>
 <pre class="r"><code>b=ggplot(mpg,aes(fl))+
   geom_bar( aes(fill = fl)); b</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-36-1.png" /><!-- --></p>
 </div>
 <div id="discrete-color-greys" class="section level3">
-<h3>Discrete color: greys</h3>
+<h3><span class="header-section-number">2.4.2</span> Discrete color: greys</h3>
 <pre class="r"><code>b + scale_fill_grey( start = 0.2, end = 0.8, 
                    na.value = &quot;red&quot;)</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-37-1.png" /><!-- --></p>
 </div>
 <div id="continuous-color-defaults" class="section level3">
-<h3>Continuous color: defaults</h3>
+<h3><span class="header-section-number">2.4.3</span> Continuous color: defaults</h3>
 <pre class="r"><code>a &lt;- ggplot(mpg, aes(x=hwy,y=cty,col=displ)) + 
   geom_point(); a</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-38-1.png" /><!-- --></p>
 </div>
 <div id="continuous-color-gradient" class="section level3">
-<h3>Continuous color: <code>gradient</code></h3>
+<h3><span class="header-section-number">2.4.4</span> Continuous color: <code>gradient</code></h3>
 <pre class="r"><code>a +  scale_color_gradient( low = &quot;red&quot;, 
                           high = &quot;yellow&quot;)</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-39-1.png" /><!-- --></p>
 </div>
 <div id="continuous-color-gradient2" class="section level3">
-<h3>Continuous color: <code>gradient2</code></h3>
+<h3><span class="header-section-number">2.4.5</span> Continuous color: <code>gradient2</code></h3>
 <pre class="r"><code>a + scale_color_gradient2(low = &quot;red&quot;, high = &quot;blue&quot;, 
                        mid = &quot;white&quot;, midpoint = 4)</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-40-1.png" /><!-- --></p>
 </div>
 <div id="continuous-color-gradientn" class="section level3">
-<h3>Continuous color: <code>gradientn</code></h3>
+<h3><span class="header-section-number">2.4.6</span> Continuous color: <code>gradientn</code></h3>
 <pre class="r"><code>a + scale_color_gradientn(
   colours = rainbow(10))</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-41-1.png" /><!-- --></p>
 </div>
 <div id="discrete-color-brewer" class="section level3">
-<h3>Discrete color: brewer</h3>
+<h3><span class="header-section-number">2.4.7</span> Discrete color: brewer</h3>
 <pre class="r"><code>b + 
   scale_fill_brewer( palette = &quot;Blues&quot;)</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-42-1.png" /><!-- --></p>
 </div>
 </div>
 <div id="colorbrewer2.org" class="section level2">
-<h2><a href="http://colorbrewer2.org">colorbrewer2.org</a></h2>
+<h2><span class="header-section-number">2.5</span> <a href="http://colorbrewer2.org">colorbrewer2.org</a></h2>
 <p><img src="03_assets/brewer1.png" alt="alt text" width="100%"></p>
 </div>
 <div id="colorbrewer-diverging" class="section level2">
-<h2>ColorBrewer: Diverging</h2>
+<h2><span class="header-section-number">2.6</span> ColorBrewer: Diverging</h2>
 <p><img src="03_assets/brewer2.png" alt="alt text" width="100%"></p>
 </div>
 <div id="colorbrewer-filtered" class="section level2">
-<h2>ColorBrewer: Filtered</h2>
+<h2><span class="header-section-number">2.7</span> ColorBrewer: Filtered</h2>
 <p><img src="03_assets/brewer3.png" alt="alt text" width="100%"></p>
 <div class="well">
-<h2 id="your-turn-1">Your turn</h2>
+<h2 id="your-turn-1"><span class="header-section-number">2.7</span> Your turn</h2>
 <p>Edit the contour plot of the geyser data:</p>
 <ol style="list-style-type: decimal">
 <li>Reduce the size of the points</li>
@@ -827,7 +827,7 @@ Show Solution
 </div>
 </div>
 <div id="axis-scaling" class="section level2">
-<h2>Axis scaling</h2>
+<h2><span class="header-section-number">2.8</span> Axis scaling</h2>
 <p>Create noisy exponential data</p>
 <pre class="r"><code>set.seed(201)
 n &lt;- 100
@@ -845,26 +845,26 @@ sp</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-47-1.png" /><!-- --></p>
 </div>
 <div id="coordinate-systems" class="section level2">
-<h2>Coordinate Systems</h2>
+<h2><span class="header-section-number">2.9</span> Coordinate Systems</h2>
 <p><img src="03_assets/ggplotCoords.png" alt="alt text" width="55%"></p>
 </div>
 <div id="position" class="section level2">
-<h2>Position</h2>
+<h2><span class="header-section-number">2.10</span> Position</h2>
 <p><img src="03_assets/ggplotPosition.png" alt="alt text" width="80%"></p>
 <div id="stacked-bars" class="section level3">
-<h3>Stacked bars</h3>
+<h3><span class="header-section-number">2.10.1</span> Stacked bars</h3>
 <pre class="r"><code>ggplot(diamonds, aes(clarity, fill=cut)) + geom_bar()</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-48-1.png" /><!-- --></p>
 </div>
 <div id="dodged-bars" class="section level3">
-<h3>Dodged bars</h3>
+<h3><span class="header-section-number">2.10.2</span> Dodged bars</h3>
 <pre class="r"><code>ggplot(diamonds, aes(clarity, fill=cut)) + geom_bar(position=&quot;dodge&quot;)</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-49-1.png" /><!-- --></p>
 </div>
 </div>
 </div>
 <div id="facets" class="section level1">
-<h1>Facets</h1>
+<h1><span class="header-section-number">3</span> Facets</h1>
 <p>Use facets to divide graphic into <em>small multiples</em> based on a categorical variable.</p>
 <p><code>facet_wrap()</code> for one variable:</p>
 <pre class="r"><code>ggplot(mpg, aes(x = cty, y = hwy, color = factor(cyl))) +
@@ -879,19 +879,19 @@ sp</code></pre>
 <p><em>Small multiples</em> (via facets) are very useful for visualization of timeseries (and especially timeseries of spatial data.)</p>
 </div>
 <div id="themes" class="section level1">
-<h1>Themes</h1>
+<h1><span class="header-section-number">4</span> Themes</h1>
 <p>Set <em>default</em> display parameters (colors, font sizes, etc.) for different purposes (for example print vs. presentation) using themes.</p>
 <div id="ggplot-themes" class="section level2">
-<h2>GGplot Themes</h2>
+<h2><span class="header-section-number">4.1</span> GGplot Themes</h2>
 <p><img src="03_assets/ggplotThemes.png" alt="alt text" width="80%"></p>
 <p>Quickly change plot appearance with themes.</p>
 <div id="more-options-in-the-ggthemes-package." class="section level3">
-<h3>More options in the <code>ggthemes</code> package.</h3>
+<h3><span class="header-section-number">4.1.1</span> More options in the <code>ggthemes</code> package.</h3>
 <pre class="r"><code>library(ggthemes)</code></pre>
 <p>Or build your own!</p>
 </div>
 <div id="theme-examples-default" class="section level3">
-<h3>Theme examples: default</h3>
+<h3><span class="header-section-number">4.1.2</span> Theme examples: default</h3>
 <pre class="r"><code>p=ggplot(mpg, aes(x = cty, y = hwy, color = factor(cyl))) +
   geom_jitter() +
   labs(
@@ -901,27 +901,27 @@ sp</code></pre>
   )</code></pre>
 </div>
 <div id="theme-examples-default-1" class="section level3">
-<h3>Theme examples: default</h3>
+<h3><span class="header-section-number">4.1.3</span> Theme examples: default</h3>
 <pre class="r"><code>p</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-54-1.png" /><!-- --></p>
 </div>
 <div id="theme-examples-solarized" class="section level3">
-<h3>Theme examples: Solarized</h3>
+<h3><span class="header-section-number">4.1.4</span> Theme examples: Solarized</h3>
 <pre class="r"><code>p + theme_solarized()</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-55-1.png" /><!-- --></p>
 </div>
 <div id="theme-examples-solarized-dark" class="section level3">
-<h3>Theme examples: Solarized Dark</h3>
+<h3><span class="header-section-number">4.1.5</span> Theme examples: Solarized Dark</h3>
 <pre class="r"><code>p +  theme_solarized(light=FALSE)</code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-56-1.png" /><!-- --></p>
 </div>
 <div id="theme-examples-excel" class="section level3">
-<h3>Theme examples: Excel</h3>
+<h3><span class="header-section-number">4.1.6</span> Theme examples: Excel</h3>
 <pre class="r"><code>p + theme_excel() </code></pre>
 <p><img src="03_Plotting_files/figure-html/unnamed-chunk-57-1.png" /><!-- --></p>
 </div>
 <div id="theme-examples-the-economist" class="section level3">
-<h3>Theme examples: <em>The Economist</em></h3>
+<h3><span class="header-section-number">4.1.7</span> Theme examples: <em>The Economist</em></h3>
 <pre class="r"><code>p + theme_economist()</code></pre>
 <pre><code>## Warning: `panel.margin` is deprecated. Please use
 ## `panel.spacing` property instead</code></pre>
@@ -933,18 +933,18 @@ sp</code></pre>
 </div>
 </div>
 <div id="savingexporting" class="section level1">
-<h1>Saving/exporting</h1>
+<h1><span class="header-section-number">5</span> Saving/exporting</h1>
 <div id="saving-using-the-gui" class="section level2">
-<h2>Saving using the GUI</h2>
+<h2><span class="header-section-number">5.1</span> Saving using the GUI</h2>
 <p><img src="03_assets/ggplot_guisave.png" alt="alt text" width="80%"></p>
 </div>
 <div id="saving-using-ggsave" class="section level2">
-<h2>Saving using <code>ggsave()</code></h2>
+<h2><span class="header-section-number">5.2</span> Saving using <code>ggsave()</code></h2>
 <p>Save a <code>ggplot</code> with sensible defaults:</p>
 <pre class="r"><code>ggsave(filename, plot = last_plot(), scale = 1, width, height)</code></pre>
 </div>
 <div id="saving-using-devices" class="section level2">
-<h2>Saving using devices</h2>
+<h2><span class="header-section-number">5.3</span> Saving using devices</h2>
 <p>Save any plot with maximum flexibility:</p>
 <pre class="r"><code>pdf(filename, width, height)  # open device
 ggplot()                      # draw the plot(s)
@@ -958,7 +958,7 @@ dev.off()                     # close the device</code></pre>
 </ul>
 <p>and more…</p>
 <div class="well">
-<h2 id="your-turn-2">Your turn</h2>
+<h2 id="your-turn-2"><span class="header-section-number">5.3</span> Your turn</h2>
 <ol style="list-style-type: decimal">
 <li>Save the <code>p</code> plot from above using <code>png()</code> and <code>dev.off()</code></li>
 <li>Switch to the solarized theme with <code>light=FALSE</code></li>
@@ -968,14 +968,14 @@ dev.off()                     # close the device</code></pre>
 Show Solution
 </button>
 <div id="demo4" class="collapse">
-<h2 id="save-a-plot-example-1">Save a plot: Example 1</h2>
+<h2 id="save-a-plot-example-1"><span class="header-section-number">5.3</span> Save a plot: Example 1</h2>
 <pre class="r"><code>png(&quot;03_assets/test1.png&quot;,width=600,height=300)
 p +  theme_solarized(light=FALSE)
 dev.off()</code></pre>
 <pre><code>## quartz_off_screen 
 ##                 2</code></pre>
 <p><img src="03_assets/test1.png" alt="alt text" width="80%"></p>
-<h2 id="save-a-plot-example-2">Save a plot: Example 2</h2>
+<h2 id="save-a-plot-example-2"><span class="header-section-number">5.3</span> Save a plot: Example 2</h2>
 <pre class="r"><code>png(&quot;03_assets/test2.png&quot;,width=600,height=300)
 p +  theme_solarized(light=FALSE, base_size=24)
 dev.off()</code></pre>
@@ -986,12 +986,12 @@ dev.off()</code></pre>
 </div>
 </div>
 <div id="ggplot2-documentation" class="section level2">
-<h2>GGPLOT2 Documentation</h2>
+<h2><span class="header-section-number">5.4</span> GGPLOT2 Documentation</h2>
 <p>Perhaps R’s best documented package: <a href="http://docs.ggplot2.org/current/">docs.ggplot2.org</a></p>
 <p><img src="03_assets/ggplotDoc.png" alt="alt text" width="100%"></p>
 </div>
 <div id="colophon" class="section level2">
-<h2>Colophon</h2>
+<h2><span class="header-section-number">5.5</span> Colophon</h2>
 <p>Sources:</p>
 <ul>
 <li><a href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf">ggplot cheatsheet</a></li>

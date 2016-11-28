@@ -15,7 +15,7 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -99,34 +99,34 @@ button.code-folding-btn:focus {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 51px;
+  padding-top: 64px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 
 .section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 </style>
 
@@ -266,7 +266,7 @@ library(grid)
 library(gridExtra)
 library(xtable)</code></pre>
 <div id="goal-of-this-class" class="section level2">
-<h2>Goal of this class</h2>
+<h2><span class="header-section-number">0.1</span> Goal of this class</h2>
 <ul>
 <li>To demonstrate a simple presence/absence modelling in spatial context.</li>
 <li>To model spatial dependence (autocorrelation) in the response.</li>
@@ -274,7 +274,7 @@ library(xtable)</code></pre>
 <p>Overview of <a href="http://cran.r-project.org/web/views/Spatial.html">R’s spatial toolset is here</a>.</p>
 </div>
 <div id="what-is-spatial-autocorrelation" class="section level2">
-<h2>What is spatial autocorrelation?</h2>
+<h2><span class="header-section-number">0.2</span> What is spatial autocorrelation?</h2>
 <p>Today we will model space by <strong>smooth splines</strong> in <code>mgcv</code> package.</p>
 <p>Examples of Alternative approaches:</p>
 <ul>
@@ -291,7 +291,7 @@ library(xtable)</code></pre>
 <p>See <a href="http://onlinelibrary.wiley.com/doi/10.1111/j.2007.0906-7590.05171.x/full">Dormann et al. 2007 Ecography, 30: 609-628</a> for a review.</p>
 </div>
 <div id="species-distribution-modeling" class="section level2">
-<h2>Species Distribution Modeling</h2>
+<h2><span class="header-section-number">0.3</span> Species Distribution Modeling</h2>
 <p>We’ll attempt to explain the spatial distribution of the Purple finch (<em>Carpodacus purpureus</em>) in San Diego county, California:</p>
 <div class="figure">
 <img src="assets/finch_photo.png" alt="purple finch figure" />
@@ -300,20 +300,20 @@ library(xtable)</code></pre>
 <p>(photo/Wikimedia)</p>
 </div>
 <div id="preparing-the-data" class="section level2">
-<h2>Preparing the data</h2>
+<h2><span class="header-section-number">0.4</span> Preparing the data</h2>
 <p>Load a vector dataset (shapefile) representing the <a href="http://sdplantatlas.org/BirdAtlas/BirdPages.htm">San Diego bird atlas data</a> for the Purple finch:</p>
 <pre class="r"><code>finch &lt;- readOGR(&quot;data&quot;, layer=&quot;finch&quot;)
 ## add centroid locations to dataframe
 finch@data[,c(&quot;x&quot;,&quot;y&quot;)]=coordinates(finch)</code></pre>
 <div id="plot-the-shapefile" class="section level3">
-<h3>Plot the shapefile</h3>
+<h3><span class="header-section-number">0.4.1</span> Plot the shapefile</h3>
 <p>Plot the finch dataset over a google map layer.</p>
 <div id="first-convert-to-latitude-longitude" class="section level4">
-<h4>First convert to latitude-longitude</h4>
+<h4><span class="header-section-number">0.4.1.1</span> First convert to latitude-longitude</h4>
 <pre class="r"><code>finchll=spTransform(finch,CRS(&quot;+proj=longlat +datum=WGS84&quot;))</code></pre>
 </div>
 <div id="get-a-google-map-image-for-the-background" class="section level4">
-<h4>Get a google map image for the background</h4>
+<h4><span class="header-section-number">0.4.1.2</span> Get a google map image for the background</h4>
 <pre class="r"><code>map_usa=get_map(&quot;usa&quot;, zoom = 4,
              maptype = &quot;terrain-background&quot;,
              source=&quot;stamen&quot;)
@@ -322,7 +322,7 @@ map_sd=get_map(bbox(finchll), zoom = 9,
              source=&quot;stamen&quot;)</code></pre>
 </div>
 <div id="build-the-ggplot-objects" class="section level4">
-<h4>Build the ggplot objects</h4>
+<h4><span class="header-section-number">0.4.1.3</span> Build the ggplot objects</h4>
 <pre class="r"><code>m1=ggmap(map_usa,extent = &quot;device&quot;)+
 geom_polygon(aes(y=lat,x=long,group=group,order=order),
              data=fortify(finchll),fill=&quot;transparent&quot;,colour=&quot;red&quot;,size=2)+
@@ -334,20 +334,20 @@ geom_polygon(aes(y=lat,x=long,group=group,order=order),
   ylab(&quot;Latitude&quot;)+xlab(&quot;Longitude&quot;)</code></pre>
 </div>
 <div id="draw-the-plot-with-an-inset-using-viewport" class="section level4">
-<h4>Draw the plot with an inset using <code>viewport()</code></h4>
+<h4><span class="header-section-number">0.4.1.4</span> Draw the plot with an inset using <code>viewport()</code></h4>
 <p><code>viewport()</code> in the <code>grid</code> package allows you to put graphical objects anywhere in the plotting region. Use it to draw the USA map as an inset to show the location of region with respect to the US.</p>
 <pre class="r"><code>print(m2)
 print(m1,vp=viewport(width=.25,height=.25,x=.8,y=.8))</code></pre>
 </div>
 </div>
 <div id="your-turn" class="section level3">
-<h3>Your Turn</h3>
+<h3><span class="header-section-number">0.4.2</span> Your Turn</h3>
 <p>Explore adjusting the <code>viewport()</code> parameters to see how it moves around. Can you move it to lower right corner? Note that the positions (e.g. <code>width</code>, <code>height</code>, <code>x</code>, and <code>y</code>) are all with respect to the full plotting domain, so if you change the aspect ratio of the plotting window, things will move around…</p>
 <p><br><br><br><br><br><br><br><br><br><br><br></p>
 </div>
 </div>
 <div id="explore-the-data" class="section level2">
-<h2>Explore the data</h2>
+<h2><span class="header-section-number">0.5</span> Explore the data</h2>
 <p>Now look at the associated data frame (analogous to the *.dbf file that accompanied the shapefile):</p>
 <pre class="r"><code>kable(head(finch@data))</code></pre>
 <blockquote>
@@ -355,7 +355,7 @@ print(m1,vp=viewport(width=.25,height=.25,x=.8,y=.8))</code></pre>
 </blockquote>
 </div>
 <div id="scaling-and-centering-the-environmental-variables" class="section level2">
-<h2>Scaling and centering the environmental variables</h2>
+<h2><span class="header-section-number">0.6</span> Scaling and centering the environmental variables</h2>
 <p>Statistical models generally perform better when covariates have a mean of zero and variance of 1, using the <code>scale()</code> function:</p>
 <pre class="r"><code>kable(head(select(finch@data,15:25)))
 
@@ -364,9 +364,9 @@ envi.scaled &lt;- as.data.frame(scale(envi))
 finch@data[,15:25] &lt;- envi.scaled</code></pre>
 </div>
 <div id="the-predictor-ndvi" class="section level2">
-<h2>The predictor (NDVI)</h2>
+<h2><span class="header-section-number">0.7</span> The predictor (NDVI)</h2>
 <div id="plot-a-chloropleth" class="section level3">
-<h3>Plot a chloropleth</h3>
+<h3><span class="header-section-number">0.7.1</span> Plot a chloropleth</h3>
 <p>From <a href="https://en.wikipedia.org/wiki/Choropleth_map">Wikipedia</a>:</p>
 <blockquote>
 <p>A <strong>choropleth</strong> (from Greek χώρο (“area/region”) + πλήθος (“multitude”)) is a thematic map in which areas are shaded or patterned in proportion to the measurement of the statistical variable being displayed on the map, such as population density or per-capita income.</p>
@@ -385,7 +385,7 @@ ggplot(finch@data, aes(map_id = id)) +
 </div>
 </div>
 <div id="your-turn-1" class="section level2">
-<h2>Your turn</h2>
+<h2><span class="header-section-number">0.8</span> Your turn</h2>
 <p>Explore the other variables in the <code>finch</code> dataset with <code>summary(finch)</code>. Plot a map of the mean elevation in each region.</p>
 <p><br><br><br><br><br><br><br><br><br><br><br><br></p>
 <pre class="r"><code>ggplot(finch@data, aes(map_id = id)) +
@@ -410,7 +410,7 @@ p1d=p1+geom_map(aes(fill = maxtmp), map = pfinch)
 grid.arrange(p1a,p1b,p1c,p1d,ncol=2)    </code></pre>
 </div>
 <div id="the-response-presences-and-absences" class="section level2">
-<h2>The response (presences and absences)</h2>
+<h2><span class="header-section-number">0.9</span> The response (presences and absences)</h2>
 <pre class="r"><code>    ggplot(finch@data, aes(map_id = id)) +
     geom_map(aes(fill = as.logical(present)), map = pfinch)+
     expand_limits(x = pfinch$long, y = pfinch$lat)+
@@ -418,7 +418,7 @@ grid.arrange(p1a,p1b,p1c,p1d,ncol=2)    </code></pre>
     coord_equal()</code></pre>
 </div>
 <div id="fitting-the-models" class="section level2">
-<h2>Fitting the models</h2>
+<h2><span class="header-section-number">0.10</span> Fitting the models</h2>
 <p>Compare three models:</p>
 <ol style="list-style-type: decimal">
 <li>Only NDVI</li>
@@ -426,7 +426,7 @@ grid.arrange(p1a,p1b,p1c,p1d,ncol=2)    </code></pre>
 <li>Space and NDVI</li>
 </ol>
 <div id="model-1---only-ndvi" class="section level3">
-<h3>Model 1 - only NDVI</h3>
+<h3><span class="header-section-number">0.10.1</span> Model 1 - only NDVI</h3>
 <p>Now we will do the actual modelling. The first simple model links the presences and absences to NDVI.</p>
 <p>First, we will fit model a model that only uses NDVI as a predictor of presence and absence:</p>
 <p><span class="math inline">$\log ( \frac{p_i}{1-p_i} ) = \beta_0 + \beta_1 NDVI_i$</span></p>
@@ -449,7 +449,7 @@ grid.arrange(p1a,p1b,p1c,p1d,ncol=2)    </code></pre>
     print(type=&quot;html&quot;)</code></pre>
 </div>
 <div id="model-2---only-space" class="section level3">
-<h3>Model 2 - only space</h3>
+<h3><span class="header-section-number">0.10.2</span> Model 2 - only space</h3>
 <p>The second model fits only the spatial trend in the data (using GAM and splines):</p>
 <pre class="r"><code>  space.only &lt;- gam(present~s(X_CEN, Y_CEN),
                    data=finch@data, family=&quot;binomial&quot;)
@@ -472,7 +472,7 @@ grid.arrange(p1a,p1b,p1c,p1d,ncol=2)    </code></pre>
     print(type=&quot;html&quot;)</code></pre>
 </div>
 <div id="model-3---space-and-ndvi" class="section level3">
-<h3>Model 3 - space and NDVI</h3>
+<h3><span class="header-section-number">0.10.3</span> Model 3 - space and NDVI</h3>
 <p>The third model uses both the NDVI and spatial trends to explain the finch’s occurrences:</p>
 <pre class="r"><code>  space.and.ndvi &lt;- gam(present~ndvi + s(X_CEN, Y_CEN),
                    data=finch@data, family=&quot;binomial&quot;)
@@ -496,7 +496,7 @@ grid.arrange(p1a,p1b,p1c,p1d,ncol=2)    </code></pre>
 </div>
 </div>
 <div id="examine-the-fitted-models" class="section level2">
-<h2>Examine the fitted models</h2>
+<h2><span class="header-section-number">0.11</span> Examine the fitted models</h2>
 <p>Now let’s put all of the predictions together:</p>
 <pre class="r"><code>predictions &lt;- data.frame(id=finch$id,
                           x=finch$x,
@@ -531,7 +531,7 @@ predictionsl= melt(predictions,
    theme(axis.ticks = element_blank(), axis.text = element_blank())</code></pre>
 </div>
 <div id="model-comparison" class="section level2">
-<h2>Model comparison</h2>
+<h2><span class="header-section-number">0.12</span> Model comparison</h2>
 <p>We can compare model performance of the models with Akaike’s Information Criterion (AIC). This uses the formula <span class="math inline">−2 * <em>l</em><em>o</em><em>g</em> − <em>l</em><em>i</em><em>k</em><em>e</em><em>l</em><em>i</em><em>h</em><em>o</em><em>o</em><em>d</em> + <em>k</em> * <em>n</em><em>p</em><em>a</em><em>r</em></span>, where</p>
 <ul>
 <li><span class="math inline"><em>n</em><em>p</em><em>a</em><em>r</em></span> number of parameters in the fitted model</li>
@@ -541,7 +541,7 @@ predictionsl= melt(predictions,
 <pre class="r"><code>kable(AIC(ndvi.only, space.only, space.and.ndvi))</code></pre>
 </div>
 <div id="spatial-autocorrelation-of-residuals" class="section level2">
-<h2>Spatial Autocorrelation of Residuals</h2>
+<h2><span class="header-section-number">0.13</span> Spatial Autocorrelation of Residuals</h2>
 <p>Should always check the spatial correlation in model residuals to evaluate assumptions. We will use the function <code>correlog</code> from the <code>ncf</code> package. An overview of other <a href="http://www.petrkeil.com/?p=1050">functions that plot correlograms is here.</a>.</p>
 <pre class="r"><code>inc=10000  #spatial increment of correlogram in m
 
@@ -561,7 +561,7 @@ cor=predictionsl%&gt;%
   xlab(&quot;Distance (km)&quot;)+ylab(&quot;Spatial\nAuto-correlation&quot;)</code></pre>
 </div>
 <div id="what-did-we-gain-by-making-the-model-spatially-explicit" class="section level2">
-<h2>What did we gain by making the model “spatially explicit”?</h2>
+<h2><span class="header-section-number">0.14</span> What did we gain by making the model “spatially explicit”?</h2>
 <ul>
 <li>We know that the effect of NDVI is not artificially amplified by pseudoreplication.</li>
 <li>We have more realistic predictions.</li>
@@ -569,7 +569,7 @@ cor=predictionsl%&gt;%
 </ul>
 </div>
 <div id="your-turn-2" class="section level2">
-<h2>Your turn</h2>
+<h2><span class="header-section-number">0.15</span> Your turn</h2>
 <p>Try adding additional co-variates into the spatial model (e.g. elevation or climate).</p>
 <pre class="r"><code>m1 &lt;- gam(present~ndvi+meanelev+
             wintert+meanppt+urban + 

@@ -1,13 +1,17 @@
-# Introduction to Raster Package
+# A quick introduction to spatial data analysis
 
 
 
+
+<div>
+<iframe src="05_presentation/05_Spatial.html" width="100%" height="700px"> </iframe>
+</div>
 
 [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](05_Raster.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
 
-This tutorial has been forked from awesome classes developed by Adam Wilson here: http://adamwilson.us/RDataScience/
+This tutorial has been forked from awesome classes developed by Adam Wilson [here]( http://adamwilson.us/RDataScience/)
 
-## Libraries
+# Setup
 
 
 ```r
@@ -17,11 +21,360 @@ library(sp)
 library(ggplot2)
 library(rgeos)
 library(maptools)
-
-# New libraries
+library(rgdal)
 library(raster)
 library(rasterVis)  #visualization library for raster
 ```
+
+# Point data
+
+## Generate some random data
+
+```r
+coords = data.frame(
+  x=rnorm(100),
+  y=rnorm(100)
+)
+str(coords)
+```
+
+```
+## 'data.frame':	100 obs. of  2 variables:
+##  $ x: num  0.9094 0.0532 -0.9575 0.144 0.505 ...
+##  $ y: num  0.1021 0.4322 0.2839 -0.1707 -0.0706 ...
+```
+
+
+
+```r
+plot(coords)
+```
+
+![](05_Raster_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+
+
+## Convert to `SpatialPoints`
+
+Many tools are designed in R to work specifically with spatial point data, so we need a special object of class *SpatialPoints*. The important thing is that it has a *slot* to store coordinates.
+
+
+```r
+sp = SpatialPoints(coords)
+str(sp)
+```
+
+```
+## Formal class 'SpatialPoints' [package "sp"] with 3 slots
+##   ..@ coords     : num [1:100, 1:2] 0.9094 0.0532 -0.9575 0.144 0.505 ...
+##   .. ..- attr(*, "dimnames")=List of 2
+##   .. .. ..$ : NULL
+##   .. .. ..$ : chr [1:2] "x" "y"
+##   ..@ bbox       : num [1:2, 1:2] -3.22 -1.96 2.51 2.4
+##   .. ..- attr(*, "dimnames")=List of 2
+##   .. .. ..$ : chr [1:2] "x" "y"
+##   .. .. ..$ : chr [1:2] "min" "max"
+##   ..@ proj4string:Formal class 'CRS' [package "sp"] with 1 slot
+##   .. .. ..@ projargs: chr NA
+```
+
+
+## Create a `SpatialPointsDataFrame`
+
+First generate a dataframe (analagous to the _attribute table_ in a shapefile)
+
+```r
+data=data.frame(ID=1:100,group=letters[1:20])
+head(data)
+```
+
+```
+##   ID group
+## 1  1     a
+## 2  2     b
+## 3  3     c
+## 4  4     d
+## 5  5     e
+## 6  6     f
+```
+
+
+Combine the coordinates with the data
+
+```r
+spdf = SpatialPointsDataFrame(coords, data)
+spdf = SpatialPointsDataFrame(sp, data)
+
+str(spdf)
+```
+
+```
+## Formal class 'SpatialPointsDataFrame' [package "sp"] with 5 slots
+##   ..@ data       :'data.frame':	100 obs. of  2 variables:
+##   .. ..$ ID   : int [1:100] 1 2 3 4 5 6 7 8 9 10 ...
+##   .. ..$ group: Factor w/ 20 levels "a","b","c","d",..: 1 2 3 4 5 6 7 8 9 10 ...
+##   ..@ coords.nrs : num(0) 
+##   ..@ coords     : num [1:100, 1:2] 0.9094 0.0532 -0.9575 0.144 0.505 ...
+##   .. ..- attr(*, "dimnames")=List of 2
+##   .. .. ..$ : NULL
+##   .. .. ..$ : chr [1:2] "x" "y"
+##   ..@ bbox       : num [1:2, 1:2] -3.22 -1.96 2.51 2.4
+##   .. ..- attr(*, "dimnames")=List of 2
+##   .. .. ..$ : chr [1:2] "x" "y"
+##   .. .. ..$ : chr [1:2] "min" "max"
+##   ..@ proj4string:Formal class 'CRS' [package "sp"] with 1 slot
+##   .. .. ..@ projargs: chr NA
+```
+Note the use of _slots_ designated with a `@`.  See `?slot` for more. 
+
+
+## Promote a data frame with `coordinates()` to a `SpatialPoints` object
+
+```r
+coordinates(data) = cbind(coords$x, coords$y) 
+```
+
+
+```r
+str(spdf)
+```
+
+```
+## Formal class 'SpatialPointsDataFrame' [package "sp"] with 5 slots
+##   ..@ data       :'data.frame':	100 obs. of  2 variables:
+##   .. ..$ ID   : int [1:100] 1 2 3 4 5 6 7 8 9 10 ...
+##   .. ..$ group: Factor w/ 20 levels "a","b","c","d",..: 1 2 3 4 5 6 7 8 9 10 ...
+##   ..@ coords.nrs : num(0) 
+##   ..@ coords     : num [1:100, 1:2] 0.9094 0.0532 -0.9575 0.144 0.505 ...
+##   .. ..- attr(*, "dimnames")=List of 2
+##   .. .. ..$ : NULL
+##   .. .. ..$ : chr [1:2] "x" "y"
+##   ..@ bbox       : num [1:2, 1:2] -3.22 -1.96 2.51 2.4
+##   .. ..- attr(*, "dimnames")=List of 2
+##   .. .. ..$ : chr [1:2] "x" "y"
+##   .. .. ..$ : chr [1:2] "min" "max"
+##   ..@ proj4string:Formal class 'CRS' [package "sp"] with 1 slot
+##   .. .. ..@ projargs: chr NA
+```
+
+## Subset data
+
+
+```r
+subset(spdf, group=="a")
+```
+
+```
+## class       : SpatialPointsDataFrame 
+## features    : 5 
+## extent      : -0.9305161, 0.9093606, -0.4056684, 1.241341  (xmin, xmax, ymin, ymax)
+## coord. ref. : NA 
+## variables   : 2
+## names       : ID, group 
+## min values  :  1,     a 
+## max values  : 81,     a
+```
+
+Or using `[]`
+
+```r
+spdf[spdf$group=="a",]
+```
+
+```
+## class       : SpatialPointsDataFrame 
+## features    : 5 
+## extent      : -0.9305161, 0.9093606, -0.4056684, 1.241341  (xmin, xmax, ymin, ymax)
+## coord. ref. : NA 
+## variables   : 2
+## names       : ID, group 
+## min values  :  1,     a 
+## max values  : 81,     a
+```
+
+<!-- Unfortunately, `dplyr` functions do not directly filter spatial objects. -->
+
+
+<div class="well">
+## Your turn
+
+Convert the following `data.frame` into a SpatialPointsDataFrame using the `coordinates()` method and then plot the points with `plot()`.
+
+
+```r
+df=data.frame(
+  lat=c(12,15,17,12),
+  lon=c(-35,-35,-32,-32),
+  id=c(1,2,3,4))
+```
+
+
+ lat   lon   id
+----  ----  ---
+  12   -35    1
+  15   -35    2
+  17   -32    3
+  12   -32    4
+
+<button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo1">Show Solution</button>
+<div id="demo1" class="collapse">
+
+
+```r
+coordinates(df)=c("lon","lat")
+plot(df)
+```
+
+![](05_Raster_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+
+</div>
+</div>
+
+## Examine topsoil quality in the Meuse river data set
+
+
+```r
+## Load the data
+data(meuse)
+str(meuse)
+```
+
+```
+## 'data.frame':	155 obs. of  14 variables:
+##  $ x      : num  181072 181025 181165 181298 181307 ...
+##  $ y      : num  333611 333558 333537 333484 333330 ...
+##  $ cadmium: num  11.7 8.6 6.5 2.6 2.8 3 3.2 2.8 2.4 1.6 ...
+##  $ copper : num  85 81 68 81 48 61 31 29 37 24 ...
+##  $ lead   : num  299 277 199 116 117 137 132 150 133 80 ...
+##  $ zinc   : num  1022 1141 640 257 269 ...
+##  $ elev   : num  7.91 6.98 7.8 7.66 7.48 ...
+##  $ dist   : num  0.00136 0.01222 0.10303 0.19009 0.27709 ...
+##  $ om     : num  13.6 14 13 8 8.7 7.8 9.2 9.5 10.6 6.3 ...
+##  $ ffreq  : Factor w/ 3 levels "1","2","3": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ soil   : Factor w/ 3 levels "1","2","3": 1 1 1 2 2 2 2 1 1 2 ...
+##  $ lime   : Factor w/ 2 levels "0","1": 2 2 2 1 1 1 1 1 1 1 ...
+##  $ landuse: Factor w/ 15 levels "Aa","Ab","Ag",..: 4 4 4 11 4 11 4 2 2 15 ...
+##  $ dist.m : num  50 30 150 270 380 470 240 120 240 420 ...
+```
+
+<div class="well">
+## Your turn
+_Promote_ the `meuse` object to a spatial points data.frame with `coordinates()`.
+
+<button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo2">Show Solution</button>
+<div id="demo2" class="collapse">
+
+
+```r
+coordinates(meuse) <- ~x+y
+# OR   coordinates(meuse)=cbind(meuse$x,meuse$y)
+# OR   coordinates(meuse))=c("x","y")
+str(meuse)
+```
+
+```
+## Formal class 'SpatialPointsDataFrame' [package "sp"] with 5 slots
+##   ..@ data       :'data.frame':	155 obs. of  12 variables:
+##   .. ..$ cadmium: num [1:155] 11.7 8.6 6.5 2.6 2.8 3 3.2 2.8 2.4 1.6 ...
+##   .. ..$ copper : num [1:155] 85 81 68 81 48 61 31 29 37 24 ...
+##   .. ..$ lead   : num [1:155] 299 277 199 116 117 137 132 150 133 80 ...
+##   .. ..$ zinc   : num [1:155] 1022 1141 640 257 269 ...
+##   .. ..$ elev   : num [1:155] 7.91 6.98 7.8 7.66 7.48 ...
+##   .. ..$ dist   : num [1:155] 0.00136 0.01222 0.10303 0.19009 0.27709 ...
+##   .. ..$ om     : num [1:155] 13.6 14 13 8 8.7 7.8 9.2 9.5 10.6 6.3 ...
+##   .. ..$ ffreq  : Factor w/ 3 levels "1","2","3": 1 1 1 1 1 1 1 1 1 1 ...
+##   .. ..$ soil   : Factor w/ 3 levels "1","2","3": 1 1 1 2 2 2 2 1 1 2 ...
+##   .. ..$ lime   : Factor w/ 2 levels "0","1": 2 2 2 1 1 1 1 1 1 1 ...
+##   .. ..$ landuse: Factor w/ 15 levels "Aa","Ab","Ag",..: 4 4 4 11 4 11 4 2 2 15 ...
+##   .. ..$ dist.m : num [1:155] 50 30 150 270 380 470 240 120 240 420 ...
+##   ..@ coords.nrs : int [1:2] 1 2
+##   ..@ coords     : num [1:155, 1:2] 181072 181025 181165 181298 181307 ...
+##   .. ..- attr(*, "dimnames")=List of 2
+##   .. .. ..$ : chr [1:155] "1" "2" "3" "4" ...
+##   .. .. ..$ : chr [1:2] "x" "y"
+##   ..@ bbox       : num [1:2, 1:2] 178605 329714 181390 333611
+##   .. ..- attr(*, "dimnames")=List of 2
+##   .. .. ..$ : chr [1:2] "x" "y"
+##   .. .. ..$ : chr [1:2] "min" "max"
+##   ..@ proj4string:Formal class 'CRS' [package "sp"] with 1 slot
+##   .. .. ..@ projargs: chr NA
+```
+
+</div>
+</div>
+
+Plot it with ggplot:
+
+```r
+  ggplot(as.data.frame(meuse),aes(x=x,y=y))+
+    geom_point(col="red")+
+    coord_equal()
+```
+
+![](05_Raster_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+
+Note that `ggplot` works only with data.frames.  Convert with `as.data.frame()` or `fortify()`.
+
+## ggplot 
+If you're not familiar with ggplot, here's a quick digression. For a more detailed version, see the ggplot section in Lesson 03: Plotting.
+# [`ggplot2`](http://ggplot2.org)
+The _grammar of graphics_ consists of specifying a number of key elements of a plot. These are the same elements you'd put in any base graphics plot; this approach just provides a consisent way of defining them 
+
+
+1.	Data: 		The raw data
+2.	`geom_`: The geometric shapes representing data (e.g. use a circle or triangle)
+3.	`aes()`:	Aesthetics of the geometric and statistical objects (color, size, shape, and position)
+4.	`scale_`:	Maps between the data and the aesthetic dimensions (e.g. x- and y-limits)
+
+```
+data
++ geometry,
++ aesthetic mappings like position, color and size
++ scaling of ranges of the data to ranges of the aesthetics
+```
+
+ Additional settings
+
+5.	`stat_`:	Statistical summaries of the data that can be plotted, such as quantiles, fitted curves (loess, linear models), etc.
+6.	`coord_`:	Transformation for mapping data coordinates into the plane of the data rectangle
+7.	`facet_`:	Arrangement of data into grid of plots (e.g. a grid with one plot for each species, location, or time)
+8.	`theme`:	Visual defaults (background, grids, axes, typeface, colors, etc.)
+
+
+
+```r
+# Old Faithful Geyser Data on duration and waiting times.
+library("MASS")
+```
+
+```
+## 
+## Attaching package: 'MASS'
+```
+
+```
+## The following objects are masked from 'package:raster':
+## 
+##     area, select
+```
+
+```
+## The following object is masked from 'package:dplyr':
+## 
+##     select
+```
+
+```r
+data(geyser)
+m <- ggplot(geyser, aes(x = duration, y = waiting)) # define data
+m + # reference the data
+  geom_point() +  # add points
+  stat_density2d(geom="contour") + # add a contour plot
+  xlim(0.5, 6) + ylim(40, 110) # define plot limits
+```
+
+![](05_Raster_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
+
+And now back to spatial data ...
 
 # Raster Package
 
@@ -57,6 +410,7 @@ getData("ISO3")%>%
 ##   ISO3         NAME
 ## 1  ZAF South Africa
 ```
+> Note that `%>%` is a *pipe*, defined by the `dplyr` package that says 'Use the previous thing as the first argument in this function. So this is equivalent to `temp1 = getData("ISO3")` followed by `temp2 = as.data.frame(temp1)` followed by `output=filter(temp2,NAME==South Africa')`.
 
 Download data for South Africa
 
@@ -66,10 +420,10 @@ za=getData('GADM', country='ZAF', level=1)
 
 
 ```r
-plot(za)
+plot(za) # this can be a little slow
 ```
+<img src="05_assets/za_vector.png" alt="alt text" width="70%">
 
-![](05_Raster_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 Danger: `plot()` works, but can be slow for complex polygons.
 
@@ -114,16 +468,10 @@ za@data
 ```
 
 
-
 ```r
-za=subset(za,NAME_1!="Prince Edward Islands")
-
+za=subset(za,NAME_1=="Eastern Cape")
 plot(za)
 ```
-
-![](05_Raster_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
-
-
 
 <div class="well">
 ## Your turn
@@ -138,19 +486,10 @@ Use the method above to download and plot the boundaries for a country of your c
 getData("ISO3")%>%
   as.data.frame%>%
   filter(NAME=="Tunisia")
-```
 
-```
-##   ISO3    NAME
-## 1  TUN Tunisia
-```
-
-```r
 country=getData('GADM', country='TUN', level=1)
 plot(country)
 ```
-
-![](05_Raster_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
 </div>
 </div>
 
@@ -169,6 +508,7 @@ Spatial data structure dividing region ('grid') into rectangles (’cells’ or 
 * `rasterStack`: Multiple Bands
 * `rasterBrick`: Multiple Bands of _same_ thing.
 
+Normally, you'll obtain rasters data by downloading it from somewhere (e.g. global climate data below), but to get a better understanding of rasters, let's build one from scratch.
 
 
 ```r
@@ -183,6 +523,8 @@ x
 ## extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)
 ## coord. ref. : +proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0
 ```
+
+There are lots of slots to handle all the ways one might need to use a raster; fortunately you won't have to dig into the majority of these.
 
 
 ```r
@@ -243,7 +585,7 @@ str(x)
 ##   ..@ z       : list()
 ```
 
-
+The most useful functions for accessing slots are `values()` to get data values, `extent()` to get the bounding box, `crs()` to get the projection.
 
 
 ```r
@@ -271,8 +613,6 @@ ncol(x)
 ```
 ## [1] 20
 ```
-
-
 
 
 ```r
@@ -358,14 +698,16 @@ values(x)= rnorm(5000)
 plot(x)
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-32-1.png)<!-- -->
 </div>
 </div>
 
 
 
 
-Raster memory usage
+## Raster memory usage
+
+Raster data files can be very large, especially when cells are at high resolution, so it becomes important to think about how much RAM is required to work with a raster to avoid slowing your computer to a crawl. The `raster` package cleverly avoids reading full rasters into memory to instead just provides pointers to the relevant raster files.
 
 
 ```r
@@ -386,7 +728,7 @@ Plotting is easy (but slow) with `plot`.
 plot(r, main='Raster with 100 cells')
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-34-1.png)<!-- -->
 
 
 
@@ -396,11 +738,11 @@ rasterVis package has `gplot()` for plotting raster data in the `ggplot()` frame
 
 
 ```r
-gplot(r,maxpixels=50000)+
-  geom_raster(aes(fill=value))
+gplot(r,maxpixels=50000)+ # reference the data
+  geom_raster(aes(fill=value)) # cell's data value determines its color
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-35-1.png)<!-- -->
 
 
 Adjust `maxpixels` for faster plotting of large datasets.
@@ -411,7 +753,7 @@ gplot(r,maxpixels=10)+
   geom_raster(aes(fill=value))
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-36-1.png)<!-- -->
 
 
 
@@ -419,12 +761,12 @@ Can use all the `ggplot` color ramps, etc.
 
 
 ```r
-gplot(r)+geom_raster(aes(fill=value))+
-    scale_fill_distiller(palette="OrRd")
+gplot(r)+ # reference the data
+  geom_raster(aes(fill=value))+ # cell's data value determines its color
+  scale_fill_distiller(palette="OrRd") # specify the color pallette
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-21-1.png)<!-- -->
-
+![](05_Raster_files/figure-html/unnamed-chunk-37-1.png)<!-- -->
 
 ## Spatial Projections
 
@@ -440,28 +782,6 @@ projection(r)
 ## [1] "+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"
 ```
 
-## Warping rasters
-
-Use `projectRaster()` to _warp_ to a different projection.
-
-`method=` `ngb` (for categorical) or `bilinear` (continuous)
-
-
-```r
-r2=projectRaster(r,crs="+proj=sinu +lon_0=0",method = )
-```
-
-```
-## Warning in rgdal::rawTransform(projto_int, projfrom, nrow(xy), xy[, 1], :
-## 48 projected point(s) not finite
-```
-
-```r
-par(mfrow=c(1,2));plot(r);plot(r2)
-```
-
-![](05_Raster_files/figure-html/unnamed-chunk-23-1.png)<!-- -->
-
 
 # WorldClim
 
@@ -469,8 +789,6 @@ par(mfrow=c(1,2));plot(r);plot(r2)
 
 Mean monthly climate and derived variables interpolated from weather stations on a 30 arc-second (~1km) grid.
 See [worldclim.org](http://www.worldclim.org/methods)
-
-
 
 ## Bioclim variables
 
@@ -545,10 +863,10 @@ gain(clim)=0.1
 
 
 ```r
-plot(clim)
+plot(clim[[1:3]]) # just the first 3, since its slow
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-27-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-42-1.png)<!-- -->
 
  
 
@@ -557,17 +875,21 @@ plot(clim)
 Or use `rasterVis` methods with gplot
 
 ```r
-gplot(clim[[13:19]])+geom_raster(aes(fill=value))+
+gplot(clim[[1:3]])+geom_raster(aes(fill=value))+
   facet_wrap(~variable)+
   scale_fill_gradientn(colours=c("brown","red","yellow","darkgreen","green"),trans="log10")+
   coord_equal()
 ```
 
 ```
+## Warning in self$trans$transform(x): NaNs produced
+```
+
+```
 ## Warning: Transformation introduced infinite values in discrete y-axis
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-28-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-43-1.png)<!-- -->
 
 
 
@@ -636,7 +958,7 @@ r1
 plot(r1)
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-31-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-46-1.png)<!-- -->
 
 ## Spatial aggregation
 
@@ -646,7 +968,7 @@ aggregate(r1, 3, fun=mean) %>%
   plot()
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-32-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-47-1.png)<!-- -->
 
 <div class="well">
 ## Your turn
@@ -661,11 +983,9 @@ aggregate(r1, 10, fun=min) %>%
   plot()
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-33-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-48-1.png)<!-- -->
 </div>
 </div>
-
-
 
 ## Focal ("moving window")
 
@@ -675,9 +995,7 @@ focal(r1, w=matrix(1,3,3), fun=mean) %>%
   plot()
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-34-1.png)<!-- -->
-
-
+![](05_Raster_files/figure-html/unnamed-chunk-49-1.png)<!-- -->
 
 
 ```r
@@ -691,8 +1009,7 @@ rf_range2 <- focal(r1, w=matrix(1,11,11), fun=range)
 plot(rf_range2)
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-35-1.png)<!-- -->
-
+![](05_Raster_files/figure-html/unnamed-chunk-50-1.png)<!-- -->
 
 <div class="well">
 ## Your turn
@@ -708,7 +1025,7 @@ focal(r1,w=matrix(1,3,3),fun=sd)%>%
   plot()
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-36-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-51-1.png)<!-- -->
 </div>
 </div>
 
@@ -717,7 +1034,7 @@ focal(r1,w=matrix(1,3,3),fun=sd)%>%
 
 ## Raster calculations
 
-the `raster` package has many options for _raster algebra_, including `+`, `-`, `*`, `/`, logical operators such as `>`, `>=`, `<`, `==`, `!` and functions such as `abs`, `round`, `ceiling`, `floor`, `trunc`, `sqrt`, `log`, `log10`, `exp`, `cos`, `sin`, `max`, `min`, `range`, `prod`, `sum`, `any`, `all`.
+The `raster` package has many options for _raster algebra_, including `+`, `-`, `*`, `/`, logical operators such as `>`, `>=`, `<`, `==`, `!` and functions such as `abs`, `round`, `ceiling`, `floor`, `trunc`, `sqrt`, `log`, `log10`, `exp`, `cos`, `sin`, `max`, `min`, `range`, `prod`, `sum`, `any`, `all`.
 
 So, for example, you can 
 
@@ -738,8 +1055,6 @@ cellStats(s,range)
 ```
 ## [1] 15.8 34.6
 ```
-
-
 
 
 ```r
@@ -768,7 +1083,7 @@ r = r1 < 15
 plot(r)
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-38-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-53-1.png)<!-- -->
 
 
 
@@ -807,7 +1122,7 @@ pts=sampleRandom(clim,100,xy=T,sp=T)
 plot(pts);axis(1);axis(2)
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-40-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-55-1.png)<!-- -->
 
 ### Extract data using a `SpatialPoints` object
 Often you will have some locations (points) for which you want data from a raster* object.  You can use the `extract` function here with the `pts` object (we'll pretend it's a new point dataset for which you want climate variables).
@@ -819,12 +1134,12 @@ head(pts_data)
 
 ```
 ##   ID bio1 bio2 bio3   bio4
-## 1  1 25.8 12.3  6.1  222.1
-## 2  2 26.1 10.7  8.0   51.6
-## 3  3 21.9 13.1  6.4  258.9
-## 4  4 20.7 10.0  3.6  599.6
-## 5  5 27.7 17.6  4.5  736.2
-## 6  6 -1.3 12.9  2.4 1394.7
+## 1  1 -6.4 14.1  3.8  814.6
+## 2  2  5.3  6.6  3.1  496.7
+## 3  3 -1.5 13.6  2.6 1339.2
+## 4  4 12.0 13.0  3.3  907.2
+## 5  5 25.8 14.9  4.9  588.7
+## 6  6 25.2  6.5  8.5   44.7
 ```
 > Use `package::function` to avoid confusion with similar functions.
 
@@ -840,7 +1155,7 @@ gplot(clim[[1]])+
   coord_equal()
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-42-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-57-1.png)<!-- -->
 
 ### Summarize climate data at point locations
 Use `gather()` to reshape the climate data for easy plotting with ggplot.
@@ -855,12 +1170,12 @@ head(d2)
 
 ```
 ##   cell   ID value
-## 1    1 bio1  25.8
-## 2    2 bio1  26.1
-## 3    3 bio1  21.9
-## 4    4 bio1  20.7
-## 5    5 bio1  27.7
-## 6    6 bio1  -1.3
+## 1    1 bio1  -6.4
+## 2    2 bio1   5.3
+## 3    3 bio1  -1.5
+## 4    4 bio1  12.0
+## 5    5 bio1  25.8
+## 6    6 bio1  25.2
 ```
 
 And plot density plots (like histograms).
@@ -871,7 +1186,7 @@ ggplot(d2,aes(x=value))+
   facet_wrap(~ID,scales="free")
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-44-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-59-1.png)<!-- -->
 
 
 ### Lines
@@ -895,7 +1210,7 @@ gplot(r1)+geom_tile(aes(fill=value))+
   geom_line(aes(x=long,y=lat),data=fortify(transect),col="red")
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-45-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-60-1.png)<!-- -->
 
 
 
@@ -969,7 +1284,7 @@ ggplot(transl,aes(x=lon,y=value,
   geom_line()
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-49-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-64-1.png)<!-- -->
 
 
 
@@ -999,13 +1314,12 @@ ggplot(rsp@data, aes(map_id = id, fill=bio1)) +
     coord_map()+
     geom_map(map = frsp)
 ```
+<img src="05_assets//slow_zonal_plot.png" alt="alt text" width="75%"> 
 
-![](05_Raster_files/figure-html/unnamed-chunk-51-1.png)<!-- -->
 
-> For more details about plotting spatialPolygons, see [here](https://github.com/hadley/ggplot2/wiki/plotting-polygon-shapefiles)
+> Not a very exciting plot, but then again, we did just ask for the mean value across the province. For more details about plotting spatialPolygons, see [here](https://github.com/hadley/ggplot2/wiki/plotting-polygon-shapefiles)
 
 ## Example Workflow
-
 
 1. Download the Maximum Temperature dataset using `getData()`
 2. Set the gain to 0.1 (to convert to degrees Celcius)
@@ -1133,17 +1447,7 @@ gplot(tmax_crop)+
             data=fortify(transect),col="red",size=3)+
   coord_map()
 ```
-
-```
-## Regions defined for each Polygons
-```
-
-```
-## Warning: Ignoring unknown aesthetics: order
-```
-
-![](05_Raster_files/figure-html/unnamed-chunk-57-1.png)<!-- -->
-
+<img src="05_assets//slow_time_series_plot.png" alt="alt text" width="75%">
 
 ## Extract and clean up the transect data
 
@@ -1214,7 +1518,7 @@ ggplot(transl,
     geom_line()
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-60-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-75-1.png)<!-- -->
 
 Or the same data in a levelplot:
 
@@ -1229,9 +1533,10 @@ ggplot(transl,
     geom_raster()
 ```
 
-![](05_Raster_files/figure-html/unnamed-chunk-61-1.png)<!-- -->
+![](05_Raster_files/figure-html/unnamed-chunk-76-1.png)<!-- -->
 
 
+<!--
 ## Raster Processing
 
 Things to consider:
@@ -1240,3 +1545,4 @@ Things to consider:
 * Disk space and temporary files
 * Use of external programs (e.g. GDAL)
 * Use of external GIS viewer (e.g. QGIS)
+-->

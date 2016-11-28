@@ -15,7 +15,7 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -99,34 +99,34 @@ button.code-folding-btn:focus {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 51px;
+  padding-top: 64px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 
 .section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 </style>
 
@@ -263,9 +263,9 @@ It appears you don’t have a PDF plugin for this browser. No biggie… you can 
 <p>This tutorial has been forked from awesome classes developed by Adam Wilson here: <a href="http://adamwilson.us/RDataScience/" class="uri">http://adamwilson.us/RDataScience/</a></p>
 <p><a href="02_DataWrangling.R"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here</a>. Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.</p>
 <div id="rstudio-shortcuts" class="section level1">
-<h1>RStudio Shortcuts</h1>
+<h1><span class="header-section-number">1</span> RStudio Shortcuts</h1>
 <div id="running-code" class="section level2">
-<h2>Running code</h2>
+<h2><span class="header-section-number">1.1</span> Running code</h2>
 <ul>
 <li><code>ctrl-R</code> (or <code>command-R</code>) to run current line</li>
 <li>Highlight <code>code</code> in script and run <code>ctrl-R</code> (or <code>command-R</code>) to run selection</li>
@@ -273,7 +273,7 @@ It appears you don’t have a PDF plugin for this browser. No biggie… you can 
 </ul>
 </div>
 <div id="switching-windows" class="section level2">
-<h2>Switching windows</h2>
+<h2><span class="header-section-number">1.2</span> Switching windows</h2>
 <ul>
 <li><code>ctrl-1</code>: script window</li>
 <li><code>ctrl-2</code>: console window</li>
@@ -284,19 +284,19 @@ It appears you don’t have a PDF plugin for this browser. No biggie… you can 
 </div>
 </div>
 <div id="data-wrangling" class="section level1">
-<h1>Data wrangling</h1>
+<h1><span class="header-section-number">2</span> Data wrangling</h1>
 <div id="useful-packages-dplyr-and-tidyr" class="section level2">
-<h2>Useful packages: <a href="https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html"><code>dplyr</code></a> and <a href=""><code>tidyr</code></a></h2>
+<h2><span class="header-section-number">2.1</span> Useful packages: <a href="https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html"><code>dplyr</code></a> and <a href=""><code>tidyr</code></a></h2>
 <p><a href="https://www.rstudio.com/resources/cheatsheets/">Cheat sheets on website</a> for <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data Wrangling</a></p>
 <pre class="r"><code>library(dplyr)
 library(tidyr)</code></pre>
 <p>Remember use <code>install.packages(&quot;dplyr&quot;)</code> to install a new package.</p>
 <div id="example-operations-from-here" class="section level3">
-<h3>Example operations from <a href="https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html">here</a></h3>
+<h3><span class="header-section-number">2.1.1</span> Example operations from <a href="https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html">here</a></h3>
 </div>
 </div>
 <div id="new-york-city-flights" class="section level2">
-<h2>New York City Flights</h2>
+<h2><span class="header-section-number">2.2</span> New York City Flights</h2>
 <p>Data from <a href="http://www.transtats.bts.gov/DatabaseInfo.asp?DB_ID=120&amp;Link=0">US Bureau of Transportation Statistics</a> (see <code>?nycflights13</code>)</p>
 <pre class="r"><code>library(nycflights13)</code></pre>
 <p>Check out the <code>flights</code> object</p>
@@ -317,7 +317,7 @@ library(tidyr)</code></pre>
 ## #   air_time &lt;dbl&gt;, distance &lt;dbl&gt;, hour &lt;dbl&gt;,
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 <div id="object-structure" class="section level3">
-<h3>Object <em>Structure</em></h3>
+<h3><span class="header-section-number">2.2.1</span> Object <em>Structure</em></h3>
 <p>Check out data <em>structure</em> with <code>glimpse()</code></p>
 <pre class="r"><code>glimpse(flights)</code></pre>
 <pre><code>## Observations: 336,776
@@ -345,7 +345,7 @@ library(tidyr)</code></pre>
 </div>
 </div>
 <div id="dplyr-verbs" class="section level1">
-<h1><code>dplyr</code> “verbs”</h1>
+<h1><span class="header-section-number">3</span> <code>dplyr</code> “verbs”</h1>
 <ul>
 <li><code>select()</code> and <code>rename()</code>: Extract existing variables</li>
 <li><code>filter()</code> and <code>slice()</code>: Extract existing observations</li>
@@ -356,7 +356,7 @@ library(tidyr)</code></pre>
 <li><code>sample_n()</code> and <code>sample_frac()</code></li>
 </ul>
 <div id="useful-select-functions" class="section level2">
-<h2>Useful select functions</h2>
+<h2><span class="header-section-number">3.1</span> Useful select functions</h2>
 <ul>
 <li>“<code>-</code>” Select everything but</li>
 <li>“<code>:</code>” Select range</li>
@@ -369,7 +369,7 @@ library(tidyr)</code></pre>
 <li><code>starts_with()</code> Select columns whose name starts with a character string</li>
 </ul>
 <div id="select-examples" class="section level3">
-<h3><code>select()</code> examples</h3>
+<h3><span class="header-section-number">3.1.1</span> <code>select()</code> examples</h3>
 <p>Select only the <code>year</code>, <code>month</code>, and <code>day</code> columns:</p>
 <pre class="r"><code>select(flights,year, month, day)</code></pre>
 <pre><code>## # A tibble: 336,776 × 3
@@ -388,7 +388,7 @@ library(tidyr)</code></pre>
 ## # ... with 336,766 more rows</code></pre>
 </div>
 <div id="select-examples-1" class="section level3">
-<h3><code>select()</code> examples</h3>
+<h3><span class="header-section-number">3.1.2</span> <code>select()</code> examples</h3>
 <p>Select everything <em>except</em> the <code>tailnum</code>:</p>
 <pre class="r"><code>select(flights,-tailnum)</code></pre>
 <pre><code>## # A tibble: 336,776 × 18
@@ -447,7 +447,7 @@ library(tidyr)</code></pre>
 </div>
 </div>
 <div id="filter-observations" class="section level2">
-<h2><code>filter()</code> observations</h2>
+<h2><span class="header-section-number">3.2</span> <code>filter()</code> observations</h2>
 <p>Filter all flights that departed on on January 1st:</p>
 <pre class="r"><code>filter(flights, month == 1, day == 1)</code></pre>
 <pre><code>## # A tibble: 842 × 19
@@ -472,7 +472,7 @@ library(tidyr)</code></pre>
 ## #   time_hour &lt;dttm&gt;</code></pre>
 </div>
 <div id="base-r-method" class="section level2">
-<h2><em>Base</em> R method</h2>
+<h2><span class="header-section-number">3.3</span> <em>Base</em> R method</h2>
 <p>This is equivalent to the more verbose code in base R:</p>
 <pre class="r"><code>flights[flights$month == 1 &amp; flights$day == 1, ]</code></pre>
 <pre><code>## # A tibble: 842 × 19
@@ -528,7 +528,7 @@ Show Solution
 </div>
 </div>
 <div id="other-boolean-expressions" class="section level2">
-<h2>Other <em>boolean</em> expressions</h2>
+<h2><span class="header-section-number">3.4</span> Other <em>boolean</em> expressions</h2>
 <p><code>filter()</code> is similar to <code>subset()</code> except it handles any number of filtering conditions joined together with <code>&amp;</code>.</p>
 <p>You can also use other boolean operators, such as <em>OR</em> (“|”):</p>
 <pre class="r"><code>filter(flights, month == 1 | month == 2)</code></pre>
@@ -584,7 +584,7 @@ Show Solution
 </div>
 </div>
 <div id="select-rows-with-slice" class="section level2">
-<h2>Select rows with <code>slice()</code>:</h2>
+<h2><span class="header-section-number">3.5</span> Select rows with <code>slice()</code>:</h2>
 <pre class="r"><code>slice(flights, 1:10)</code></pre>
 <pre><code>## # A tibble: 10 × 19
 ##     year month   day dep_time sched_dep_time
@@ -607,7 +607,7 @@ Show Solution
 ## #   minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
 <div id="arrange-rows" class="section level2">
-<h2><code>arrange()</code> rows</h2>
+<h2><span class="header-section-number">3.6</span> <code>arrange()</code> rows</h2>
 <p><code>arrange()</code> is similar to <code>filter()</code> except it reorders instead of filtering.</p>
 <pre class="r"><code>arrange(flights, year, month, day)</code></pre>
 <pre><code>## # A tibble: 336,776 × 19
@@ -634,7 +634,7 @@ Show Solution
 <pre class="r"><code>flights[order(flights$year, flights$month, flights$day), ]</code></pre>
 </div>
 <div id="descending-order-desc" class="section level2">
-<h2>Descending order: <code>desc()</code></h2>
+<h2><span class="header-section-number">3.7</span> Descending order: <code>desc()</code></h2>
 <pre class="r"><code>arrange(flights, desc(arr_delay))</code></pre>
 <pre><code>## # A tibble: 336,776 × 19
 ##     year month   day dep_time sched_dep_time
@@ -660,7 +660,7 @@ Show Solution
 <pre class="r"><code>flights[order(desc(flights$arr_delay)), ]</code></pre>
 </div>
 <div id="distinct-find-distinct-rows" class="section level2">
-<h2>Distinct: Find distinct rows</h2>
+<h2><span class="header-section-number">3.8</span> Distinct: Find distinct rows</h2>
 <pre class="r"><code>distinct(
   select(flights,carrier)
 )</code></pre>
@@ -685,7 +685,7 @@ Show Solution
 ## 16      OO</code></pre>
 </div>
 <div id="mutate-derive-new-variables" class="section level2">
-<h2>Mutate: Derive new variables</h2>
+<h2><span class="header-section-number">3.9</span> Mutate: Derive new variables</h2>
 <p>Adds columns with calculations based on other columns.</p>
 <p>Average air speed (miles/hour):</p>
 <pre class="r"><code>select(
@@ -707,7 +707,7 @@ Show Solution
 ## # ... with 336,766 more rows</code></pre>
 </div>
 <div id="chaining-operations" class="section level2">
-<h2>Chaining Operations</h2>
+<h2><span class="header-section-number">3.10</span> Chaining Operations</h2>
 <p>Performing multiple operations sequentially with a <em>pipe</em> character</p>
 <ol style="list-style-type: decimal">
 <li>Group by a variable</li>
@@ -767,7 +767,7 @@ head(a4)</code></pre>
 <p>Arguments are distant from function -&gt; difficult to read!</p>
 </div>
 <div id="chaining-operations-1" class="section level2">
-<h2>Chaining Operations</h2>
+<h2><span class="header-section-number">3.11</span> Chaining Operations</h2>
 <p><code>%&gt;%</code> allows you to <em>pipe</em> together various commands</p>
 <p><code>x %&gt;% f(y)</code> turns into <code>f(x, y)</code></p>
 <p>So you can use it to rewrite multiple operations that you can read left-to-right, top-to-bottom:</p>
@@ -798,7 +798,7 @@ head(a4)</code></pre>
 ## # ... with 39 more rows</code></pre>
 </div>
 <div id="analyze-by-group-with-group_by" class="section level2">
-<h2>Analyze by group with <code>group_by()</code></h2>
+<h2><span class="header-section-number">3.12</span> Analyze by group with <code>group_by()</code></h2>
 <p>Perform operations by <em>group</em>: mean departure delay by airport (<code>origin</code>)</p>
 <pre class="r"><code>flights %&gt;%
   group_by(origin) %&gt;%
@@ -872,9 +872,9 @@ Show Solution
 </div>
 </div>
 <div id="combining-data-sets" class="section level1">
-<h1>Combining data sets</h1>
+<h1><span class="header-section-number">4</span> Combining data sets</h1>
 <div id="dplyr-join-methods" class="section level2">
-<h2><code>dplyr</code> <em>join</em> methods</h2>
+<h2><span class="header-section-number">4.1</span> <code>dplyr</code> <em>join</em> methods</h2>
 <p><img src="02_assets/join1.png" alt="Drawing" style="width: 50%;"/></p>
 <ul>
 <li><code>left_join(a, b, by = &quot;x1&quot;)</code> Join matching rows from b to a.</li>
@@ -883,22 +883,22 @@ Show Solution
 <li><code>full_join(a, b, by = &quot;x1&quot;)</code> Join data. Retain all values, all rows.</li>
 </ul>
 <div id="left-join" class="section level3">
-<h3>Left Join</h3>
+<h3><span class="header-section-number">4.1.1</span> Left Join</h3>
 <p><code>left_join(a, b, by = &quot;x1&quot;)</code> Join matching rows from b to a.</p>
 <p><img src="02_assets/join1.png" alt="Drawing" style="width: 50%;"/> <img src="02_assets/join_left.png" alt="Drawing" style="width: 50%;"/></p>
 </div>
 <div id="right-join" class="section level3">
-<h3>Right Join</h3>
+<h3><span class="header-section-number">4.1.2</span> Right Join</h3>
 <p><code>right_join(a, b, by = &quot;x1&quot;)</code> Join matching rows from a to b.</p>
 <p><img src="02_assets/join1.png" alt="Drawing" style="width: 50%;"/> <img src="02_assets/join_right.png" alt="Drawing" style="width: 50%;"/></p>
 </div>
 <div id="inner-join" class="section level3">
-<h3>Inner Join</h3>
+<h3><span class="header-section-number">4.1.3</span> Inner Join</h3>
 <p><code>inner_join(a, b, by = &quot;x1&quot;)</code> Retain only rows in both sets.</p>
 <p><img src="02_assets/join1.png" alt="Drawing" style="width: 50%;"/> <img src="02_assets/join_inner.png" alt="Drawing" style="width: 50%;"/></p>
 </div>
 <div id="full-join" class="section level3">
-<h3>Full Join</h3>
+<h3><span class="header-section-number">4.1.4</span> Full Join</h3>
 <p><code>full_join(a, b, by = &quot;x1&quot;)</code> Join data. Retain all values, all rows.</p>
 <p><img src="02_assets/join1.png" alt="Drawing" style="width: 50%;"/> <img src="02_assets/join_full.png" alt="Drawing" style="width: 50%;"/></p>
 <pre class="r"><code>flights%&gt;%
@@ -958,10 +958,10 @@ Show Solution
 </div>
 </div>
 <div id="plot-the-flights-data" class="section level2">
-<h2>Plot the <code>flights</code> data</h2>
+<h2><span class="header-section-number">4.2</span> Plot the <code>flights</code> data</h2>
 <p>The section below shows some ‘advanced’ coding to extract the geographic locations for all flights and plotting. This is just meant as an example to illustrate how one might use these functions to perform a mini-analysis that results in a map.</p>
 <div id="join-destination-airports" class="section level3">
-<h3>Join destination airports</h3>
+<h3><span class="header-section-number">4.2.1</span> Join destination airports</h3>
 <pre class="r"><code>library(geosphere)
 library(maps)
 library(ggplot2)
@@ -1046,7 +1046,7 @@ wrld &lt;- c(geom_polygon(
 </div>
 </div>
 <div id="colophon" class="section level2">
-<h2>Colophon</h2>
+<h2><span class="header-section-number">4.3</span> Colophon</h2>
 <p>This exercise based on code from <a href="http://spatial.ly/2012/06/mapping-worlds-biggest-airlines/">here</a>.</p>
 </div>
 </div>

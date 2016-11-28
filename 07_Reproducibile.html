@@ -15,7 +15,7 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -99,34 +99,34 @@ button.code-folding-btn:focus {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 51px;
+  padding-top: 64px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 
 .section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 .section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 69px;
+  margin-top: -69px;
 }
 </style>
 
@@ -251,12 +251,12 @@ $(document).ready(function () {
 
 
 <div id="overview" class="section level1">
-<h1>Overview</h1>
+<h1><span class="header-section-number">1</span> Overview</h1>
 <blockquote>
 <p>“The goal of reproducible research is to tie specific instructions to data analysis and experimental data so that scholarship can be recreated, better understood and verified.” <small> Max Kuhn, CRAN Task View: Reproducible Research </small></p>
 </blockquote>
 <div id="history-of-reproducible-research" class="section level2">
-<h2>History of reproducible research</h2>
+<h2><span class="header-section-number">1.1</span> History of reproducible research</h2>
 <ul>
 <li>Mathematics (400 BC?)</li>
 <li>Write scientiﬁc paper, Galileo, Pasteur, etc. (1660s?)</li>
@@ -269,13 +269,13 @@ $(document).ready(function () {
 <p><small>Gavish &amp; Gonoho AAAS 2011, Oxberry 2013</small></p>
 </div>
 <div id="motivations-claerbouts-principle" class="section level2">
-<h2>Motivations: <br> Claerbout’s principle</h2>
+<h2><span class="header-section-number">1.2</span> Motivations: <br> Claerbout’s principle</h2>
 <blockquote>
 <p>“An article about computational result is advertising, not scholarship. The actual scholarship is the full software environment, code and data, that produced the result.” <small> Claerbout and Karrenbach, Proceedings of the 62nd Annual International Meeting of the Society of Exploration Geophysics. 1992</small></p>
 </blockquote>
 </div>
 <div id="benefits-are-straightforward" class="section level2">
-<h2>Benefits are straightforward</h2>
+<h2><span class="header-section-number">1.3</span> Benefits are straightforward</h2>
 <ul>
 <li><strong>Verification &amp; Reliability</strong>: Find and fix bugs. Today’s results == tomorrow’s.</li>
 <li><strong>Transparency</strong>: increased citation count, broader impact, improved institutional memory</li>
@@ -284,7 +284,7 @@ $(document).ready(function () {
 </ul>
 </div>
 <div id="but-limitations-are-substantial" class="section level2">
-<h2>But limitations are substantial</h2>
+<h2><span class="header-section-number">1.4</span> But limitations are substantial</h2>
 <p><strong>Technical</strong></p>
 <ul>
 <li>Classified/sensitive/big data</li>
@@ -302,17 +302,17 @@ $(document).ready(function () {
 </ul>
 </div>
 <div id="our-work-exists-on-a-spectrum-of-reproducibility" class="section level2">
-<h2>Our work exists on a spectrum of reproducibility</h2>
+<h2><span class="header-section-number">1.5</span> Our work exists on a spectrum of reproducibility</h2>
 <p><img src="07_assets/peng-spectrum.jpg" alt="alt text" width="800"></p>
 <p><small>Peng 2011, Science 334(6060) pp. 1226-1227</small></p>
 </div>
 <div id="goal-expose-more-of-the-research-workflow" class="section level2">
-<h2>Goal: expose more of the research workflow</h2>
+<h2><span class="header-section-number">1.6</span> Goal: expose more of the research workflow</h2>
 <p><img src="07_assets/peng-pipeline.jpg" alt="alt text" width="600"></p>
 <p><small><small><a href="http://www.stodden.net/AMP2011/slides/pengslides.pdf" class="uri">http://www.stodden.net/AMP2011/slides/pengslides.pdf</a></small></small></p>
 </div>
 <div id="common-practices-of-many-scientists" class="section level2 columns-2">
-<h2>Common practices of many scientists</h2>
+<h2><span class="header-section-number">1.7</span> Common practices of many scientists</h2>
 <ul>
 <li>Enter data in Excel</li>
 <li>Use Excel for data cleaning &amp; descriptive statistics</li>
@@ -324,7 +324,7 @@ $(document).ready(function () {
 <p><small><img src="07_assets/lemon.png" alt="alt text" /></small></p>
 </div>
 <div id="common-practices-of-many-scientists-1" class="section level2 columns-2">
-<h2>Common practices of many scientists</h2>
+<h2><span class="header-section-number">1.8</span> Common practices of many scientists</h2>
 <ul>
 <li>Version control is ad hoc</li>
 <li>Excel handles missing data inconsistently and sometimes incorrectly</li>
@@ -335,7 +335,7 @@ $(document).ready(function () {
 <p><img src="07_assets/phd-comic-VCS.gif" alt="alt text" width="400"></p>
 </div>
 <div id="click-trails-are-ephemeral-dangerous" class="section level2 columns-2">
-<h2>Click trails are ephemeral &amp; dangerous</h2>
+<h2><span class="header-section-number">1.9</span> Click trails are ephemeral &amp; dangerous</h2>
 <ul>
 <li>Lots of human effort for tedious &amp; time-wasting tasks</li>
 <li>Error-prone due to manual &amp; ad hoc data handling</li>
@@ -346,7 +346,7 @@ $(document).ready(function () {
 <p><img src="07_assets/contrails.jpg" alt="alt text" width="400"></p>
 </div>
 <div id="case-study-reinhart-and-rogoff-controversy" class="section level2 columns-2">
-<h2>Case study: Reinhart and Rogoff controversy</h2>
+<h2><span class="header-section-number">1.10</span> Case study: Reinhart and Rogoff controversy</h2>
 <p><img src="07_assets/reinhart_rogoff_coding_error_0.png" alt="alt text" width="400"></p>
 <ul>
 <li>2010: Claimed high debt-to-GDP ratios led to low GDP growth</li>
@@ -357,9 +357,9 @@ $(document).ready(function () {
 <p>Excel coding error sliced several countries out of the data set…. <a href="http://www.economist.com/news/finance-and-economics/21576362-seminal-analysis-relationship-between-debt-and-growth-comes-under">The Economist</a></p>
 </div>
 <div id="case-study-gay-marrage" class="section level2">
-<h2>Case study: Gay Marrage</h2>
+<h2><span class="header-section-number">1.11</span> Case study: Gay Marrage</h2>
 <div id="in-may-2015-science-retracted-a-study-of-how-canvassers-can-sway-peoples-opinions-about-gay-marriage-published-just-5-months-ago." class="section level4">
-<h4>In May 2015 <em>Science</em> retracted a study of how canvassers can sway people’s opinions about gay marriage published just 5 months ago.</h4>
+<h4><span class="header-section-number">1.11.0.1</span> In May 2015 <em>Science</em> retracted a study of how canvassers can sway people’s opinions about gay marriage published just 5 months ago.</h4>
 <ul>
 <li>Original survey data not made available for independent reproduction of results</li>
 <li>Survey incentives misrepresented</li>
@@ -371,9 +371,9 @@ $(document).ready(function () {
 </div>
 </div>
 <div id="case-study-seizure-medicine" class="section level2">
-<h2>Case study: Seizure Medicine</h2>
+<h2><span class="header-section-number">1.12</span> Case study: Seizure Medicine</h2>
 <div id="seizure-study-retracted-after-authors-realize-data-got-terribly-mixed" class="section level4">
-<h4>2013 Seizure study retracted after authors realize data got “terribly mixed”</h4>
+<h4><span class="header-section-number">1.12.0.1</span> 2013 Seizure study retracted after authors realize data got “terribly mixed”</h4>
 <blockquote>
 <p>“The article has been retracted at the request of the authors. After carefully re-examining the data presented in the article, they identified that data of two different hospitals got terribly mixed. The published results cannot be reproduced in accordance with scientific and clinical correctness.”&quot; <small> Authors of Low Dose Lidocaine for Refractory Seizures in Preterm Neonates </small></p>
 </blockquote>
@@ -381,7 +381,7 @@ $(document).ready(function () {
 </div>
 </div>
 <div id="bad-spreadsheet-merge-kills-depression-paper-quick-fix-resurrects-it" class="section level2">
-<h2>Bad spreadsheet merge kills depression paper, quick fix resurrects it</h2>
+<h2><span class="header-section-number">1.13</span> Bad spreadsheet merge kills depression paper, quick fix resurrects it</h2>
 <p>Authors informed the journal that the merge of lab results and other survey data used in the paper resulted in an error regarding the identification codes. Results of the analyses were based on the data set in which this error occurred.</p>
 <blockquote>
 <p>“<strong>Lower</strong> levels of CSF IL-6 were associated with current depression and with future depression […]” <small>Original conclusion</small></p>
@@ -392,7 +392,7 @@ $(document).ready(function () {
 <p><a href="http://retractionwatch.com/2014/07/01/bad-spreadsheet-merge-kills-depression-paper-quick-fix-resurrects-it/">Source</a></p>
 </div>
 <div id="scripted-analyses-are-superior" class="section level2 columns-2">
-<h2>Scripted analyses are superior</h2>
+<h2><span class="header-section-number">1.14</span> Scripted analyses are superior</h2>
 <p><img src="07_assets/open-science.png" alt="alt text" width="250px"></p>
 <ul>
 <li>Plain text files readable for a <em>long</em> time</li>
@@ -401,7 +401,7 @@ $(document).ready(function () {
 </ul>
 </div>
 <div id="literate-statistical-programming" class="section level2">
-<h2>Literate statistical programming</h2>
+<h2><span class="header-section-number">1.15</span> Literate statistical programming</h2>
 <blockquote>
 <p>“Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to humans what we want the computer to do.” <small>Donald E. Knuth, Literate Programming, 1984</small></p>
 </blockquote>
@@ -409,10 +409,10 @@ $(document).ready(function () {
 <pre class="r"><code>time &lt;- format(Sys.time(), &quot;%a %d %b %X %Y&quot;)</code></pre>
 <p>The text and R code are interwoven in the output:</p>
 <p>The time is <code>`r time`</code></p>
-<p>The time is Tue 22 Nov 19:06:49 2016</p>
+<p>The time is Mon 28 Nov 17:23:40 2016</p>
 </div>
 <div id="literate-programming-for-and-against" class="section level2 columns-2">
-<h2>Literate programming: for and against</h2>
+<h2><span class="header-section-number">1.16</span> Literate programming: for and against</h2>
 <p><strong>For</strong></p>
 <ul>
 <li>Text &amp; code in one place, in logical order</li>
@@ -427,9 +427,9 @@ $(document).ready(function () {
 </div>
 </div>
 <div id="reproducible-research-in-r" class="section level1">
-<h1>Reproducible Research in R</h1>
+<h1><span class="header-section-number">2</span> Reproducible Research in R</h1>
 <div id="need-a-programming-language" class="section level2 columns-2">
-<h2>Need a programming language</h2>
+<h2><span class="header-section-number">2.1</span> Need a programming language</h2>
 <p>The machine-readable part: R</p>
 <ul>
 <li>R: Free, open source, cross-platform, highly interactive, huge user community in academica and private sector</li>
@@ -444,7 +444,7 @@ $(document).ready(function () {
 </blockquote>
 </div>
 <div id="need-a-document-formatting-language" class="section level2 columns-2">
-<h2>Need a document formatting language</h2>
+<h2><span class="header-section-number">2.2</span> Need a document formatting language</h2>
 <p><img src="07_assets/markdown.png" alt="alt text" width="100"></p>
 <p>Markdown: lightweight document formatting syntax. Easy to write, read and publish as-is.</p>
 <p>The human-readable part</p>
@@ -456,7 +456,7 @@ $(document).ready(function () {
 </ul>
 </div>
 <div id="dynamic-documents-in-r" class="section level2 columns-2">
-<h2>Dynamic documents in R</h2>
+<h2><span class="header-section-number">2.3</span> Dynamic documents in R</h2>
 <p><code>knitr</code> - descendant of Sweave</p>
 <p>Engine for dynamic report generation in R</p>
 <p><img src="07_assets/knitr.png" alt="alt text" width="200"></p>
@@ -469,7 +469,7 @@ $(document).ready(function () {
 </ul>
 </div>
 <div id="pandoc-document-converter" class="section level2 columns-2">
-<h2>Pandoc: document converter</h2>
+<h2><span class="header-section-number">2.4</span> Pandoc: document converter</h2>
 <p><img src="07_assets/pandoc-workflow-rmd-md.png" alt="alt text" width="100%"> <small><small><small><a href="http://kieranhealy.org/blog/archives/2014/01/23/plain-text/" class="uri">http://kieranhealy.org/blog/archives/2014/01/23/plain-text/</a> </small></small></small></p>
 <p>A universal document converter, open source, cross-platform</p>
 <ul>
@@ -482,9 +482,9 @@ $(document).ready(function () {
 </div>
 </div>
 <div id="version-control" class="section level1">
-<h1>Version Control</h1>
+<h1><span class="header-section-number">3</span> Version Control</h1>
 <div id="tracking-changes-with-version-control" class="section level2">
-<h2>Tracking changes with version control</h2>
+<h2><span class="header-section-number">3.1</span> Tracking changes with version control</h2>
 <p><strong>Payoffs</strong></p>
 <ul>
 <li>Eases collaboration</li>
@@ -495,7 +495,7 @@ $(document).ready(function () {
 <p><img src="07_assets/git.png" alt="alt text" width="25%"> <img src="07_assets/github.png" alt="alt text" width="25%"> <img src="07_assets/bitbucket.png" alt="alt text" width="25%"></p>
 </div>
 <div id="environment-for-reproducible-research" class="section level2 columns-2">
-<h2>Environment for reproducible research</h2>
+<h2><span class="header-section-number">3.2</span> Environment for reproducible research</h2>
 <p><img src="07_assets/rstudio.png" alt="alt text" width="10%"></p>
 <ul>
 <li>integrated R console</li>
@@ -507,13 +507,13 @@ $(document).ready(function () {
 </blockquote>
 </div>
 <div id="depositing-code-and-data" class="section level2">
-<h2>Depositing code and data</h2>
+<h2><span class="header-section-number">3.3</span> Depositing code and data</h2>
 <p><strong>Payoffs</strong> - Free space for hosting (and paid options) - Assignment of persistent DOIs - Tracking citation metrics</p>
 <p><strong>Costs</strong> - Sometimes license restrictions (CC-BY &amp; CC0) - Limited or no private storage space</p>
 <p><img src="07_assets/figshare.png" alt="alt text" width="30%"> <img src="07_assets/dryad.png" alt="alt text" width="30%"> <img src="07_assets/zenodo.png" alt="alt text" width="30%"></p>
 </div>
 <div id="a-hierarchy-of-reproducibility" class="section level2">
-<h2>A hierarchy of reproducibility</h2>
+<h2><span class="header-section-number">3.4</span> A hierarchy of reproducibility</h2>
 <ul>
 <li><strong>Good</strong>: Use code with an integrated development environment (IDE). Minimize pointing and clicking (RStudio)</li>
 <li><strong>Better</strong>: Use version control. Help yourself keep track of changes, fix bugs and improve project management (RStudio &amp; Git &amp; GitHub or BitBucket)</li>
@@ -521,15 +521,15 @@ $(document).ready(function () {
 </ul>
 </div>
 <div id="section" class="section level2">
-<h2></h2>
+<h2><span class="header-section-number">3.5</span> </h2>
 <p><img src="07_assets/VictoriaStoddenIASSISTJune2010-reasons-to.png" alt="alt text" width="800"> <small>Stodden (IASSIST 2010) sampled American academics registered at the Machine Learning conference NIPS (134 responses from 593 requests (23%). Red = communitarian norms, Blue = private incentives</small></p>
 </div>
 <div id="section-1" class="section level2">
-<h2></h2>
+<h2><span class="header-section-number">3.6</span> </h2>
 <p><img src="07_assets/VictoriaStoddenIASSISTJune2010-reasons.png" alt="alt text" width="800"> <small>Stodden (IASSIST 2010) sampled American academics registered at the Machine Learning conference NIPS (134 responses from 593 requests (23%). Red = communitarian norms, Blue = private incentives</small></p>
 </div>
 <div id="standards-to-normalise-reproducible-research" class="section level2">
-<h2>Standards to normalise reproducible research</h2>
+<h2><span class="header-section-number">3.7</span> Standards to normalise reproducible research</h2>
 <p>Reproducible Research Standard (Stodden 2009)</p>
 <ul>
 <li>The full compendium on the internet</li>
@@ -539,7 +539,7 @@ $(document).ready(function () {
 </ul>
 </div>
 <div id="biggest-challenge-culture-change" class="section level2">
-<h2>Biggest challenge: culture change</h2>
+<h2><span class="header-section-number">3.8</span> Biggest challenge: culture change</h2>
 <p>Promote culture change through positive attribution</p>
 <p>Implement mechanisms to indicate &amp; encourage <strong>degrees of compliance</strong> (ie. clear definitions for different levels of reproducibility), cf. Stodden’s:</p>
 <ul>
@@ -551,7 +551,7 @@ $(document).ready(function () {
 </ul>
 </div>
 <div id="our-role-in-the-future-of-reproducible-research-leveque-et-al-2012" class="section level2">
-<h2>Our role in the future of reproducible research (Leveque et al 2012)</h2>
+<h2><span class="header-section-number">3.9</span> Our role in the future of reproducible research (Leveque et al 2012)</h2>
 <ul>
 <li>Train students by putting homework, assignments &amp; dissertations on the reproducible research spectrum</li>
 <li>Publish examples of reproducible research in our field</li>
@@ -563,21 +563,21 @@ $(document).ready(function () {
 </div>
 </div>
 <div id="demo-lets-get-started" class="section level1">
-<h1>Demo: let’s get started</h1>
+<h1><span class="header-section-number">4</span> Demo: let’s get started</h1>
 <p><a href="07_assets/demo/Demo.Rmd"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here</a>. Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.</p>
 <div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
+<h2><span class="header-section-number">4.1</span> R Markdown</h2>
 <p>Cheatsheet:</p>
 <p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"> <img src="07_assets/rmarkdown.png" alt="alt text" width="400"></a></p>
 <p><small><small><small><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf</a></small></small></small></p>
 </div>
 <div id="create-new-file" class="section level2">
-<h2>Create new file</h2>
+<h2><span class="header-section-number">4.2</span> Create new file</h2>
 <p><strong>File -&gt; New File -&gt; RMarkdown -&gt; Document -&gt; HTML</strong></p>
 <p><img src="07_assets/rmarkdownwindow.png" alt="alt text" width="500"></p>
 </div>
 <div id="step-1-load-packages" class="section level2">
-<h2>Step 1: Load packages</h2>
+<h2><span class="header-section-number">4.3</span> Step 1: Load packages</h2>
 <p>All R code to be run must be in a <em>code chunk</em> like this:</p>
 <pre class="r"><code>#```{r,eval=F}
 CODE HERE
@@ -592,7 +592,7 @@ library(spocc)</code></pre>
 </blockquote>
 </div>
 <div id="step-2-load-data" class="section level2">
-<h2>Step 2: Load data</h2>
+<h2><span class="header-section-number">4.4</span> Step 2: Load data</h2>
 <p>Now use the <code>occ()</code> function to download all the <em>occurrence</em> records for the American robin (<em>Turdus migratorius</em>) from the <a href="gbif.org">Global Biodiversity Information Facility</a>.</p>
 <p><img src="07_assets/Turdus-migratorius-002.jpg" alt="alt text" width="200"></p>
 <p><small><small><small>Licensed under CC BY-SA 3.0 via <a href="https://commons.wikimedia.org/wiki/File:Turdus-migratorius-002.jpg#/media/File:Turdus-migratorius-002.jpg">Wikimedia Commons</a></small></small></small></p>
@@ -604,7 +604,7 @@ d = occ(query=sp, from=&#39;ebird&#39;,limit = 1000) %&gt;% occ2df()</code></pre
 <p>This can take a few seconds.</p>
 </div>
 <div id="step-3-map-it" class="section level2">
-<h2>Step 3: Map it</h2>
+<h2><span class="header-section-number">4.5</span> Step 3: Map it</h2>
 <pre class="r"><code># Load coastline
 map=map_data(&quot;world&quot;)
 
@@ -616,7 +616,7 @@ ggplot(d,aes(x=longitude,y=latitude))+
 <p><img src="07_Reproducibile_files/figure-html/unnamed-chunk-5-1.png" /><!-- --></p>
 </div>
 <div id="step-4" class="section level2">
-<h2>Step 4:</h2>
+<h2><span class="header-section-number">4.6</span> Step 4:</h2>
 <p>Update the YAML header to keep the markdown file</p>
 <p>From this:</p>
 <pre class="r"><code>title: &quot;Untitled&quot;
@@ -633,7 +633,7 @@ output:
 <p>And click <code>knit HTML</code> to generate the output</p>
 </div>
 <div id="step-5-explore-markdown-functions" class="section level2">
-<h2>Step 5: Explore markdown functions</h2>
+<h2><span class="header-section-number">4.7</span> Step 5: Explore markdown functions</h2>
 <ol style="list-style-type: decimal">
 <li>Use the Cheatsheet to add sections and some example narrative.<br />
 </li>
@@ -644,18 +644,18 @@ output:
 <p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"> <img src="07_assets/rmarkdown.png" alt="alt text" width="400"></a></p>
 </div>
 <div id="final" class="section level2">
-<h2>Final</h2>
+<h2><span class="header-section-number">4.8</span> Final</h2>
 <blockquote>
 <p>Abandoning the habit of secrecy in favor of process transparency and peer review was the crucial step by which alchemy became chemistry.<small>Raymond, E. S., 2004, The art of UNIX programming: Addison-Wesley.</small></p>
 </blockquote>
 </div>
 <div id="colophon" class="section level2">
-<h2>Colophon</h2>
+<h2><span class="header-section-number">4.9</span> Colophon</h2>
 <p><a href="https://github.com/benmarwick/CSSS-Primer-Reproducible-Research">Slides based on Ben Marwick’s presentation to the UW Center for Statistics and Social Sciences (12 March 2014)</a> (<a href="http://orcid.org/0000-0001-7879-4531">OrcID</a>)</p>
 <p>Licensing: * Presentation: <a href="http://creativecommons.org/licenses/by/3.0/us/">CC-BY-3.0</a> * Source code: <a href="http://opensource.org/licenses/MIT">MIT</a></p>
 </div>
 <div id="references" class="section level2">
-<h2>References</h2>
+<h2><span class="header-section-number">4.10</span> References</h2>
 <p>See Rmd file for full references and sources</p>
 </div>
 </div>

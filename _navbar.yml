@@ -10,7 +10,7 @@ left:
       - text: "About Course Content"
         href: CourseContent.html
       - text: "-----------------"
-      - text: "Module 1: Introduction to R"
+      - text: "Introduction to R"
       - text: "00 Course Introduction"
         href: 00_CourseIntroductionFrame.html
       - text: "01 First Steps"
@@ -28,11 +28,11 @@ left:
       - text: "06 More Raster Data"
         href: 06_RasterTwo.html
       - text: "-----------------"
-      - text: "Module 3: Advanced Programming"
-      - text: "07 Reproducible Research"
-        href: 07_Reproducibile.html
+      - text: "Module 3: Cleaning and Integrating Biodiversity Data"
+      - text: "Workshop Schedule"
+        href: 107_Reproducibile.html
   - text: "Resources"
     href: Resources.html
 right:
   - icon: fa-github fa-lg
-    href: https://cmerow.github.io/RDataScience
+    href: https://github.com/cmerow/RDataScience/tree/gh-pages

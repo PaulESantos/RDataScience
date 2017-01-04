@@ -40,8 +40,8 @@ str(coords)
 
 ```
 ## 'data.frame':	100 obs. of  2 variables:
-##  $ x: num  0.9094 0.0532 -0.9575 0.144 0.505 ...
-##  $ y: num  0.1021 0.4322 0.2839 -0.1707 -0.0706 ...
+##  $ x: num  1.996 0.103 0.239 0.83 -0.323 ...
+##  $ y: num  -0.421 -1.103 0.222 -0.753 -0.833 ...
 ```
 
 
@@ -65,11 +65,11 @@ str(sp)
 
 ```
 ## Formal class 'SpatialPoints' [package "sp"] with 3 slots
-##   ..@ coords     : num [1:100, 1:2] 0.9094 0.0532 -0.9575 0.144 0.505 ...
+##   ..@ coords     : num [1:100, 1:2] 1.996 0.103 0.239 0.83 -0.323 ...
 ##   .. ..- attr(*, "dimnames")=List of 2
 ##   .. .. ..$ : NULL
 ##   .. .. ..$ : chr [1:2] "x" "y"
-##   ..@ bbox       : num [1:2, 1:2] -3.22 -1.96 2.51 2.4
+##   ..@ bbox       : num [1:2, 1:2] -2.29 -1.83 2.37 2.35
 ##   .. ..- attr(*, "dimnames")=List of 2
 ##   .. .. ..$ : chr [1:2] "x" "y"
 ##   .. .. ..$ : chr [1:2] "min" "max"
@@ -113,11 +113,11 @@ str(spdf)
 ##   .. ..$ ID   : int [1:100] 1 2 3 4 5 6 7 8 9 10 ...
 ##   .. ..$ group: Factor w/ 20 levels "a","b","c","d",..: 1 2 3 4 5 6 7 8 9 10 ...
 ##   ..@ coords.nrs : num(0) 
-##   ..@ coords     : num [1:100, 1:2] 0.9094 0.0532 -0.9575 0.144 0.505 ...
+##   ..@ coords     : num [1:100, 1:2] 1.996 0.103 0.239 0.83 -0.323 ...
 ##   .. ..- attr(*, "dimnames")=List of 2
 ##   .. .. ..$ : NULL
 ##   .. .. ..$ : chr [1:2] "x" "y"
-##   ..@ bbox       : num [1:2, 1:2] -3.22 -1.96 2.51 2.4
+##   ..@ bbox       : num [1:2, 1:2] -2.29 -1.83 2.37 2.35
 ##   .. ..- attr(*, "dimnames")=List of 2
 ##   .. .. ..$ : chr [1:2] "x" "y"
 ##   .. .. ..$ : chr [1:2] "min" "max"
@@ -144,11 +144,11 @@ str(spdf)
 ##   .. ..$ ID   : int [1:100] 1 2 3 4 5 6 7 8 9 10 ...
 ##   .. ..$ group: Factor w/ 20 levels "a","b","c","d",..: 1 2 3 4 5 6 7 8 9 10 ...
 ##   ..@ coords.nrs : num(0) 
-##   ..@ coords     : num [1:100, 1:2] 0.9094 0.0532 -0.9575 0.144 0.505 ...
+##   ..@ coords     : num [1:100, 1:2] 1.996 0.103 0.239 0.83 -0.323 ...
 ##   .. ..- attr(*, "dimnames")=List of 2
 ##   .. .. ..$ : NULL
 ##   .. .. ..$ : chr [1:2] "x" "y"
-##   ..@ bbox       : num [1:2, 1:2] -3.22 -1.96 2.51 2.4
+##   ..@ bbox       : num [1:2, 1:2] -2.29 -1.83 2.37 2.35
 ##   .. ..- attr(*, "dimnames")=List of 2
 ##   .. .. ..$ : chr [1:2] "x" "y"
 ##   .. .. ..$ : chr [1:2] "min" "max"
@@ -166,7 +166,7 @@ subset(spdf, group=="a")
 ```
 ## class       : SpatialPointsDataFrame 
 ## features    : 5 
-## extent      : -0.9305161, 0.9093606, -0.4056684, 1.241341  (xmin, xmax, ymin, ymax)
+## extent      : -1.589283, 1.995578, -0.4209843, 1.726206  (xmin, xmax, ymin, ymax)
 ## coord. ref. : NA 
 ## variables   : 2
 ## names       : ID, group 
@@ -183,7 +183,7 @@ spdf[spdf$group=="a",]
 ```
 ## class       : SpatialPointsDataFrame 
 ## features    : 5 
-## extent      : -0.9305161, 0.9093606, -0.4056684, 1.241341  (xmin, xmax, ymin, ymax)
+## extent      : -1.589283, 1.995578, -0.4209843, 1.726206  (xmin, xmax, ymin, ymax)
 ## coord. ref. : NA 
 ## variables   : 2
 ## names       : ID, group 
@@ -344,26 +344,6 @@ data
 ```r
 # Old Faithful Geyser Data on duration and waiting times.
 library("MASS")
-```
-
-```
-## 
-## Attaching package: 'MASS'
-```
-
-```
-## The following objects are masked from 'package:raster':
-## 
-##     area, select
-```
-
-```
-## The following object is masked from 'package:dplyr':
-## 
-##     select
-```
-
-```r
 data(geyser)
 m <- ggplot(geyser, aes(x = duration, y = waiting)) # define data
 m + # reference the data
@@ -513,6 +493,13 @@ Normally, you'll obtain rasters data by downloading it from somewhere (e.g. glob
 
 ```r
 x <- raster()
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 x
 ```
 
@@ -638,6 +625,13 @@ res(x)
 
 ```r
 r <- raster(ncol=10, nrow=10)
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 ncell(r)
 ```
 
@@ -691,11 +685,31 @@ Create and then plot a new raster with:
 
 ```r
 x=raster(nrow=100,ncol=50,vals=rnorm(100*50))
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 # OR
 x= raster(nrow=100,ncol=50)
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 values(x)= rnorm(5000)
 
 plot(x)
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
 ```
 
 ![](05_Raster_files/figure-html/unnamed-chunk-32-1.png)<!-- -->
@@ -728,6 +742,12 @@ Plotting is easy (but slow) with `plot`.
 plot(r, main='Raster with 100 cells')
 ```
 
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
 ![](05_Raster_files/figure-html/unnamed-chunk-34-1.png)<!-- -->
 
 
@@ -742,6 +762,10 @@ gplot(r,maxpixels=50000)+ # reference the data
   geom_raster(aes(fill=value)) # cell's data value determines its color
 ```
 
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
 ![](05_Raster_files/figure-html/unnamed-chunk-35-1.png)<!-- -->
 
 
@@ -751,6 +775,11 @@ Adjust `maxpixels` for faster plotting of large datasets.
 ```r
 gplot(r,maxpixels=10)+
   geom_raster(aes(fill=value))
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
 ```
 
 ![](05_Raster_files/figure-html/unnamed-chunk-36-1.png)<!-- -->
@@ -764,6 +793,10 @@ Can use all the `ggplot` color ramps, etc.
 gplot(r)+ # reference the data
   geom_raster(aes(fill=value))+ # cell's data value determines its color
   scale_fill_distiller(palette="OrRd") # specify the color pallette
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
 ```
 
 ![](05_Raster_files/figure-html/unnamed-chunk-37-1.png)<!-- -->
@@ -828,6 +861,30 @@ Download the data:
 clim=getData('worldclim', var='bio', res=10) 
 ```
 
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
 `res` is resolution (0.5, 2.5, 5, and 10 minutes of a degree)
 
 
@@ -866,6 +923,15 @@ gain(clim)=0.1
 plot(clim[[1:3]]) # just the first 3, since its slow
 ```
 
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
 ![](05_Raster_files/figure-html/unnamed-chunk-42-1.png)<!-- -->
 
  
@@ -879,6 +945,12 @@ gplot(clim[[1:3]])+geom_raster(aes(fill=value))+
   facet_wrap(~variable)+
   scale_fill_gradientn(colours=c("brown","red","yellow","darkgreen","green"),trans="log10")+
   coord_equal()
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
 ```
 
 ```
@@ -932,8 +1004,19 @@ Use `[[1:3]]` to select raster layers from raster stack.
 ```r
 ## crop to a latitude/longitude box
 r1 <- crop(clim[[1]], extent(10,35,-35,-20))
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 ## Crop using a Spatial polygon
 r1 <- crop(clim[[1]], bbox(za))
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
 ```
 
 
@@ -958,6 +1041,12 @@ r1
 plot(r1)
 ```
 
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
 ![](05_Raster_files/figure-html/unnamed-chunk-46-1.png)<!-- -->
 
 ## Spatial aggregation
@@ -966,6 +1055,13 @@ plot(r1)
 ## aggregate using a function
 aggregate(r1, 3, fun=mean) %>%
   plot()
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
 ```
 
 ![](05_Raster_files/figure-html/unnamed-chunk-47-1.png)<!-- -->
@@ -983,6 +1079,13 @@ aggregate(r1, 10, fun=min) %>%
   plot()
 ```
 
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
 ![](05_Raster_files/figure-html/unnamed-chunk-48-1.png)<!-- -->
 </div>
 </div>
@@ -995,18 +1098,58 @@ focal(r1, w=matrix(1,3,3), fun=mean) %>%
   plot()
 ```
 
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
 ![](05_Raster_files/figure-html/unnamed-chunk-49-1.png)<!-- -->
 
 
 ```r
 ## apply a function over a moving window
 rf_min <- focal(r1, w=matrix(1,11,11), fun=min)
-rf_max <- focal(r1, w=matrix(1,11,11), fun=max)
-rf_range=rf_max-rf_min
+```
 
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
+rf_max <- focal(r1, w=matrix(1,11,11), fun=max)
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
+rf_range=rf_max-rf_min
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 ## or just use the range function
 rf_range2 <- focal(r1, w=matrix(1,11,11), fun=range)
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 plot(rf_range2)
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
 ```
 
 ![](05_Raster_files/figure-html/unnamed-chunk-50-1.png)<!-- -->
@@ -1023,6 +1166,13 @@ Plot the focal standard deviation of `r1` over a 3x3 window.
 ```r
 focal(r1,w=matrix(1,3,3),fun=sd)%>%
   plot()
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
 ```
 
 ![](05_Raster_files/figure-html/unnamed-chunk-51-1.png)<!-- -->
@@ -1049,6 +1199,13 @@ cellStats(r1,range)
 ```r
 ## add 10
 s = r1 + 10
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 cellStats(s,range)
 ```
 
@@ -1060,6 +1217,13 @@ cellStats(s,range)
 ```r
 ## take the square root
 s = sqrt(r1)
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 cellStats(s,range)
 ```
 
@@ -1070,6 +1234,13 @@ cellStats(s,range)
 ```r
 # round values
 r = round(r1)
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 cellStats(r,range)
 ```
 
@@ -1080,7 +1251,20 @@ cellStats(r,range)
 ```r
 # find cells with values less than 15 degrees C
 r = r1 < 15
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 plot(r)
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
 ```
 
 ![](05_Raster_files/figure-html/unnamed-chunk-53-1.png)<!-- -->
@@ -1092,6 +1276,14 @@ plot(r)
 ```r
 # multiply s times r and add 5
 s = s * r1 + 5
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 cellStats(s,range)
 ```
 
@@ -1119,6 +1311,13 @@ Generate 100 random points and the associated climate variables at those points.
 ```r
 ## define a new dataset of points to play with
 pts=sampleRandom(clim,100,xy=T,sp=T)
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 plot(pts);axis(1);axis(2)
 ```
 
@@ -1129,17 +1328,31 @@ Often you will have some locations (points) for which you want data from a raste
 
 ```r
 pts_data=raster::extract(clim[[1:4]],pts,df=T)
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 head(pts_data)
 ```
 
 ```
 ##   ID bio1 bio2 bio3   bio4
-## 1  1 -6.4 14.1  3.8  814.6
-## 2  2  5.3  6.6  3.1  496.7
-## 3  3 -1.5 13.6  2.6 1339.2
-## 4  4 12.0 13.0  3.3  907.2
-## 5  5 25.8 14.9  4.9  588.7
-## 6  6 25.2  6.5  8.5   44.7
+## 1  1 12.7 12.6  2.8 1114.2
+## 2  2  3.1  8.4  2.5  838.5
+## 3  3 23.0 11.6  7.0   90.5
+## 4  4  2.9 15.2  3.1 1098.9
+## 5  5 11.8  8.7  3.2  642.8
+## 6  6 23.7 13.4  6.2  259.9
 ```
 > Use `package::function` to avoid confusion with similar functions.
 
@@ -1153,6 +1366,11 @@ gplot(clim[[1]])+
     data=as.data.frame(pts),
     aes(x=x,y=y),col="red")+
   coord_equal()
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
 ```
 
 ![](05_Raster_files/figure-html/unnamed-chunk-57-1.png)<!-- -->
@@ -1170,12 +1388,12 @@ head(d2)
 
 ```
 ##   cell   ID value
-## 1    1 bio1  -6.4
-## 2    2 bio1   5.3
-## 3    3 bio1  -1.5
-## 4    4 bio1  12.0
-## 5    5 bio1  25.8
-## 6    6 bio1  25.2
+## 1    1 bio1  12.7
+## 2    2 bio1   3.1
+## 3    3 bio1  23.0
+## 4    4 bio1   2.9
+## 5    5 bio1  11.8
+## 6    6 bio1  23.7
 ```
 
 And plot density plots (like histograms).
@@ -1210,6 +1428,10 @@ gplot(r1)+geom_tile(aes(fill=value))+
   geom_line(aes(x=long,y=lat),data=fortify(transect),col="red")
 ```
 
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
 ![](05_Raster_files/figure-html/unnamed-chunk-60-1.png)<!-- -->
 
 
@@ -1223,6 +1445,21 @@ trans=raster::extract(x=clim[[12:14]],
                       along=T,
                       cellnumbers=T)%>%
   data.frame()
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 head(trans)
 ```
 
@@ -1297,6 +1534,40 @@ rsp=raster::extract(x=r1,
                     y=za,
                     fun=mean,
                     sp=T)
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 #spplot(rsp,zcol="bio1")
 ```
 
@@ -1332,6 +1603,26 @@ ggplot(rsp@data, aes(map_id = id, fill=bio1)) +
 ```r
 country=getData('GADM', country='TUN', level=1)
 tmax=getData('worldclim', var='tmax', res=10)
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 gain(tmax)=0.1
 names(tmax)
 ```
@@ -1395,10 +1686,28 @@ See `?sprintf` for details
 names(tmax)=sprintf("%02d",1:12)
 
 tmax_crop=crop(tmax,country)
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 tmaxave_crop=mean(tmax_crop)  # calculate mean annual maximum temperature 
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 tmaxavefocal_crop=focal(tmaxave_crop,
                         fun=median,
                         w=matrix(1,11,11))
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
 ```
 
 > Only a few datasets are available usig `getData()` in the raster package, but you can download almost any file on the web with `file.download()`.
@@ -1457,6 +1766,15 @@ trans=raster::extract(tmax_crop,
                       along=T,
                       cellnumbers=T)%>% 
   as.data.frame()
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 trans[,c("lon","lat")]=coordinates(tmax_crop)[trans$cell]
 trans$order=as.integer(rownames(trans))
 head(trans)

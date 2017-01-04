@@ -11,7 +11,7 @@
 
 
 
-<title></title>
+<title>A quick introduction to spatial data analysis</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,6 +22,7 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -193,34 +194,52 @@ $(document).ready(function () {
       <a href="CourseContent.html">About Course Content</a>
     </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Introduction to R</li>
+    <li class="dropdown-header">Module 1: Introduction to R</li>
     <li>
-      <a href="00_CourseIntroductionFrame.html">00 Course Introduction</a>
+      <a href="00_CourseIntroductionFrame.html">1.0 Course Introduction</a>
     </li>
     <li>
-      <a href="01_Rintro.html">01 First Steps</a>
+      <a href="01_Rintro.html">1.1 First Steps</a>
     </li>
     <li>
-      <a href="02_DataWrangling.html">02 Data Wrangling</a>
+      <a href="02_DataWrangling.html">1.2 Data Wrangling</a>
     </li>
     <li>
-      <a href="03_Plotting.html">03 Plotting</a>
+      <a href="03_Plotting.html">1.3 Plotting</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Module 2: Spatial Analyses</li>
     <li>
-      <a href="04_Spatial.html">04 Spatial Data</a>
+      <a href="04_Spatial.html">2.1 Spatial Data</a>
     </li>
     <li>
-      <a href="05_Raster.html">05 Spatial Raster Data</a>
+      <a href="05_Raster.html">2.2 Spatial Raster Data</a>
     </li>
     <li>
-      <a href="06_RasterTwo.html">06 More Raster Data</a>
+      <a href="06_RasterTwo.html">2.3 More Raster Data</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Module 3: Cleaning and Integrating Biodiversity Data</li>
     <li>
-      <a href="107_Reproducibile.html">Workshop Schedule</a>
+      <a href="3_1_Ecoinf_Schedule.html">3.1 Workshop Schedule</a>
+    </li>
+    <li>
+      <a href="Under_Construction.html">3.2 Hypervolumes</a>
+    </li>
+    <li>
+      <a href="3_3_RBIEN_tutorial.html">3.3 Accessing Plant Biodiversity Data</a>
+    </li>
+    <li>
+      <a href="Under_Construction.html">3.4 Taxonomic Name Resolution</a>
+    </li>
+    <li>
+      <a href="Under_Construction.html">3.5 A streamlined range modeling workflow: Wallace</a>
+    </li>
+    <li>
+      <a href="Under_Construction.html">3.6 Integrating biogeographic data sources with spatial priors</a>
+    </li>
+    <li>
+      <a href="Under_Construction.html">3.7 Teaching Econformatics</a>
     </li>
   </ul>
 </li>
@@ -244,21 +263,19 @@ $(document).ready(function () {
 
 
 
+<h1 class="title toc-ignore">A quick introduction to spatial data analysis</h1>
 
 </div>
 
 
-<div id="a-quick-introduction-to-spatial-data-analysis" class="section level1">
-<h1><span class="header-section-number">1</span> A quick introduction to spatial data analysis</h1>
 <div>
 <iframe src="05_presentation/05_Spatial.html" width="100%" height="700px">
 </iframe>
 </div>
 <p><a href="05_Raster.R"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here</a>. Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.</p>
 <p>This tutorial has been forked from awesome classes developed by Adam Wilson <a href="http://adamwilson.us/RDataScience/">here</a></p>
-</div>
 <div id="setup" class="section level1">
-<h1><span class="header-section-number">2</span> Setup</h1>
+<h1><span class="header-section-number">1</span> Setup</h1>
 <pre class="r"><code>library(dplyr)
 library(tidyr)
 library(sp)
@@ -270,31 +287,31 @@ library(raster)
 library(rasterVis)  #visualization library for raster</code></pre>
 </div>
 <div id="point-data" class="section level1">
-<h1><span class="header-section-number">3</span> Point data</h1>
+<h1><span class="header-section-number">2</span> Point data</h1>
 <div id="generate-some-random-data" class="section level2">
-<h2><span class="header-section-number">3.1</span> Generate some random data</h2>
+<h2><span class="header-section-number">2.1</span> Generate some random data</h2>
 <pre class="r"><code>coords = data.frame(
   x=rnorm(100),
   y=rnorm(100)
 )
 str(coords)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    100 obs. of  2 variables:
-##  $ x: num  0.9094 0.0532 -0.9575 0.144 0.505 ...
-##  $ y: num  0.1021 0.4322 0.2839 -0.1707 -0.0706 ...</code></pre>
+##  $ x: num  1.996 0.103 0.239 0.83 -0.323 ...
+##  $ y: num  -0.421 -1.103 0.222 -0.753 -0.833 ...</code></pre>
 <pre class="r"><code>plot(coords)</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-4-1.png" /><!-- --></p>
 </div>
 <div id="convert-to-spatialpoints" class="section level2">
-<h2><span class="header-section-number">3.2</span> Convert to <code>SpatialPoints</code></h2>
+<h2><span class="header-section-number">2.2</span> Convert to <code>SpatialPoints</code></h2>
 <p>Many tools are designed in R to work specifically with spatial point data, so we need a special object of class <em>SpatialPoints</em>. The important thing is that it has a <em>slot</em> to store coordinates.</p>
 <pre class="r"><code>sp = SpatialPoints(coords)
 str(sp)</code></pre>
 <pre><code>## Formal class &#39;SpatialPoints&#39; [package &quot;sp&quot;] with 3 slots
-##   ..@ coords     : num [1:100, 1:2] 0.9094 0.0532 -0.9575 0.144 0.505 ...
+##   ..@ coords     : num [1:100, 1:2] 1.996 0.103 0.239 0.83 -0.323 ...
 ##   .. ..- attr(*, &quot;dimnames&quot;)=List of 2
 ##   .. .. ..$ : NULL
 ##   .. .. ..$ : chr [1:2] &quot;x&quot; &quot;y&quot;
-##   ..@ bbox       : num [1:2, 1:2] -3.22 -1.96 2.51 2.4
+##   ..@ bbox       : num [1:2, 1:2] -2.29 -1.83 2.37 2.35
 ##   .. ..- attr(*, &quot;dimnames&quot;)=List of 2
 ##   .. .. ..$ : chr [1:2] &quot;x&quot; &quot;y&quot;
 ##   .. .. ..$ : chr [1:2] &quot;min&quot; &quot;max&quot;
@@ -302,7 +319,7 @@ str(sp)</code></pre>
 ##   .. .. ..@ projargs: chr NA</code></pre>
 </div>
 <div id="create-a-spatialpointsdataframe" class="section level2">
-<h2><span class="header-section-number">3.3</span> Create a <code>SpatialPointsDataFrame</code></h2>
+<h2><span class="header-section-number">2.3</span> Create a <code>SpatialPointsDataFrame</code></h2>
 <p>First generate a dataframe (analagous to the <em>attribute table</em> in a shapefile)</p>
 <pre class="r"><code>data=data.frame(ID=1:100,group=letters[1:20])
 head(data)</code></pre>
@@ -323,11 +340,11 @@ str(spdf)</code></pre>
 ##   .. ..$ ID   : int [1:100] 1 2 3 4 5 6 7 8 9 10 ...
 ##   .. ..$ group: Factor w/ 20 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
 ##   ..@ coords.nrs : num(0) 
-##   ..@ coords     : num [1:100, 1:2] 0.9094 0.0532 -0.9575 0.144 0.505 ...
+##   ..@ coords     : num [1:100, 1:2] 1.996 0.103 0.239 0.83 -0.323 ...
 ##   .. ..- attr(*, &quot;dimnames&quot;)=List of 2
 ##   .. .. ..$ : NULL
 ##   .. .. ..$ : chr [1:2] &quot;x&quot; &quot;y&quot;
-##   ..@ bbox       : num [1:2, 1:2] -3.22 -1.96 2.51 2.4
+##   ..@ bbox       : num [1:2, 1:2] -2.29 -1.83 2.37 2.35
 ##   .. ..- attr(*, &quot;dimnames&quot;)=List of 2
 ##   .. .. ..$ : chr [1:2] &quot;x&quot; &quot;y&quot;
 ##   .. .. ..$ : chr [1:2] &quot;min&quot; &quot;max&quot;
@@ -336,7 +353,7 @@ str(spdf)</code></pre>
 <p>Note the use of <em>slots</em> designated with a <code>@</code>. See <code>?slot</code> for more.</p>
 </div>
 <div id="promote-a-data-frame-with-coordinates-to-a-spatialpoints-object" class="section level2">
-<h2><span class="header-section-number">3.4</span> Promote a data frame with <code>coordinates()</code> to a <code>SpatialPoints</code> object</h2>
+<h2><span class="header-section-number">2.4</span> Promote a data frame with <code>coordinates()</code> to a <code>SpatialPoints</code> object</h2>
 <pre class="r"><code>coordinates(data) = cbind(coords$x, coords$y) </code></pre>
 <pre class="r"><code>str(spdf)</code></pre>
 <pre><code>## Formal class &#39;SpatialPointsDataFrame&#39; [package &quot;sp&quot;] with 5 slots
@@ -344,11 +361,11 @@ str(spdf)</code></pre>
 ##   .. ..$ ID   : int [1:100] 1 2 3 4 5 6 7 8 9 10 ...
 ##   .. ..$ group: Factor w/ 20 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
 ##   ..@ coords.nrs : num(0) 
-##   ..@ coords     : num [1:100, 1:2] 0.9094 0.0532 -0.9575 0.144 0.505 ...
+##   ..@ coords     : num [1:100, 1:2] 1.996 0.103 0.239 0.83 -0.323 ...
 ##   .. ..- attr(*, &quot;dimnames&quot;)=List of 2
 ##   .. .. ..$ : NULL
 ##   .. .. ..$ : chr [1:2] &quot;x&quot; &quot;y&quot;
-##   ..@ bbox       : num [1:2, 1:2] -3.22 -1.96 2.51 2.4
+##   ..@ bbox       : num [1:2, 1:2] -2.29 -1.83 2.37 2.35
 ##   .. ..- attr(*, &quot;dimnames&quot;)=List of 2
 ##   .. .. ..$ : chr [1:2] &quot;x&quot; &quot;y&quot;
 ##   .. .. ..$ : chr [1:2] &quot;min&quot; &quot;max&quot;
@@ -356,11 +373,11 @@ str(spdf)</code></pre>
 ##   .. .. ..@ projargs: chr NA</code></pre>
 </div>
 <div id="subset-data" class="section level2">
-<h2><span class="header-section-number">3.5</span> Subset data</h2>
+<h2><span class="header-section-number">2.5</span> Subset data</h2>
 <pre class="r"><code>subset(spdf, group==&quot;a&quot;)</code></pre>
 <pre><code>## class       : SpatialPointsDataFrame 
 ## features    : 5 
-## extent      : -0.9305161, 0.9093606, -0.4056684, 1.241341  (xmin, xmax, ymin, ymax)
+## extent      : -1.589283, 1.995578, -0.4209843, 1.726206  (xmin, xmax, ymin, ymax)
 ## coord. ref. : NA 
 ## variables   : 2
 ## names       : ID, group 
@@ -370,7 +387,7 @@ str(spdf)</code></pre>
 <pre class="r"><code>spdf[spdf$group==&quot;a&quot;,]</code></pre>
 <pre><code>## class       : SpatialPointsDataFrame 
 ## features    : 5 
-## extent      : -0.9305161, 0.9093606, -0.4056684, 1.241341  (xmin, xmax, ymin, ymax)
+## extent      : -1.589283, 1.995578, -0.4209843, 1.726206  (xmin, xmax, ymin, ymax)
 ## coord. ref. : NA 
 ## variables   : 2
 ## names       : ID, group 
@@ -378,7 +395,7 @@ str(spdf)</code></pre>
 ## max values  : 81,     a</code></pre>
 <!-- Unfortunately, `dplyr` functions do not directly filter spatial objects. -->
 <div class="well">
-<h2 id="your-turn"><span class="header-section-number">3.5</span> Your turn</h2>
+<h2 id="your-turn"><span class="header-section-number">2.5</span> Your turn</h2>
 <p>Convert the following <code>data.frame</code> into a SpatialPointsDataFrame using the <code>coordinates()</code> method and then plot the points with <code>plot()</code>.</p>
 <pre class="r"><code>df=data.frame(
   lat=c(12,15,17,12),
@@ -426,7 +443,7 @@ plot(df)</code></pre>
 </div>
 </div>
 <div id="examine-topsoil-quality-in-the-meuse-river-data-set" class="section level2">
-<h2><span class="header-section-number">3.6</span> Examine topsoil quality in the Meuse river data set</h2>
+<h2><span class="header-section-number">2.6</span> Examine topsoil quality in the Meuse river data set</h2>
 <pre class="r"><code>## Load the data
 data(meuse)
 str(meuse)</code></pre>
@@ -446,7 +463,7 @@ str(meuse)</code></pre>
 ##  $ landuse: Factor w/ 15 levels &quot;Aa&quot;,&quot;Ab&quot;,&quot;Ag&quot;,..: 4 4 4 11 4 11 4 2 2 15 ...
 ##  $ dist.m : num  50 30 150 270 380 470 240 120 240 420 ...</code></pre>
 <div class="well">
-<h2 id="your-turn-1"><span class="header-section-number">3.6</span> Your turn</h2>
+<h2 id="your-turn-1"><span class="header-section-number">2.6</span> Your turn</h2>
 <p><em>Promote</em> the <code>meuse</code> object to a spatial points data.frame with <code>coordinates()</code>.</p>
 <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo2">
 Show Solution
@@ -491,7 +508,7 @@ str(meuse)</code></pre>
 <p>Note that <code>ggplot</code> works only with data.frames. Convert with <code>as.data.frame()</code> or <code>fortify()</code>.</p>
 </div>
 <div id="ggplot" class="section level2">
-<h2><span class="header-section-number">3.7</span> ggplot</h2>
+<h2><span class="header-section-number">2.7</span> ggplot</h2>
 <p>If you’re not familiar with ggplot, here’s a quick digression. For a more detailed version, see the ggplot section in Lesson 03: Plotting. # <a href="http://ggplot2.org"><code>ggplot2</code></a> The <em>grammar of graphics</em> consists of specifying a number of key elements of a plot. These are the same elements you’d put in any base graphics plot; this approach just provides a consisent way of defining them</p>
 <ol style="list-style-type: decimal">
 <li>Data: The raw data</li>
@@ -511,16 +528,8 @@ str(meuse)</code></pre>
 <li><code>theme</code>: Visual defaults (background, grids, axes, typeface, colors, etc.)</li>
 </ol>
 <pre class="r"><code># Old Faithful Geyser Data on duration and waiting times.
-library(&quot;MASS&quot;)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;MASS&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:raster&#39;:
-## 
-##     area, select</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     select</code></pre>
-<pre class="r"><code>data(geyser)
+library(&quot;MASS&quot;)
+data(geyser)
 m &lt;- ggplot(geyser, aes(x = duration, y = waiting)) # define data
 m + # reference the data
   geom_point() +  # add points
@@ -531,9 +540,9 @@ m + # reference the data
 </div>
 </div>
 <div id="raster-package" class="section level1">
-<h1><span class="header-section-number">4</span> Raster Package</h1>
+<h1><span class="header-section-number">3</span> Raster Package</h1>
 <div id="getdata" class="section level2">
-<h2><span class="header-section-number">4.1</span> <code>getData()</code></h2>
+<h2><span class="header-section-number">3.1</span> <code>getData()</code></h2>
 <p>Raster package includes access to some useful (vector and raster) datasets with <code>getData()</code>:</p>
 <ul>
 <li>Elevation (SRTM 90m resolution raster)</li>
@@ -549,7 +558,7 @@ m + # reference the data
 </ol>
 </div>
 <div id="gadm-global-administrative-areas" class="section level2">
-<h2><span class="header-section-number">4.2</span> GADM: Global Administrative Areas</h2>
+<h2><span class="header-section-number">3.2</span> GADM: Global Administrative Areas</h2>
 <p>Administrative areas in this database are countries and lower level subdivisions.</p>
 <p><img src="05_assets/gadm25.png" alt="alt text" width="70%"></p>
 <p>Divided by country (see website for full dataset). Explore country list:</p>
@@ -567,7 +576,7 @@ m + # reference the data
 <p><img src="05_assets/za_vector.png" alt="alt text" width="70%"></p>
 <p>Danger: <code>plot()</code> works, but can be slow for complex polygons.</p>
 <div id="check-out-attribute-table" class="section level3">
-<h3><span class="header-section-number">4.2.1</span> Check out attribute table</h3>
+<h3><span class="header-section-number">3.2.1</span> Check out attribute table</h3>
 <pre class="r"><code>za@data</code></pre>
 <pre><code>##   OBJECTID ID_0 ISO       NAME_0 ID_1        NAME_1 HASC_1 CCN_1 CCA_1
 ## 1        1  211 ZAF South Africa    1  Eastern Cape  ZA.EC    NA    EC
@@ -602,7 +611,7 @@ m + # reference the data
 <pre class="r"><code>za=subset(za,NAME_1==&quot;Eastern Cape&quot;)
 plot(za)</code></pre>
 <div class="well">
-<h2 id="your-turn-2"><span class="header-section-number">4.2.1</span> Your turn</h2>
+<h2 id="your-turn-2"><span class="header-section-number">3.2.1</span> Your turn</h2>
 <p>Use the method above to download and plot the boundaries for a country of your choice.</p>
 <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo1">
 Show Solution
@@ -620,9 +629,9 @@ plot(country)</code></pre>
 </div>
 </div>
 <div id="raster-data" class="section level1">
-<h1><span class="header-section-number">5</span> Raster Data</h1>
+<h1><span class="header-section-number">4</span> Raster Data</h1>
 <div id="raster-introduction" class="section level2">
-<h2><span class="header-section-number">5.1</span> Raster introduction</h2>
+<h2><span class="header-section-number">4.1</span> Raster introduction</h2>
 <p>Spatial data structure dividing region (‘grid’) into rectangles (’cells’ or ’pixels’) storing one or more values each.</p>
 <p><small> Some examples from the <a href="http://cran.r-project.org/web/packages/raster/vignettes/Raster.pdf">Raster vignette</a> by Robert J. Hijmans. </small></p>
 <ul>
@@ -631,8 +640,9 @@ plot(country)</code></pre>
 <li><code>rasterBrick</code>: Multiple Bands of <em>same</em> thing.</li>
 </ul>
 <p>Normally, you’ll obtain rasters data by downloading it from somewhere (e.g. global climate data below), but to get a better understanding of rasters, let’s build one from scratch.</p>
-<pre class="r"><code>x &lt;- raster()
-x</code></pre>
+<pre class="r"><code>x &lt;- raster()</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>x</code></pre>
 <pre><code>## class       : RasterLayer 
 ## dimensions  : 180, 360, 64800  (nrow, ncol, ncell)
 ## resolution  : 1, 1  (x, y)
@@ -708,9 +718,10 @@ ncol(x)</code></pre>
 <pre><code>## [1] 111.1111 100.0000</code></pre>
 </div>
 <div id="raster-data-storage" class="section level2">
-<h2><span class="header-section-number">5.2</span> Raster data storage</h2>
-<pre class="r"><code>r &lt;- raster(ncol=10, nrow=10)
-ncell(r)</code></pre>
+<h2><span class="header-section-number">4.2</span> Raster data storage</h2>
+<pre class="r"><code>r &lt;- raster(ncol=10, nrow=10)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>ncell(r)</code></pre>
 <pre><code>## [1] 100</code></pre>
 <p>But it is an empty raster</p>
 <pre class="r"><code>hasValues(r)</code></pre>
@@ -722,7 +733,7 @@ hasValues(r)</code></pre>
 <pre class="r"><code>values(r)[1:10]</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <div class="well">
-<h2 id="your-turn-3"><span class="header-section-number">5.2</span> Your turn</h2>
+<h2 id="your-turn-3"><span class="header-section-number">4.2</span> Your turn</h2>
 <p>Create and then plot a new raster with:</p>
 <ol style="list-style-type: decimal">
 <li>100 rows</li>
@@ -733,18 +744,23 @@ hasValues(r)</code></pre>
 Show Solution
 </button>
 <div id="demo2" class="collapse">
-<pre class="r"><code>x=raster(nrow=100,ncol=50,vals=rnorm(100*50))
-# OR
-x= raster(nrow=100,ncol=50)
-values(x)= rnorm(5000)
+<pre class="r"><code>x=raster(nrow=100,ncol=50,vals=rnorm(100*50))</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code># OR
+x= raster(nrow=100,ncol=50)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>values(x)= rnorm(5000)
 
 plot(x)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-32-1.png" /><!-- --></p>
 </div>
 </div>
 </div>
 <div id="raster-memory-usage" class="section level2">
-<h2><span class="header-section-number">5.3</span> Raster memory usage</h2>
+<h2><span class="header-section-number">4.3</span> Raster memory usage</h2>
 <p>Raster data files can be very large, especially when cells are at high resolution, so it becomes important to think about how much RAM is required to work with a raster to avoid slowing your computer to a crawl. The <code>raster</code> package cleverly avoids reading full rasters into memory to instead just provides pointers to the relevant raster files.</p>
 <pre class="r"><code>inMemory(r)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
@@ -753,29 +769,36 @@ plot(x)</code></pre>
 </blockquote>
 </div>
 <div id="raster-plotting" class="section level2">
-<h2><span class="header-section-number">5.4</span> Raster Plotting</h2>
+<h2><span class="header-section-number">4.4</span> Raster Plotting</h2>
 <p>Plotting is easy (but slow) with <code>plot</code>.</p>
 <pre class="r"><code>plot(r, main=&#39;Raster with 100 cells&#39;)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-34-1.png" /><!-- --></p>
 <div id="ggplot-and-rastervis" class="section level3">
-<h3><span class="header-section-number">5.4.1</span> ggplot and rasterVis</h3>
+<h3><span class="header-section-number">4.4.1</span> ggplot and rasterVis</h3>
 <p>rasterVis package has <code>gplot()</code> for plotting raster data in the <code>ggplot()</code> framework.</p>
 <pre class="r"><code>gplot(r,maxpixels=50000)+ # reference the data
   geom_raster(aes(fill=value)) # cell&#39;s data value determines its color</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-35-1.png" /><!-- --></p>
 <p>Adjust <code>maxpixels</code> for faster plotting of large datasets.</p>
 <pre class="r"><code>gplot(r,maxpixels=10)+
   geom_raster(aes(fill=value))</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-36-1.png" /><!-- --></p>
 <p>Can use all the <code>ggplot</code> color ramps, etc.</p>
 <pre class="r"><code>gplot(r)+ # reference the data
   geom_raster(aes(fill=value))+ # cell&#39;s data value determines its color
   scale_fill_distiller(palette=&quot;OrRd&quot;) # specify the color pallette</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-37-1.png" /><!-- --></p>
 </div>
 </div>
 <div id="spatial-projections" class="section level2">
-<h2><span class="header-section-number">5.5</span> Spatial Projections</h2>
+<h2><span class="header-section-number">4.5</span> Spatial Projections</h2>
 <p>Raster package uses standard <a href="http://www.spatialreference.org">coordinate reference system (CRS)</a>.</p>
 <p>For example, see the projection format for the <a href="http://www.spatialreference.org/ref/epsg/4326/"><em>standard</em> WGS84</a>.</p>
 <pre class="r"><code>projection(r)</code></pre>
@@ -783,13 +806,13 @@ plot(x)</code></pre>
 </div>
 </div>
 <div id="worldclim" class="section level1">
-<h1><span class="header-section-number">6</span> WorldClim</h1>
+<h1><span class="header-section-number">5</span> WorldClim</h1>
 <div id="overview-of-worldclim" class="section level2">
-<h2><span class="header-section-number">6.1</span> Overview of WorldClim</h2>
+<h2><span class="header-section-number">5.1</span> Overview of WorldClim</h2>
 <p>Mean monthly climate and derived variables interpolated from weather stations on a 30 arc-second (~1km) grid. See <a href="http://www.worldclim.org/methods">worldclim.org</a></p>
 </div>
 <div id="bioclim-variables" class="section level2">
-<h2><span class="header-section-number">6.2</span> Bioclim variables</h2>
+<h2><span class="header-section-number">5.2</span> Bioclim variables</h2>
 <p><small></p>
 <table>
 <thead>
@@ -880,12 +903,33 @@ plot(x)</code></pre>
 <p></small></p>
 </div>
 <div id="download-climate-data" class="section level2">
-<h2><span class="header-section-number">6.3</span> Download climate data</h2>
+<h2><span class="header-section-number">5.3</span> Download climate data</h2>
 <p>Download the data:</p>
 <pre class="r"><code>clim=getData(&#39;worldclim&#39;, var=&#39;bio&#39;, res=10) </code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><code>res</code> is resolution (0.5, 2.5, 5, and 10 minutes of a degree)</p>
 <div id="gain-and-offset" class="section level3">
-<h3><span class="header-section-number">6.3.1</span> Gain and Offset</h3>
+<h3><span class="header-section-number">5.3.1</span> Gain and Offset</h3>
 <pre class="r"><code>clim</code></pre>
 <pre><code>## class       : RasterStack 
 ## dimensions  : 900, 2160, 1944000, 19  (nrow, ncol, ncell, nlayers)
@@ -899,18 +943,27 @@ plot(x)</code></pre>
 <pre class="r"><code>gain(clim)=0.1</code></pre>
 </div>
 <div id="plot-with-plot" class="section level3">
-<h3><span class="header-section-number">6.3.2</span> Plot with <code>plot()</code></h3>
+<h3><span class="header-section-number">5.3.2</span> Plot with <code>plot()</code></h3>
 <pre class="r"><code>plot(clim[[1:3]]) # just the first 3, since its slow</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-42-1.png" /><!-- --></p>
 </div>
 </div>
 <div id="faceting-in-ggplot" class="section level2">
-<h2><span class="header-section-number">6.4</span> Faceting in ggplot</h2>
+<h2><span class="header-section-number">5.4</span> Faceting in ggplot</h2>
 <p>Or use <code>rasterVis</code> methods with gplot</p>
 <pre class="r"><code>gplot(clim[[1:3]])+geom_raster(aes(fill=value))+
   facet_wrap(~variable)+
   scale_fill_gradientn(colours=c(&quot;brown&quot;,&quot;red&quot;,&quot;yellow&quot;,&quot;darkgreen&quot;,&quot;green&quot;),trans=&quot;log10&quot;)+
   coord_equal()</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <pre><code>## Warning in self$trans$transform(x): NaNs produced</code></pre>
 <pre><code>## Warning: Transformation introduced infinite values in discrete y-axis</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-43-1.png" /><!-- --></p>
@@ -926,12 +979,14 @@ canProcessInMemory(clim)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="subsetting-and-spatial-cropping" class="section level2">
-<h2><span class="header-section-number">6.5</span> Subsetting and spatial cropping</h2>
+<h2><span class="header-section-number">5.5</span> Subsetting and spatial cropping</h2>
 <p>Use <code>[[1:3]]</code> to select raster layers from raster stack.</p>
 <pre class="r"><code>## crop to a latitude/longitude box
-r1 &lt;- crop(clim[[1]], extent(10,35,-35,-20))
-## Crop using a Spatial polygon
+r1 &lt;- crop(clim[[1]], extent(10,35,-35,-20))</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>## Crop using a Spatial polygon
 r1 &lt;- crop(clim[[1]], bbox(za))</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <pre class="r"><code>r1</code></pre>
 <pre><code>## class       : RasterLayer 
 ## dimensions  : 76, 98, 7448  (nrow, ncol, ncell)
@@ -942,16 +997,23 @@ r1 &lt;- crop(clim[[1]], bbox(za))</code></pre>
 ## names       : bio1 
 ## values      : 5.8, 24.6  (min, max)</code></pre>
 <pre class="r"><code>plot(r1)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-46-1.png" /><!-- --></p>
 </div>
 <div id="spatial-aggregation" class="section level2">
-<h2><span class="header-section-number">6.6</span> Spatial aggregation</h2>
+<h2><span class="header-section-number">5.6</span> Spatial aggregation</h2>
 <pre class="r"><code>## aggregate using a function
 aggregate(r1, 3, fun=mean) %&gt;%
   plot()</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-47-1.png" /><!-- --></p>
 <div class="well">
-<h2 id="your-turn-4"><span class="header-section-number">6.6</span> Your turn</h2>
+<h2 id="your-turn-4"><span class="header-section-number">5.6</span> Your turn</h2>
 <p>Create a new raster by aggregating to the minimum (<code>min</code>) value of <code>r1</code> within a 10 pixel window</p>
 <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo3">
 Show Solution
@@ -959,27 +1021,41 @@ Show Solution
 <div id="demo3" class="collapse">
 <pre class="r"><code>aggregate(r1, 10, fun=min) %&gt;%
   plot()</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-48-1.png" /><!-- --></p>
 </div>
 </div>
 </div>
 <div id="focal-moving-window" class="section level2">
-<h2><span class="header-section-number">6.7</span> Focal (“moving window”)</h2>
+<h2><span class="header-section-number">5.7</span> Focal (“moving window”)</h2>
 <pre class="r"><code>## apply a function over a moving window
 focal(r1, w=matrix(1,3,3), fun=mean) %&gt;% 
   plot()</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-49-1.png" /><!-- --></p>
 <pre class="r"><code>## apply a function over a moving window
-rf_min &lt;- focal(r1, w=matrix(1,11,11), fun=min)
-rf_max &lt;- focal(r1, w=matrix(1,11,11), fun=max)
-rf_range=rf_max-rf_min
-
-## or just use the range function
-rf_range2 &lt;- focal(r1, w=matrix(1,11,11), fun=range)
-plot(rf_range2)</code></pre>
+rf_min &lt;- focal(r1, w=matrix(1,11,11), fun=min)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>rf_max &lt;- focal(r1, w=matrix(1,11,11), fun=max)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>rf_range=rf_max-rf_min</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>## or just use the range function
+rf_range2 &lt;- focal(r1, w=matrix(1,11,11), fun=range)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>plot(rf_range2)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-50-1.png" /><!-- --></p>
 <div class="well">
-<h2 id="your-turn-5"><span class="header-section-number">6.7</span> Your turn</h2>
+<h2 id="your-turn-5"><span class="header-section-number">5.7</span> Your turn</h2>
 <p>Plot the focal standard deviation of <code>r1</code> over a 3x3 window.</p>
 <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo4">
 Show Solution
@@ -987,42 +1063,55 @@ Show Solution
 <div id="demo4" class="collapse">
 <pre class="r"><code>focal(r1,w=matrix(1,3,3),fun=sd)%&gt;%
   plot()</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-51-1.png" /><!-- --></p>
 </div>
 </div>
 </div>
 <div id="raster-calculations" class="section level2">
-<h2><span class="header-section-number">6.8</span> Raster calculations</h2>
+<h2><span class="header-section-number">5.8</span> Raster calculations</h2>
 <p>The <code>raster</code> package has many options for <em>raster algebra</em>, including <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, logical operators such as <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>==</code>, <code>!</code> and functions such as <code>abs</code>, <code>round</code>, <code>ceiling</code>, <code>floor</code>, <code>trunc</code>, <code>sqrt</code>, <code>log</code>, <code>log10</code>, <code>exp</code>, <code>cos</code>, <code>sin</code>, <code>max</code>, <code>min</code>, <code>range</code>, <code>prod</code>, <code>sum</code>, <code>any</code>, <code>all</code>.</p>
 <p>So, for example, you can</p>
 <pre class="r"><code>cellStats(r1,range)</code></pre>
 <pre><code>## [1]  5.8 24.6</code></pre>
 <pre class="r"><code>## add 10
-s = r1 + 10
-cellStats(s,range)</code></pre>
+s = r1 + 10</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>cellStats(s,range)</code></pre>
 <pre><code>## [1] 15.8 34.6</code></pre>
 <pre class="r"><code>## take the square root
-s = sqrt(r1)
-cellStats(s,range)</code></pre>
+s = sqrt(r1)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>cellStats(s,range)</code></pre>
 <pre><code>## [1] 2.408319 4.959839</code></pre>
 <pre class="r"><code># round values
-r = round(r1)
-cellStats(r,range)</code></pre>
+r = round(r1)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>cellStats(r,range)</code></pre>
 <pre><code>## [1]  6 25</code></pre>
 <pre class="r"><code># find cells with values less than 15 degrees C
-r = r1 &lt; 15
-plot(r)</code></pre>
+r = r1 &lt; 15</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>plot(r)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-53-1.png" /><!-- --></p>
 <div id="apply-algebraic-functions" class="section level3">
-<h3><span class="header-section-number">6.8.1</span> Apply algebraic functions</h3>
+<h3><span class="header-section-number">5.8.1</span> Apply algebraic functions</h3>
 <pre class="r"><code># multiply s times r and add 5
-s = s * r1 + 5
-cellStats(s,range)</code></pre>
+s = s * r1 + 5</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>cellStats(s,range)</code></pre>
 <pre><code>## [1]  18.96825 127.01203</code></pre>
 </div>
 </div>
 <div id="extracting-raster-data" class="section level2">
-<h2><span class="header-section-number">6.9</span> Extracting Raster Data</h2>
+<h2><span class="header-section-number">5.9</span> Extracting Raster Data</h2>
 <ul>
 <li>points</li>
 <li>lines</li>
@@ -1032,54 +1121,65 @@ cellStats(s,range)</code></pre>
 </ul>
 <p>Extract all intersecting values OR apply a summarizing function with <code>fun</code>.</p>
 <div id="point-data-1" class="section level3">
-<h3><span class="header-section-number">6.9.1</span> Point data</h3>
+<h3><span class="header-section-number">5.9.1</span> Point data</h3>
 <p><code>sampleRandom()</code> generates random points and automatically extracts the raster values for those points. Also check out <code>?sampleStratified</code> and <code>sampleRegular()</code>.</p>
 <p>Generate 100 random points and the associated climate variables at those points.</p>
 <pre class="r"><code>## define a new dataset of points to play with
-pts=sampleRandom(clim,100,xy=T,sp=T)
-plot(pts);axis(1);axis(2)</code></pre>
+pts=sampleRandom(clim,100,xy=T,sp=T)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>plot(pts);axis(1);axis(2)</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-55-1.png" /><!-- --></p>
 </div>
 <div id="extract-data-using-a-spatialpoints-object" class="section level3">
-<h3><span class="header-section-number">6.9.2</span> Extract data using a <code>SpatialPoints</code> object</h3>
+<h3><span class="header-section-number">5.9.2</span> Extract data using a <code>SpatialPoints</code> object</h3>
 <p>Often you will have some locations (points) for which you want data from a raster* object. You can use the <code>extract</code> function here with the <code>pts</code> object (we’ll pretend it’s a new point dataset for which you want climate variables).</p>
-<pre class="r"><code>pts_data=raster::extract(clim[[1:4]],pts,df=T)
-head(pts_data)</code></pre>
+<pre class="r"><code>pts_data=raster::extract(clim[[1:4]],pts,df=T)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>head(pts_data)</code></pre>
 <pre><code>##   ID bio1 bio2 bio3   bio4
-## 1  1 -6.4 14.1  3.8  814.6
-## 2  2  5.3  6.6  3.1  496.7
-## 3  3 -1.5 13.6  2.6 1339.2
-## 4  4 12.0 13.0  3.3  907.2
-## 5  5 25.8 14.9  4.9  588.7
-## 6  6 25.2  6.5  8.5   44.7</code></pre>
+## 1  1 12.7 12.6  2.8 1114.2
+## 2  2  3.1  8.4  2.5  838.5
+## 3  3 23.0 11.6  7.0   90.5
+## 4  4  2.9 15.2  3.1 1098.9
+## 5  5 11.8  8.7  3.2  642.8
+## 6  6 23.7 13.4  6.2  259.9</code></pre>
 <blockquote>
 <p>Use <code>package::function</code> to avoid confusion with similar functions.</p>
 </blockquote>
 </div>
 <div id="plot-the-global-dataset-with-the-random-points" class="section level3">
-<h3><span class="header-section-number">6.9.3</span> Plot the global dataset with the random points</h3>
+<h3><span class="header-section-number">5.9.3</span> Plot the global dataset with the random points</h3>
 <pre class="r"><code>gplot(clim[[1]])+
   geom_raster(aes(fill=value))+
   geom_point(
     data=as.data.frame(pts),
     aes(x=x,y=y),col=&quot;red&quot;)+
   coord_equal()</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-57-1.png" /><!-- --></p>
 </div>
 <div id="summarize-climate-data-at-point-locations" class="section level3">
-<h3><span class="header-section-number">6.9.4</span> Summarize climate data at point locations</h3>
+<h3><span class="header-section-number">5.9.4</span> Summarize climate data at point locations</h3>
 <p>Use <code>gather()</code> to reshape the climate data for easy plotting with ggplot.</p>
 <pre class="r"><code>d2=pts_data%&gt;%
   gather(ID)
 colnames(d2)[1]=&quot;cell&quot;
 head(d2)</code></pre>
 <pre><code>##   cell   ID value
-## 1    1 bio1  -6.4
-## 2    2 bio1   5.3
-## 3    3 bio1  -1.5
-## 4    4 bio1  12.0
-## 5    5 bio1  25.8
-## 6    6 bio1  25.2</code></pre>
+## 1    1 bio1  12.7
+## 2    2 bio1   3.1
+## 3    3 bio1  23.0
+## 4    4 bio1   2.9
+## 5    5 bio1  11.8
+## 6    6 bio1  23.7</code></pre>
 <p>And plot density plots (like histograms).</p>
 <pre class="r"><code>ggplot(d2,aes(x=value))+
   geom_density()+
@@ -1087,7 +1187,7 @@ head(d2)</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-59-1.png" /><!-- --></p>
 </div>
 <div id="lines" class="section level3">
-<h3><span class="header-section-number">6.9.5</span> Lines</h3>
+<h3><span class="header-section-number">5.9.5</span> Lines</h3>
 <p>Extract values along a transect.</p>
 <pre class="r"><code>transect = SpatialLinesDataFrame(
   SpatialLines(list(Lines(list(Line(
@@ -1103,16 +1203,26 @@ transect=SpatialLinesDataFrame(
 
 gplot(r1)+geom_tile(aes(fill=value))+
   geom_line(aes(x=long,y=lat),data=fortify(transect),col=&quot;red&quot;)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-60-1.png" /><!-- --></p>
 </div>
 <div id="plot-transect" class="section level3">
-<h3><span class="header-section-number">6.9.6</span> Plot Transect</h3>
+<h3><span class="header-section-number">5.9.6</span> Plot Transect</h3>
 <pre class="r"><code>trans=raster::extract(x=clim[[12:14]],
                       y=transect,
                       along=T,
                       cellnumbers=T)%&gt;%
-  data.frame()
-head(trans)</code></pre>
+  data.frame()</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>head(trans)</code></pre>
 <pre><code>##      cell bio12 bio13 bio14
 ## 1 1601755  81.4  13.0   2.0
 ## 2 1601756  71.9  11.6   1.7
@@ -1121,7 +1231,7 @@ head(trans)</code></pre>
 ## 5 1601759  41.5   6.1   1.3
 ## 6 1601760  36.1   5.0   1.2</code></pre>
 <div id="add-other-metadata-and-reshape" class="section level4">
-<h4><span class="header-section-number">6.9.6.1</span> Add other metadata and reshape</h4>
+<h4><span class="header-section-number">5.9.6.1</span> Add other metadata and reshape</h4>
 <pre class="r"><code>trans[,c(&quot;lon&quot;,&quot;lat&quot;)]=coordinates(clim)[trans$cell]
 trans$order=as.integer(rownames(trans))
 head(trans)  </code></pre>
@@ -1155,13 +1265,41 @@ head(transl)</code></pre>
 </div>
 </div>
 <div id="zonal-statistics" class="section level3">
-<h3><span class="header-section-number">6.9.7</span> <em>Zonal</em> statistics</h3>
+<h3><span class="header-section-number">5.9.7</span> <em>Zonal</em> statistics</h3>
 <p>Calculate mean annual temperature averaged by province (polygons).</p>
 <pre class="r"><code>rsp=raster::extract(x=r1,
                     y=za,
                     fun=mean,
-                    sp=T)
-#spplot(rsp,zcol=&quot;bio1&quot;)</code></pre>
+                    sp=T)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>#spplot(rsp,zcol=&quot;bio1&quot;)</code></pre>
 <pre class="r"><code>## add the ID to the dataframe itself for easier indexing in the map
 rsp$id=as.numeric(rownames(rsp@data))
 ## create fortified version for plotting with ggplot()
@@ -1180,7 +1318,7 @@ ggplot(rsp@data, aes(map_id = id, fill=bio1)) +
 </div>
 </div>
 <div id="example-workflow" class="section level2">
-<h2><span class="header-section-number">6.10</span> Example Workflow</h2>
+<h2><span class="header-section-number">5.10</span> Example Workflow</h2>
 <ol style="list-style-type: decimal">
 <li>Download the Maximum Temperature dataset using <code>getData()</code></li>
 <li>Set the gain to 0.1 (to convert to degrees Celcius)</li>
@@ -1190,8 +1328,22 @@ ggplot(rsp@data, aes(map_id = id, fill=bio1)) +
 <li>Create a transect across the region and extract the temperature data.</li>
 </ol>
 <pre class="r"><code>country=getData(&#39;GADM&#39;, country=&#39;TUN&#39;, level=1)
-tmax=getData(&#39;worldclim&#39;, var=&#39;tmax&#39;, res=10)
-gain(tmax)=0.1
+tmax=getData(&#39;worldclim&#39;, var=&#39;tmax&#39;, res=10)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>gain(tmax)=0.1
 names(tmax)</code></pre>
 <pre><code>##  [1] &quot;tmax1&quot;  &quot;tmax2&quot;  &quot;tmax3&quot;  &quot;tmax4&quot;  &quot;tmax5&quot;  &quot;tmax6&quot;  &quot;tmax7&quot; 
 ##  [8] &quot;tmax8&quot;  &quot;tmax9&quot;  &quot;tmax10&quot; &quot;tmax11&quot; &quot;tmax12&quot;</code></pre>
@@ -1215,11 +1367,14 @@ month.name</code></pre>
 <p>See <code>?sprintf</code> for details</p>
 <pre class="r"><code>names(tmax)=sprintf(&quot;%02d&quot;,1:12)
 
-tmax_crop=crop(tmax,country)
-tmaxave_crop=mean(tmax_crop)  # calculate mean annual maximum temperature 
-tmaxavefocal_crop=focal(tmaxave_crop,
+tmax_crop=crop(tmax,country)</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>tmaxave_crop=mean(tmax_crop)  # calculate mean annual maximum temperature </code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>tmaxavefocal_crop=focal(tmaxave_crop,
                         fun=median,
                         w=matrix(1,11,11))</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
 <blockquote>
 <p>Only a few datasets are available usig <code>getData()</code> in the raster package, but you can download almost any file on the web with <code>file.download()</code>.</p>
 </blockquote>
@@ -1233,13 +1388,13 @@ tmaxavefocal_crop=focal(tmaxave_crop,
 ## 100% 18.1 21.2 25.6 31.2 35.9 41.4 43.3 42.6 38.5 31.9 24.5 18.9</code></pre>
 </div>
 <div id="create-a-transect-spatiallinesdataframe" class="section level2">
-<h2><span class="header-section-number">6.11</span> Create a Transect (SpatialLinesDataFrame)</h2>
+<h2><span class="header-section-number">5.11</span> Create a Transect (SpatialLinesDataFrame)</h2>
 <pre class="r"><code>transect=SpatialLinesDataFrame(
   readWKT(&quot;LINESTRING(8 36,10 36)&quot;),
   data.frame(Z = c(&quot;T1&quot;)))</code></pre>
 </div>
 <div id="plot-the-timeseries-of-climate-data" class="section level2">
-<h2><span class="header-section-number">6.12</span> Plot the timeseries of climate data</h2>
+<h2><span class="header-section-number">5.12</span> Plot the timeseries of climate data</h2>
 <pre class="r"><code>gplot(tmax_crop)+
   geom_tile(aes(fill=value))+
   scale_fill_gradientn(
@@ -1258,13 +1413,16 @@ tmaxavefocal_crop=focal(tmaxave_crop,
 <p><img src="05_assets/slow_time_series_plot.png" alt="alt text" width="75%"></p>
 </div>
 <div id="extract-and-clean-up-the-transect-data" class="section level2">
-<h2><span class="header-section-number">6.13</span> Extract and clean up the transect data</h2>
+<h2><span class="header-section-number">5.13</span> Extract and clean up the transect data</h2>
 <pre class="r"><code>trans=raster::extract(tmax_crop,
                       transect,
                       along=T,
                       cellnumbers=T)%&gt;% 
-  as.data.frame()
-trans[,c(&quot;lon&quot;,&quot;lat&quot;)]=coordinates(tmax_crop)[trans$cell]
+  as.data.frame()</code></pre>
+<pre><code>## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files</code></pre>
+<pre class="r"><code>trans[,c(&quot;lon&quot;,&quot;lat&quot;)]=coordinates(tmax_crop)[trans$cell]
 trans$order=as.integer(rownames(trans))
 head(trans)</code></pre>
 <pre><code>##   cell  X01  X02  X03  X04  X05  X06  X07  X08  X09  X10  X11  X12
@@ -1300,7 +1458,7 @@ head(transl)</code></pre>
 ## 6   234 8.916667 8.916667     6     X     1  11.3   January</code></pre>
 </div>
 <div id="plot-the-transect-data" class="section level2">
-<h2><span class="header-section-number">6.14</span> Plot the transect data</h2>
+<h2><span class="header-section-number">5.14</span> Plot the transect data</h2>
 <pre class="r"><code>ggplot(transl,
        aes(x=lon,y=value,
            colour=month,

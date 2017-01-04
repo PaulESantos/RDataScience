@@ -17,7 +17,10 @@
 
 
 
-While you're waiting, please install the following:
+While you're waiting, please :
+
+Sign up for an account to access ([bien3.org](bien3.org))
+
 ```
 install.packages(c('devtools','bossMaps'))
 ```

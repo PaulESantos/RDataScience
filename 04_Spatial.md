@@ -16,12 +16,13 @@ library(rgdal)
 ```
 
 ```
-## rgdal: version: 1.2-4, (SVN revision 643)
+## rgdal: version: 1.2-5, (SVN revision 648)
 ##  Geospatial Data Abstraction Library extensions to R successfully loaded
-##  Loaded GDAL runtime: GDAL 1.11.4, released 2016/01/25
-##  Path to GDAL shared files: /Library/Frameworks/R.framework/Versions/3.3/Resources/library/rgdal/gdal
+##  Loaded GDAL runtime: GDAL 2.1.2, released 2016/10/24
+##  Path to GDAL shared files: 
 ##  Loaded PROJ.4 runtime: Rel. 4.9.1, 04 March 2015, [PJ_VERSION: 491]
-##  Path to PROJ.4 shared files: /Library/Frameworks/R.framework/Versions/3.3/Resources/library/rgdal/proj
+##  Path to PROJ.4 shared files: (autodetected)
+## WARNING: no proj_defs.dat in PROJ.4 shared files
 ##  Linking to sp version: 1.2-3
 ```
 
@@ -478,62 +479,70 @@ Also the `gdalUtils` package for reprojecting, transforming, reclassifying, etc.
 
 List the file formats that your installation of rgdal can read/write with `ogrDrivers()`:
 
-name             write 
----------------  ------
-AeronavFAA       FALSE 
-ARCGEN           FALSE 
-AVCBin           FALSE 
-AVCE00           FALSE 
-BNA              TRUE  
-CartoDB          FALSE 
-CouchDB          TRUE  
-CSV              TRUE  
-DGN              TRUE  
-DXF              TRUE  
-EDIGEO           FALSE 
-ElasticSearch    TRUE  
-ESRI Shapefile   TRUE  
-Geoconcept       TRUE  
-GeoJSON          TRUE  
-GeoRSS           TRUE  
-GFT              TRUE  
-GME              TRUE  
-GML              TRUE  
-GMT              TRUE  
-GPKG             TRUE  
-GPSBabel         TRUE  
-GPSTrackMaker    TRUE  
-GPX              TRUE  
-HTF              FALSE 
-Idrisi           FALSE 
-KML              TRUE  
-MapInfo File     TRUE  
-Memory           TRUE  
-ODS              TRUE  
-OpenAir          FALSE 
-OpenFileGDB      FALSE 
-OSM              FALSE 
-PCIDSK           TRUE  
-PDF              TRUE  
-PDS              FALSE 
-PGDump           TRUE  
-REC              FALSE 
-S57              TRUE  
-SDTS             FALSE 
-SEGUKOOA         FALSE 
-SEGY             FALSE 
-SQLite           TRUE  
-SUA              FALSE 
-SVG              FALSE 
-SXF              FALSE 
-TIGER            TRUE  
-UK .NTF          FALSE 
-VFK              FALSE 
-VRT              FALSE 
-WAsP             TRUE  
-WFS              FALSE 
-XLSX             TRUE  
-XPlane           FALSE 
+name             long_name                                             write   copy    isVector 
+---------------  ----------------------------------------------------  ------  ------  ---------
+AeronavFAA       Aeronav FAA                                           FALSE   FALSE   TRUE     
+AmigoCloud       AmigoCloud                                            TRUE    FALSE   TRUE     
+ARCGEN           Arc/Info Generate                                     FALSE   FALSE   TRUE     
+AVCBin           Arc/Info Binary Coverage                              FALSE   FALSE   TRUE     
+AVCE00           Arc/Info E00 (ASCII) Coverage                         FALSE   FALSE   TRUE     
+BNA              Atlas BNA                                             TRUE    FALSE   TRUE     
+Carto            Carto                                                 TRUE    FALSE   TRUE     
+Cloudant         Cloudant / CouchDB                                    TRUE    FALSE   TRUE     
+CouchDB          CouchDB / GeoCouch                                    TRUE    FALSE   TRUE     
+CSV              Comma Separated Value (.csv)                          TRUE    FALSE   TRUE     
+CSW              OGC CSW (Catalog  Service for the Web)                FALSE   FALSE   TRUE     
+DGN              Microstation DGN                                      TRUE    FALSE   TRUE     
+DXF              AutoCAD DXF                                           TRUE    FALSE   TRUE     
+EDIGEO           French EDIGEO exchange format                         FALSE   FALSE   TRUE     
+ElasticSearch    Elastic Search                                        TRUE    FALSE   TRUE     
+ESRI Shapefile   ESRI Shapefile                                        TRUE    FALSE   TRUE     
+Geoconcept       Geoconcept                                            TRUE    FALSE   TRUE     
+GeoJSON          GeoJSON                                               TRUE    FALSE   TRUE     
+GeoRSS           GeoRSS                                                TRUE    FALSE   TRUE     
+GFT              Google Fusion Tables                                  TRUE    FALSE   TRUE     
+GML              Geography Markup Language (GML)                       TRUE    FALSE   TRUE     
+GPKG             GeoPackage                                            TRUE    TRUE    TRUE     
+GPSBabel         GPSBabel                                              TRUE    FALSE   TRUE     
+GPSTrackMaker    GPSTrackMaker                                         TRUE    FALSE   TRUE     
+GPX              GPX                                                   TRUE    FALSE   TRUE     
+HTF              Hydrographic Transfer Vector                          FALSE   FALSE   TRUE     
+HTTP             HTTP Fetching Wrapper                                 FALSE   FALSE   TRUE     
+Idrisi           Idrisi Vector (.vct)                                  FALSE   FALSE   TRUE     
+JML              OpenJUMP JML                                          TRUE    FALSE   TRUE     
+KML              Keyhole Markup Language (KML)                         TRUE    FALSE   TRUE     
+MapInfo File     MapInfo File                                          TRUE    FALSE   TRUE     
+Memory           Memory                                                TRUE    FALSE   TRUE     
+netCDF           Network Common Data Format                            TRUE    TRUE    TRUE     
+ODS              Open Document/ LibreOffice / OpenOffice Spreadsheet   TRUE    FALSE   TRUE     
+OGR_GMT          GMT ASCII Vectors (.gmt)                              TRUE    FALSE   TRUE     
+OGR_PDS          Planetary Data Systems TABLE                          FALSE   FALSE   TRUE     
+OGR_SDTS         SDTS                                                  FALSE   FALSE   TRUE     
+OGR_VRT          VRT - Virtual Datasource                              FALSE   FALSE   TRUE     
+OpenAir          OpenAir                                               FALSE   FALSE   TRUE     
+OpenFileGDB      ESRI FileGDB                                          FALSE   FALSE   TRUE     
+OSM              OpenStreetMap XML and PBF                             FALSE   FALSE   TRUE     
+PCIDSK           PCIDSK Database File                                  TRUE    FALSE   TRUE     
+PDF              Geospatial PDF                                        TRUE    TRUE    TRUE     
+PGDUMP           PostgreSQL SQL dump                                   TRUE    FALSE   TRUE     
+PLSCENES         Planet Labs Scenes API                                FALSE   FALSE   TRUE     
+REC              EPIInfo .REC                                          FALSE   FALSE   TRUE     
+S57              IHO S-57 (ENC)                                        TRUE    FALSE   TRUE     
+SEGUKOOA         SEG-P1 / UKOOA P1/90                                  FALSE   FALSE   TRUE     
+SEGY             SEG-Y                                                 FALSE   FALSE   TRUE     
+Selafin          Selafin                                               TRUE    FALSE   TRUE     
+SQLite           SQLite / Spatialite                                   TRUE    FALSE   TRUE     
+SUA              Tim Newport-Peace's Special Use Airspace Format       FALSE   FALSE   TRUE     
+SVG              Scalable Vector Graphics                              FALSE   FALSE   TRUE     
+SXF              Storage and eXchange Format                           FALSE   FALSE   TRUE     
+TIGER            U.S. Census TIGER/Line                                TRUE    FALSE   TRUE     
+UK .NTF          UK .NTF                                               FALSE   FALSE   TRUE     
+VDV              VDV-451/VDV-452/INTREST Data Format                   TRUE    FALSE   TRUE     
+VFK              Czech Cadastral Exchange Data Format                  FALSE   FALSE   TRUE     
+WAsP             WAsP .map format                                      TRUE    FALSE   TRUE     
+WFS              OGC WFS (Web Feature Service)                         FALSE   FALSE   TRUE     
+XLSX             MS Office Open XML spreadsheet                        TRUE    FALSE   TRUE     
+XPlane           X-Plane/Flightgear aeronautical data                  FALSE   FALSE   TRUE     
 
 Now as an example, let's read in a shapefile that's included in the `maptools` package.  You can try 
 
@@ -551,21 +560,21 @@ ogrInfo(dsn=file, layer="sids")
 ## Extent: (-84.32385 33.88199) - (-75.45698 36.58965)
 ## LDID: 87 
 ## Number of fields: 14 
-##         name type length typeName
-## 1       AREA    2     12     Real
-## 2  PERIMETER    2     12     Real
-## 3      CNTY_    2     11     Real
-## 4    CNTY_ID    2     11     Real
-## 5       NAME    4     32   String
-## 6       FIPS    4      5   String
-## 7     FIPSNO    2     16     Real
-## 8   CRESS_ID    0      3  Integer
-## 9      BIR74    2     12     Real
-## 10     SID74    2      9     Real
-## 11   NWBIR74    2     11     Real
-## 12     BIR79    2     12     Real
-## 13     SID79    2      9     Real
-## 14   NWBIR79    2     12     Real
+##         name type length  typeName
+## 1       AREA    2     12      Real
+## 2  PERIMETER    2     12      Real
+## 3      CNTY_   12     11 Integer64
+## 4    CNTY_ID   12     11 Integer64
+## 5       NAME    4     32    String
+## 6       FIPS    4      5    String
+## 7     FIPSNO   12     16 Integer64
+## 8   CRESS_ID    0      3   Integer
+## 9      BIR74    2     12      Real
+## 10     SID74    2      9      Real
+## 11   NWBIR74    2     11      Real
+## 12     BIR79    2     12      Real
+## 13     SID79    2      9      Real
+## 14   NWBIR79    2     12      Real
 ```
 
 ```r
@@ -578,6 +587,7 @@ sids <- readOGR(dsn=file, layer="sids")
 ## Source: "/Library/Frameworks/R.framework/Versions/3.3/Resources/library/maptools/shapes/sids.shp", layer: "sids"
 ## with 100 features
 ## It has 14 fields
+## Integer64 fields read as strings:  CNTY_ CNTY_ID FIPSNO
 ```
 
 ```r
@@ -593,37 +603,37 @@ summary(sids)
 ## Is projected: NA 
 ## proj4string : [NA]
 ## Data attributes:
-##       AREA          PERIMETER         CNTY_         CNTY_ID    
-##  Min.   :0.0420   Min.   :0.999   Min.   :1825   Min.   :1825  
-##  1st Qu.:0.0910   1st Qu.:1.324   1st Qu.:1902   1st Qu.:1902  
-##  Median :0.1205   Median :1.609   Median :1982   Median :1982  
-##  Mean   :0.1263   Mean   :1.673   Mean   :1986   Mean   :1986  
-##  3rd Qu.:0.1542   3rd Qu.:1.859   3rd Qu.:2067   3rd Qu.:2067  
-##  Max.   :0.2410   Max.   :3.640   Max.   :2241   Max.   :2241  
-##                                                                
-##         NAME         FIPS        FIPSNO         CRESS_ID     
-##  Alamance : 1   37001  : 1   Min.   :37001   Min.   :  1.00  
-##  Alexander: 1   37003  : 1   1st Qu.:37050   1st Qu.: 25.75  
-##  Alleghany: 1   37005  : 1   Median :37100   Median : 50.50  
-##  Anson    : 1   37007  : 1   Mean   :37100   Mean   : 50.50  
-##  Ashe     : 1   37009  : 1   3rd Qu.:37150   3rd Qu.: 75.25  
-##  Avery    : 1   37011  : 1   Max.   :37199   Max.   :100.00  
-##  (Other)  :94   (Other):94                                   
-##      BIR74           SID74          NWBIR74           BIR79      
-##  Min.   :  248   Min.   : 0.00   Min.   :   1.0   Min.   :  319  
-##  1st Qu.: 1077   1st Qu.: 2.00   1st Qu.: 190.0   1st Qu.: 1336  
-##  Median : 2180   Median : 4.00   Median : 697.5   Median : 2636  
-##  Mean   : 3300   Mean   : 6.67   Mean   :1050.8   Mean   : 4224  
-##  3rd Qu.: 3936   3rd Qu.: 8.25   3rd Qu.:1168.5   3rd Qu.: 4889  
-##  Max.   :21588   Max.   :44.00   Max.   :8027.0   Max.   :30757  
+##       AREA          PERIMETER         CNTY_       CNTY_ID          NAME   
+##  Min.   :0.0420   Min.   :0.999   1825   : 1   1825   : 1   Alamance : 1  
+##  1st Qu.:0.0910   1st Qu.:1.324   1827   : 1   1827   : 1   Alexander: 1  
+##  Median :0.1205   Median :1.609   1828   : 1   1828   : 1   Alleghany: 1  
+##  Mean   :0.1263   Mean   :1.673   1831   : 1   1831   : 1   Anson    : 1  
+##  3rd Qu.:0.1542   3rd Qu.:1.859   1832   : 1   1832   : 1   Ashe     : 1  
+##  Max.   :0.2410   Max.   :3.640   1833   : 1   1833   : 1   Avery    : 1  
+##                                   (Other):94   (Other):94   (Other)  :94  
+##       FIPS        FIPSNO      CRESS_ID          BIR74      
+##  37001  : 1   37001  : 1   Min.   :  1.00   Min.   :  248  
+##  37003  : 1   37003  : 1   1st Qu.: 25.75   1st Qu.: 1077  
+##  37005  : 1   37005  : 1   Median : 50.50   Median : 2180  
+##  37007  : 1   37007  : 1   Mean   : 50.50   Mean   : 3300  
+##  37009  : 1   37009  : 1   3rd Qu.: 75.25   3rd Qu.: 3936  
+##  37011  : 1   37011  : 1   Max.   :100.00   Max.   :21588  
+##  (Other):94   (Other):94                                   
+##      SID74          NWBIR74           BIR79           SID79      
+##  Min.   : 0.00   Min.   :   1.0   Min.   :  319   Min.   : 0.00  
+##  1st Qu.: 2.00   1st Qu.: 190.0   1st Qu.: 1336   1st Qu.: 2.00  
+##  Median : 4.00   Median : 697.5   Median : 2636   Median : 5.00  
+##  Mean   : 6.67   Mean   :1050.8   Mean   : 4224   Mean   : 8.36  
+##  3rd Qu.: 8.25   3rd Qu.:1168.5   3rd Qu.: 4889   3rd Qu.:10.25  
+##  Max.   :44.00   Max.   :8027.0   Max.   :30757   Max.   :57.00  
 ##                                                                  
-##      SID79          NWBIR79       
-##  Min.   : 0.00   Min.   :    3.0  
-##  1st Qu.: 2.00   1st Qu.:  250.5  
-##  Median : 5.00   Median :  874.5  
-##  Mean   : 8.36   Mean   : 1352.8  
-##  3rd Qu.:10.25   3rd Qu.: 1406.8  
-##  Max.   :57.00   Max.   :11631.0  
+##     NWBIR79       
+##  Min.   :    3.0  
+##  1st Qu.:  250.5  
+##  Median :  874.5  
+##  Mean   : 1352.8  
+##  3rd Qu.: 1406.8  
+##  Max.   :11631.0  
 ## 
 ```
 
@@ -680,6 +690,13 @@ Note that it has no projection information assigned (since it came from a simple
 
 ```r
 proj4string(sids) <- CRS("+proj=longlat +ellps=clrk66")
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 proj4string(sids)
 ```
 
@@ -699,6 +716,10 @@ Project the `sids` data to the US National Atlas Equal Area (Lambert azimuthal e
 
 ```r
 sids_us = spTransform(sids,CRS("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"))
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
 ```
 
 Compare the _bounding box_:
@@ -826,6 +847,7 @@ sids = readOGR(dsn=file, layer="sids")
 ## Source: "/Library/Frameworks/R.framework/Versions/3.3/Resources/library/maptools/shapes/sids.shp", layer: "sids"
 ## with 100 features
 ## It has 14 fields
+## Integer64 fields read as strings:  CNTY_ CNTY_ID FIPSNO
 ```
 
 ## Simplify polygons with RGEOS

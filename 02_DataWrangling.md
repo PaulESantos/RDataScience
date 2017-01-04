@@ -992,6 +992,13 @@ rts <- gcIntermediate(as.matrix(NYCll),
                       1000,
                       addStartEnd=TRUE,
                       sp=TRUE)
+```
+
+```
+## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
+```
+
+```r
 rts.ff <- fortify(
   as(rts,"SpatialLinesDataFrame")) # convert into something ggplot can plot
 

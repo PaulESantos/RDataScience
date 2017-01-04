@@ -11,18 +11,17 @@
 
 
 
-<title>A quick introduction to spatial data analysis</title>
+<title></title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-1.1/highlight.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -99,34 +98,34 @@ button.code-folding-btn:focus {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 64px;
+  padding-top: 66px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 69px;
-  margin-top: -69px;
+  padding-top: 71px;
+  margin-top: -71px;
 }
 
 .section h2 {
-  padding-top: 69px;
-  margin-top: -69px;
+  padding-top: 71px;
+  margin-top: -71px;
 }
 .section h3 {
-  padding-top: 69px;
-  margin-top: -69px;
+  padding-top: 71px;
+  margin-top: -71px;
 }
 .section h4 {
-  padding-top: 69px;
-  margin-top: -69px;
+  padding-top: 71px;
+  margin-top: -71px;
 }
 .section h5 {
-  padding-top: 69px;
-  margin-top: -69px;
+  padding-top: 71px;
+  margin-top: -71px;
 }
 .section h6 {
-  padding-top: 69px;
-  margin-top: -69px;
+  padding-top: 71px;
+  margin-top: -71px;
 }
 </style>
 
@@ -194,7 +193,7 @@ $(document).ready(function () {
       <a href="CourseContent.html">About Course Content</a>
     </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Module 1: Introduction to R</li>
+    <li class="dropdown-header">Introduction to R</li>
     <li>
       <a href="00_CourseIntroductionFrame.html">00 Course Introduction</a>
     </li>
@@ -219,9 +218,9 @@ $(document).ready(function () {
       <a href="06_RasterTwo.html">06 More Raster Data</a>
     </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Module 3: Advanced Programming</li>
+    <li class="dropdown-header">Module 3: Cleaning and Integrating Biodiversity Data</li>
     <li>
-      <a href="07_Reproducibile.html">07 Reproducible Research</a>
+      <a href="107_Reproducibile.html">Workshop Schedule</a>
     </li>
   </ul>
 </li>
@@ -231,7 +230,7 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://cmerow.github.io/RDataScience">
+  <a href="https://github.com/cmerow/RDataScience/tree/gh-pages">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -245,19 +244,21 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">A quick introduction to spatial data analysis</h1>
 
 </div>
 
 
+<div id="a-quick-introduction-to-spatial-data-analysis" class="section level1">
+<h1><span class="header-section-number">1</span> A quick introduction to spatial data analysis</h1>
 <div>
 <iframe src="05_presentation/05_Spatial.html" width="100%" height="700px">
 </iframe>
 </div>
 <p><a href="05_Raster.R"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here</a>. Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.</p>
 <p>This tutorial has been forked from awesome classes developed by Adam Wilson <a href="http://adamwilson.us/RDataScience/">here</a></p>
+</div>
 <div id="setup" class="section level1">
-<h1><span class="header-section-number">1</span> Setup</h1>
+<h1><span class="header-section-number">2</span> Setup</h1>
 <pre class="r"><code>library(dplyr)
 library(tidyr)
 library(sp)
@@ -269,9 +270,9 @@ library(raster)
 library(rasterVis)  #visualization library for raster</code></pre>
 </div>
 <div id="point-data" class="section level1">
-<h1><span class="header-section-number">2</span> Point data</h1>
+<h1><span class="header-section-number">3</span> Point data</h1>
 <div id="generate-some-random-data" class="section level2">
-<h2><span class="header-section-number">2.1</span> Generate some random data</h2>
+<h2><span class="header-section-number">3.1</span> Generate some random data</h2>
 <pre class="r"><code>coords = data.frame(
   x=rnorm(100),
   y=rnorm(100)
@@ -284,7 +285,7 @@ str(coords)</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-4-1.png" /><!-- --></p>
 </div>
 <div id="convert-to-spatialpoints" class="section level2">
-<h2><span class="header-section-number">2.2</span> Convert to <code>SpatialPoints</code></h2>
+<h2><span class="header-section-number">3.2</span> Convert to <code>SpatialPoints</code></h2>
 <p>Many tools are designed in R to work specifically with spatial point data, so we need a special object of class <em>SpatialPoints</em>. The important thing is that it has a <em>slot</em> to store coordinates.</p>
 <pre class="r"><code>sp = SpatialPoints(coords)
 str(sp)</code></pre>
@@ -301,7 +302,7 @@ str(sp)</code></pre>
 ##   .. .. ..@ projargs: chr NA</code></pre>
 </div>
 <div id="create-a-spatialpointsdataframe" class="section level2">
-<h2><span class="header-section-number">2.3</span> Create a <code>SpatialPointsDataFrame</code></h2>
+<h2><span class="header-section-number">3.3</span> Create a <code>SpatialPointsDataFrame</code></h2>
 <p>First generate a dataframe (analagous to the <em>attribute table</em> in a shapefile)</p>
 <pre class="r"><code>data=data.frame(ID=1:100,group=letters[1:20])
 head(data)</code></pre>
@@ -335,7 +336,7 @@ str(spdf)</code></pre>
 <p>Note the use of <em>slots</em> designated with a <code>@</code>. See <code>?slot</code> for more.</p>
 </div>
 <div id="promote-a-data-frame-with-coordinates-to-a-spatialpoints-object" class="section level2">
-<h2><span class="header-section-number">2.4</span> Promote a data frame with <code>coordinates()</code> to a <code>SpatialPoints</code> object</h2>
+<h2><span class="header-section-number">3.4</span> Promote a data frame with <code>coordinates()</code> to a <code>SpatialPoints</code> object</h2>
 <pre class="r"><code>coordinates(data) = cbind(coords$x, coords$y) </code></pre>
 <pre class="r"><code>str(spdf)</code></pre>
 <pre><code>## Formal class &#39;SpatialPointsDataFrame&#39; [package &quot;sp&quot;] with 5 slots
@@ -355,7 +356,7 @@ str(spdf)</code></pre>
 ##   .. .. ..@ projargs: chr NA</code></pre>
 </div>
 <div id="subset-data" class="section level2">
-<h2><span class="header-section-number">2.5</span> Subset data</h2>
+<h2><span class="header-section-number">3.5</span> Subset data</h2>
 <pre class="r"><code>subset(spdf, group==&quot;a&quot;)</code></pre>
 <pre><code>## class       : SpatialPointsDataFrame 
 ## features    : 5 
@@ -377,7 +378,7 @@ str(spdf)</code></pre>
 ## max values  : 81,     a</code></pre>
 <!-- Unfortunately, `dplyr` functions do not directly filter spatial objects. -->
 <div class="well">
-<h2 id="your-turn"><span class="header-section-number">2.5</span> Your turn</h2>
+<h2 id="your-turn"><span class="header-section-number">3.5</span> Your turn</h2>
 <p>Convert the following <code>data.frame</code> into a SpatialPointsDataFrame using the <code>coordinates()</code> method and then plot the points with <code>plot()</code>.</p>
 <pre class="r"><code>df=data.frame(
   lat=c(12,15,17,12),
@@ -425,7 +426,7 @@ plot(df)</code></pre>
 </div>
 </div>
 <div id="examine-topsoil-quality-in-the-meuse-river-data-set" class="section level2">
-<h2><span class="header-section-number">2.6</span> Examine topsoil quality in the Meuse river data set</h2>
+<h2><span class="header-section-number">3.6</span> Examine topsoil quality in the Meuse river data set</h2>
 <pre class="r"><code>## Load the data
 data(meuse)
 str(meuse)</code></pre>
@@ -445,7 +446,7 @@ str(meuse)</code></pre>
 ##  $ landuse: Factor w/ 15 levels &quot;Aa&quot;,&quot;Ab&quot;,&quot;Ag&quot;,..: 4 4 4 11 4 11 4 2 2 15 ...
 ##  $ dist.m : num  50 30 150 270 380 470 240 120 240 420 ...</code></pre>
 <div class="well">
-<h2 id="your-turn-1"><span class="header-section-number">2.6</span> Your turn</h2>
+<h2 id="your-turn-1"><span class="header-section-number">3.6</span> Your turn</h2>
 <p><em>Promote</em> the <code>meuse</code> object to a spatial points data.frame with <code>coordinates()</code>.</p>
 <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo2">
 Show Solution
@@ -490,7 +491,7 @@ str(meuse)</code></pre>
 <p>Note that <code>ggplot</code> works only with data.frames. Convert with <code>as.data.frame()</code> or <code>fortify()</code>.</p>
 </div>
 <div id="ggplot" class="section level2">
-<h2><span class="header-section-number">2.7</span> ggplot</h2>
+<h2><span class="header-section-number">3.7</span> ggplot</h2>
 <p>If you’re not familiar with ggplot, here’s a quick digression. For a more detailed version, see the ggplot section in Lesson 03: Plotting. # <a href="http://ggplot2.org"><code>ggplot2</code></a> The <em>grammar of graphics</em> consists of specifying a number of key elements of a plot. These are the same elements you’d put in any base graphics plot; this approach just provides a consisent way of defining them</p>
 <ol style="list-style-type: decimal">
 <li>Data: The raw data</li>
@@ -530,9 +531,9 @@ m + # reference the data
 </div>
 </div>
 <div id="raster-package" class="section level1">
-<h1><span class="header-section-number">3</span> Raster Package</h1>
+<h1><span class="header-section-number">4</span> Raster Package</h1>
 <div id="getdata" class="section level2">
-<h2><span class="header-section-number">3.1</span> <code>getData()</code></h2>
+<h2><span class="header-section-number">4.1</span> <code>getData()</code></h2>
 <p>Raster package includes access to some useful (vector and raster) datasets with <code>getData()</code>:</p>
 <ul>
 <li>Elevation (SRTM 90m resolution raster)</li>
@@ -548,7 +549,7 @@ m + # reference the data
 </ol>
 </div>
 <div id="gadm-global-administrative-areas" class="section level2">
-<h2><span class="header-section-number">3.2</span> GADM: Global Administrative Areas</h2>
+<h2><span class="header-section-number">4.2</span> GADM: Global Administrative Areas</h2>
 <p>Administrative areas in this database are countries and lower level subdivisions.</p>
 <p><img src="05_assets/gadm25.png" alt="alt text" width="70%"></p>
 <p>Divided by country (see website for full dataset). Explore country list:</p>
@@ -566,7 +567,7 @@ m + # reference the data
 <p><img src="05_assets/za_vector.png" alt="alt text" width="70%"></p>
 <p>Danger: <code>plot()</code> works, but can be slow for complex polygons.</p>
 <div id="check-out-attribute-table" class="section level3">
-<h3><span class="header-section-number">3.2.1</span> Check out attribute table</h3>
+<h3><span class="header-section-number">4.2.1</span> Check out attribute table</h3>
 <pre class="r"><code>za@data</code></pre>
 <pre><code>##   OBJECTID ID_0 ISO       NAME_0 ID_1        NAME_1 HASC_1 CCN_1 CCA_1
 ## 1        1  211 ZAF South Africa    1  Eastern Cape  ZA.EC    NA    EC
@@ -601,7 +602,7 @@ m + # reference the data
 <pre class="r"><code>za=subset(za,NAME_1==&quot;Eastern Cape&quot;)
 plot(za)</code></pre>
 <div class="well">
-<h2 id="your-turn-2"><span class="header-section-number">3.2.1</span> Your turn</h2>
+<h2 id="your-turn-2"><span class="header-section-number">4.2.1</span> Your turn</h2>
 <p>Use the method above to download and plot the boundaries for a country of your choice.</p>
 <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo1">
 Show Solution
@@ -619,9 +620,9 @@ plot(country)</code></pre>
 </div>
 </div>
 <div id="raster-data" class="section level1">
-<h1><span class="header-section-number">4</span> Raster Data</h1>
+<h1><span class="header-section-number">5</span> Raster Data</h1>
 <div id="raster-introduction" class="section level2">
-<h2><span class="header-section-number">4.1</span> Raster introduction</h2>
+<h2><span class="header-section-number">5.1</span> Raster introduction</h2>
 <p>Spatial data structure dividing region (‘grid’) into rectangles (’cells’ or ’pixels’) storing one or more values each.</p>
 <p><small> Some examples from the <a href="http://cran.r-project.org/web/packages/raster/vignettes/Raster.pdf">Raster vignette</a> by Robert J. Hijmans. </small></p>
 <ul>
@@ -707,7 +708,7 @@ ncol(x)</code></pre>
 <pre><code>## [1] 111.1111 100.0000</code></pre>
 </div>
 <div id="raster-data-storage" class="section level2">
-<h2><span class="header-section-number">4.2</span> Raster data storage</h2>
+<h2><span class="header-section-number">5.2</span> Raster data storage</h2>
 <pre class="r"><code>r &lt;- raster(ncol=10, nrow=10)
 ncell(r)</code></pre>
 <pre><code>## [1] 100</code></pre>
@@ -721,7 +722,7 @@ hasValues(r)</code></pre>
 <pre class="r"><code>values(r)[1:10]</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <div class="well">
-<h2 id="your-turn-3"><span class="header-section-number">4.2</span> Your turn</h2>
+<h2 id="your-turn-3"><span class="header-section-number">5.2</span> Your turn</h2>
 <p>Create and then plot a new raster with:</p>
 <ol style="list-style-type: decimal">
 <li>100 rows</li>
@@ -743,7 +744,7 @@ plot(x)</code></pre>
 </div>
 </div>
 <div id="raster-memory-usage" class="section level2">
-<h2><span class="header-section-number">4.3</span> Raster memory usage</h2>
+<h2><span class="header-section-number">5.3</span> Raster memory usage</h2>
 <p>Raster data files can be very large, especially when cells are at high resolution, so it becomes important to think about how much RAM is required to work with a raster to avoid slowing your computer to a crawl. The <code>raster</code> package cleverly avoids reading full rasters into memory to instead just provides pointers to the relevant raster files.</p>
 <pre class="r"><code>inMemory(r)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
@@ -752,12 +753,12 @@ plot(x)</code></pre>
 </blockquote>
 </div>
 <div id="raster-plotting" class="section level2">
-<h2><span class="header-section-number">4.4</span> Raster Plotting</h2>
+<h2><span class="header-section-number">5.4</span> Raster Plotting</h2>
 <p>Plotting is easy (but slow) with <code>plot</code>.</p>
 <pre class="r"><code>plot(r, main=&#39;Raster with 100 cells&#39;)</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-34-1.png" /><!-- --></p>
 <div id="ggplot-and-rastervis" class="section level3">
-<h3><span class="header-section-number">4.4.1</span> ggplot and rasterVis</h3>
+<h3><span class="header-section-number">5.4.1</span> ggplot and rasterVis</h3>
 <p>rasterVis package has <code>gplot()</code> for plotting raster data in the <code>ggplot()</code> framework.</p>
 <pre class="r"><code>gplot(r,maxpixels=50000)+ # reference the data
   geom_raster(aes(fill=value)) # cell&#39;s data value determines its color</code></pre>
@@ -774,7 +775,7 @@ plot(x)</code></pre>
 </div>
 </div>
 <div id="spatial-projections" class="section level2">
-<h2><span class="header-section-number">4.5</span> Spatial Projections</h2>
+<h2><span class="header-section-number">5.5</span> Spatial Projections</h2>
 <p>Raster package uses standard <a href="http://www.spatialreference.org">coordinate reference system (CRS)</a>.</p>
 <p>For example, see the projection format for the <a href="http://www.spatialreference.org/ref/epsg/4326/"><em>standard</em> WGS84</a>.</p>
 <pre class="r"><code>projection(r)</code></pre>
@@ -782,13 +783,13 @@ plot(x)</code></pre>
 </div>
 </div>
 <div id="worldclim" class="section level1">
-<h1><span class="header-section-number">5</span> WorldClim</h1>
+<h1><span class="header-section-number">6</span> WorldClim</h1>
 <div id="overview-of-worldclim" class="section level2">
-<h2><span class="header-section-number">5.1</span> Overview of WorldClim</h2>
+<h2><span class="header-section-number">6.1</span> Overview of WorldClim</h2>
 <p>Mean monthly climate and derived variables interpolated from weather stations on a 30 arc-second (~1km) grid. See <a href="http://www.worldclim.org/methods">worldclim.org</a></p>
 </div>
 <div id="bioclim-variables" class="section level2">
-<h2><span class="header-section-number">5.2</span> Bioclim variables</h2>
+<h2><span class="header-section-number">6.2</span> Bioclim variables</h2>
 <p><small></p>
 <table>
 <thead>
@@ -879,12 +880,12 @@ plot(x)</code></pre>
 <p></small></p>
 </div>
 <div id="download-climate-data" class="section level2">
-<h2><span class="header-section-number">5.3</span> Download climate data</h2>
+<h2><span class="header-section-number">6.3</span> Download climate data</h2>
 <p>Download the data:</p>
 <pre class="r"><code>clim=getData(&#39;worldclim&#39;, var=&#39;bio&#39;, res=10) </code></pre>
 <p><code>res</code> is resolution (0.5, 2.5, 5, and 10 minutes of a degree)</p>
 <div id="gain-and-offset" class="section level3">
-<h3><span class="header-section-number">5.3.1</span> Gain and Offset</h3>
+<h3><span class="header-section-number">6.3.1</span> Gain and Offset</h3>
 <pre class="r"><code>clim</code></pre>
 <pre><code>## class       : RasterStack 
 ## dimensions  : 900, 2160, 1944000, 19  (nrow, ncol, ncell, nlayers)
@@ -898,13 +899,13 @@ plot(x)</code></pre>
 <pre class="r"><code>gain(clim)=0.1</code></pre>
 </div>
 <div id="plot-with-plot" class="section level3">
-<h3><span class="header-section-number">5.3.2</span> Plot with <code>plot()</code></h3>
+<h3><span class="header-section-number">6.3.2</span> Plot with <code>plot()</code></h3>
 <pre class="r"><code>plot(clim[[1:3]]) # just the first 3, since its slow</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-42-1.png" /><!-- --></p>
 </div>
 </div>
 <div id="faceting-in-ggplot" class="section level2">
-<h2><span class="header-section-number">5.4</span> Faceting in ggplot</h2>
+<h2><span class="header-section-number">6.4</span> Faceting in ggplot</h2>
 <p>Or use <code>rasterVis</code> methods with gplot</p>
 <pre class="r"><code>gplot(clim[[1:3]])+geom_raster(aes(fill=value))+
   facet_wrap(~variable)+
@@ -925,7 +926,7 @@ canProcessInMemory(clim)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="subsetting-and-spatial-cropping" class="section level2">
-<h2><span class="header-section-number">5.5</span> Subsetting and spatial cropping</h2>
+<h2><span class="header-section-number">6.5</span> Subsetting and spatial cropping</h2>
 <p>Use <code>[[1:3]]</code> to select raster layers from raster stack.</p>
 <pre class="r"><code>## crop to a latitude/longitude box
 r1 &lt;- crop(clim[[1]], extent(10,35,-35,-20))
@@ -944,13 +945,13 @@ r1 &lt;- crop(clim[[1]], bbox(za))</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-46-1.png" /><!-- --></p>
 </div>
 <div id="spatial-aggregation" class="section level2">
-<h2><span class="header-section-number">5.6</span> Spatial aggregation</h2>
+<h2><span class="header-section-number">6.6</span> Spatial aggregation</h2>
 <pre class="r"><code>## aggregate using a function
 aggregate(r1, 3, fun=mean) %&gt;%
   plot()</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-47-1.png" /><!-- --></p>
 <div class="well">
-<h2 id="your-turn-4"><span class="header-section-number">5.6</span> Your turn</h2>
+<h2 id="your-turn-4"><span class="header-section-number">6.6</span> Your turn</h2>
 <p>Create a new raster by aggregating to the minimum (<code>min</code>) value of <code>r1</code> within a 10 pixel window</p>
 <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo3">
 Show Solution
@@ -963,7 +964,7 @@ Show Solution
 </div>
 </div>
 <div id="focal-moving-window" class="section level2">
-<h2><span class="header-section-number">5.7</span> Focal (“moving window”)</h2>
+<h2><span class="header-section-number">6.7</span> Focal (“moving window”)</h2>
 <pre class="r"><code>## apply a function over a moving window
 focal(r1, w=matrix(1,3,3), fun=mean) %&gt;% 
   plot()</code></pre>
@@ -978,7 +979,7 @@ rf_range2 &lt;- focal(r1, w=matrix(1,11,11), fun=range)
 plot(rf_range2)</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-50-1.png" /><!-- --></p>
 <div class="well">
-<h2 id="your-turn-5"><span class="header-section-number">5.7</span> Your turn</h2>
+<h2 id="your-turn-5"><span class="header-section-number">6.7</span> Your turn</h2>
 <p>Plot the focal standard deviation of <code>r1</code> over a 3x3 window.</p>
 <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo4">
 Show Solution
@@ -991,7 +992,7 @@ Show Solution
 </div>
 </div>
 <div id="raster-calculations" class="section level2">
-<h2><span class="header-section-number">5.8</span> Raster calculations</h2>
+<h2><span class="header-section-number">6.8</span> Raster calculations</h2>
 <p>The <code>raster</code> package has many options for <em>raster algebra</em>, including <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, logical operators such as <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>==</code>, <code>!</code> and functions such as <code>abs</code>, <code>round</code>, <code>ceiling</code>, <code>floor</code>, <code>trunc</code>, <code>sqrt</code>, <code>log</code>, <code>log10</code>, <code>exp</code>, <code>cos</code>, <code>sin</code>, <code>max</code>, <code>min</code>, <code>range</code>, <code>prod</code>, <code>sum</code>, <code>any</code>, <code>all</code>.</p>
 <p>So, for example, you can</p>
 <pre class="r"><code>cellStats(r1,range)</code></pre>
@@ -1013,7 +1014,7 @@ r = r1 &lt; 15
 plot(r)</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-53-1.png" /><!-- --></p>
 <div id="apply-algebraic-functions" class="section level3">
-<h3><span class="header-section-number">5.8.1</span> Apply algebraic functions</h3>
+<h3><span class="header-section-number">6.8.1</span> Apply algebraic functions</h3>
 <pre class="r"><code># multiply s times r and add 5
 s = s * r1 + 5
 cellStats(s,range)</code></pre>
@@ -1021,7 +1022,7 @@ cellStats(s,range)</code></pre>
 </div>
 </div>
 <div id="extracting-raster-data" class="section level2">
-<h2><span class="header-section-number">5.9</span> Extracting Raster Data</h2>
+<h2><span class="header-section-number">6.9</span> Extracting Raster Data</h2>
 <ul>
 <li>points</li>
 <li>lines</li>
@@ -1031,7 +1032,7 @@ cellStats(s,range)</code></pre>
 </ul>
 <p>Extract all intersecting values OR apply a summarizing function with <code>fun</code>.</p>
 <div id="point-data-1" class="section level3">
-<h3><span class="header-section-number">5.9.1</span> Point data</h3>
+<h3><span class="header-section-number">6.9.1</span> Point data</h3>
 <p><code>sampleRandom()</code> generates random points and automatically extracts the raster values for those points. Also check out <code>?sampleStratified</code> and <code>sampleRegular()</code>.</p>
 <p>Generate 100 random points and the associated climate variables at those points.</p>
 <pre class="r"><code>## define a new dataset of points to play with
@@ -1040,7 +1041,7 @@ plot(pts);axis(1);axis(2)</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-55-1.png" /><!-- --></p>
 </div>
 <div id="extract-data-using-a-spatialpoints-object" class="section level3">
-<h3><span class="header-section-number">5.9.2</span> Extract data using a <code>SpatialPoints</code> object</h3>
+<h3><span class="header-section-number">6.9.2</span> Extract data using a <code>SpatialPoints</code> object</h3>
 <p>Often you will have some locations (points) for which you want data from a raster* object. You can use the <code>extract</code> function here with the <code>pts</code> object (we’ll pretend it’s a new point dataset for which you want climate variables).</p>
 <pre class="r"><code>pts_data=raster::extract(clim[[1:4]],pts,df=T)
 head(pts_data)</code></pre>
@@ -1056,7 +1057,7 @@ head(pts_data)</code></pre>
 </blockquote>
 </div>
 <div id="plot-the-global-dataset-with-the-random-points" class="section level3">
-<h3><span class="header-section-number">5.9.3</span> Plot the global dataset with the random points</h3>
+<h3><span class="header-section-number">6.9.3</span> Plot the global dataset with the random points</h3>
 <pre class="r"><code>gplot(clim[[1]])+
   geom_raster(aes(fill=value))+
   geom_point(
@@ -1066,7 +1067,7 @@ head(pts_data)</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-57-1.png" /><!-- --></p>
 </div>
 <div id="summarize-climate-data-at-point-locations" class="section level3">
-<h3><span class="header-section-number">5.9.4</span> Summarize climate data at point locations</h3>
+<h3><span class="header-section-number">6.9.4</span> Summarize climate data at point locations</h3>
 <p>Use <code>gather()</code> to reshape the climate data for easy plotting with ggplot.</p>
 <pre class="r"><code>d2=pts_data%&gt;%
   gather(ID)
@@ -1086,7 +1087,7 @@ head(d2)</code></pre>
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-59-1.png" /><!-- --></p>
 </div>
 <div id="lines" class="section level3">
-<h3><span class="header-section-number">5.9.5</span> Lines</h3>
+<h3><span class="header-section-number">6.9.5</span> Lines</h3>
 <p>Extract values along a transect.</p>
 <pre class="r"><code>transect = SpatialLinesDataFrame(
   SpatialLines(list(Lines(list(Line(
@@ -1105,7 +1106,7 @@ gplot(r1)+geom_tile(aes(fill=value))+
 <p><img src="05_Raster_files/figure-html/unnamed-chunk-60-1.png" /><!-- --></p>
 </div>
 <div id="plot-transect" class="section level3">
-<h3><span class="header-section-number">5.9.6</span> Plot Transect</h3>
+<h3><span class="header-section-number">6.9.6</span> Plot Transect</h3>
 <pre class="r"><code>trans=raster::extract(x=clim[[12:14]],
                       y=transect,
                       along=T,
@@ -1120,7 +1121,7 @@ head(trans)</code></pre>
 ## 5 1601759  41.5   6.1   1.3
 ## 6 1601760  36.1   5.0   1.2</code></pre>
 <div id="add-other-metadata-and-reshape" class="section level4">
-<h4><span class="header-section-number">5.9.6.1</span> Add other metadata and reshape</h4>
+<h4><span class="header-section-number">6.9.6.1</span> Add other metadata and reshape</h4>
 <pre class="r"><code>trans[,c(&quot;lon&quot;,&quot;lat&quot;)]=coordinates(clim)[trans$cell]
 trans$order=as.integer(rownames(trans))
 head(trans)  </code></pre>
@@ -1154,7 +1155,7 @@ head(transl)</code></pre>
 </div>
 </div>
 <div id="zonal-statistics" class="section level3">
-<h3><span class="header-section-number">5.9.7</span> <em>Zonal</em> statistics</h3>
+<h3><span class="header-section-number">6.9.7</span> <em>Zonal</em> statistics</h3>
 <p>Calculate mean annual temperature averaged by province (polygons).</p>
 <pre class="r"><code>rsp=raster::extract(x=r1,
                     y=za,
@@ -1179,7 +1180,7 @@ ggplot(rsp@data, aes(map_id = id, fill=bio1)) +
 </div>
 </div>
 <div id="example-workflow" class="section level2">
-<h2><span class="header-section-number">5.10</span> Example Workflow</h2>
+<h2><span class="header-section-number">6.10</span> Example Workflow</h2>
 <ol style="list-style-type: decimal">
 <li>Download the Maximum Temperature dataset using <code>getData()</code></li>
 <li>Set the gain to 0.1 (to convert to degrees Celcius)</li>
@@ -1232,13 +1233,13 @@ tmaxavefocal_crop=focal(tmaxave_crop,
 ## 100% 18.1 21.2 25.6 31.2 35.9 41.4 43.3 42.6 38.5 31.9 24.5 18.9</code></pre>
 </div>
 <div id="create-a-transect-spatiallinesdataframe" class="section level2">
-<h2><span class="header-section-number">5.11</span> Create a Transect (SpatialLinesDataFrame)</h2>
+<h2><span class="header-section-number">6.11</span> Create a Transect (SpatialLinesDataFrame)</h2>
 <pre class="r"><code>transect=SpatialLinesDataFrame(
   readWKT(&quot;LINESTRING(8 36,10 36)&quot;),
   data.frame(Z = c(&quot;T1&quot;)))</code></pre>
 </div>
 <div id="plot-the-timeseries-of-climate-data" class="section level2">
-<h2><span class="header-section-number">5.12</span> Plot the timeseries of climate data</h2>
+<h2><span class="header-section-number">6.12</span> Plot the timeseries of climate data</h2>
 <pre class="r"><code>gplot(tmax_crop)+
   geom_tile(aes(fill=value))+
   scale_fill_gradientn(
@@ -1257,7 +1258,7 @@ tmaxavefocal_crop=focal(tmaxave_crop,
 <p><img src="05_assets/slow_time_series_plot.png" alt="alt text" width="75%"></p>
 </div>
 <div id="extract-and-clean-up-the-transect-data" class="section level2">
-<h2><span class="header-section-number">5.13</span> Extract and clean up the transect data</h2>
+<h2><span class="header-section-number">6.13</span> Extract and clean up the transect data</h2>
 <pre class="r"><code>trans=raster::extract(tmax_crop,
                       transect,
                       along=T,
@@ -1299,7 +1300,7 @@ head(transl)</code></pre>
 ## 6   234 8.916667 8.916667     6     X     1  11.3   January</code></pre>
 </div>
 <div id="plot-the-transect-data" class="section level2">
-<h2><span class="header-section-number">5.14</span> Plot the transect data</h2>
+<h2><span class="header-section-number">6.14</span> Plot the transect data</h2>
 <pre class="r"><code>ggplot(transl,
        aes(x=lon,y=value,
            colour=month,

@@ -38,7 +38,7 @@ left:
       - text: "3.4 A streamlined range modeling workflow: Wallace"
         href: Under_Construction.html   
       - text: "3.5 Integrating biogeographic data "
-        href: Under_Construction.html  
+        href: 3_5_Minxent.html  
       - text: "3.6 Network Associations"
         href: 3_2_Networks.html
       - text: "3.7 Teaching Econformatics"

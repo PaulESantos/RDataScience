@@ -12,5 +12,7 @@ output:
       after_body: include/after_body.html
     css: cm_yeti_bootswatch.css
     keep_md: true
+    code_folding: show
+
     
     

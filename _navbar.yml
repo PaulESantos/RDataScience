@@ -33,13 +33,13 @@ left:
         href: 3_1_Ecoinf_Schedule.html
       - text: "3.2 Hypervolumes"
         href: Under_Construction.html
-      - text: "3.3 Accessing Plant Biodiversity Data"
-        href: 3_3_RBIEN_tutorial.html
-      - text: "3.4 Taxonomic Name Resolution"
+      - text: "3.3 Taxonomic Name Resolution"
         href: Under_Construction.html
+      - text: "3.4 Accessing Plant Biodiversity Data"
+        href: 3_3_RBIEN_tutorial.html
       - text: "3.5 A streamlined range modeling workflow: Wallace"
         href: Under_Construction.html   
-      - text: "3.6 Integrating biogeographic data sources with spatial priors"
+      - text: "3.6 Integrating biogeographic data "
         href: Under_Construction.html  
       - text: "3.7 Teaching Econformatics"
         href: Under_Construction.html   

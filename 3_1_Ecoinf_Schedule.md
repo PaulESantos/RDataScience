@@ -11,8 +11,8 @@
 | 250-310 | Brian Maitner | RBIEN |
 | 310-320 | Rob Anderson <br> Jamie Kass | Wallace|
 | 320-400 | Jamie Kass <br> Matt Aiello-Lammens | Wallace Demo |
-| 400-420 | Cory Merow    | Integrating data with spatial priors |
-| 420-440 | Drew Kerkhoff | Teaching ecoinformatics|
+| 400-420 | Cory Merow    | Integrating biogeographic data with spatial priors |
+| 420-440 | Drew Kerkhoff | Teaching ecoinformatics |
 | 440-500 | Rob Anderson <br> Cory Merow | Future Directions |
 
 

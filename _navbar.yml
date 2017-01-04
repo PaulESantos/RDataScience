@@ -4,11 +4,11 @@ left:
   - text: "Home"
     href: index.html
   - text: "Schedule"
-    href: Schedule.html
+    href: Head2_Schedule.html
   - text: "Content"
     menu:
       - text: "About Course Content"
-        href: CourseContent.html
+        href: Head1_CourseContent.html
       - text: "-----------------"
       - text: "Module 1: Introduction to R"
       - text: "1.0 Course Introduction"
@@ -31,20 +31,20 @@ left:
       - text: "Module 3: Cleaning and Integrating Biodiversity Data"
       - text: "3.1 Workshop Schedule"
         href: 3_1_Ecoinf_Schedule.html
-      - text: "3.2 Hypervolumes"
+      - text: "3.2 Taxonomic Name Resolution"
         href: Under_Construction.html
-      - text: "3.3 Taxonomic Name Resolution"
-        href: Under_Construction.html
-      - text: "3.4 Accessing Plant Biodiversity Data"
+      - text: "3.3 Accessing Plant Biodiversity Data"
         href: 3_3_RBIEN_tutorial.html
-      - text: "3.5 A streamlined range modeling workflow: Wallace"
+      - text: "3.4 A streamlined range modeling workflow: Wallace"
         href: Under_Construction.html   
-      - text: "3.6 Integrating biogeographic data "
+      - text: "3.5 Integrating biogeographic data "
         href: Under_Construction.html  
+      - text: "3.6 Network Associations"
+        href: 3_2_Networks.html
       - text: "3.7 Teaching Econformatics"
         href: Under_Construction.html   
   - text: "Resources"
-    href: Resources.html
+    href: Head3_Resources.html
 right:
   - icon: fa-github fa-lg
     href: https://github.com/cmerow/RDataScience/tree/gh-pages

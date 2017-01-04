@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-1.1/highlight.js"></script>
@@ -67,7 +70,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="cm_yeti_bootswatch.css" type="text/css" />
 
 </head>
 
@@ -163,6 +166,101 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 
 <div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
@@ -181,7 +279,7 @@ $(document).ready(function () {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="Schedule.html">Schedule</a>
+  <a href="Head2_Schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -191,7 +289,7 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="CourseContent.html">About Course Content</a>
+      <a href="Head1_CourseContent.html">About Course Content</a>
     </li>
     <li class="divider"></li>
     <li class="dropdown-header">Module 1: Introduction to R</li>
@@ -224,19 +322,19 @@ $(document).ready(function () {
       <a href="3_1_Ecoinf_Schedule.html">3.1 Workshop Schedule</a>
     </li>
     <li>
-      <a href="Under_Construction.html">3.2 Hypervolumes</a>
+      <a href="Under_Construction.html">3.2 Taxonomic Name Resolution</a>
     </li>
     <li>
-      <a href="Under_Construction.html">3.3 Taxonomic Name Resolution</a>
+      <a href="3_3_RBIEN_tutorial.html">3.3 Accessing Plant Biodiversity Data</a>
     </li>
     <li>
-      <a href="3_3_RBIEN_tutorial.html">3.4 Accessing Plant Biodiversity Data</a>
+      <a href="Under_Construction.html">3.4 A streamlined range modeling workflow: Wallace</a>
     </li>
     <li>
-      <a href="Under_Construction.html">3.5 A streamlined range modeling workflow: Wallace</a>
+      <a href="Under_Construction.html">3.5 Integrating biogeographic data </a>
     </li>
     <li>
-      <a href="Under_Construction.html">3.6 Integrating biogeographic data </a>
+      <a href="3_2_Networks.html">3.6 Network Associations</a>
     </li>
     <li>
       <a href="Under_Construction.html">3.7 Teaching Econformatics</a>
@@ -244,7 +342,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li>
-  <a href="Resources.html">Resources</a>
+  <a href="Head3_Resources.html">Resources</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -303,6 +401,8 @@ It appears you don’t have a PDF plugin for this browser. No biggie… you can 
 </footer>
 
 
+</div>
+</div>
 
 </div>
 

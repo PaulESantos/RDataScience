@@ -13,6 +13,9 @@ output:
     css: cm_yeti_bootswatch.css
     keep_md: true
     code_folding: show
+    df_print: paged
+    fig_caption: yes
+      
 
     
     

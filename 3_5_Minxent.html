@@ -26,6 +26,8 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -292,7 +294,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Content
+    R Intro
      
     <span class="caret"></span>
   </a>
@@ -326,27 +328,47 @@ div.tocify {
       <a href="06_RasterTwo.html">2.3 More Raster Data</a>
     </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Module 3: Cleaning and Integrating Biodiversity Data</li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Ecoinformatics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="3_1_Ecoinf_Schedule.html">3.1 Workshop Schedule</a>
+      <a href="3_1_Ecoinf_Schedule.html">1 Workshop Schedule</a>
     </li>
     <li>
-      <a href="Under_Construction.html">3.2 Taxonomic Name Resolution</a>
+      <a href="Under_Construction.html">2 Taxonomic Name Resolution</a>
     </li>
     <li>
-      <a href="3_3_RBIEN_tutorial.html">3.3 Accessing Plant Biodiversity Data</a>
+      <a href="3_3_RBIEN_tutorial.html">3 Accessing Plant Biodiversity Data</a>
     </li>
     <li>
-      <a href="Under_Construction.html">3.4 A streamlined range modeling workflow: Wallace</a>
+      <a href="Under_Construction.html">4 A streamlined range modeling workflow: Wallace</a>
     </li>
     <li>
-      <a href="3_5_Minxent.html">3.5 Integrating biogeographic data </a>
+      <a href="3_5_Minxent.html">5 Integrating biogeographic data </a>
     </li>
     <li>
-      <a href="3_2_Networks.html">3.6 Network Associations</a>
+      <a href="3_2_Networks.html">6 Network Associations</a>
     </li>
     <li>
-      <a href="Under_Construction.html">3.7 Teaching Econformatics</a>
+      <a href="Under_Construction.html">7 Teaching Econformatics</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Ecological Modeling
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Under_Construction.html">Under Construction</a>
     </li>
   </ul>
 </li>
@@ -383,6 +405,16 @@ div.tocify {
 </div>
 
 
+<div>
+<object data="3_5_assets/Minxent_Short.pdf" type="application/pdf" width="100%" height="600px">
+<p>
+It appears you don’t have a PDF plugin for this browser. No biggie… you can <a href="03_assets/03_Plotting.pdf">click here to download the PDF file.</a>
+</p>
+</object>
+</div>
+<p>
+<a href="3_5_assets/Minxent_Short.pdf">Download the PDF of the presentation</a>
+</p>
 <p><a href="3_5_Minxent.R"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here</a>. Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.</p>
 <div id="setup" class="section level1">
 <h1><span class="header-section-number">1</span> Setup</h1>
@@ -406,15 +438,6 @@ data(&quot;Tinamus_solitarius_env&quot;)
 points=Tinamus_solitarius_points
 range=Tinamus_solitarius_range
 env=Tinamus_solitarius_env</code></pre>
-<!-- <div class="well"> -->
-<!-- Create a new variable called `y` and set it to `15` -->
-<!-- <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo1">Show Solution</button> -->
-<!-- <div id="demo1" class="collapse"> -->
-<!-- ```{r, purl=F} -->
-<!-- y=15 -->
-<!-- ``` -->
-<!-- </div> -->
-<!-- </div> -->
 </div>
 </div>
 </div>
@@ -695,66 +718,12 @@ names(ps) = sub(&quot;prior&quot;, &quot;posterior&quot;, names(priors)[psi])</c
 </div>
 <div id="predictions-maps-for-different-priorsoffesets" class="section level2">
 <h2><span class="header-section-number">3.4</span> Predictions maps for different priors/offesets</h2>
-<p><img src="3_5_Minxent_files/figure-html/unnamed-chunk-17-1.png" /><!-- --></p>
-<!-- ## Transects across all priors -->
-<!-- ### Extract data along transects -->
-<!-- ```{r} -->
-<!-- ## Extract transect -->
-<!-- transect = SpatialLinesDataFrame(SpatialLines(list(Lines(list( -->
-<!--   Line(cbind(c(-51.85,-62.45), c(-26.01,-14.82))) -->
-<!-- ), ID = "a"))), -->
-<!-- data.frame(Z = c("transect"), row.names = c("a"))) -->
-<!-- trans = do.call( -->
-<!--   rbind.data.frame, -->
-<!--   raster::extract( -->
-<!--     stack(rdist, rdata, ps), -->
-<!--   transect, -->
-<!--   along = T, -->
-<!--   cellnumbers = T -->
-<!--   )) -->
-<!-- trans[, c("lon", "lat")] = coordinates(rdata)[trans$cell] -->
-<!-- ## get order to identify non-monotonic increase -->
-<!-- trans$order = 1:nrow(trans) -->
-<!-- ## drop pixels in which range dist is decreasing as order increases -->
-<!-- ## This is to remove situation if transect starts from not-center of rangemap -->
-<!-- ## e.g. plot(order~rangeDist,data=trans) -->
-<!-- trans = trans[trans$order > trans$order[which.min(trans$rangeDist)], ] -->
-<!-- transl = group_by(trans, lon, lat) %>% -->
-<!--   gather(variable, value,-lon,-lat,-cell,-rangeDist,-order) -->
-<!-- ## separate prior/posterior data -->
-<!-- transp = filter(transl, !variable %in% c("bio1", "bio12")) -->
-<!-- ## add prior id column -->
-<!-- transp$type = ifelse(grepl("prior", transp$variable), "Offset", "Prediction") -->
-<!-- transp$id = as.numeric(sub("prior|posterior", "", transp$variable)) -->
-<!-- ## order levels for convenient plotting -->
-<!-- transp$type = factor(transp$type, -->
-<!--                      levels = c("Prediction", "Offset"), -->
-<!--                      ordered = T) -->
-<!-- ## add prior information -->
-<!-- transp$rate = priorf$rate[match(transp$id, priorf$id)] -->
-<!-- transp$prob = priorf$prob[match(transp$id, priorf$id)] -->
-<!-- transp = transp[order(transp$rangeDist), ] -->
-<!-- transp$label = factor(paste0("Rate=", transp$rate, " Prob=", transp$prob), ordered = -->
-<!--                         T) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- ggplot(transp, aes( -->
-<!--   x = rangeDist, -->
-<!--   y = value, -->
-<!--   colour = type, -->
-<!--   group = type -->
-<!-- )) + -->
-<!--   scale_y_log10() + -->
-<!--   facet_grid(prob ~ rate, labeller = label_both) + -->
-<!--   geom_vline(xintercept = 0, -->
-<!--              linetype = "dashed", -->
-<!--              colour = "black") + -->
-<!--   geom_path() + -->
-<!--   xlab("Distance from range edge") + -->
-<!--   ylab("Relative Occurrence Rate P(X|Y=1)") + -->
-<!--   scale_color_manual(values = c("red", "black")) + -->
-<!--   ggtitle(paste(species, " prior and posterior values along transect")) -->
-<!-- ``` -->
+<!-- fig.cap=fig$cap('preds','Predictions for different expert map smoothing parameters.', col="blue"), fig.align="center"} -->
+<p>The first column corresponds to a maxent prediction without an offset/prior (so those are are the same). Note that those models have the worst AIC compared to any of the other models, which incorporate the expert map. Figuring out which of the expert map priors is best will require some evaluation of the expert’s typical accuracy, e.g. across a taxonomic group. That’s the next phase of analysis… <img src="3_5_Minxent_files/figure-html/predplot-1.png" /><!-- --></p>
+<!-- # not working figure caption code -->
+<!-- # ```{r, fig.cap=fig$cap("cos_wav", "Cosine curve", col="red"), fig.align="center"} -->
+<!-- # par(mar=c(2.5, 2.5, 0.5, 0.5)); plot(x=0:100*pi/50, y=cos(0:100*pi/50), cex=0.5, xlab="x", ylab="cos(x)") -->
+<!-- # ``` -->
 </div>
 </div>
 

@@ -34,17 +34,6 @@ range=Tinamus_solitarius_range
 env=Tinamus_solitarius_env
 
 #' 
-#' <!-- <div class="well"> -->
-#' <!-- Create a new variable called `y` and set it to `15` -->
-#' 
-#' <!-- <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo1">Show Solution</button> -->
-#' <!-- <div id="demo1" class="collapse"> -->
-#' <!-- ```{r, purl=F} -->
-#' <!-- y=15 -->
-#' <!-- ``` -->
-#' <!-- </div> -->
-#' <!-- </div> -->
-#' 
 #' # Calculate Priors
 #' 
 #' ## Calculate range distances
@@ -304,120 +293,55 @@ ps = stack(psf)
 names(ps) = sub("prior", "posterior", names(priors)[psi])
 
 #' 
-#' ## Predictions maps for different priors/offesets
-#' 
-## ----fig.width=12,fig.height=12,message=F,echo=FALSE---------------------
-res = 1e4
-p_psn = rasterVis::gplot(ps, max = res) + geom_raster(aes(fill = value))
-p_psn$data$id = as.numeric(sub("prior|posterior", "", p_psn$data$variable))
-p_psn$data$rate = priorf$rate[p_psn$data$id]
-p_psn$data$prob = priorf$prob[p_psn$data$id]
-
-p_psn + 
-  facet_grid(prob ~ rate, labeller = label_both) +
-  scale_fill_gradientn(
-    colours = hcols(100, bias = .5),
-    trans = "log10",
-    name = "Relative Occurrence Rate\np(x|Y=1)",
-    na.value = "transparent"
-  ) +
-  geom_polygon(
-    aes(x = long, y = lat, group = group),
-    data = fortify(range),
-    fill = "transparent",
-    col = "black",
-    size = .2
-  ) +
-  geom_point(
-    aes(x = coords.x1, y = coords.x2),
-    data = as.data.frame(coordinates(points[points$presence == 1,])),
-    col = "black",
-    size = .5
-  ) +
-  geom_text(
-    aes(
-      -30,-40,
-      label = paste0("AIC=", round(AIC),
-                     ifelse(
-                       round(fitbuffer) == 0, "", 
-                       paste0("\nFitDist=", round(fitbuffer), " km")
-                     )),
-      group = NULL
-    ),
-    data = priorf,
-    hjust = 1,
-    size = 2
-  ) +
-  ylab("Latitude") + xlab("Longitude") +
-  coord_equal()
+## ---- fig.cap=fig$cap("cos_wav", "Cosine curve", col="red"), fig.align="center"----
+par(mar=c(2.5, 2.5, 0.5, 0.5)); plot(x=0:100*pi/50, y=cos(0:100*pi/50), cex=0.5, xlab="x", ylab="cos(x)")
 
 #' 
+#' <!-- ## Predictions maps for different priors/offesets -->
 #' 
-#' <!-- ## Transects across all priors -->
+#' <!-- ```{r predplot,fig.width=12,fig.height=12,message=F,echo=FALSE, fig.cap=fig$cap('preds','Predictions for different expert map smoothing parameters.', col="blue"), fig.align="center"} -->
+#' <!-- res = 1e4 -->
+#' <!-- p_psn = rasterVis::gplot(ps, max = res) + geom_raster(aes(fill = value)) -->
+#' <!-- p_psn$data$id = as.numeric(sub("prior|posterior", "", p_psn$data$variable)) -->
+#' <!-- p_psn$data$rate = priorf$rate[p_psn$data$id] -->
+#' <!-- p_psn$data$prob = priorf$prob[p_psn$data$id] -->
 #' 
-#' <!-- ### Extract data along transects -->
-#' 
-#' <!-- ```{r} -->
-#' <!-- ## Extract transect -->
-#' <!-- transect = SpatialLinesDataFrame(SpatialLines(list(Lines(list( -->
-#' <!--   Line(cbind(c(-51.85,-62.45), c(-26.01,-14.82))) -->
-#' <!-- ), ID = "a"))), -->
-#' <!-- data.frame(Z = c("transect"), row.names = c("a"))) -->
-#' 
-#' 
-#' <!-- trans = do.call( -->
-#' <!--   rbind.data.frame, -->
-#' <!--   raster::extract( -->
-#' <!--     stack(rdist, rdata, ps), -->
-#' <!--   transect, -->
-#' <!--   along = T, -->
-#' <!--   cellnumbers = T -->
-#' <!--   )) -->
-#' 
-#' <!-- trans[, c("lon", "lat")] = coordinates(rdata)[trans$cell] -->
-#' <!-- ## get order to identify non-monotonic increase -->
-#' <!-- trans$order = 1:nrow(trans) -->
-#' <!-- ## drop pixels in which range dist is decreasing as order increases -->
-#' <!-- ## This is to remove situation if transect starts from not-center of rangemap -->
-#' <!-- ## e.g. plot(order~rangeDist,data=trans) -->
-#' <!-- trans = trans[trans$order > trans$order[which.min(trans$rangeDist)], ] -->
-#' 
-#' <!-- transl = group_by(trans, lon, lat) %>% -->
-#' <!--   gather(variable, value,-lon,-lat,-cell,-rangeDist,-order) -->
-#' 
-#' <!-- ## separate prior/posterior data -->
-#' <!-- transp = filter(transl, !variable %in% c("bio1", "bio12")) -->
-#' 
-#' <!-- ## add prior id column -->
-#' <!-- transp$type = ifelse(grepl("prior", transp$variable), "Offset", "Prediction") -->
-#' <!-- transp$id = as.numeric(sub("prior|posterior", "", transp$variable)) -->
-#' <!-- ## order levels for convenient plotting -->
-#' <!-- transp$type = factor(transp$type, -->
-#' <!--                      levels = c("Prediction", "Offset"), -->
-#' <!--                      ordered = T) -->
-#' <!-- ## add prior information -->
-#' <!-- transp$rate = priorf$rate[match(transp$id, priorf$id)] -->
-#' <!-- transp$prob = priorf$prob[match(transp$id, priorf$id)] -->
-#' <!-- transp = transp[order(transp$rangeDist), ] -->
-#' <!-- transp$label = factor(paste0("Rate=", transp$rate, " Prob=", transp$prob), ordered = -->
-#' <!--                         T) -->
-#' <!-- ``` -->
-#' 
-#' <!-- ```{r} -->
-#' <!-- ggplot(transp, aes( -->
-#' <!--   x = rangeDist, -->
-#' <!--   y = value, -->
-#' <!--   colour = type, -->
-#' <!--   group = type -->
-#' <!-- )) + -->
-#' <!--   scale_y_log10() + -->
+#' <!-- p_psn +  -->
 #' <!--   facet_grid(prob ~ rate, labeller = label_both) + -->
-#' <!--   geom_vline(xintercept = 0, -->
-#' <!--              linetype = "dashed", -->
-#' <!--              colour = "black") + -->
-#' <!--   geom_path() + -->
-#' <!--   xlab("Distance from range edge") + -->
-#' <!--   ylab("Relative Occurrence Rate P(X|Y=1)") + -->
-#' <!--   scale_color_manual(values = c("red", "black")) + -->
-#' <!--   ggtitle(paste(species, " prior and posterior values along transect")) -->
+#' <!--   scale_fill_gradientn( -->
+#' <!--     colours = hcols(100, bias = .5), -->
+#' <!--     trans = "log10", -->
+#' <!--     name = "Relative Occurrence Rate\np(x|Y=1)", -->
+#' <!--     na.value = "transparent" -->
+#' <!--   ) + -->
+#' <!--   geom_polygon( -->
+#' <!--     aes(x = long, y = lat, group = group), -->
+#' <!--     data = fortify(range), -->
+#' <!--     fill = "transparent", -->
+#' <!--     col = "black", -->
+#' <!--     size = .2 -->
+#' <!--   ) + -->
+#' <!--   geom_point( -->
+#' <!--     aes(x = coords.x1, y = coords.x2), -->
+#' <!--     data = as.data.frame(coordinates(points[points$presence == 1,])), -->
+#' <!--     col = "black", -->
+#' <!--     size = .5 -->
+#' <!--   ) + -->
+#' <!--   geom_text( -->
+#' <!--     aes( -->
+#' <!--       -30,-40, -->
+#' <!--       label = paste0("AIC=", round(AIC), -->
+#' <!--                      ifelse( -->
+#' <!--                        round(fitbuffer) == 0, "",  -->
+#' <!--                        paste0("\nFitDist=", round(fitbuffer), " km") -->
+#' <!--                      )), -->
+#' <!--       group = NULL -->
+#' <!--     ), -->
+#' <!--     data = priorf, -->
+#' <!--     hjust = 1, -->
+#' <!--     size = 2 -->
+#' <!--   ) + -->
+#' <!--   ylab("Latitude") + xlab("Longitude") + -->
+#' <!--   coord_equal() -->
 #' <!-- ``` -->
+#' 

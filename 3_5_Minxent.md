@@ -2,6 +2,17 @@
 
 
 
+<div>
+<object data="3_5_assets/Minxent_Short.pdf" type="application/pdf" width="100%" height="600px"> 
+  <p>It appears you don't have a PDF plugin for this browser.
+   No biggie... you can <a href="03_assets/03_Plotting.pdf">click here to
+  download the PDF file.</a></p>  
+ </object>
+ </div>
+ <p><a href="3_5_assets/Minxent_Short.pdf">Download the PDF of the presentation</a></p>  
+
+
+
 [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](3_5_Minxent.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
 
 # Setup
@@ -31,17 +42,6 @@ points=Tinamus_solitarius_points
 range=Tinamus_solitarius_range
 env=Tinamus_solitarius_env
 ```
-
-<!-- <div class="well"> -->
-<!-- Create a new variable called `y` and set it to `15` -->
-
-<!-- <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo1">Show Solution</button> -->
-<!-- <div id="demo1" class="collapse"> -->
-<!-- ```{r, purl=F} -->
-<!-- y=15 -->
-<!-- ``` -->
-<!-- </div> -->
-<!-- </div> -->
 
 # Calculate Priors
 
@@ -381,75 +381,12 @@ names(ps) = sub("prior", "posterior", names(priors)[psi])
 ```
 
 ## Predictions maps for different priors/offesets
+<!-- fig.cap=fig$cap('preds','Predictions for different expert map smoothing parameters.', col="blue"), fig.align="center"} -->
+The first column corresponds to a maxent prediction without an offset/prior (so those are are the same). Note that those models have the worst AIC compared to any of the other models, which incorporate the expert map. Figuring out which of the expert map priors is best will require some evaluation of the expert's typical accuracy, e.g. across a taxonomic group. That's the next phase of analysis...
+![](3_5_Minxent_files/figure-html/predplot-1.png)<!-- -->
 
-![](3_5_Minxent_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+<!-- # not working figure caption code -->
+<!-- # ```{r, fig.cap=fig$cap("cos_wav", "Cosine curve", col="red"), fig.align="center"} -->
+<!-- # par(mar=c(2.5, 2.5, 0.5, 0.5)); plot(x=0:100*pi/50, y=cos(0:100*pi/50), cex=0.5, xlab="x", ylab="cos(x)") -->
+<!-- # ``` -->
 
-
-<!-- ## Transects across all priors -->
-
-<!-- ### Extract data along transects -->
-
-<!-- ```{r} -->
-<!-- ## Extract transect -->
-<!-- transect = SpatialLinesDataFrame(SpatialLines(list(Lines(list( -->
-<!--   Line(cbind(c(-51.85,-62.45), c(-26.01,-14.82))) -->
-<!-- ), ID = "a"))), -->
-<!-- data.frame(Z = c("transect"), row.names = c("a"))) -->
-
-
-<!-- trans = do.call( -->
-<!--   rbind.data.frame, -->
-<!--   raster::extract( -->
-<!--     stack(rdist, rdata, ps), -->
-<!--   transect, -->
-<!--   along = T, -->
-<!--   cellnumbers = T -->
-<!--   )) -->
-
-<!-- trans[, c("lon", "lat")] = coordinates(rdata)[trans$cell] -->
-<!-- ## get order to identify non-monotonic increase -->
-<!-- trans$order = 1:nrow(trans) -->
-<!-- ## drop pixels in which range dist is decreasing as order increases -->
-<!-- ## This is to remove situation if transect starts from not-center of rangemap -->
-<!-- ## e.g. plot(order~rangeDist,data=trans) -->
-<!-- trans = trans[trans$order > trans$order[which.min(trans$rangeDist)], ] -->
-
-<!-- transl = group_by(trans, lon, lat) %>% -->
-<!--   gather(variable, value,-lon,-lat,-cell,-rangeDist,-order) -->
-
-<!-- ## separate prior/posterior data -->
-<!-- transp = filter(transl, !variable %in% c("bio1", "bio12")) -->
-
-<!-- ## add prior id column -->
-<!-- transp$type = ifelse(grepl("prior", transp$variable), "Offset", "Prediction") -->
-<!-- transp$id = as.numeric(sub("prior|posterior", "", transp$variable)) -->
-<!-- ## order levels for convenient plotting -->
-<!-- transp$type = factor(transp$type, -->
-<!--                      levels = c("Prediction", "Offset"), -->
-<!--                      ordered = T) -->
-<!-- ## add prior information -->
-<!-- transp$rate = priorf$rate[match(transp$id, priorf$id)] -->
-<!-- transp$prob = priorf$prob[match(transp$id, priorf$id)] -->
-<!-- transp = transp[order(transp$rangeDist), ] -->
-<!-- transp$label = factor(paste0("Rate=", transp$rate, " Prob=", transp$prob), ordered = -->
-<!--                         T) -->
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- ggplot(transp, aes( -->
-<!--   x = rangeDist, -->
-<!--   y = value, -->
-<!--   colour = type, -->
-<!--   group = type -->
-<!-- )) + -->
-<!--   scale_y_log10() + -->
-<!--   facet_grid(prob ~ rate, labeller = label_both) + -->
-<!--   geom_vline(xintercept = 0, -->
-<!--              linetype = "dashed", -->
-<!--              colour = "black") + -->
-<!--   geom_path() + -->
-<!--   xlab("Distance from range edge") + -->
-<!--   ylab("Relative Occurrence Rate P(X|Y=1)") + -->
-<!--   scale_color_manual(values = c("red", "black")) + -->
-<!--   ggtitle(paste(species, " prior and posterior values along transect")) -->
-<!-- ``` -->

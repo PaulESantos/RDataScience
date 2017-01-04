@@ -5,7 +5,7 @@ left:
     href: index.html
   - text: "Schedule"
     href: Head2_Schedule.html
-  - text: "Content"
+  - text: "R Intro"
     menu:
       - text: "About Course Content"
         href: Head1_CourseContent.html
@@ -28,21 +28,26 @@ left:
       - text: "2.3 More Raster Data"
         href: 06_RasterTwo.html
       - text: "-----------------"
-      - text: "Module 3: Cleaning and Integrating Biodiversity Data"
-      - text: "3.1 Workshop Schedule"
+  - text: "Ecoinformatics"
+    menu:
+      - text: "1 Workshop Schedule"
         href: 3_1_Ecoinf_Schedule.html
-      - text: "3.2 Taxonomic Name Resolution"
+      - text: "2 Taxonomic Name Resolution"
         href: Under_Construction.html
-      - text: "3.3 Accessing Plant Biodiversity Data"
+      - text: "3 Accessing Plant Biodiversity Data"
         href: 3_3_RBIEN_tutorial.html
-      - text: "3.4 A streamlined range modeling workflow: Wallace"
+      - text: "4 A streamlined range modeling workflow: Wallace"
         href: Under_Construction.html   
-      - text: "3.5 Integrating biogeographic data "
+      - text: "5 Integrating biogeographic data "
         href: 3_5_Minxent.html  
-      - text: "3.6 Network Associations"
+      - text: "6 Network Associations"
         href: 3_2_Networks.html
-      - text: "3.7 Teaching Econformatics"
+      - text: "7 Teaching Econformatics"
         href: Under_Construction.html   
+  - text: "Ecological Modeling"
+    menu:
+    - text: "Under Construction"
+      href: Under_Construction.html   
   - text: "Resources"
     href: Head3_Resources.html
 right:

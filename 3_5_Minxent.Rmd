@@ -13,15 +13,14 @@ knitr::read_chunk('cm_knitr_settings.r')
 ```
 
 <div>
-<object data="3_5_assets/Minxent_Short.pdf" type="application/pdf" width="100%" height="600px"> 
+<object data="3_5_assets/Minxent_Short.pdf" type="application/pdf" width="100%" height="650px"> 
   <p>It appears you don't have a PDF plugin for this browser.
    No biggie... you can <a href="03_assets/03_Plotting.pdf">click here to
   download the PDF file.</a></p>  
  </object>
  </div>
+ 
  <p><a href="3_5_assets/Minxent_Short.pdf">Download the PDF of the presentation</a></p>  
-
-
 
 [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](`r output`).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
 
@@ -313,7 +312,7 @@ names(ps) = sub("prior", "posterior", names(priors)[psi])
 ## Predictions maps for different priors/offesets
 <!-- fig.cap=fig$cap('preds','Predictions for different expert map smoothing parameters.', col="blue"), fig.align="center"} -->
 The first column corresponds to a maxent prediction without an offset/prior (so those are are the same). Note that those models have the worst AIC compared to any of the other models, which incorporate the expert map. Figuring out which of the expert map priors is best will require some evaluation of the expert's typical accuracy, e.g. across a taxonomic group. That's the next phase of analysis...
-```{r predplot,fig.width=10,fig.height=10,message=F,echo=FALSE} 
+```{r predplot,fig.width=11,fig.height=11,message=F,echo=FALSE} 
 res = 1e4
 p_psn = rasterVis::gplot(ps, max = res) + geom_raster(aes(fill = value))
 p_psn$data$id = as.numeric(sub("prior|posterior", "", p_psn$data$variable))

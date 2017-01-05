@@ -415,9 +415,9 @@ library(ape) #Package for working with phylogenies in R
 library(maps) #Useful for making quick maps of occurrences
 library(sp) # A package for spatial data</code></pre>
 </div>
-<div id="an-overview-of-the-package" class="section level1">
-<h1><span class="header-section-number">2</span> An overview of the package</h1>
-<p>We try to make this package as easy and intuitive to use as possible, but it is still often easiest to start with our vignette. Particularly useful are the “Function Names” and “Function Directory” sections.</p>
+<div id="overview" class="section level1">
+<h1><span class="header-section-number">2</span> Overview</h1>
+<p>It is often easiest to start with our vignette. Particularly useful are the “Function Names” and “Function Directory” sections.</p>
 <pre class="r"><code>vignette(&quot;BRI&quot;)</code></pre>
 <p>The function names follow a consistent naming strategy, and mostly consist of 3 parts:</p>
 <ol style="list-style-type: decimal">
@@ -458,25 +458,28 @@ library(sp) # A package for spatial data</code></pre>
 </ol>
 <p>Each of these functions has a number of different arguments that modify your query, either refining your search criteria or returning more data for each record. These arguments include:</p>
 <ol style="list-style-type: decimal">
-<li><p>cultivated If TRUE, records known to be cultivated will be returned.</p></li>
-<li><p>only.new.world If TRUE, records returned are limited to those in North and South America, where greater data cleaing and validation has been done.</p></li>
+<li><p><code>cultivated</code> If TRUE, records known to be cultivated will be returned.</p></li>
+<li><p><code>only.new.world</code> If TRUE, records returned are limited to those in North and South America, where greater data cleaing and validation has been done.</p></li>
 </ol>
 <ul>
 <li>Note that the arguments cultivated and only.new.world may change the number of records returned.</li>
 </ul>
 <ol start="3" style="list-style-type: decimal">
-<li><p>all.taxonomy If TRUE, the query will return additional taxonomic data, including the uncorrected taxonomic information for those records.</p></li>
-<li><p>native.status If TRUE, additional information will be returned regarding whether a species is native in a given region.</p></li>
-<li><p>observation.type If TRUE, the query will return whether each record is from either a plot or a specimen. This may be useful if a user believes one type of information may be more accurate.</p></li>
-<li><p>political.boundaries If TRUE, the query will return information on which country, state, etc. that an occurrence is found within.</p></li>
-<li><p>print.query If TRUE, the function will print the SQL query that it used. This is mostly useful for users looking to create their own custom queries (which should be done with caution).</p></li>
+<li><p><code>all.taxonomy</code> If TRUE, the query will return additional taxonomic data, including the uncorrected taxonomic information for those records.</p></li>
+<li><p><code>native.status</code> If TRUE, additional information will be returned regarding whether a species is native in a given region.</p></li>
+<li><p><code>observation.type</code> If TRUE, the query will return whether each record is from either a plot or a specimen. This may be useful if a user believes one type of information may be more accurate.</p></li>
+<li><p><code>political.boundaries</code> If TRUE, the query will return information on which country, state, etc. that an occurrence is found within.</p></li>
+<li><p><code>print.query</code> If TRUE, the function will print the SQL query that it used. This is mostly useful for users looking to create their own custom queries (which should be done with caution).</p></li>
 </ol>
-<p><strong>Example 1: Occurrence records for a species</strong></p>
+<div id="example-1-occurrence-records-for-a-species" class="section level2">
+<h2><span class="header-section-number">4.1</span> Example 1: Occurrence records for a species</h2>
 <p>Okay, enough reading. Let’s get some data.</p>
-<p>Let’s say we’re interested in the species <em>Xanthium strumarium</em> and we’d like some occurrence data. We’ll use the function <code>BIEN_occurrence_species</code> to grab the occurrence data.</p>
+<p>Let’s say we’re interested in the species <em>Xanthium strumarium</em> and we’d like some occurrence data.<br />
+<!-- We'll use the function `BIEN_occurrence_species` to grab the occurrence data. --></p>
 <pre class="r"><code>Xanthium_strumarium &lt;- BIEN_occurrence_species(species = &quot;Xanthium strumarium&quot;)</code></pre>
-<p>Take a moment and view the dataframe and take a look at the structure</p>
-<pre class="r"><code>View(Xanthium_strumarium)
+<!-- Take a moment and view the dataframe and take a look at the structure -->
+<pre class="r"><code>#View(Xanthium_strumarium)
+head(Xanthium_strumarium)
 str(Xanthium_strumarium)</code></pre>
 <p>The default data that is returned consists of the latitude, longitude and date collected, along with a set of attribution data. If we want more information on these occurrences, we just need to change the arguments:</p>
 <pre class="r"><code>Xanthium_strumarium_full &lt;- BIEN_occurrence_species(species = &quot;Xanthium strumarium&quot;,cultivated = T,only.new.world = F,all.taxonomy = T,native.status = T,observation.type = T,political.boundaries = T)
@@ -530,10 +533,12 @@ points(cbind(Xanthium_strumarium_full$longitude,Xanthium_strumarium_full$latitud
 
 points(cbind(Xanthium_strumarium$longitude,Xanthium_strumarium$latitude),col=&quot;blue&quot;,pch=20,cex=1) </code></pre>
 <p><img src="3_3_RBIEN_tutorial_files/figure-html/unnamed-chunk-7-1.png" /><!-- --></p>
-<p>From the map, we can see that the points from the default query (in blue) all fall within the New World. The points from the full query (red + blue) additionally include occurrences from the Old World. The points in the Old World have not gone through the same data validation procedures as those in the New World, but may still be useful.</p>
-<p><strong>Example 2: Occurrence records for a country</strong></p>
+<p>From the map, we can see that the points from the default query (in blue) all fall within the New World. The points from the full query (red + blue) additionally include occurrences from the Old World. The points in the Old World have not gone through the same data validation procedures by BIEN as those in the New World, but may still be useful.</p>
+</div>
+<div id="example-2-occurrence-records-for-a-country" class="section level2">
+<h2><span class="header-section-number">4.2</span> Example 2: Occurrence records for a country</h2>
 <p>Since we may be interested in a particular geographic area, rather than a particular set of species, there are also options to easily extract data by political region as well.</p>
-<p>We’ll choose a relatively small region, the Bahamas, for our demonstration.</p>
+<!-- We'll choose a relatively small region, the Bahamas, for our demonstration. -->
 <pre class="r"><code>Bahamas &lt;- BIEN_occurrence_country(country =  &quot;Bahamas&quot;)
 
 #Let&#39;s see how many species we have
@@ -548,6 +553,7 @@ points(cbind(Bahamas$longitude,Bahamas$latitude),col=&quot;blue&quot;,pch=20,cex
 <p><img src="3_3_RBIEN_tutorial_files/figure-html/unnamed-chunk-8-1.png" /><!-- --></p>
 <pre class="r"><code>#Looks like some islands are considerably better sampled than others.</code></pre>
 </div>
+</div>
 <div id="range-maps" class="section level1">
 <h1><span class="header-section-number">5</span> Range maps</h1>
 <p>These functions begin with the prefix “BIEN_ranges_” and return (unsurprisingly) species ranges. Most of these functions work by saving the downloaded ranges to a specified directory in shapefile format, rather than by loading them into the R environment.</p>
@@ -559,53 +565,76 @@ points(cbind(Bahamas$longitude,Bahamas$latitude),col=&quot;blue&quot;,pch=20,cex
 </ol>
 <p>The range functions have different arguments than we have seen so far, including:</p>
 <ol style="list-style-type: decimal">
-<li><p>directory This is where the function will be saving the shapefiles you download</p></li>
-<li><p>matched If TRUE, the function will return a dataframe listing which species ranges were downloaded and which weren’t.</p></li>
-<li><p>match_names_only If TRUE, the function will check whether a map is available for each species without actually downloading it</p></li>
-<li><p>include.gid If TRUE, the function will append a unique gid number to each range map’s filename. This argument is designed to allow forward compatibility when BIEN contains multiple range maps for each species.</p></li>
+<li><p><code>directory</code> This is where the function will be saving the shapefiles you download</p></li>
+<li><p><code>matched</code> If TRUE, the function will return a dataframe listing which species ranges were downloaded and which weren’t.</p></li>
+<li><p><code>match_names_only</code> If TRUE, the function will check whether a map is available for each species without actually downloading it</p></li>
+<li><p><code>include.gid</code> If TRUE, the function will append a unique gid number to each range map’s filename. This argument is designed to allow forward compatibility when BIEN contains multiple range maps for each species.</p></li>
 </ol>
-<!-- **Example 3: Range maps and occurrence points** -->
-<!-- If we have a species we're interested in, and would like to load the range map into the environment,  we can use the function `BIEN_ranges_load_species`.  Let's try this for *Xanthium strumarium*. -->
-<!-- ```{r} -->
-<!-- Xanthium_strumarium_range <- BIEN_ranges_load_species(species = "Xanthium strumarium") -->
-<!-- ``` -->
-<!-- The range map is now in our global environment as a Spatial polygons dataframe.  Let's plot the map and see what it looks like. -->
-<!-- ```{r} -->
-<!-- #First, let's add a base map so that our range has some context: -->
-<!-- map('world',fill=T , col= "grey", bg="light blue",xlim = c(-180,-20),ylim = c(-60,80)) -->
-<!-- #Now, we can add the range map: -->
-<!-- plot(Xanthium_strumarium_range,col="green",add=T) -->
-<!-- ``` -->
-<!-- Now, let's add those occurrence points from earlier to this map: -->
-<!-- ```{r} -->
-<!-- map('world',fill=T , col= "grey", bg="light blue",xlim = c(-180,-20),ylim = c(-60,80)) -->
-<!-- plot(Xanthium_strumarium_range,col="green",add=T) -->
-<!-- points(cbind(Xanthium_strumarium$longitude,Xanthium_strumarium$latitude),col="blue",pch=20,cex=1) -->
-<!-- ``` -->
-<!-- # Plot data -->
-<!-- These functions begin with the prefix "BIEN_plot_" and return ecological plot data.  Functions include: -->
-<!-- 1. `BIEN_plot_list_sampling_protocol` Returns the different plot sampling protocols found in the BIEN database. -->
-<!-- 2. `BIEN_plot_list_datasource` Returns the different datasources that are available in the BIEN database. -->
-<!-- * These first two functions are useful for identifying plots with comparable sampling methods. -->
-<!-- 3. `BIEN_plot_sampling_protocol` Downloads data for a specified sampling protocol -->
-<!-- 4. `BIEN_plot_datasource` Downloads data for a specific datasource -->
-<!-- * These next two function are then useful for downloading datasets with consistent methodology. -->
-<!-- 5. `BIEN_plot_country` -->
-<!-- 6. `BIEN_plot_state` -->
-<!-- 7. `BIEN_plot_dataset` Downloads data for a given dataset (which is nested within a datasource) -->
-<!-- 8. `BIEN_plot_name` Downloads data for a specific plot name (these are nested within a given dataset) -->
-<!-- Again we have some of the same arguments available for these queries that we saw for the occurrence functions.  We also have the new argument *all.metadata*, which causes the functions to return more metadata for each plot. -->
-<p><strong>Example 4: Plot data by plot name</strong></p>
+<div id="example-3-range-maps-and-occurrence-points" class="section level2">
+<h2><span class="header-section-number">5.1</span> Example 3: Range maps and occurrence points</h2>
+<p>To load a range map we can use the function <code>BIEN_ranges_load_species</code>.<br />
+<!-- Let's try this for *Xanthium strumarium*. --></p>
+<pre class="r"><code>Xanthium_strumarium_range &lt;- BIEN_ranges_load_species(species = &quot;Xanthium strumarium&quot;)
+# note that you might get an error here if you have an old version of the PROJ library</code></pre>
+<p>The range map is now in our global environment as a Spatial polygons dataframe. <!-- Let's plot the map and see what it looks like. --></p>
+<pre class="r"><code>#First, let&#39;s add a base map so that our range has some context:
+
+map(&#39;world&#39;,fill=T , col= &quot;grey&quot;, bg=&quot;light blue&quot;,xlim = c(-180,-20),ylim = c(-60,80))
+
+#Now, we can add the range map:
+plot(Xanthium_strumarium_range,col=&quot;green&quot;,add=T)</code></pre>
+<p><img src="3_3_RBIEN_tutorial_files/figure-html/unnamed-chunk-10-1.png" /><!-- --></p>
+<p>Now, let’s add those occurrence points from earlier to this map:</p>
+<pre class="r"><code>map(&#39;world&#39;,fill=T , col= &quot;grey&quot;, bg=&quot;light blue&quot;,xlim = c(-180,-20),ylim = c(-60,80))
+plot(Xanthium_strumarium_range,col=&quot;green&quot;,add=T)
+points(cbind(Xanthium_strumarium$longitude,Xanthium_strumarium$latitude),col=&quot;blue&quot;,pch=20,cex=1)</code></pre>
+<p><img src="3_3_RBIEN_tutorial_files/figure-html/unnamed-chunk-11-1.png" /><!-- --></p>
+</div>
+</div>
+<div id="plot-data" class="section level1">
+<h1><span class="header-section-number">6</span> Plot data</h1>
+<p>These functions begin with the prefix “BIEN_plot_” and return ecological plot data. Functions include:</p>
+<ol style="list-style-type: decimal">
+<li><p><code>BIEN_plot_list_sampling_protocol</code> Returns the different plot sampling protocols found in the BIEN database.</p></li>
+<li><p><code>BIEN_plot_list_datasource</code> Returns the different datasources that are available in the BIEN database.</p></li>
+</ol>
+<ul>
+<li>These first two functions are useful for identifying plots with comparable sampling methods.</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li><p><code>BIEN_plot_sampling_protocol</code> Downloads data for a specified sampling protocol</p></li>
+<li><p><code>BIEN_plot_datasource</code> Downloads data for a specific datasource</p></li>
+</ol>
+<ul>
+<li>These next two function are then useful for downloading datasets with consistent methodology.</li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li><p><code>BIEN_plot_country</code></p></li>
+<li><p><code>BIEN_plot_state</code></p></li>
+<li><p><code>BIEN_plot_dataset</code> Downloads data for a given dataset (which is nested within a datasource)</p></li>
+<li><p><code>BIEN_plot_name</code> Downloads data for a specific plot name (these are nested within a given dataset)</p></li>
+</ol>
+<p>Again we have some of the same arguments available for these queries that we saw for the occurrence functions. We also have the new argument <em>all.metadata</em>, which causes the functions to return more metadata for each plot.</p>
+<div id="example-4-plot-data-by-plot-name" class="section level2">
+<h2><span class="header-section-number">6.1</span> Example 4: Plot data by plot name</h2>
 <p>Let’s take a look at the data for an individual plot.</p>
 <pre class="r"><code>LUQUILLO &lt;- BIEN_plot_name(plot.name = &quot;LUQUILLO&quot;)
-View(LUQUILLO)</code></pre>
+#View(LUQUILLO)
+head(LUQUILLO)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["plot_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["subplot"],"name":[2],"type":["chr"],"align":["left"]},{"label":["elevation_m"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["plot_area_ha"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["sampling_protocol"],"name":[5],"type":["chr"],"align":["left"]},{"label":["recorded_by"],"name":[6],"type":["chr"],"align":["left"]},{"label":["scrubbed_species_binomial"],"name":[7],"type":["chr"],"align":["left"]},{"label":["individual_count"],"name":[8],"type":["int"],"align":["right"]},{"label":["latitude"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["longitude"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["date_collected"],"name":[11],"type":["function () ",".Internal(date())"],"align":["right"]},{"label":["datasource"],"name":[12],"type":["chr"],"align":["left"]},{"label":["dataset"],"name":[13],"type":["chr"],"align":["left"]},{"label":["dataowner"],"name":[14],"type":["chr"],"align":["left"]},{"label":["custodial_institution_codes"],"name":[15],"type":["chr"],"align":["left"]},{"label":["collection_code"],"name":[16],"type":["chr"],"align":["left"]}],"data":[{"1":"LUQUILLO","2":"1","3":"300","4":"0.1","5":"0.1 ha  transect, stems >= 2.5 cm dbh","6":"Alwyn H. Gentry","7":"Cyathea aquilina","8":"1","9":"NA","10":"NA","11":"<NA>","12":"SALVIAS","13":"Gentry Transect Dataset","14":"James S. MIller","15":"NA","16":"NA"},{"1":"LUQUILLO","2":"1","3":"300","4":"0.1","5":"0.1 ha  transect, stems >= 2.5 cm dbh","6":"Alwyn H. Gentry","7":"Dacryodes excelsa","8":"1","9":"18.1833","10":"-65.8333","11":"<NA>","12":"SALVIAS","13":"Gentry Transect Dataset","14":"James S. MIller","15":"NA","16":"NA"},{"1":"LUQUILLO","2":"1","3":"300","4":"0.1","5":"0.1 ha  transect, stems >= 2.5 cm dbh","6":"Alwyn H. Gentry","7":"Guarea guidonia","8":"1","9":"18.1833","10":"-65.8333","11":"<NA>","12":"SALVIAS","13":"Gentry Transect Dataset","14":"James S. MIller","15":"NA","16":"NA"},{"1":"LUQUILLO","2":"1","3":"300","4":"0.1","5":"0.1 ha  transect, stems >= 2.5 cm dbh","6":"Alwyn H. Gentry","7":"Paullinia pinnata","8":"1","9":"18.1833","10":"-65.8333","11":"<NA>","12":"SALVIAS","13":"Gentry Transect Dataset","14":"James S. MIller","15":"NA","16":"NA"},{"1":"LUQUILLO","2":"1","3":"300","4":"0.1","5":"0.1 ha  transect, stems >= 2.5 cm dbh","6":"NA","7":"Prestoea acuminata","8":"4","9":"18.1833","10":"-65.8333","11":"<NA>","12":"SALVIAS","13":"Gentry Transect Dataset","14":"James S. MIller","15":"NA","16":"NA"},{"1":"LUQUILLO","2":"1","3":"300","4":"0.1","5":"0.1 ha  transect, stems >= 2.5 cm dbh","6":"Alwyn H. Gentry","7":"Schefflera morototoni","8":"1","9":"18.1833","10":"-65.8333","11":"<NA>","12":"SALVIAS","13":"Gentry Transect Dataset","14":"James S. MIller","15":"NA","16":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <p>We can see that this is a 0.1 hectare transect where stems &gt;= 2.5 cm diameter at breast height were included. If we’d like more detail, we can use additional arguments:</p>
 <pre class="r"><code>LUQUILLO_full &lt;- BIEN_plot_name(plot.name = &quot;LUQUILLO&quot;,cultivated = T,all.taxonomy = T,native.status = T,political.boundaries = T,all.metadata = T)</code></pre>
-<pre class="r"><code>View(LUQUILLO_full)</code></pre>
+<pre class="r"><code>#View(LUQUILLO_full)
+head(LUQUILLO_full)</code></pre>
 <p>The dataframe LUQUILLO_full contains more useful information, including metadata on which taxa were included, which growth forms were included and information on whether species are known to be native or introduced.</p>
 </div>
+</div>
 <div id="trait-data" class="section level1">
-<h1><span class="header-section-number">6</span> Trait data</h1>
+<h1><span class="header-section-number">7</span> Trait data</h1>
 <p>These functions begin with the prefix “BIEN_trait_” and access the BIEN trait database. Note that the spelling of the trait names must be precise, so we recommend using the function <code>BIEN_trait_list</code> first.</p>
 <p>Functions include:</p>
 <ol style="list-style-type: decimal">
@@ -619,141 +648,149 @@ View(LUQUILLO)</code></pre>
 <li><p><code>BIEN_trait_traitbygenus</code></p></li>
 <li><p><code>BIEN_trait_traitbyspecies</code></p></li>
 </ol>
-<p><strong>Example 5: Accessing trait data</strong></p>
+<div id="example-5-accessing-trait-data" class="section level2">
+<h2><span class="header-section-number">7.1</span> Example 5: Accessing trait data</h2>
 <p>If you’re interested in accessing all traits for a taxon, say the genus <em>Salix</em>, just go ahead and use the corresponding function:</p>
 <pre class="r"><code>Salix_traits&lt;-BIEN_trait_genus(genus = &quot;Salix&quot;)</code></pre>
 <p>If instead we’re interested in a particular trait, the first step is to check if that trait is present and verify the spelling using the function <code>BIEN_trait_list</code>.</p>
 <pre class="r"><code>BIEN_trait_list()</code></pre>
-<pre><code>##                           trait_name
-## 1  Area-based photosynthesis (Aarea)
-## 2                     Flowering date
-## 3                    Flowering month
-## 4                             Height
-## 5                          Leaf area
-## 6                         Leaf Cmass
-## 7                      Leaf dry mass
-## 8     Leaf dry matter content (LDMC)
-## 9                Leaf lifespan (LLS)
-## 10                        Leaf Narea
-## 11                        Leaf Nmass
-## 12                        Leaf Parea
-## 13                        Leaf Pmass
-## 14 Mass-based photosynthesis (Amass)
-## 15                         seed mass
-## 16          Specific leaf area (SLA)
-## 17         Stomatal conductance (Gs)
-## 18                      wood density
-## 19                              &lt;NA&gt;</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["trait_name"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"Area-based photosynthesis (Aarea)"},{"1":"Flowering date"},{"1":"Flowering month"},{"1":"Height"},{"1":"Leaf area"},{"1":"Leaf Cmass"},{"1":"Leaf dry mass"},{"1":"Leaf dry matter content (LDMC)"},{"1":"Leaf lifespan (LLS)"},{"1":"Leaf Narea"},{"1":"Leaf Nmass"},{"1":"Leaf Pmass"},{"1":"Mass-based photosynthesis (Amass)"},{"1":"seed mass"},{"1":"Specific leaf area (SLA)"},{"1":"Stomatal conductance (Gs)"},{"1":"wood density"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 <p>If we’re interested in Specific Leaf Area, we see that this is called “Specific leaf area (SLA)” in the database. Now that we know the proper spelling, we can use the function <code>BIEN_trait_trait</code> to download all observations of that trait.</p>
 <pre class="r"><code>SLA &lt;- BIEN_trait_trait(trait = &quot;Specific leaf area (SLA)&quot;)</code></pre>
 <p>Note that the units have been standardized and that there is a full set of attribution data for each trait.</p>
 </div>
+</div>
 <div id="taxonomy-data" class="section level1">
-<h1><span class="header-section-number">7</span> Taxonomy Data</h1>
+<h1><span class="header-section-number">8</span> Taxonomy Data</h1>
 <p>While there are existing packages that query taxonomic data (e.g. those included in the taxize package), the RBIEN taxonomy functions access the taxonomic information that underlies the BIEN database, ensuring consistency.</p>
 <ol style="list-style-type: decimal">
 <li><p><code>BIEN_taxonomy_family</code> Downloads all taxonomic information for a given family.</p></li>
 <li><p><code>BIEN_taxonomy_genus</code></p></li>
 <li><p><code>BIEN_taxonomy_species</code></p></li>
 </ol>
-<p><strong>Example 6: Taxonomic data </strong></p>
+<div id="example-6-taxonomic-data" class="section level2">
+<h2><span class="header-section-number">8.1</span> Example 6: Taxonomic data</h2>
 <p>Let’s say we’re interested in the genus <em>Asclepias</em>, and we’d like to get an idea of how many species there are in this genus and what higher taxa it falls within.</p>
 <pre class="r"><code>Asclepias_taxonomy&lt;-BIEN_taxonomy_genus(genus = &quot;Asclepias&quot;)
 
-View(Asclepias_taxonomy)
-
-#We see that the genus Asclepias falls within the family Apocynaceae and the order Gentianales.
+#View(Asclepias_taxonomy)
+Asclepias_taxonomy[1:10,]</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["higher_plant_group"],"name":[1],"type":["chr"],"align":["left"]},{"label":["class"],"name":[2],"type":["chr"],"align":["left"]},{"label":["superorder"],"name":[3],"type":["chr"],"align":["left"]},{"label":["order"],"name":[4],"type":["chr"],"align":["left"]},{"label":["scrubbed_family"],"name":[5],"type":["chr"],"align":["left"]},{"label":["scrubbed_genus"],"name":[6],"type":["chr"],"align":["left"]},{"label":["scrubbed_species_binomial"],"name":[7],"type":["chr"],"align":["left"]},{"label":["scrubbed_author"],"name":[8],"type":["chr"],"align":["left"]},{"label":["scrubbed_taxonomic_status"],"name":[9],"type":["chr"],"align":["left"]}],"data":[{"1":"flowering plants","2":"Equisetopsida","3":"Asteranae","4":"Gentianales","5":"Apocynaceae","6":"Asclepias","7":"Asclepias aceratoides","8":"M.A.Curtis","9":"no opinion"},{"1":"flowering plants","2":"Equisetopsida","3":"Asteranae","4":"Gentianales","5":"Apocynaceae","6":"Asclepias","7":"Asclepias adscendens","8":"(Schltr.) Schltr.","9":"accepted"},{"1":"flowering plants","2":"Equisetopsida","3":"Asteranae","4":"Gentianales","5":"Apocynaceae","6":"Asclepias","7":"Asclepias aequicornu","8":"E. Fourn.","9":"accepted"},{"1":"flowering plants","2":"Equisetopsida","3":"Asteranae","4":"Gentianales","5":"Apocynaceae","6":"Asclepias","7":"Asclepias affinis","8":"(Schltr.) Schltr.","9":"accepted"},{"1":"flowering plants","2":"Equisetopsida","3":"Asteranae","4":"Gentianales","5":"Apocynaceae","6":"Asclepias","7":"Asclepias alba","8":"Cav.","9":"no opinion"},{"1":"flowering plants","2":"Equisetopsida","3":"Asteranae","4":"Gentianales","5":"Apocynaceae","6":"Asclepias","7":"Asclepias albens","8":"(E.Mey.) Schltr.","9":"accepted"},{"1":"flowering plants","2":"Equisetopsida","3":"Asteranae","4":"Gentianales","5":"Apocynaceae","6":"Asclepias","7":"Asclepias albicans","8":"S.Watson","9":"accepted"},{"1":"flowering plants","2":"Equisetopsida","3":"Asteranae","4":"Gentianales","5":"Apocynaceae","6":"Asclepias","7":"Asclepias alpestris","8":"(K.Schum.) Goyder","9":"accepted"},{"1":"flowering plants","2":"Equisetopsida","3":"Asteranae","4":"Gentianales","5":"Apocynaceae","6":"Asclepias","7":"Asclepias amabilis","8":"N.E.Br.","9":"accepted"},{"1":"flowering plants","2":"Equisetopsida","3":"Asteranae","4":"Gentianales","5":"Apocynaceae","6":"Asclepias","7":"Asclepias ameliae","8":"S.Moore","9":"accepted"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>#We see that the genus Asclepias falls within the family Apocynaceae and the order Gentianales.
 
 #You&#39;ll also notice that a given species may appear more than once (due to multiple circumscriptions, some of which may be illegitimate).
 
 #If we&#39;d just like to know all the speciess that aren&#39;t illegitimate:
 Asclepias_species&lt;-unique(Asclepias_taxonomy$scrubbed_species_binomial[Asclepias_taxonomy$scrubbed_taxonomic_status %in% c(&quot;accepted&quot;,  &quot;no opinion&quot;)])</code></pre>
 </div>
+</div>
 <div id="phylogenies" class="section level1">
-<h1><span class="header-section-number">8</span> Phylogenies</h1>
-<p>The BIEN database currently contains 101 phylogenies for new world plants. This includes 100 replicated phylogenies that include nearly all New World plant species (“complete phylogenies”) and 1 phylogeny containing only those New World plant species for which molecular data was available (“conservative phylogeny”). Currently, there are only 2 functions available:</p>
+<h1><span class="header-section-number">9</span> Phylogenies</h1>
+<p>The BIEN database currently contains 101 phylogenies for new world plants. This includes 100 replicated phylogenies that include nearly all New World plant species (“complete phylogenies”) and 1 phylogeny containing only those New World plant species for which molecular data was available (“conservative phylogeny”). Currently, there are 2 functions available:</p>
 <ol style="list-style-type: decimal">
 <li><p><code>BIEN_phylogeny_complete</code> This function will return a specified number of the replicated “complete” phylogenies. Note that each phylogeny is several Mb in size, so downloading many may take a while on slow connections.</p></li>
 <li><p><code>BIEN_phylogeny_conservative</code> This function returns the conservative phylogeny.</p></li>
 </ol>
 <p>Arguments: The function <code>BIEN_phylogeny_complete</code> has a few arguments that are worth explaining:</p>
-<p>n_phylogenies This is the number of replicated phylogenies that you want to download (between 1 and 100)</p>
-<p>seed This function sets the seed for the random number generator before randomly drawing the phylogenies to be downloaded. This is useful for replicating analyses.</p>
-<p>replicates This function allows you to specify WHICH of the 100 phylogenies to download, rather than having them selected randomly.</p>
-<p><strong>Example 7: Phylogenies </strong></p>
-<p>Let’s say we want to download the conservative phylogeny.</p>
+<ul>
+<li><p><code>n_phylogenies</code> This is the number of replicated phylogenies that you want to download (between 1 and 100)</p></li>
+<li><p><code>seed</code> This function sets the seed for the random number generator before randomly drawing the phylogenies to be downloaded. This is useful for replicating analyses.</p></li>
+<li><p><code>replicates</code> This function allows you to specify WHICH of the 100 phylogenies to download, rather than having them selected randomly.</p></li>
+</ul>
+<div id="example-7-phylogenies" class="section level2">
+<h2><span class="header-section-number">9.1</span> Example 7: Phylogenies</h2>
+<p>Let’s download the conservative phylogeny.</p>
 <pre class="r"><code>phylo &lt;- BIEN_phylogeny_conservative()
 
 #Let&#39;s make sure it looks alright
 
 plot.phylo(x = phylo, show.tip.label =  FALSE)</code></pre>
-<p><img src="3_3_RBIEN_tutorial_files/figure-html/unnamed-chunk-16-1.png" /><!-- --></p>
+<p><img src="3_3_RBIEN_tutorial_files/figure-html/unnamed-chunk-19-1.png" /><!-- --></p>
 <pre class="r"><code>#If we just want to see which species are included
 
 phylo_species &lt;- phylo$tip.label</code></pre>
 </div>
+</div>
 <div id="stem-data" class="section level1">
-<h1><span class="header-section-number">9</span> Stem Data</h1>
+<h1><span class="header-section-number">10</span> Stem Data</h1>
 <p>The BIEN datbase contains stem data associated with many of the plots. This is typically either diameter at breast height or diameter at ground height. At present, there is only one stem function (although expect more in the future):</p>
 <ol style="list-style-type: decimal">
 <li><code>BIEN_stem_species</code> This function downloads all of the stem data for a given species (or set of species)</li>
 </ol>
 <p>Arguments:</p>
 <p>The arguments for this function are the same that we have seen in the occurrence and plot functions.</p>
-<p><strong>Example 8: Stem data </strong></p>
+<!-- ## Example 8: Stem data  -->
 </div>
 <div id="species-lists" class="section level1">
-<h1><span class="header-section-number">10</span> Species lists</h1>
+<h1><span class="header-section-number">11</span> Species lists</h1>
 <p>These functions begin with the prefix “BIEN_list_” and allow you to quickly get a list of all the species in a geographic unit. Functions include:</p>
 <ol style="list-style-type: decimal">
 <li><p><code>BIEN_list_country</code> Returns all species found within a country.</p></li>
 <li><p><code>BIEN_list_state</code> Returns all species found within a given state/province</p></li>
 <li><p><code>BIEN_list_county</code> Returns all species found within a given state/province</p></li>
 </ol>
-<p>Some of the same arguments we saw in the occurrence functions appear here as well, including “cultivate”, “only.new.world” and “print.query”.</p>
-<p><strong>Example 9: Species list for a country</strong></p>
+<p>Some of the same arguments we saw in the occurrence functions appear here as well, including <code>cultivate</code>, <code>only.new.world</code>, and <code>print.query</code>.</p>
+<div id="example-9-species-list-for-a-country" class="section level2">
+<h2><span class="header-section-number">11.1</span> Example 9: Species list for a country</h2>
 <p>Let’s return to our previous example. What if we just need a list of the species in the Bahamas, rather than the specific details of each occurrence record? We can instead use the function <code>BIEN_list_country</code> to download a list of species, which should be much faster than using <code>BIEN_occurrence_country</code> to get a species list.</p>
 <pre class="r"><code>Bahamas_species_list&lt;-BIEN_list_country(country = &quot;Bahamas&quot;)
 
 #Notice that this time, we have 998 species, whereas previously we saw that there were 999 unique species.  What happened?  The list functions ignore NA values for species names, but R does not.  R counted NA values as a unique species name, giving one extra unique value.</code></pre>
-<p>If we wanted to retrieve the results for multiple countries at once, that is simple as well. We just need to supply a vector of countries.</p>
+<p>For multiple countries at once, supply a vector of countries.</p>
 <pre class="r"><code>country_vector&lt;-c(&quot;Haiti&quot;,&quot;Dominican Republic&quot;)
 Haiti_DR &lt;- BIEN_list_country(country = country_vector)</code></pre>
 </div>
+</div>
 <div id="metadata" class="section level1">
-<h1><span class="header-section-number">11</span> Metadata</h1>
-<p>The BIEN metadata functions are still in development. Currently, there are only 2 functions:</p>
+<h1><span class="header-section-number">12</span> Metadata</h1>
+<p>The BIEN metadata functions are still in development. Currently, there are 2 functions:</p>
 <ol style="list-style-type: decimal">
 <li><p><code>BIEN_metadata_database_version</code> Returns the current version number of the BIEN database and the release date.</p></li>
 <li><p><code>BIEN_metadata_match_data</code> Rudimentary function to check for changed records between old and current queries.</p></li>
 </ol>
-<p><strong>Example 10: Metadata </strong></p>
+<div id="example-10-metadata" class="section level2">
+<h2><span class="header-section-number">12.1</span> Example 10: Metadata</h2>
 <p>To check what the current version of the BIEN database is (which we recommend reporting when using BIEN data):</p>
 <pre class="r"><code>BIEN_metadata_database_version()</code></pre>
-<pre><code>##   db_version db_release_date
-## 1      3.4.0      2016-11-22</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["db_version"],"name":[1],"type":["chr"],"align":["left"]},{"label":["db_release_date"],"name":[2],"type":["function () ",".Internal(date())"],"align":["right"]}],"data":[{"1":"3.4.1","2":"2017-01-04"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
 </div>
 <div id="custom-queries" class="section level1">
-<h1><span class="header-section-number">12</span> Custom Queries</h1>
+<h1><span class="header-section-number">13</span> Custom Queries</h1>
 <p>We recommend avoiding custom queries where possible. If you have an idea for a new function/functionality, contacting the package maintainer or submitting a note on the Github site for the package may be a better idea. However, if you need to write your own SQL query, we recommend that you familiarize yourself with both postgresql and the BIEN database structure first. Most of our functions have the argument “print.query” which will display the SQL query that the function utilized. These queries can provide a starting point for custum queries (by adding or omitting parts of them). These queries can then be executed using the function <code>BIEN_sql</code>.</p>
 <ol style="list-style-type: decimal">
 <li><code>BIEN_sql</code> This function returns the results of a postgresql query. This function is typically used as an internal function, but can be used for writing custom queries.</li>
 </ol>
 <p>Arguments:</p>
-<p>The argument “query” is the only one likely to be of use to users. The other arguments are included for primarily for developmental purposes.</p>
-<p><strong>Example 11: Writing your own query </strong> Let’s return to our example from above where we downloaded the occurrence records for <em>Xanthium strumarium</em>. Let’s take a look at the query that underlies that:</p>
+<p>The argument <code>query</code> is the only one likely to be of use to users. The other arguments are included for primarily for developmental purposes.</p>
+<div id="example-11-writing-your-own-query" class="section level2">
+<h2><span class="header-section-number">13.1</span> Example 11: Writing your own query</h2>
+<p>Let’s return to our example from above where we downloaded the occurrence records for <em>Xanthium strumarium</em>. Let’s take a look at the query that underlies that:</p>
 <pre class="r"><code>Xanthium_strumarium &lt;- BIEN_occurrence_species(species = &quot;Xanthium strumarium&quot;,print.query = T)</code></pre>
 <pre><code>## [1] &quot;SELECT scrubbed_species_binomial, latitude, longitude,date_collected,datasource,dataset,dataowner,custodial_institution_codes,collection_code FROM view_full_occurrence_individual WHERE scrubbed_species_binomial in ( &#39;Xanthium strumarium&#39; ) AND (is_cultivated = 0 OR is_cultivated IS NULL) AND is_new_world = 1 AND higher_plant_group IS NOT NULL AND (is_geovalid = 1 OR is_geovalid IS NULL) ORDER BY scrubbed_species_binomial;&quot;</code></pre>
 <p>We see that our query looks like this:</p>
 <p>“SELECT scrubbed_species_binomial, latitude, longitude,date_collected,datasource,dataset,dataowner,custodial_institution_codes,collection_code FROM view_full_occurrence_individual WHERE scrubbed_species_binomial in ( ‘Xanthium strumarium’ ) AND (is_cultivated = 0 OR is_cultivated IS NULL) AND is_new_world = 1 AND higher_plant_group IS NOT NULL AND (is_geovalid = 1 OR is_geovalid IS NULL) ORDER BY scrubbed_species_binomial;”</p>
 <p>Now, if we want to modify this to be more restrictive and only include occurrences that could be geovalidated and are not cultivated, that simply involves a few changes:</p>
 <p>“SELECT scrubbed_species_binomial, latitude, longitude,date_collected,datasource,dataset,dataowner,custodial_institution_codes,collection_code FROM view_full_occurrence_individual WHERE scrubbed_species_binomial in ( ‘Xanthium strumarium’ ) AND (is_cultivated = 0 ) AND is_new_world = 1 AND higher_plant_group IS NOT NULL AND (is_geovalid = 1 ) ORDER BY scrubbed_species_binomial;”</p>
-<p>We can now submit this new but of code using <code>BIEN_sql</code></p>
+<p>We can now submit this new bit of code using <code>BIEN_sql</code></p>
 <pre class="r"><code>Xanthium_strumarium_modified &lt;- BIEN_sql(query = &quot;SELECT scrubbed_species_binomial, latitude, longitude,date_collected,datasource,dataset,dataowner,custodial_institution_codes,collection_code FROM view_full_occurrence_individual WHERE scrubbed_species_binomial in ( &#39;Xanthium strumarium&#39; ) AND (is_cultivated = 0 ) AND is_new_world = 1 AND higher_plant_group IS NOT NULL AND (is_geovalid = 1 ) ORDER BY scrubbed_species_binomial;&quot;)
 
 #This query only returns a fraction of the records the default query does, but for some purposes we may only want the highest quality records.</code></pre>
 <!-- # Combining Queries -->
-<!-- **Example 12: Putting it all together ** -->
+<!-- ## Example 12: Putting it all together ** -->
+</div>
 </div>
 
 

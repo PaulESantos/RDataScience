@@ -15,9 +15,8 @@ library(maps) #Useful for making quick maps of occurrences
 library(sp) # A package for spatial data
 
 #' 
-#' # An overview of the package
-#' We try to make this package as easy and intuitive to use as possible, but it is still often easiest to start with our vignette.
-#' Particularly useful are the "Function Names" and "Function Directory" sections.
+#' # Overview 
+#' It is often easiest to start with our vignette. Particularly useful are the "Function Names" and "Function Directory" sections.
 #' 
 ## ---- message=F,warning=FALSE, results='hide'----------------------------
 vignette("BRI")
@@ -69,41 +68,44 @@ vignette("BRI")
 #' 
 #' Each of these functions has a number of different arguments that modify your query, either refining your search criteria or returning more data for each record.  These arguments include:
 #' 
-#' 1. cultivated  If TRUE, records known to be cultivated will be returned.
+#' 1. `cultivated`  If TRUE, records known to be cultivated will be returned.
 #' 
-#' 2. only.new.world If TRUE, records returned are limited to those in North and South America, where greater data cleaing and validation has been done.
+#' 2. `only.new.world` If TRUE, records returned are limited to those in North and South America, where greater data cleaing and validation has been done.
 #' 
 #' * Note that the arguments cultivated and only.new.world may change the number of records returned.
 #' 
-#' 3. all.taxonomy If TRUE, the query will return additional taxonomic data, including the uncorrected taxonomic information for those records.
+#' 3. `all.taxonomy` If TRUE, the query will return additional taxonomic data, including the uncorrected taxonomic information for those records.
 #' 
-#' 4. native.status If TRUE, additional information will be returned regarding whether a species is native in a given region.
+#' 4. `native.status` If TRUE, additional information will be returned regarding whether a species is native in a given region.
 #' 
-#' 5. observation.type  If TRUE, the query will return whether each record is from either a plot or a specimen.  This may be useful if a user believes one type of information may be more accurate.
+#' 5. `observation.type`  If TRUE, the query will return whether each record is from either a plot or a specimen.  This may be useful if a user believes one type of information may be more accurate.
 #' 
-#' 6. political.boundaries If TRUE, the query will return information on which country, state, etc. that an occurrence is found within.
+#' 6. `political.boundaries` If TRUE, the query will return information on which country, state, etc. that an occurrence is found within.
 #' 
-#' 7. print.query If TRUE, the function will print the SQL query that it used.  This is mostly useful for users looking to create their own custom queries (which should be done with caution).
+#' 7. `print.query` If TRUE, the function will print the SQL query that it used.  This is mostly useful for users looking to create their own custom queries (which should be done with caution).
 #' 
 #' 
-#' **Example 1: Occurrence records for a species**
+#' ## Example 1: Occurrence records for a species
 #' 
 #' Okay, enough reading.  Let's get some data.
 #' 
-#' Let's say we're interested in the species *Xanthium strumarium* and we'd like some occurrence data.  We'll use the function `BIEN_occurrence_species` to grab the occurrence data.
+#' Let's say we're interested in the species *Xanthium strumarium* and we'd like some occurrence data.  
+#' <!-- We'll use the function `BIEN_occurrence_species` to grab the occurrence data. -->
 #' 
 ## ------------------------------------------------------------------------
 Xanthium_strumarium <- BIEN_occurrence_species(species = "Xanthium strumarium")
 
 #' 
-#' Take a moment and view the dataframe and take a look at the structure
+#' <!-- Take a moment and view the dataframe and take a look at the structure -->
 #' 
 ## ----eval=FALSE----------------------------------------------------------
-## View(Xanthium_strumarium)
+## #View(Xanthium_strumarium)
+## head(Xanthium_strumarium)
 ## str(Xanthium_strumarium)
 
 #' 
 #' The default data that is returned consists of the latitude, longitude and date collected, along with a set of attribution data.  If we want more information on these occurrences, we just need to change the arguments:
+#' 
 ## ------------------------------------------------------------------------
 Xanthium_strumarium_full <- BIEN_occurrence_species(species = "Xanthium strumarium",cultivated = T,only.new.world = F,all.taxonomy = T,native.status = T,observation.type = T,political.boundaries = T)
 
@@ -129,13 +131,13 @@ points(cbind(Xanthium_strumarium$longitude,Xanthium_strumarium$latitude),col="bl
 
 
 #' 
-#' From the map, we can see that the points from the default query (in blue) all fall within the New World.  The points from the full query (red + blue) additionally include occurrences from the Old World.  The points in the Old World have not gone through the same data validation procedures as those in the New World, but may still be useful.
+#' From the map, we can see that the points from the default query (in blue) all fall within the New World.  The points from the full query (red + blue) additionally include occurrences from the Old World.  The points in the Old World have not gone through the same data validation procedures by BIEN as those in the New World, but may still be useful.
 #' 
-#' **Example 2: Occurrence records for a country**
+#' ## Example 2: Occurrence records for a country
 #' 
 #' Since we may be interested in a particular geographic area, rather than a particular set of species, there are also options to easily extract data by political region as well.
 #' 
-#' We'll choose a relatively small region, the Bahamas, for our demonstration.
+#' <!-- We'll choose a relatively small region, the Bahamas, for our demonstration. -->
 #' 
 ## ------------------------------------------------------------------------
 Bahamas <- BIEN_occurrence_country(country =  "Bahamas")
@@ -158,8 +160,6 @@ points(cbind(Bahamas$longitude,Bahamas$latitude),col="blue",pch=20,cex=1)
 #' 
 #' These functions begin with the prefix "BIEN_ranges_" and return (unsurprisingly) species ranges.  Most of these functions work by saving the downloaded ranges to a specified directory in shapefile format, rather than by loading them into the R environment.
 #' 
-#' 
-#' 
 #' Functions include:
 #' 
 #' 1. `BIEN_ranges_species`  Downloads range maps for given species and save them to a specified directory.
@@ -170,83 +170,82 @@ points(cbind(Bahamas$longitude,Bahamas$latitude),col="blue",pch=20,cex=1)
 #' 
 #' The range functions have different arguments than we have seen so far, including:
 #' 
-#' 1. directory This is where the function will be saving the shapefiles you download
+#' 1. `directory` This is where the function will be saving the shapefiles you download
 #' 
-#' 2.  matched  If TRUE, the function will return a dataframe listing which species ranges were downloaded and which weren't.
+#' 2.  `matched`  If TRUE, the function will return a dataframe listing which species ranges were downloaded and which weren't.
 #' 
-#' 3.  match_names_only If TRUE, the function will check whether a map is available for each species without actually downloading it
+#' 3.  `match_names_only` If TRUE, the function will check whether a map is available for each species without actually downloading it
 #' 
-#' 4. include.gid If TRUE, the function will append a unique gid number to each range map's filename.  This argument is designed to allow forward compatibility when BIEN contains multiple range maps for each species.
+#' 4. `include.gid` If TRUE, the function will append a unique gid number to each range map's filename.  This argument is designed to allow forward compatibility when BIEN contains multiple range maps for each species.
 #' 
-#' <!-- **Example 3: Range maps and occurrence points** -->
+#' ## Example 3: Range maps and occurrence points
 #' 
-#' <!-- If we have a species we're interested in, and would like to load the range map into the environment,  we can use the function `BIEN_ranges_load_species`.  Let's try this for *Xanthium strumarium*. -->
+#' To load a range map we can use the function `BIEN_ranges_load_species`.  
+#' <!-- Let's try this for *Xanthium strumarium*. -->
 #' 
-#' <!-- ```{r} -->
+## ------------------------------------------------------------------------
+
+Xanthium_strumarium_range <- BIEN_ranges_load_species(species = "Xanthium strumarium")
+# note that you might get an error here if you have an old version of the PROJ library
+
 #' 
-#' <!-- Xanthium_strumarium_range <- BIEN_ranges_load_species(species = "Xanthium strumarium") -->
+#' The range map is now in our global environment as a Spatial polygons dataframe. 
+#' <!-- Let's plot the map and see what it looks like. -->
 #' 
-#' <!-- ``` -->
+## ------------------------------------------------------------------------
+
+#First, let's add a base map so that our range has some context:
+
+map('world',fill=T , col= "grey", bg="light blue",xlim = c(-180,-20),ylim = c(-60,80))
+
+#Now, we can add the range map:
+plot(Xanthium_strumarium_range,col="green",add=T)
+
 #' 
-#' <!-- The range map is now in our global environment as a Spatial polygons dataframe.  Let's plot the map and see what it looks like. -->
+#' Now, let's add those occurrence points from earlier to this map:
 #' 
-#' <!-- ```{r} -->
+## ------------------------------------------------------------------------
+
+map('world',fill=T , col= "grey", bg="light blue",xlim = c(-180,-20),ylim = c(-60,80))
+plot(Xanthium_strumarium_range,col="green",add=T)
+points(cbind(Xanthium_strumarium$longitude,Xanthium_strumarium$latitude),col="blue",pch=20,cex=1)
+
+
 #' 
-#' <!-- #First, let's add a base map so that our range has some context: -->
+#' # Plot data
 #' 
-#' <!-- map('world',fill=T , col= "grey", bg="light blue",xlim = c(-180,-20),ylim = c(-60,80)) -->
+#' These functions begin with the prefix "BIEN_plot_" and return ecological plot data.  Functions include:
 #' 
-#' <!-- #Now, we can add the range map: -->
-#' <!-- plot(Xanthium_strumarium_range,col="green",add=T) -->
+#' 1. `BIEN_plot_list_sampling_protocol` Returns the different plot sampling protocols found in the BIEN database.
 #' 
+#' 2. `BIEN_plot_list_datasource` Returns the different datasources that are available in the BIEN database.
 #' 
+#' * These first two functions are useful for identifying plots with comparable sampling methods.
 #' 
-#' <!-- ``` -->
+#' 3. `BIEN_plot_sampling_protocol` Downloads data for a specified sampling protocol
 #' 
-#' <!-- Now, let's add those occurrence points from earlier to this map: -->
+#' 4. `BIEN_plot_datasource` Downloads data for a specific datasource
 #' 
-#' <!-- ```{r} -->
+#' * These next two function are then useful for downloading datasets with consistent methodology.
 #' 
-#' <!-- map('world',fill=T , col= "grey", bg="light blue",xlim = c(-180,-20),ylim = c(-60,80)) -->
-#' <!-- plot(Xanthium_strumarium_range,col="green",add=T) -->
-#' <!-- points(cbind(Xanthium_strumarium$longitude,Xanthium_strumarium$latitude),col="blue",pch=20,cex=1) -->
+#' 5. `BIEN_plot_country`
 #' 
+#' 6. `BIEN_plot_state`
 #' 
-#' <!-- ``` -->
+#' 7. `BIEN_plot_dataset` Downloads data for a given dataset (which is nested within a datasource)
 #' 
-#' <!-- # Plot data -->
+#' 8. `BIEN_plot_name` Downloads data for a specific plot name (these are nested within a given dataset)
 #' 
-#' <!-- These functions begin with the prefix "BIEN_plot_" and return ecological plot data.  Functions include: -->
-#' 
-#' <!-- 1. `BIEN_plot_list_sampling_protocol` Returns the different plot sampling protocols found in the BIEN database. -->
-#' 
-#' <!-- 2. `BIEN_plot_list_datasource` Returns the different datasources that are available in the BIEN database. -->
-#' 
-#' <!-- * These first two functions are useful for identifying plots with comparable sampling methods. -->
-#' 
-#' <!-- 3. `BIEN_plot_sampling_protocol` Downloads data for a specified sampling protocol -->
-#' 
-#' <!-- 4. `BIEN_plot_datasource` Downloads data for a specific datasource -->
-#' 
-#' <!-- * These next two function are then useful for downloading datasets with consistent methodology. -->
-#' 
-#' <!-- 5. `BIEN_plot_country` -->
-#' 
-#' <!-- 6. `BIEN_plot_state` -->
-#' 
-#' <!-- 7. `BIEN_plot_dataset` Downloads data for a given dataset (which is nested within a datasource) -->
-#' 
-#' <!-- 8. `BIEN_plot_name` Downloads data for a specific plot name (these are nested within a given dataset) -->
-#' 
-#' <!-- Again we have some of the same arguments available for these queries that we saw for the occurrence functions.  We also have the new argument *all.metadata*, which causes the functions to return more metadata for each plot. -->
+#' Again we have some of the same arguments available for these queries that we saw for the occurrence functions.  We also have the new argument *all.metadata*, which causes the functions to return more metadata for each plot.
 #' 
 #' 
-#' **Example 4: Plot data by plot name**
+#' ## Example 4: Plot data by plot name
 #' 
 #' Let's take a look at the data for an individual plot.
 ## ------------------------------------------------------------------------
 LUQUILLO <- BIEN_plot_name(plot.name = "LUQUILLO")
-View(LUQUILLO)
+#View(LUQUILLO)
+head(LUQUILLO)
 
 #' 
 #' We can see that this is a 0.1 hectare transect where stems >= 2.5 cm diameter at breast height were included.  If we'd like more detail, we can use additional arguments:
@@ -255,18 +254,15 @@ LUQUILLO_full <- BIEN_plot_name(plot.name = "LUQUILLO",cultivated = T,all.taxono
 
 #' 
 ## ---- eval=FALSE---------------------------------------------------------
-## View(LUQUILLO_full)
+## #View(LUQUILLO_full)
+## head(LUQUILLO_full)
 
 #' 
 #' The dataframe LUQUILLO_full contains more useful information, including metadata on which taxa were included, which growth forms were included and information on whether species are known to be native or introduced.
 #' 
-#' 
-#' 
-#' 
 #' # Trait data
 #' 
 #' These functions begin with the prefix "BIEN_trait_" and access the BIEN trait database.   Note that the spelling of the trait names must be precise, so we recommend using the function `BIEN_trait_list` first.
-#' 
 #' 
 #' Functions include:
 #' 
@@ -289,7 +285,7 @@ LUQUILLO_full <- BIEN_plot_name(plot.name = "LUQUILLO",cultivated = T,all.taxono
 #' 9. `BIEN_trait_traitbyspecies`
 #' 
 #' 
-#' **Example 5: Accessing trait data**
+#' ## Example 5: Accessing trait data
 #' 
 #' If you're interested in accessing all traits for a taxon, say the genus *Salix*, just go ahead and use the corresponding function:
 #' 
@@ -327,7 +323,7 @@ SLA <- BIEN_trait_trait(trait = "Specific leaf area (SLA)")
 #' 
 #' 3. `BIEN_taxonomy_species`
 #' 
-#' **Example 6: Taxonomic data **
+#' ## Example 6: Taxonomic data 
 #' 
 #' Let's say we're interested in the genus *Asclepias*, and we'd like to get an idea of how many species there are in this genus and what higher taxa it falls within.
 #' 
@@ -335,8 +331,8 @@ SLA <- BIEN_trait_trait(trait = "Specific leaf area (SLA)")
 
 Asclepias_taxonomy<-BIEN_taxonomy_genus(genus = "Asclepias")
 
-View(Asclepias_taxonomy)
-
+#View(Asclepias_taxonomy)
+Asclepias_taxonomy[1:10,]
 #We see that the genus Asclepias falls within the family Apocynaceae and the order Gentianales.
 
 #You'll also notice that a given species may appear more than once (due to multiple circumscriptions, some of which may be illegitimate).
@@ -345,12 +341,9 @@ View(Asclepias_taxonomy)
 Asclepias_species<-unique(Asclepias_taxonomy$scrubbed_species_binomial[Asclepias_taxonomy$scrubbed_taxonomic_status %in% c("accepted",  "no opinion")])
 
 
-
-#' 
-#' 
 #' 
 #' # Phylogenies
-#' The BIEN database currently contains 101 phylogenies for new world plants.  This includes 100 replicated phylogenies that include nearly all New World plant species ("complete phylogenies") and 1 phylogeny containing only those New World plant species for which molecular data was available ("conservative phylogeny"). Currently, there are only 2 functions available:
+#' The BIEN database currently contains 101 phylogenies for new world plants.  This includes 100 replicated phylogenies that include nearly all New World plant species ("complete phylogenies") and 1 phylogeny containing only those New World plant species for which molecular data was available ("conservative phylogeny"). Currently, there are 2 functions available:
 #' 
 #' 1. `BIEN_phylogeny_complete`  This function will return a specified number of the replicated "complete" phylogenies.  Note that each phylogeny is several Mb in size, so downloading many may take a while on slow connections.
 #' 
@@ -358,16 +351,16 @@ Asclepias_species<-unique(Asclepias_taxonomy$scrubbed_species_binomial[Asclepias
 #' 
 #' Arguments: The function `BIEN_phylogeny_complete` has a few arguments that are worth explaining:
 #' 
-#' n_phylogenies This is the number of replicated phylogenies that you want to download (between 1 and 100)
+#' * `n_phylogenies` This is the number of replicated phylogenies that you want to download (between 1 and 100)
 #' 
-#' seed This function sets the seed for the random number generator before randomly drawing the phylogenies to be downloaded.  This is useful for replicating analyses.
+#' * `seed` This function sets the seed for the random number generator before randomly drawing the phylogenies to be downloaded.  This is useful for replicating analyses.
 #' 
-#' replicates This function allows you to specify WHICH of the 100 phylogenies to download, rather than having them selected randomly.
+#' * `replicates` This function allows you to specify WHICH of the 100 phylogenies to download, rather than having them selected randomly.
 #' 
 #' 
-#' **Example 7: Phylogenies **
+#' ## Example 7: Phylogenies 
 #' 
-#' Let's say we want to download the conservative phylogeny.
+#' Let's download the conservative phylogeny.
 #' 
 ## ------------------------------------------------------------------------
 
@@ -382,7 +375,6 @@ plot.phylo(x = phylo, show.tip.label =  FALSE)
 phylo_species <- phylo$tip.label
 
 
-
 #' 
 #' 
 #' # Stem Data
@@ -395,11 +387,7 @@ phylo_species <- phylo$tip.label
 #' 
 #' The arguments for this function are the same that we have seen in the occurrence and plot functions.
 #' 
-#' **Example 8: Stem data **
-#' 
-#' 
-#' 
-#' 
+#' <!-- ## Example 8: Stem data  -->
 #' 
 #' # Species lists
 #' 
@@ -411,10 +399,10 @@ phylo_species <- phylo$tip.label
 #' 
 #' 3.  `BIEN_list_county` Returns all species found within a given state/province
 #' 
-#' Some of the same arguments we saw in the occurrence functions appear here as well, including "cultivate", "only.new.world" and "print.query".
+#' Some of the same arguments we saw in the occurrence functions appear here as well, including `cultivate`, `only.new.world`, and `print.query`.
 #' 
 #' 
-#' **Example 9: Species list for a country**
+#' ## Example 9: Species list for a country
 #' 
 #' Let's return to our previous example.  What if we just need a list of the species in the Bahamas, rather than the specific details of each occurrence record?  We can instead use the function `BIEN_list_country` to download a list of species, which should be much faster than using `BIEN_occurrence_country` to get a species list.
 #' 
@@ -425,7 +413,7 @@ Bahamas_species_list<-BIEN_list_country(country = "Bahamas")
 
 
 #' 
-#' If we wanted to retrieve the results for multiple countries at once, that is simple as well.  We just need to supply a vector of countries.
+#' For multiple countries at once, supply a vector of countries.
 #' 
 ## ------------------------------------------------------------------------
 
@@ -434,15 +422,14 @@ Haiti_DR <- BIEN_list_country(country = country_vector)
 
 
 #' 
-#' 
 #' # Metadata
-#' The BIEN metadata functions are still in development.  Currently, there are only 2 functions:
+#' The BIEN metadata functions are still in development.  Currently, there are 2 functions:
 #' 
 #' 1. `BIEN_metadata_database_version` Returns the current version number of the BIEN database and the release date.
 #' 
 #' 2. `BIEN_metadata_match_data` Rudimentary function to check for changed records between old and current queries.
 #' 
-#' **Example 10: Metadata **
+#' ## Example 10: Metadata 
 #' 
 #' To check what the current version of the BIEN database is (which we recommend reporting when using BIEN data):
 #' 
@@ -460,9 +447,9 @@ BIEN_metadata_database_version()
 #' 
 #' Arguments:
 #' 
-#' The argument "query" is the only one likely to be of use to users.  The other arguments are included for primarily for developmental purposes.
+#' The argument `query` is the only one likely to be of use to users.  The other arguments are included for primarily for developmental purposes.
 #' 
-#' **Example 11: Writing your own query **
+#' ## Example 11: Writing your own query 
 #' Let's return to our example from above where we downloaded the occurrence records for *Xanthium strumarium*.  Let's take a look at the query that underlies that:
 #' 
 ## ------------------------------------------------------------------------
@@ -479,7 +466,7 @@ Xanthium_strumarium <- BIEN_occurrence_species(species = "Xanthium strumarium",p
 #' 
 #' "SELECT scrubbed_species_binomial, latitude, longitude,date_collected,datasource,dataset,dataowner,custodial_institution_codes,collection_code FROM view_full_occurrence_individual WHERE scrubbed_species_binomial in ( 'Xanthium strumarium' ) AND (is_cultivated = 0 ) AND is_new_world = 1 AND higher_plant_group IS NOT NULL AND (is_geovalid = 1 ) ORDER BY scrubbed_species_binomial;"
 #' 
-#' We can now submit this new but of code using `BIEN_sql`
+#' We can now submit this new bit of code using `BIEN_sql`
 #' 
 ## ------------------------------------------------------------------------
 
@@ -490,4 +477,4 @@ Xanthium_strumarium_modified <- BIEN_sql(query = "SELECT scrubbed_species_binomi
 
 #' 
 #' <!-- # Combining Queries -->
-#' <!-- **Example 12: Putting it all together ** -->
+#' <!-- ## Example 12: Putting it all together ** -->

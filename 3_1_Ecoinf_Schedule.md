@@ -24,6 +24,7 @@ Sign up for an account to access [bien3.org](bien3.org)
 
 ```r
 install.packages(c('devtools', 'netassoc'),dep=T)
+install.packages(c('ape','sp','maps'),dep=T)
 install.packages(c('bossMaps','ggplot2','foreach', 'dplyr','tidyr','raster'),dep=T)
 ```
 <!--

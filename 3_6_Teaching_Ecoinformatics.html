@@ -9,9 +9,10 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Drew Kerkhoff" />
 
 
-<title>Resources</title>
+<title>Ecology Lab: SDM using Maxent</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -400,35 +401,137 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Resources</h1>
+<h1 class="title toc-ignore">Ecology Lab: SDM using Maxent</h1>
+<h4 class="author"><em>Drew Kerkhoff</em></h4>
 
 </div>
 
 
-<div id="getting-started-with-r" class="section level2">
-<h2><span class="header-section-number">0.1</span> Getting Started with R</h2>
-<div style="height: 10px;">
+<div>
+<object data="3_6_assets/BIENWorkshopEducation.pdf" type="application/pdf" width="100%" height="670px">
+<p>
+It appears you don’t have a PDF plugin for this browser. No biggie… you can <a href="3_6_assets/BIENWorkshopEducation.pdf">click here to download the PDF file.</a>
+</p>
+</object>
+</div>
+<p>
+<a href="3_6_assets/BIENWorkshopEducation.pdf">Download the PDF of the presentation</a>
+</p>
+<p><a href="3_6_Teaching_Ecoinformatics.R"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here</a>. Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.</p>
+<div id="setup" class="section level1">
+<h1><span class="header-section-number">1</span> Setup</h1>
+<pre class="r"><code>library(raster)
+library(rgdal)
+library(maps)
+library(mapdata)
+library(dismo)  
+#library(rJava)  
+library(maptools)
+library(jsonlite)</code></pre>
+<div id="data-access" class="section level2">
+<h2><span class="header-section-number">1.1</span> Data Access</h2>
+<p>Current environment from worldclim</p>
+<pre class="r"><code>currentEnv=getData(&quot;worldclim&quot;, var=&quot;bio&quot;, res=2.5)</code></pre>
+<p>Future environment based on the 8.5 concentration scenario for 2070 from HADGEM2-ES model</p>
+<pre class="r"><code>futureEnv=getData(&#39;CMIP5&#39;, var=&#39;bio&#39;, res=2.5, rcp=85, model=&#39;HE&#39;, year=70)
+names(futureEnv)=names(currentEnv)</code></pre>
+<p>Species locations from gbif - for example, the timber rattlesnake</p>
+<pre class="r"><code>rattler=gbif(&#39;crotalus&#39;,&#39;horridus&#39;)</code></pre>
+</div>
+<div id="data-processing" class="section level2">
+<h2><span class="header-section-number">1.2</span> Data Processing</h2>
+<pre class="r"><code># limit number of predictors just a bit
+currentEnv=dropLayer(currentEnv, c(&quot;bio2&quot;, &quot;bio3&quot;, &quot;bio4&quot;, &quot;bio10&quot;, &quot;bio11&quot;, &quot;bio13&quot;, &quot;bio14&quot;, &quot;bio15&quot;))
+futureEnv=dropLayer(futureEnv, c(&quot;bio2&quot;, &quot;bio3&quot;, &quot;bio4&quot;, &quot;bio10&quot;, &quot;bio11&quot;, &quot;bio13&quot;, &quot;bio14&quot;, &quot;bio15&quot;))
 
+# get rid of occurences without location information
+rattler=subset(rattler, !is.na(lon) &amp; !is.na(lat))
+
+# find and eliminate duplicate locations
+rattlerdups=duplicated(rattler[, c(&quot;lon&quot;, &quot;lat&quot;)])
+rattler &lt;-rattler[!rattlerdups, ]
+
+# make initial plot for diagnostic purposes
+plot(wrld_simpl, xlim=c(min(rattler$lon)-1,max(rattler$lon)+1), ylim=c(min(rattler$lat)-1,max(rattler$lat)+1), axes=TRUE, col=&quot;light yellow&quot;)
+points(rattler$lon, rattler$lat, col=&quot;orange&quot;, pch=20, cex=0.75)
+
+# eliminate questionable points likely outside the native range
+rattler &lt;- rattler[rattler$lon &lt; -40 &amp; rattler$lat &gt; 25 , ]
+
+# make another plot, with higher resolution background
+map(&#39;worldHires&#39;, xlim=c(min(rattler$lon)-1,max(rattler$lon)+1), ylim=c(min(rattler$lat)-1,max(rattler$lat)+1), fill=TRUE, col=&quot;light yellow&quot;)
+points(rattler$lon, rattler$lat, col=&quot;orange&quot;, pch=20, cex=0.75)
+
+# map mean annual temperature
+plot(modelEnv[[&quot;bio1&quot;]]/10, main=&quot;Annual Mean Temperature&quot;, col=brewer.pal(50,&quot;RdYlBu&quot;))
+map(&#39;worldHires&#39;,xlim=c(min(rattler$lon)-10,max(rattler$lon)+10), ylim=c(min(rattler$lat)-10,max(rattler$lat)+10), fill=FALSE, add=TRUE)
+points(rattler$lon, rattler$lat, pch=&quot;+&quot;, cex=0.2)
+
+# map future mean annual temperature
+plot(modelFutureEnv[[&quot;bio1&quot;]]/10, main=&quot;Future Annual Mean Temperature&quot;)
+map(&#39;worldHires&#39;,xlim=c(min(rattler$lon)-10,max(rattler$lon)+10), ylim=c(min(rattler$lat)-10,max(rattler$lat)+10), fill=FALSE, add=TRUE)
+points(rattler$lon, rattler$lat, pch=&quot;+&quot;, cex=0.2)</code></pre>
 </div>
-<ul>
-<li><a href="https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf">A very short introduction to R</a></li>
-<li><p><a href="http://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">R Markdown Cheat Sheet (PDF)</a>, a quick guide to the most commonly used markdown syntax, knitr options, and output formats.</p></li>
-<li><p><a href="http://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">R Markdown Reference Guide (PDF)</a>, a more comprehensive reference guide to markdown, knitr, and output format options.</p></li>
-</ul>
+<div id="species-distribution-modeling" class="section level2">
+<h2><span class="header-section-number">1.3</span> Species Distribution Modeling</h2>
+<pre class="r"><code># first crop environment to the local species range +/- 10 degrees
+model.extent&lt;-extent(min(rattler$lon)-10,max(rattler$lon)+10,min(rattler$lat)-10,max(rattler$lat)+10)
+modelEnv=crop(currentEnv,model.extent)
+modelFutureEnv=crop(futureEnv, model.extent)
+modelMitigatedEnv=crop(mitigatedEnv, model.extent)
+
+# withold 20% of the data for testing the model
+rattlerocc=cbind.data.frame(rattler$lon,rattler$lat)
+fold &lt;- kfold(rattlerocc, k=5)
+rattlertest &lt;- rattlerocc[fold == 1, ]
+rattlertrain &lt;- rattlerocc[fold != 1, ]
+
+#fit the maxent model
+rattler.me &lt;- maxent(modelEnv, rattlertrain)
+
+# plot showing importance of each variable
+plot(rattler.me)
+
+# response curves
+response(rattler.me)
+# predict to entire dataset
+rattler.pred &lt;- predict(rattler.me, modelEnv)
+
+#plot predictions
+plot(rattler.pred, main=&quot;Predicted Suitability&quot;)
+map(&#39;worldHires&#39;, fill=FALSE, add=TRUE)
+points(rattler$lon, rattler$lat, pch=&quot;+&quot;, cex=0.2)</code></pre>
+<pre class="r"><code># make predictions with the future environment data
+rattler.2070 = predict(rattler.me, modelFutureEnv)
+rattler.mitigated = predict(rattler.me, modelMitigatedEnv)
+
+#plot predictions
+plot(rattler.2070, main=&quot;Predicted Future Suitability&quot;)
+map(&#39;worldHires&#39;, fill=FALSE, add=TRUE)
+points(rattler$lon, rattler$lat, pch=&quot;+&quot;, cex=0.2)
+
+rattler.change=rattler.2070-rattler.pred
+rattler.mit.change=rattler.mitigated-rattler.pred
+plot(rattler.change, main=&quot;Predicted Change in Suitability&quot;)
+map(&#39;worldHires&#39;, fill=FALSE, add=TRUE)
+points(rattler$lon, rattler$lat, pch=&quot;+&quot;, cex=0.2)</code></pre>
+<pre class="r"><code>#testing the model
+# background data
+bg &lt;- randomPoints(modelEnv, 1000) #background &quot;pseudoabsences&quot;
+
+#simplest way to use &#39;evaluate&#39;
+e1 &lt;- evaluate(rattler.me, p=occtest, a=bg, x=modelEnv)
+
+plot(e1, &#39;ROC&#39;)
+rattlerChangePoints = extract(rattler.change, rattlerocc)
+hist(rattlerChangePoints, main=&quot;&quot;, xlab=&quot;Change in habitat suitability&quot;)
+abline(v=0, col=&quot;red&quot;)
+
+rattlerMitChangePoints = extract(rattler.mit.change, rattlerocc)
+hist(rattlerChangePoints, main=&quot;&quot;, x)
+abline(v=0, col=&quot;red&quot;)</code></pre>
+<p>Note: Code largely adapted from: <a href="http://spatialecology.weebly.com/r-code--data/category/sdm-maxent" class="uri">http://spatialecology.weebly.com/r-code--data/category/sdm-maxent</a> and Fiona Spooner’s series of RPubs, which were adapted from examples in Hijmans and Elith 2011</p>
 </div>
-<div id="infographic-resources" class="section level2">
-<h2><span class="header-section-number">0.2</span> Infographic resources</h2>
-<ul>
-<li><a href="http://www.r-bloggers.com/r-how-to-layout-and-design-an-infographic/">Infographic Layout</a></li>
-</ul>
-</div>
-<div id="learning-more" class="section level2">
-<h2><span class="header-section-number">0.3</span> Learning more</h2>
-<p>For even more in-depth documentation see:</p>
-<ul>
-<li><a href="http://adv-r.had.co.nz">Advanced R</a> book for R users who want to improve their programming skills and understanding of the language. It should also be useful for programmers coming to R from other languages, as it explains some of R’s quirks and shows how some parts that seem horrible do have a positive side.</li>
-<li>The website for the <a href="http://yihui.name/knitr/">knitr package</a>. Knitr is an extremely powerful tool for dynamic content generation and the website has a wealth of documentation and examples to help you utilize it to its full potential.</li>
-</ul>
 </div>
 
 

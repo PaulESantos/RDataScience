@@ -34,3 +34,13 @@ Wallace: install_github()?
 RBEIN:install_github("EnquistLab/RBIEN/BRI")
 -->
 
+<div>
+<object data="3_1_assets/Intro_slides.pdf" type="application/pdf" width="100%" height="650px"> 
+  <p>It appears you don't have a PDF plugin for this browser.
+   No biggie... you can <a href="3_1_assets/Intro_slides.pdf">click here to
+  download the PDF file.</a></p>  
+ </object>
+ </div>
+ 
+ <p><a href="3_1_assets/Intro_slides.pdf">Download the PDF of the presentation</a></p>  
+

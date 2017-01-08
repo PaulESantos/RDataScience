@@ -4,14 +4,14 @@ Jamie Kass, Matt Aiello-Lammens
 
 
 <div>
-<object data="3_5_assets/Minxent_Short.pdf" type="application/pdf" width="100%" height="650px"> 
+<object data="3_4_assets/Wallace_Intro.pdf" type="application/pdf" width="100%" height="650px"> 
   <p>It appears you don't have a PDF plugin for this browser.
-   No biggie... you can <a href="03_assets/03_Plotting.pdf">click here to
+   No biggie... you can <a href="3_4_assets/Wallace_Intro.pdf">click here to
   download the PDF file.</a></p>  
  </object>
  </div>
  
- <p><a href="3_5_assets/Minxent_Short.pdf">Download the PDF of the presentation</a></p>  
+ <p><a href="3_4_assets/Wallace_Intro.pdf">Download the PDF of the presentation</a></p>  
 
 [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](3_4_wallace.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
 

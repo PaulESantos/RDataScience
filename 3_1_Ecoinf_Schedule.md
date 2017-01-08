@@ -29,6 +29,7 @@ install.packages(c('ape','sp','maps'),dep=T)
 install.packages(c('bossMaps','ggplot2','foreach', 'dplyr','tidyr','raster'),dep=T)
 install.packages('rgdal', 'mapdata','dismo','rJava' ,'maptools','jsonlite',dep=T)
 devtools::install_github("wallaceEcoMod/wallace")
+install.packages('ape','rjson','RCurl')
 ```
 <!--
 Wallace: install_github()?

@@ -9,9 +9,10 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Brad Boyle" />
 
 
-<title>About Course Content</title>
+<title>TNRS</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -400,19 +401,186 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">About Course Content</h1>
-<h3 class="subtitle"><em>Set yourself up to follow along efficiently</em></h3>
+<h1 class="title toc-ignore">TNRS</h1>
+<h4 class="author"><em>Brad Boyle</em></h4>
 
 </div>
 
 
-<p>During class we will will work through various exercises listed in the “Contents” section above. Each activity has a link to a R script of the same material so you can easily run the code as we go through the class.</p>
-<div id="efficient-layout-of-your-screen" class="section level2">
-<h2><span class="header-section-number">0.1</span> Efficient layout of your screen</h2>
-<div class="figure">
-<img src="img/ScreenLayout_Arrows.png" />
-
+<div>
+<object data="3_7_assets/tnrs.pdf" type="application/pdf" width="100%" height="650px">
+<p>
+It appears you don’t have a PDF plugin for this browser. No biggie… you can <a href="3_7_assets/tnrs.pdf">click here to download the PDF file.</a>
+</p>
+</object>
 </div>
+<p>
+<a href="3_7_assets/tnrs.pdf">Download the PDF of the presentation</a>
+</p>
+<p><a href="3_7_TNRS.R"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here</a>. Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.</p>
+<div id="gui-example" class="section level1">
+<h1><span class="header-section-number">1</span> GUI Example</h1>
+<pre class="r"><code>###############################################
+# Example use of TNRS web interface
+# By: Naim Matasci &amp; Brad Boyle (bboyle@email.arizona.edu)
+# Date: Jan. 5, 2017
+###############################################
+
+library(ape)
+
+#Tree topology from Ackerly, D. 2009. Conservatism and diversification of plant functional traits: Evolutionary rates versus phylogenetic signal. PNAS 106:19699--19706.
+lobelioids.string&lt;-&#39;((((((Lobelia_kauaensis,Lobelia_villosa),Lobelia_gloria-montis),(Trematolobelia_kauaiensis,Trematolobelia_macrostachys)),((Lobelia_hypoleuca,Lobelia_yuccoides),Lobelia_niihauensis)),((Brighamia_insignis,Brighamia_rockii),(Delissea_rhytidosperma,Delissea_subcordata))),((((Cyanea_pilosa,Cyanea_acuminata),Cyanea_hirtella),(Cyanea_coriacea,Cyanea_leptostegia)),(((Clermontia_kakeana,Clermontia_parviflora),Clermontia_arborescens),Clermontia_fauriei)));&#39;
+
+#Transform the newick sting into an ape phylo object
+tree&lt;-read.tree(text=lobelioids.string)
+
+#Obtain the taxa names
+old.names&lt;-tree$tip.label
+
+#Change the underscore characters into blank spaces
+old.names&lt;-gsub(&#39;_&#39;,&#39; &#39;,old.names)
+
+# Add an integer identifier to each name
+# I&#39;ve turned the names vector into a two column data frame, but you
+# could use a matrix if you prefer
+old.names.df &lt;- as.data.frame(old.names)
+old.names.df[,2] &lt;- old.names.df[,1]
+old.names.df[,1] &lt;- seq(1:nrow(old.names.df))
+colnames(old.names.df) &lt;- c(&quot;id&quot;,&quot;Name_submitted&quot;)
+
+# Write names and IDs to tab-delimitted file without headers
+#  A CSV file would also work
+write.table(old.names.df, file=&quot;oldnames.csv&quot;, 
+    row.names=FALSE, col.names=FALSE, sep=&quot;,&quot;)
+    
+#############################################
+# STOP HERE AND COMPLETE THE FOLLOWING MANUAL 
+# STEPS BEFORE CONTINUING
+#
+# 1. Upload &amp; process names file with TNRS web interface
+# (http://tnrs.iplantcollaborative.org/TNRSapp.html)
+#       a. Edit &quot;Name processing settings&quot; on right
+#           i. Select sources. 
+#               IMPORTANT! If you choose &quot;TPL&quot;, make sure you also 
+#               choose ILDIS and GCC. These three together have the same
+#               content as The Plant List (www.theplantlist.org)
+#       b. Select tab &quot;Upload and Submit List&quot;
+#       c. Check box &quot;My file contains an identifier as first column&quot;
+#       d. Choose file, enter email, and submit
+#
+# 2. Download results when ready (you will be notified by email)
+#       a. Select tab &quot;Retrieve Results&quot;
+#       b. Enter your email and submission key (from notification email)
+#       c. Inspect results. When in doubt, use the hyperlinks to research 
+#           names at the original source. If you select alternative matches, 
+#           these will be downloaded instead as the best match.
+#       d. Download the results, with the following options:
+#           i. Best matches only
+#           ii. Detailed download format
+#           iii. UTF-8
+#           iv. Rename download file if you wish
+#           v. Save the file to this directory
+#
+# TIP: try using different source to see how they affect you names
+#       before and after
+#############################################
+
+# Import the TNRS results file as a tab-delimitted text file with headers
+# Here we are assuming the default file name supplied by TNRS
+tnrs.results.filename &lt;- &quot;tnrs_results.txt&quot;
+tnrs.results &lt;- read.table(tnrs.results.filename, header=T, sep=&quot;\t&quot;)
+
+# Merge the old and new names into single data frame, by id
+new.names.df &lt;- tnrs.results[, c(&quot;user_id&quot;, &quot;Name_matched&quot;, &quot;Accepted_name&quot;)]
+names &lt;- merge(old.names.df, new.names.df, by.x=c(&quot;id&quot;), by.y=c(&quot;user_id&quot;))
+names &lt;- data.frame(lapply(names, as.character), stringsAsFactors=FALSE)
+
+# Add a new column to keep clear the distinction between the name matched, 
+# the accepted name and the final name used
+# Set it to the accepted name to start
+names$Final_name &lt;- names$Accepted_name
+
+# If TNRS did not return any accepted name (no match, or name is already accepted), 
+# use the final name instead
+# WARNING: 
+# You might want to research the matched name instead of using it blindly!
+names[names[,c(&quot;Accepted_name&quot;)]==&quot;&quot;,c(&quot;Final_name&quot;)] &lt;-
+    names[names[,c(&quot;Accepted_name&quot;)]==&quot;&quot;,c(&quot;Name_matched&quot;)] 
+
+# Save the old tree for comparison
+tree.old &lt;- tree
+
+#The old taxa names are replaced with the corrected taxa names
+tree$tip.label&lt;-names[,c(&quot;Final_name&quot;)]
+
+# Set up mutliplot
+par(mfrow=c(1,2))
+
+# Plot the original tree with old names
+plot(tree.old, main=&quot;Before name resolution&quot;)
+
+# Plot the tree with resolved names
+plot(tree, main=&quot;After name resolution&quot;)</code></pre>
+</div>
+<div id="api-example" class="section level1">
+<h1><span class="header-section-number">2</span> API Example</h1>
+<pre class="r"><code>###############################################
+# Example use of TNRS api
+# By: Naim Matasci
+###############################################
+
+library(ape)
+library(rjson)  
+library(RCurl) 
+
+tnrs.api&lt;-&#39;http://tnrs.iplantc.org/tnrsm-svc&#39;
+
+#Tree topology from Ackerly, D. 2009. Conservatism and diversification of plant functional traits: Evolutionary rates versus phylogenetic signal. PNAS 106:19699--19706.
+lobelioids.string&lt;-&#39;((((((Lobelia_kauaensis,Lobelia_villosa),Lobelia_gloria-montis),(Trematolobelia_kauaiensis,Trematolobelia_macrostachys)),((Lobelia_hypoleuca,Lobelia_yuccoides),Lobelia_niihauensis)),((Brighamia_insignis,Brighamia_rockii),(Delissea_rhytidosperma,Delissea_subcordata))),((((Cyanea_pilosa,Cyanea_acuminata),Cyanea_hirtella),(Cyanea_coriacea,Cyanea_leptostegia)),(((Clermontia_kakeana,Clermontia_parviflora),Clermontia_arborescens),Clermontia_fauriei)));&#39;
+
+#Transform the newick sting into an ape phylo object
+tree&lt;-read.tree(text=lobelioids.string)
+
+#Obtain the taxa names
+old.names&lt;-tree$tip.label
+
+#Change the underscore characters into blank spaces
+old.names&lt;-gsub(&#39;_&#39;,&#39; &#39;,old.names)
+
+#Transforms the vector into a string
+old.names&lt;-paste(old.names,collapse=&#39;,&#39;)
+
+#The string needs to be URL-encoded
+old.names&lt;-curlEscape(old.names)
+
+#Send a request to the TNRS service
+url&lt;-paste(tnrs.api,&#39;/matchNames?retrieve=best&amp;names=&#39;,old.names,sep=&#39;&#39;)
+tnrs.json&lt;-getURL(url) 
+
+#The response needs to be converted from JSON
+tnrs.results&lt;-fromJSON(tnrs.json)
+
+#The corrected names are extracted from the response
+names&lt;-sapply(tnrs.results[[1]], function(x) c(x$nameSubmitted,x$acceptedName))
+names&lt;-as.data.frame(t(names),stringsAsFactors=FALSE)
+
+#If TNRS did not return any accepted name (no match, or name is already accepted), the submitted name is retained
+names[names[,2]==&quot;&quot;,2]&lt;-names[names[,2]==&quot;&quot;,1] 
+
+# Save the old tree so we can compare
+tree.old &lt;- tree
+
+#The old taxa names are replaced with the corrected taxa names
+tree$tip.label&lt;-names[,2]
+
+# Set up mutliplot
+par(mfrow=c(1,2))
+
+# Plot the original tree with old names
+plot(tree.old, main=&quot;Before name resolution&quot;)
+
+# Plot the tree with resolved names
+plot(tree, main=&quot;After name resolution&quot;)</code></pre>
 </div>
 
 

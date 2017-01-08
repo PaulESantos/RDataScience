@@ -33,7 +33,7 @@ left:
       - text: "1 Workshop Schedule"
         href: 3_1_Ecoinf_Schedule.html
       - text: "2 Taxonomic Name Resolution"
-        href: Under_Construction.html
+        href: 3_7_TNRS.html
       - text: "3 Accessing Plant Biodiversity Data"
         href: 3_3_RBIEN_tutorial.html
       - text: "4 A streamlined modeling workflow: Wallace"

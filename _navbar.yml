@@ -36,8 +36,8 @@ left:
         href: Under_Construction.html
       - text: "3 Accessing Plant Biodiversity Data"
         href: 3_3_RBIEN_tutorial.html
-      - text: "4 A streamlined range modeling workflow: Wallace"
-        href: Under_Construction.html   
+      - text: "4 A streamlined modeling workflow: Wallace"
+        href: 3_4_wallace.html   
       - text: "5 Integrating biogeographic data "
         href: 3_5_Minxent.html  
       - text: "6 Network Associations"

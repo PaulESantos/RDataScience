@@ -9,6 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="2017 International Biogeography Meeting" />
 
 
 <title>Workshop Schedule</title>
@@ -347,7 +348,7 @@ div.tocify {
       <a href="3_3_RBIEN_tutorial.html">3 Accessing Plant Biodiversity Data</a>
     </li>
     <li>
-      <a href="Under_Construction.html">4 A streamlined range modeling workflow: Wallace</a>
+      <a href="3_4_wallace.html">4 A streamlined modeling workflow: Wallace</a>
     </li>
     <li>
       <a href="3_5_Minxent.html">5 Integrating biogeographic data </a>
@@ -401,11 +402,17 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Workshop Schedule</h1>
+<h4 class="author"><em>2017 International Biogeography Meeting</em></h4>
 
 </div>
 
 
-<table>
+<table style="width:100%;">
+<colgroup>
+<col width="11%" />
+<col width="18%" />
+<col width="69%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Time</th>
@@ -422,7 +429,7 @@ div.tocify {
 <tr class="even">
 <td>120-140</td>
 <td align="left">Brian Enquist</td>
-<td align="left">Introduction to Ecoinformatics and BIEN (<a href="bien3.org" class="uri">bien3.org</a>)</td>
+<td align="left">Introduction BIEN - The Botanical Information and Ecology Network (<a href="bien3.org" class="uri">bien3.org</a>)</td>
 </tr>
 <tr class="odd">
 <td>140-200</td>
@@ -442,32 +449,32 @@ div.tocify {
 <tr class="even">
 <td>230-250</td>
 <td align="left">Brian Maitner</td>
-<td align="left">RBIEN</td>
+<td align="left">Accessing New World plant data: <code>RBien</code></td>
 </tr>
 <tr class="odd">
 <td>250-300</td>
 <td align="left">Rob Anderson <br> Jamie Kass</td>
-<td align="left">Wallace</td>
+<td align="left">Wallace - An R-based reproducible workflow for ecological analyses</td>
 </tr>
 <tr class="even">
 <td>300-340</td>
 <td align="left">Jamie Kass <br> Matt Aiello-Lammens</td>
-<td align="left">Wallace Demo</td>
+<td align="left"><code>wallace</code> Demo</td>
 </tr>
 <tr class="odd">
 <td>340-400</td>
 <td align="left">Cory Merow</td>
-<td align="left">Integrating biogeographic data with spatial priors</td>
+<td align="left">Integrating biogeographic data with other spatial maps: <code>bossMaps</code></td>
 </tr>
 <tr class="even">
 <td>400-420</td>
 <td align="left">Naia Morueta-Holme</td>
-<td align="left">Network Associations</td>
+<td align="left">Species network associations: <code>netassoc</code></td>
 </tr>
 <tr class="odd">
 <td>420-440</td>
 <td align="left">Drew Kerkhoff</td>
-<td align="left">Teaching ecoinformatics</td>
+<td align="left">Teaching ecoinformatics to undergrads</td>
 </tr>
 <tr class="even">
 <td>440-500</td>
@@ -481,11 +488,22 @@ div.tocify {
 <pre class="r"><code>install.packages(c(&#39;devtools&#39;, &#39;netassoc&#39;),dep=T)
 install.packages(c(&#39;ape&#39;,&#39;sp&#39;,&#39;maps&#39;),dep=T)
 install.packages(c(&#39;bossMaps&#39;,&#39;ggplot2&#39;,&#39;foreach&#39;, &#39;dplyr&#39;,&#39;tidyr&#39;,&#39;raster&#39;),dep=T)
-install.packages(&#39;rgdal&#39;, &#39;mapdata&#39;,&#39;dismo&#39;,&#39;rJava&#39; ,&#39;maptools&#39;,&#39;jsonlite&#39;,dep=T)</code></pre>
+install.packages(&#39;rgdal&#39;, &#39;mapdata&#39;,&#39;dismo&#39;,&#39;rJava&#39; ,&#39;maptools&#39;,&#39;jsonlite&#39;,dep=T)
+devtools::install_github(&quot;wallaceEcoMod/wallace&quot;)</code></pre>
 <!--
 Wallace: install_github()?
 RBEIN:install_github("EnquistLab/RBIEN/BRI")
 -->
+<div>
+<object data="3_1_assets/Intro_slides.pdf" type="application/pdf" width="100%" height="650px">
+<p>
+It appears you don’t have a PDF plugin for this browser. No biggie… you can <a href="3_1_assets/Intro_slides.pdf">click here to download the PDF file.</a>
+</p>
+</object>
+</div>
+<p>
+<a href="3_1_assets/Intro_slides.pdf">Download the PDF of the presentation</a>
+</p>
 
 
 <!-- give the footer some space -->

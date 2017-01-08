@@ -15,6 +15,8 @@ Drew Kerkhoff
 
 [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](3_6_Teaching_Ecoinformatics.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.
 
+Note that Drew's course website, with R output is available [here](http://www.rpubs.com/kerkhoffa/SDMMaxent)
+
 # Setup
 
 ```r

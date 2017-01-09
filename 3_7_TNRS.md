@@ -15,6 +15,7 @@ Brad Boyle
 
 [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](3_7_TNRS.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
 
+
 #GUI Example
 
 
@@ -83,7 +84,10 @@ write.table(old.names.df, file="oldnames.csv",
 # TIP: try using different source to see how they affect you names
 #		before and after
 #############################################
+```
 
+
+```r
 # Import the TNRS results file as a tab-delimitted text file with headers
 # Here we are assuming the default file name supplied by TNRS
 tnrs.results.filename <- "tnrs_results.txt"
@@ -184,3 +188,5 @@ plot(tree.old, main="Before name resolution")
 # Plot the tree with resolved names
 plot(tree, main="After name resolution")
 ```
+
+![](3_7_TNRS_files/figure-html/unnamed-chunk-4-1.png)<!-- -->

@@ -23,9 +23,10 @@ knitr::read_chunk('cm_knitr_settings.r')
 
 [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](`r output`).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
 
+
 #GUI Example
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 ###############################################
 # Example use of TNRS web interface
 # By: Naim Matasci & Brad Boyle (bboyle@email.arizona.edu)
@@ -90,7 +91,9 @@ write.table(old.names.df, file="oldnames.csv",
 # TIP: try using different source to see how they affect you names
 #		before and after
 #############################################
+```
 
+```{r, eval=FALSE}
 # Import the TNRS results file as a tab-delimitted text file with headers
 # Here we are assuming the default file name supplied by TNRS
 tnrs.results.filename <- "tnrs_results.txt"
@@ -132,7 +135,7 @@ plot(tree, main="After name resolution")
 
 # API Example
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
 ###############################################
 # Example use of TNRS api
 # By: Naim Matasci

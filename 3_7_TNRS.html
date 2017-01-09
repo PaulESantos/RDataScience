@@ -486,9 +486,8 @@ write.table(old.names.df, file=&quot;oldnames.csv&quot;,
 #
 # TIP: try using different source to see how they affect you names
 #       before and after
-#############################################
-
-# Import the TNRS results file as a tab-delimitted text file with headers
+#############################################</code></pre>
+<pre class="r"><code># Import the TNRS results file as a tab-delimitted text file with headers
 # Here we are assuming the default file name supplied by TNRS
 tnrs.results.filename &lt;- &quot;tnrs_results.txt&quot;
 tnrs.results &lt;- read.table(tnrs.results.filename, header=T, sep=&quot;\t&quot;)
@@ -584,6 +583,7 @@ plot(tree.old, main=&quot;Before name resolution&quot;)
 
 # Plot the tree with resolved names
 plot(tree, main=&quot;After name resolution&quot;)</code></pre>
+<p><img src="3_7_TNRS_files/figure-html/unnamed-chunk-4-1.png" /><!-- --></p>
 </div>
 
 

@@ -9,8 +9,8 @@ Brian Maitner
 <!-- You can download`BRI -->
 
 ```r
-install.packages('https://cmerow.github.io/RDataScience/3_3_assets/BIEN_1.0.0.tar.gz')
-library(BRI)
+#install_github("bmaitner/RBIEN/BIEN")
+library(BIEN)
 library(ape) #Package for working with phylogenies in R
 library(maps) #Useful for making quick maps of occurrences
 library(sp) # A package for spatial data

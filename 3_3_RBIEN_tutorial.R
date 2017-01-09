@@ -9,7 +9,7 @@
 #' # Setup
 #' <!-- You can download`BRI -->
 ## ----message=F,warning=FALSE, results='hide'-----------------------------
-install.packages('https://cmerow.github.io/RDataScience/3_3_assets/BRI_0.1.4.0.tar.gz')
+install.packages('https://cmerow.github.io/RDataScience/3_3_assets/BIEN_1.0.0.tar.gz')
 library(BRI)
 library(ape) #Package for working with phylogenies in R
 library(maps) #Useful for making quick maps of occurrences

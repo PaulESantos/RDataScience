@@ -6,7 +6,7 @@ Brian Maitner
 
 
 # Setup
-
+<!-- You can download`BRI -->
 
 ```r
 library(BRI)

@@ -7,7 +7,7 @@
 #' 
 #' 
 #' # Setup
-#' 
+#' <!-- You can download`BRI -->
 ## ----message=F,warning=FALSE, results='hide'-----------------------------
 library(BRI)
 library(ape) #Package for working with phylogenies in R

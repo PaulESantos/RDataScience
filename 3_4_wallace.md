@@ -1,6 +1,8 @@
 # Wallace
 Jamie Kass, Matt Aiello-Lammens  
 
+<!-- Scroll down to the section beginning # *Wallace* below - this top stuff is just for the website  -->
+
 
 
 <div>
@@ -13,7 +15,10 @@ Jamie Kass, Matt Aiello-Lammens
  
  <p><a href="3_4_assets/Wallace_Intro.pdf">Download the PDF of the presentation</a></p>  
 
-[<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](3_4_wallace.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
+<!-- [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](3_4_wallace.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.   -->
+
+ <p><a href="3_4_wallace_Rmd">Download the Rmd of the code</a></p>  
+
 
 # *Wallace*
 

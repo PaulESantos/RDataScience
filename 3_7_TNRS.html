@@ -585,6 +585,201 @@ plot(tree.old, main=&quot;Before name resolution&quot;)
 plot(tree, main=&quot;After name resolution&quot;)</code></pre>
 <p><img src="3_7_TNRS_files/figure-html/unnamed-chunk-4-1.png" /><!-- --></p>
 </div>
+<div id="diaobolical-example" class="section level1">
+<h1><span class="header-section-number">3</span> Diaobolical Example</h1>
+<pre class="r"><code>###############################################
+# Really diabolical example use of TNRS web interface to scrub
+# Al Gentry plot data
+#
+# By: Brad Boyle (bboyle@email.arizona.edu)
+# Date: Jan. 5, 2017
+###############################################
+
+# Read in the plot data
+# Here we are using the Alwyn Gentry 0.1 ha transect    CERROOLU, from
+# cloud forest in Cerro Olumo, Nicaragua, saved as a CSV file. Source:
+# http://www.mobot.org/mobot/research/gentry/welcome.shtml
+rawdata &lt;- read.csv(&quot;CERROOLU.csv&quot;, header=TRUE)
+
+# Have a look at the data:
+rawdata[1:12,] 
+
+# Note the separate columns for FAMILY, GENUS, and SPECIES. Also that 
+# SPECIES is actually specific epithet, not the full species name. 
+# Note also (1) use of all caps (harder for the TNRS parser
+# to separate &amp; classify the name parts), (2) presence of morphospecies (e.g.,
+# Desmopsis M1), (3) morphospecies determined to family only (e.g., 
+# Acanthaceae M1 M1), and (4) rampant misspellings (trust me)
+
+# Lets pull just the names and add some columns
+raw.names &lt;- rawdata[,2:4]
+colnames(raw.names) &lt;- c(&quot;famly.orig&quot;, &quot;genus.orig&quot;, &quot;sp.epithet.orig&quot;)
+
+# Form the full species name
+raw.names$species.orig &lt;- paste(raw.names$genus.orig, raw.names$sp.epithet.orig, sep=&quot; &quot;)
+
+# Have a look at the first few records. 
+raw.names[1:12,]
+
+# Looks like we need to include family to disambiguate morphospecies such 
+# as &quot;Acanthaceae M1 M1&quot; which are identified to family only.  We can identify
+# these rows by the presence of a numeralspecies.orig
+raw.names[grep(&quot;[[:digit:]]&quot;, raw.names$genus.orig), c(&quot;species.orig&quot;)] &lt;- paste(
+    raw.names[grep(&quot;[[:digit:]]&quot;, raw.names$genus.orig), 1], 
+    raw.names[grep(&quot;[[:digit:]]&quot;, raw.names$genus.orig), 2], 
+    raw.names[grep(&quot;[[:digit:]]&quot;, raw.names$genus.orig), 3], 
+    sep=&quot; &quot;)
+    
+# That&#39;s better:
+raw.names[1:12,]
+
+# Let&#39;s put just the unique old names in their own data frame
+# This step is optional, but if you have a very large number of records it 
+# will save TNRS processing time to process unique names only. Also,
+# it is easier to inspect the results
+unique.names &lt;- unique(raw.names$species.orig)
+
+# We could upload just the names, but let&#39;s add an ID just to be safe
+unique.names &lt;- as.data.frame(unique.names)
+unique.names[,2] &lt;- unique.names[,1]
+unique.names[,1] &lt;- seq(1:nrow(unique.names))
+colnames(unique.names) &lt;- c(&quot;id&quot;,&quot;Name_submitted&quot;)
+
+# Write names and IDs to tab-delimitted file without headers
+#  A CSV file would also work
+write.table(unique.names, file=&quot;unique_names.csv&quot;, 
+    row.names=FALSE, col.names=FALSE, sep=&quot;,&quot;)
+    
+##################################################
+# STOP HERE AND PROCESS THE NAMES MANUALLY USING THE TNRS
+#
+# 1. Upload &amp; process names file with TNRS web interface
+# (http://tnrs.iplantcollaborative.org/TNRSapp.html)
+#       a. Edit &quot;Name processing settings&quot; on right
+#           i. Select source &quot;Tropicos&quot; only. Why? Because Tropicos is
+#               the best authority for New World tropical plant names
+#       b. Select tab &quot;Upload and Submit List&quot;
+#       c. Check box &quot;My file contains an identifier as first column&quot;
+#       d. Choose file, enter email, and submit
+#
+# *** You will be notified by email when results are ready ***
+#
+# 2. Inspect the results!!! Especially, anything with a flag,. Also select 
+#       alternative species matches if applicable. For genera of morphospecies
+#       this isn&#39;t usually necessary.
+#       a. Select tab &quot;Retrieve Results&quot;
+#       b. Enter your email and submission key (from notification email)
+#       c. Inspect &amp; research. When in doubt, use the hyperlinks to research 
+#           names at the original source. If you select alternative matches, 
+#           these will be downloaded instead as the best match. Research 
+#           any name with Taxonomic Status &lt;&gt; Accepted or Synonym.
+# 
+# NOTE 1. The TNRS could not resolve &quot;SARCORHACHIS NARANPANUM&quot;. 
+#       Following the link to Tropicos takes you to the page for the genus 
+#       &quot;Sarcorhachis&quot;. Click on the link   &quot;Subordinate Taxa&quot;. Scrolling down the 
+#       list of species, it appears that the submitted name is an extremely garbled 
+#       misspelling of &quot;Sarcorhachis naranjoana&quot;. At this point, you could either fix
+#       the name in the existing TNRS results, or change the spelling in the data frame
+#       of original names and re-submit to the TNRS. Let&#39;s just fix it ourselves.
+#
+#   NOTE 2. We have one &quot;Illegitimate&quot; name in our list: &quot;Lasianthea fruticosa&quot;.
+#       Tropicos reports that this is a spelling variant of &quot;Lasianthaea fruticosa&quot;, 
+#       But for some reason they do not correct it. As a spelling variant, it should be
+#       marked Invalid, not Illegitimate. In any case, we&#39;ll fix it later.
+#
+# NOTE 3: We have one &quot;Invalid&quot; name on our list: &quot;Tetrapteris schiedeana&quot;.
+#       This is a spelling variant which was never formally published. Tropicos
+#       reports that the name can be &quot;automatically correctable to Tetrapterys&quot;,
+#       but for some reason they do not do so. Let&#39;s correct it ourselves.
+#
+# 3. Download the results, with the following options:
+#           a. Best matches only
+#           b. Detailed download format
+#           c. UTF-8
+#           d. Rename download file; let&#39;s call it &quot;unique_names_scrubbed.txt&quot;
+#           e. Save the file to this directory
+#
+##################################################
+
+# Import the TNRS results file as a tab-delimitted text file with headers
+# Here we are assuming the default file name supplied by TNRS
+tnrs.results.filename &lt;- &quot;unique_names_scrubbed.txt&quot;
+tnrs.results &lt;- read.table(tnrs.results.filename, header=T, sep=&quot;\t&quot;)
+
+# Merge the old and new names into single data frame, by id
+# Lets include family and unmatched terms, as well as the matched species name.
+# Also let&#39;s save authorities. Just because.
+new.names.df &lt;- tnrs.results[, c(&quot;user_id&quot;, 
+    &quot;Name_matched_accepted_family&quot;, &quot;Name_matched&quot;, 
+    &quot;Name_matched_author&quot;, &quot;Name_matched_rank&quot;, 
+    &quot;Accepted_name_family&quot;, &quot;Accepted_name&quot;, &quot;Accepted_name_author&quot;,
+    &quot;Unmatched_terms&quot;, &quot;Taxonomic_status&quot;
+    )]
+names &lt;- merge(unique.names, new.names.df, by.x=c(&quot;id&quot;), by.y=c(&quot;user_id&quot;))
+names &lt;- data.frame(lapply(names, as.character), stringsAsFactors=FALSE)
+
+# Add some new columns to hold the final family, taxon, morphospecies
+# and author. Start by pasting in the accepted names
+names$family.final &lt;- names$Accepted_name_family
+names$name.final &lt;- names$Accepted_name
+names$authority.final &lt;- names$Accepted_name_author
+names$morphospecies.final &lt;- &quot;&quot;
+names[is.na(names)] &lt;- &quot;&quot;
+
+# Let&#39;s have a look at just the names:
+names[ 1:12, c(&quot;Name_submitted&quot;, &quot;Name_matched&quot;, &quot;Accepted_name&quot;, &quot;name.final&quot;)]
+
+# If TNRS did not return any accepted name (no match, or name is already accepted), 
+# use the final name instead
+names[names[,c(&quot;Accepted_name&quot;)]==&quot;&quot;, c(&quot;family.final&quot;)] &lt;-
+    names[names[,c(&quot;Accepted_name&quot;)]==&quot;&quot;, c(&quot;Name_matched_accepted_family&quot;)] 
+names[names[,c(&quot;Accepted_name&quot;)]==&quot;&quot;, c(&quot;name.final&quot;)] &lt;-
+    names[names[,c(&quot;Accepted_name&quot;)]==&quot;&quot;,c(&quot;Name_matched&quot;)] 
+names[names[,c(&quot;Accepted_name&quot;)]==&quot;&quot;, c(&quot;authority.final&quot;)] &lt;-
+    names[names[,c(&quot;Accepted_name&quot;)]==&quot;&quot;,c(&quot;Name_matched_author&quot;)] 
+
+# Check again
+names[ 1:12, c(&quot;Name_submitted&quot;, &quot;Name_matched&quot;, &quot;Accepted_name&quot;, &quot;name.final&quot;)]
+
+# Let get rid of authority for names only identified to family or genus
+names[names[, c(&quot;Name_matched_rank&quot;)]==&quot;family&quot; ,c(&quot;authority&quot;)] &lt;- &quot;&quot;
+names[names[, c(&quot;Name_matched_rank&quot;)]==&quot;genus&quot; ,c(&quot;authority&quot;)] &lt;- &quot;&quot;
+
+# Fix the three invalid/illegitimate or unmatched names:
+names[names[, c(&quot;Name_submitted&quot;)]==&quot;LASIANTHEA FRUTICOSA&quot; , c(&quot;family.final&quot;)] &lt;- &quot;Asteraceae&quot;
+names[names[, c(&quot;Name_submitted&quot;)]==&quot;LASIANTHEA FRUTICOSA&quot; , c(&quot;name.final&quot;)] &lt;- &quot;Lasianthaea fruticosa&quot;
+names[names[, c(&quot;Name_submitted&quot;)]==&quot;LASIANTHEA FRUTICOSA&quot; , c(&quot;authority.final&quot;)] &lt;- &quot;(L.) K.M. Becker&quot;
+
+names[names[, c(&quot;Name_submitted&quot;)]==&quot;SARCORHACHIS NARANPANUM&quot; , c(&quot;family.final&quot;)] &lt;- &quot;Piperaceae&quot;
+names[names[, c(&quot;Name_submitted&quot;)]==&quot;SARCORHACHIS NARANPANUM&quot; , c(&quot;name.final&quot;)] &lt;- &quot;Sarcorhachis naranjoana&quot;
+names[names[, c(&quot;Name_submitted&quot;)]==&quot;SARCORHACHIS NARANPANUM&quot; , c(&quot;authority.final&quot;)] &lt;- &quot;(C. DC.) Trel.&quot;
+
+names[names[, c(&quot;Name_submitted&quot;)]==&quot;TETRAPTERIS SCHIEDEANA&quot; , c(&quot;family.final&quot;)] &lt;- &quot;Malpighiaceae&quot;
+names[names[, c(&quot;Name_submitted&quot;)]==&quot;TETRAPTERIS SCHIEDEANA&quot; , c(&quot;name.final&quot;)] &lt;- &quot;Tetrapterys schiedeana&quot;
+names[names[, c(&quot;Name_submitted&quot;)]==&quot;TETRAPTERIS SCHIEDEANA&quot; , c(&quot;authority.final&quot;)] &lt;- &quot;Schltdl. &amp; Cham.&quot;
+
+# Finally, let&#39;s put morphospecies back together:
+names[is.na(names)] &lt;- &quot;&quot;
+names$morphospecies.final &lt;- paste(names$name.final, names$Unmatched_terms, sep=&quot; &quot;)
+# Trim whitespace. You may need to use the fancier version if you have R earlier than 3.2.0
+names$morphospecies.final &lt;- trimws(names$morphospecies.final)
+
+# Check the final result:
+names[ , c(&quot;Name_submitted&quot;, &quot;Name_matched_accepted_family&quot;, &quot;Name_matched&quot;, &quot;Accepted_name_family&quot;, &quot;Accepted_name&quot;, 
+    &quot;family.final&quot;, &quot;name.final&quot;, &quot;morphospecies.final&quot;
+    )]
+    
+# Pretty good, but not quite perfect. Note that &quot;real&quot; specific epithets that did not 
+# match (as  opposed to morphospecies names) weren&#39;t dumped to Unmatched_terms.
+# So you&#39;ll still need to do some special handling to reform a morphospecies for such
+# name. (E.g., &quot;STEMMADENIA DONNELL-SMITHII&quot;; try extracting the unmatched part
+# and append to the matched genus: &quot;Stemmadenia DONNELL-SMITHII&quot;). And you&#39;ll 
+# need to remove the message &quot;No suitable matches found.&quot; that the TNRS pastes
+# into complete non-matches
+
+# Final step: I&#39;ll leave it to you join your final names back to the original 
+# data file. </code></pre>
+</div>
 
 
 <!-- give the footer some space -->

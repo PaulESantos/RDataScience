@@ -22,7 +22,7 @@ author: 2017 International Biogeography Meeting
 
 While you're waiting, please :
 
-Sign up for an account to access [bien3.org](bien3.org)
+Sign up for an account to access [www.bien3.org](www.bien3.org)
 
 ```{r,eval=FALSE}
 install.packages(c('devtools', 'netassoc'),dep=T)

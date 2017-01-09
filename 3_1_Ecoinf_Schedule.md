@@ -20,7 +20,7 @@
 
 While you're waiting, please :
 
-Sign up for an account to access [bien3.org](bien3.org)
+Sign up for an account to access [www.bien3.org](www.bien3.org)
 
 
 ```r

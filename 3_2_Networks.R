@@ -4,6 +4,7 @@
 #' ---
 #' 
 #' 
+#' 
 #' <div>
 #' <object data="3_2_assets/network_slides.pdf" type="application/pdf" width="100%" height="650px"> 
 #'   <p>It appears you don't have a PDF plugin for this browser.
@@ -13,7 +14,7 @@
 #'  </div>
 #'  
 #'  <p><a href="3_2_assets/network_slides.pdf">Download the PDF of the presentation</a></p>  
-#' 
+#'  
 #' 
 #' [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](`r output`).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
 #' 

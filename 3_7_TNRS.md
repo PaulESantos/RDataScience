@@ -13,7 +13,7 @@ Brad Boyle
  
  <p><a href="3_7_assets/tnrs.pdf">Download the PDF of the presentation</a></p>  
 
-[<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](3_7_TNRS.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
+[<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](3_7_TNRS.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  ** Sorry, this download is not currently working - please follow the code below**
 
 
 #GUI Example

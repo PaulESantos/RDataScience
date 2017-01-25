@@ -48,8 +48,8 @@ left:
         href: 3_6_Teaching_Ecoinformatics.html   
   - text: "Ecological Modeling"
     menu:
-    - text: "Under Construction"
-      href: Under_Construction.html   
+    - text: "Range Models with Wallace"
+      href: 4_1_Wallace_SDMs.html   
   - text: "Resources"
     href: Head3_Resources.html
 right:

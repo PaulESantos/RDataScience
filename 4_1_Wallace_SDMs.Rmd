@@ -27,7 +27,7 @@ knitr::read_chunk('cm_knitr_settings.r')
 [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](`r output`).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
 
 # Setup
-For `wallace` to work, *you need the latest version of R* (or at least later than version 3.2.4). Download for 
+For `wallace` to work, **you need the latest version of R** (or at least later than version 3.2.4). Download for 
 [Windows](https://cran.r-project.org/bin/windows/base/) or [Mac](https://cran.r-project.org/bin/macosx/).
 
 Load necessary libraries. 
@@ -38,7 +38,7 @@ library(wallace)
 run_wallace() # this will open the Wallace GUI in a web browser
 ```
 
-The `wallace` GUI will open in your web browser and the R command line will be occupied (you only get a prompt back by pushing 'escape'). If you find this annoying and want to use your typical R command line, open a terminal window, type `R` to start R, and then run the lines above in that window. This will tie up your terminal window but not your usual R command line (e.g. RStudio, or the R GUI). *You need to avoid exiting your browser window or closing the R window that initiated `wallace` or you'll have to start over! Luckily that's pretty fast...* Using the terminal looks like this:
+The `wallace` GUI will open in your web browser and the R command line will be occupied (you only get a prompt back by pushing 'escape'). If you find this annoying and want to use your typical R command line, open a terminal window, type `R` to start R, and then run the lines above in that window. This will tie up your terminal window but not your usual R command line (e.g. RStudio, or the R GUI). **You need to avoid exiting your browser window or closing the R window that initiated `wallace` or you'll have to start over! Luckily that's pretty fast...** Using the terminal looks like this:
 
 <br>
 ![](4_1_assets/Wallace_Introb.png)
@@ -52,7 +52,7 @@ Typing `run_wallace()` will give you the following in your web browser:
 
 # Get Occurrence Data
 
-Start by getting about 300 records of *Acer rubrum* (red maple) from GBIF. Throughout, I'll use a red arrow in the images below to indicate which buttons I'm referring to.
+Start by getting about 300 records of **Acer rubrum** (red maple) from GBIF. Throughout, I'll use a red arrow in the images below to indicate which buttons I'm referring to.
 
 
 <br>
@@ -68,7 +68,7 @@ Notice that there are tabs along the top, and you can view the sources of the oc
 
 
 <br>
-Each *Module* (the tabs labeled 1-8 at the top of the screen) comes with guidance and references by select the tabs at the right.
+Each **Module** (the tabs labeled 1-8 at the top of the screen) comes with guidance and references by select the tabs at the right.
 
 <br>
 ![](4_1_assets/Wallace1c.png)
@@ -97,7 +97,7 @@ Download these points for later reference.
 
 Now we need some covariates to describe occurrence patterns. Worldclim is global climate data base that is very popular to both use and complain about. It seems pretty good in regions with lots of weather stations, but has issues, especially with precipitation-related things. Lesson: statistical models have problems if you don't have data. So its perfectly good for coarse resolution work, and was a decade ahead of competitors that are only emerging now. We'll add those to Wallace eventually.
 
-Choose the *10 arcmin* data and press download. The first time you use `wallace` these data are slowly downloaded; after that you don't have to wait. *Don't select finer resolution* or you'll be downloading while the rest of us are modeling. 
+Choose the **10 arcmin** data and press download. The first time you use `wallace` these data are slowly downloaded; after that you don't have to wait. **Don't select finer resolution** or you'll be downloading while the rest of us are modeling. 
 
 <br>
 
@@ -108,7 +108,7 @@ Notice that the log window notes that one point was discarded because environmen
 
 # Prep environmental data
 
-Now we need to choose the extent of the modeling domain. This jargon means that we have to define a sensible region to fit the model. Contrary to many publications, species ranges are not typically best modeling on domains defined by squares or political boundaries. Press some buttons on this screen to explore the options, but end up with something like what I show below. We'll explore the consequences shortly. Press the *Mask* button to trim the environmental layers to this polygon and download the result.
+Now we need to choose the extent of the modeling domain. This jargon means that we have to define a sensible region to fit the model. Contrary to many publications, species ranges are not typically best modeling on domains defined by squares or political boundaries. Press some buttons on this screen to explore the options, but end up with something like what I show below. We'll explore the consequences shortly. Press the **Mask** button to trim the environmental layers to this polygon and download the result.
 
 <br>
 
@@ -167,7 +167,7 @@ This takes about 2 min; you're building 3 model types and 4 folds for each, and 
 ![](4_1_assets/Wallace6a.png)
 
 <br>
-Notice that the first time I ran this, I got an error, which you may get too. You need to put the maxent software (maxent.jar) in the directory where `wallace` will look for it. This is a bug we're working on. As the log window indicates, download the file and put it in the appropriate directory. Then click *Run Models* again. The result is number of statistics to compare the different models you just built. There should be 3: one for each of the regularization multipliers 1,2,3.
+Notice that the first time I ran this, I got an error, which you may get too. You need to put the maxent software (maxent.jar) in the directory where `wallace` will look for it. This is a bug we're working on. As the log window indicates, download the file and put it in the appropriate directory. Then click **Run Models** again. The result is number of statistics to compare the different models you just built. There should be 3: one for each of the regularization multipliers 1,2,3.
 
 <br>
 ![](4_1_assets/Wallace6b.png)
@@ -178,16 +178,16 @@ Notice that the first time I ran this, I got an error, which you may get too. Yo
 <br>
 
 # Visualize
-Now let's see which model performs best. Statistics based on the data witheld from fitting (*test data*) are the most reliable for determining the model's generality and ability to transfer to other locations. The model with regularization mulitiple = 2 appears to be the best model based on avg.test.auc=0.804. Moving to the Visualize tab (module 7), you can plot the performance statistics across models. Explore the options a little.
+Now let's see which model performs best. Statistics based on the data witheld from fitting (**test data**) are the most reliable for determining the model's generality and ability to transfer to other locations. The model with regularization mulitiple = 2 appears to be the best model based on avg.test.auc=0.804. Moving to the Visualize tab (module 7), you can plot the performance statistics across models. Explore the options a little.
 
 <br>
 ![](4_1_assets/Wallace7a.png)
 
 <br>
 
-To evaluate whether the model makes biological sense, we can look at *response curves* that define how each predictor (x-axis) relates to suitability (y-axis). The modal shape seems reasonable; there are places where the temp range is both too wide and too narrow for A. rubrum. The little jagged pieces intuitively seem like overfitting; why would a species, over an evolutionary time span, have an abrupt dip in response to temp range (as seen around 430). (Note that the units are degrees C x 100; worldclim serves the files this way to compress them.)
+To evaluate whether the model makes biological sense, we can look at **response curves** that define how each predictor (x-axis) relates to suitability (y-axis). The modal shape seems reasonable; there are places where the temp range is both too wide and too narrow for A. rubrum. The little jagged pieces intuitively seem like overfitting; why would a species, over an evolutionary time span, have an abrupt dip in response to temp range (as seen around 430). (Note that the units are degrees C x 100; worldclim serves the files this way to compress them.)
 
-The *bioclim* predictors are a series of summaries of temp and precip that have been determined to have some biological significance. They're all listed [here](http://www.worldclim.org/bioclim). bio7, seen below, is the annual temperature range.
+The **bioclim** predictors are a series of summaries of temp and precip that have been determined to have some biological significance. They're all listed [here](http://www.worldclim.org/bioclim). bio7, seen below, is the annual temperature range.
 
 <br>
 
@@ -234,7 +234,7 @@ As another example, of `wallace`'s features, we can also project to future clima
 
 # Extracting the code
 
-A major advantage of `wallace` compared to other GUI-based software is that you can extract all the code used to run the analysis. This allows you to recall what you did, share it, or modify it. The code is best extracted in *R markdown* format, which is a convienient format for combining R and text (and actually forms the basis of this website). Other formats are also available; for example Microsoft Word output mught be useful if you live in the '90s.
+A major advantage of `wallace` compared to other GUI-based software is that you can extract all the code used to run the analysis. This allows you to recall what you did, share it, or modify it. The code is best extracted in **R markdown** format, which is a convienient format for combining R and text (and actually forms the basis of this website). Other formats are also available; for example Microsoft Word output mught be useful if you live in the '90s.
 
 To download the code, select Rmd and click Download. You may need to go to your R window and allow R to set up a cache to proceed. Extraction takes a minute; currently it has to rerun all the analyses we just did. We'll fix this in an upcoming release to avoid the redundancy.
 
@@ -246,7 +246,7 @@ To download the code, select Rmd and click Download. You may need to go to your 
 
 Now, you should have an .Rmd file that contains your complete analysis. Sometimes, if you make a bunch of mistakes while playing with the GUI, you might get an error when extracting the .Rmd. If that happens, you can download mine [here](https://cmerow.github.io/RDataScience/4_1_assets/Outputs/wallace-session-2017-01-26.Rmd)
 
-Rmd files combine regular text with *code chunks*, shown by the red arrow below. Modules from `wallace` are indicated as headers denoted by *###*. For a quick reference to Rmd syntax, see [here](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+Rmd files combine regular text with **code chunks**, shown by the red arrow below. Modules from `wallace` are indicated as headers denoted by **###**. For a quick reference to Rmd syntax, see [here](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
 
 <br>
 
@@ -255,7 +255,7 @@ Rmd files combine regular text with *code chunks*, shown by the red arrow below.
 
 You might want to open a new R window and try running some of this code. Just note that if you close your `wallace` session you'll lose your progress in the web browser (but your Rmd will be unaffected).
 
-If you use RStudio, you can open this Rmd an click to *knit* to compile your workflow into a sharable html document. Just in case you encountered an error, you can see mine [here](https://cmerow.github.io/RDataScience/4_1_assets/Outputs/wallace-session-2017-01-26.html)
+If you use RStudio, you can open this Rmd an click to **knit** to compile your workflow into a sharable html document. Just in case you encountered an error, you can see mine [here](https://cmerow.github.io/RDataScience/4_1_assets/Outputs/wallace-session-2017-01-26.html)
 
 Note that you can change anything you like in this code to build upon your workflow. Future versions of `wallace` will enable you to upload such modified Rmds to `wallace` to fill in all the options you chose and pick up where you left off in a previous analysis in the GUI.
 

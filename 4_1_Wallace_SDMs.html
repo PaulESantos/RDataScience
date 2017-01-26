@@ -437,6 +437,62 @@ run_wallace() # this will open the Wallace GUI in a web browser</code></pre>
 
 </div>
 </div>
+<div id="get-occurrence-data" class="section level1">
+<h1><span class="header-section-number">2</span> Get Occurrence Data</h1>
+<p>Start by getting about 300 records of <em>Acer rubrum</em> (red maple) from GBIF. Throughout, I’ll use a red arrow in the images below to indicate which buttons I’m referring to.</p>
+<div class="figure">
+<img src="4_1_assets/Wallace1a.png" />
+
+</div>
+<p>While you’re at it, download the data for later use (bottom left).</p>
+<p>Notice that there are tabs along the top, and you can view the sources of the occurrence data. Later you can choose to ditch some if it looks suspect.</p>
+<div class="figure">
+<img src="4_1_assets/Wallace1b.png" />
+
+</div>
+<p>Each <em>Module</em> (the tabs labeled 1-8 at the top of the screen) comes with guidance and references by select the tabs at the right.</p>
+<div class="figure">
+<img src="4_1_assets/Wallace1c.png" />
+
+</div>
+</div>
+<div id="prep-occurrences" class="section level1">
+<h1><span class="header-section-number">3</span> Prep Occurrences</h1>
+<p>Now let’s clean up the data. If we want to model <em>A. Rubrum</em> in the US, we can toss that odd point in Europe. Click the point to see it’s info and then enter the ID at the left to remove it.</p>
+<div class="figure">
+<img src="4_1_assets/Wallace2a.png" />
+
+</div>
+<p>The samples may exhibit spatial autocorrelation, which is best to account for in the model or remove before modeling. For example, there might be a bunch of samples near cities because these are mostly from iNaturalist (citizen science) and citizen often live near cities. So lets spatially thin the points and make sure they’re all at least 10km from one another. That left me with 163 points for modeling.</p>
+<div class="figure">
+<img src="4_1_assets/Wallace2b.png" />
+
+</div>
+<p>Download these points for later reference.</p>
+</div>
+<div id="get-environmental-data" class="section level1">
+<h1><span class="header-section-number">4</span> Get environmental data</h1>
+</div>
+<div id="prep-environmental-data" class="section level1">
+<h1><span class="header-section-number">5</span> Prep environmental data</h1>
+</div>
+<div id="partition-occurrences" class="section level1">
+<h1><span class="header-section-number">6</span> Partition occurrences</h1>
+</div>
+<div id="model" class="section level1">
+<h1><span class="header-section-number">7</span> Model</h1>
+</div>
+<div id="visualize" class="section level1">
+<h1><span class="header-section-number">8</span> Visualize</h1>
+</div>
+<div id="map" class="section level1">
+<h1><span class="header-section-number">9</span> Map</h1>
+</div>
+<div id="post-processing-e.g.richness" class="section level1">
+<h1><span class="header-section-number">10</span> Post-processing (e.g. Richness)</h1>
+<p>At the moment we don’t have anything built into <code>wallace</code> for this step, so you can use R directly with the code creates above.</p>
+<p>First, you’ll need to extract the .Rmd of your analysis.</p>
+</div>
 
 
 <!-- give the footer some space -->

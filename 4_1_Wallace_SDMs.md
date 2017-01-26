@@ -38,3 +38,54 @@ Typing `run_wallace()` will give you the following in your web browser:
 
 ![](4_1_assets/Wallace_Intro.png)
 
+
+# Get Occurrence Data
+
+Start by getting about 300 records of *Acer rubrum* (red maple) from GBIF. Throughout, I'll use a red arrow in the images below to indicate which buttons I'm referring to.
+
+
+![](4_1_assets/Wallace1a.png)
+
+While you're at it, download the data for later use (bottom left).
+
+Notice that there are tabs along the top, and you can view the sources of the occurrence data. Later you can choose to ditch some if it looks suspect.
+
+
+![](4_1_assets/Wallace1b.png)
+
+
+Each *Module* (the tabs labeled 1-8 at the top of the screen) comes with guidance and references by select the tabs at the right.
+
+![](4_1_assets/Wallace1c.png)
+
+
+# Prep Occurrences
+
+Now let's clean up the data. If we want to model *A. Rubrum* in the US, we can toss that odd point in Europe. Click the point to see it's info and then enter the ID at the left to remove it.
+
+![](4_1_assets/Wallace2a.png)
+
+The samples may exhibit spatial autocorrelation, which is best to account for in the model or remove before modeling. For example, there might be a bunch of samples near cities because these are mostly from iNaturalist (citizen science) and citizen often live near cities. So lets spatially thin the points and make sure they're all at least 10km from one another. That left me with 163 points for modeling.
+
+
+![](4_1_assets/Wallace2b.png)
+
+Download these points for later reference.
+
+# Get environmental data
+
+# Prep environmental data
+
+# Partition occurrences
+
+# Model
+
+# Visualize
+
+# Map
+
+# Post-processing (e.g. Richness)
+At the moment we don't have anything built into `wallace` for this step, so you can use R directly with the code creates above.
+
+First, you'll need to extract the .Rmd of your analysis.
+

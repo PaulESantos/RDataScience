@@ -4,24 +4,21 @@ Cory Merow
 
 
 
-<!-- <div> -->
-<!-- <object data="4_1_assets/Wallace_SDMs1.pdf" type="application/pdf" width="100%" height="650px">  -->
-<!--   <p>It appears you don't have a PDF plugin for this browser. -->
-<!--    No biggie... you can <a href="4_1_assets/Wallace_SDMs1.pdf">click here to -->
-<!--   download the PDF file.</a></p>   -->
-<!--  </object> -->
-<!--  </div> -->
+<div>
+<object data="4_1_assets/4_1_SDMs_Intro.pdf" type="application/pdf" width="100%" height="700px">
+  <p>It appears you don't have a PDF plugin for this browser.
+   No biggie... you can <a href="4_1_assets/4_1_SDMs_Intro.pdf">click here to
+  download the PDF file.</a></p>
+ </object>
+ </div>
 
-<!--  <p><a href="4_1_assets/Wallace_SDMs1.pdf">Download the PDF of the presentation</a></p>   -->
+ <p><a href="4_1_assets/4_1_SDMs_Intro.pdf">Download the PDF of the presentation</a></p>
 
 [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](4_1_Wallace_SDMs.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
 
 # Setup
-For `wallace` to work, *you need the latest version of R* (or at least later than version 3.2.4)
-
-[Windows](https://cran.r-project.org/bin/windows/base/)
-
-[Mac](https://cran.r-project.org/bin/macosx/)
+For `wallace` to work, *you need the latest version of R* (or at least later than version 3.2.4). Download for 
+[Windows](https://cran.r-project.org/bin/windows/base/) or [Mac](https://cran.r-project.org/bin/macosx/).
 
 Load necessary libraries. 
 
@@ -225,7 +222,7 @@ To download the code, select Rmd and click Download. You may need to go to your 
 
 Now, you should have an .Rmd file that contains your complete analysis. Sometimes, if you make a bunch of mistakes while playing with the GUI, you might get an error when extracting the .Rmd. If that happens, you can download mine [here](https://cmerow.github.io/RDataScience/4_1_assets/Outputs/wallace-session-2017-01-26.Rmd)
 
-Rmd files combine regular text with *code chunks*, which are initiated with * ` ` ` {r}*  and concluded with * ` ` ` *. Modules from `wallace` are indicated as headers denoted by *###*. For a quick reference to Rmd syntax, see [here](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+Rmd files combine regular text with *code chunks*, shown by the red arrow below. Modules from `wallace` are indicated as headers denoted by *###*. For a quick reference to Rmd syntax, see [here](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
 
 <br>
 
@@ -238,4 +235,17 @@ At the moment we don't have anything built into `wallace` for post-processing, s
 
 # Improving the model
 
-Let's revisit that crappy prediction into northern Canada. This issue derived from a poor choice of modeling domain. 
+Let's revisit that crappy prediction into northern Canada. This issue derived from a poor choice of modeling domain and an overfit model. Try rerunning the analysis by extending the domain to include many locations where the species does not occur (see below) and using a simpler model that includes only linear and quadtratic features.
+
+<br>
+
+![](4_1_assets/WallaceNexta.png)
+
+<br>
+
+Here are the improved predictions that avoid prediction in northern Canada.
+
+<br>
+
+![](4_1_assets/WallaceNexta.png)
+

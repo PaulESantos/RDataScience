@@ -411,20 +411,20 @@ div.tocify {
 </div>
 
 
-<!-- <div> -->
-<!-- <object data="4_1_assets/Wallace_SDMs1.pdf" type="application/pdf" width="100%" height="650px">  -->
-<!--   <p>It appears you don't have a PDF plugin for this browser. -->
-<!--    No biggie... you can <a href="4_1_assets/Wallace_SDMs1.pdf">click here to -->
-<!--   download the PDF file.</a></p>   -->
-<!--  </object> -->
-<!--  </div> -->
-<!--  <p><a href="4_1_assets/Wallace_SDMs1.pdf">Download the PDF of the presentation</a></p>   -->
+<div>
+<object data="4_1_assets/4_1_SDMs_Intro.pdf" type="application/pdf" width="100%" height="700px">
+<p>
+It appears you don’t have a PDF plugin for this browser. No biggie… you can <a href="4_1_assets/4_1_SDMs_Intro.pdf">click here to download the PDF file.</a>
+</p>
+</object>
+</div>
+<p>
+<a href="4_1_assets/4_1_SDMs_Intro.pdf">Download the PDF of the presentation</a>
+</p>
 <p><a href="4_1_Wallace_SDMs.R"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here</a>. Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.</p>
 <div id="setup" class="section level1">
 <h1><span class="header-section-number">1</span> Setup</h1>
-<p>For <code>wallace</code> to work, <em>you need the latest version of R</em> (or at least later than version 3.2.4)</p>
-<p><a href="https://cran.r-project.org/bin/windows/base/">Windows</a></p>
-<p><a href="https://cran.r-project.org/bin/macosx/">Mac</a></p>
+<p>For <code>wallace</code> to work, <em>you need the latest version of R</em> (or at least later than version 3.2.4). Download for <a href="https://cran.r-project.org/bin/windows/base/">Windows</a> or <a href="https://cran.r-project.org/bin/macosx/">Mac</a>.</p>
 <p>Load necessary libraries.</p>
 <pre class="r"><code>install.packages(&#39;knitr&#39;,dep=T) # you need the latest version, even if you already have it
 install.packages(&#39;wallace&#39;,dep=T)
@@ -566,7 +566,7 @@ run_wallace() # this will open the Wallace GUI in a web browser</code></pre>
 </div>
 <p><br></p>
 <p>Now, you should have an .Rmd file that contains your complete analysis. Sometimes, if you make a bunch of mistakes while playing with the GUI, you might get an error when extracting the .Rmd. If that happens, you can download mine <a href="https://cmerow.github.io/RDataScience/4_1_assets/Outputs/wallace-session-2017-01-26.Rmd">here</a></p>
-<p>Rmd files combine regular text with <em>code chunks</em>, which are initiated with * <code>`</code> {r}* and concluded with * <code>`</code> <em>. Modules from <code>wallace</code> are indicated as headers denoted by </em>###*. For a quick reference to Rmd syntax, see <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">here</a></p>
+<p>Rmd files combine regular text with <em>code chunks</em>, shown by the red arrow below. Modules from <code>wallace</code> are indicated as headers denoted by <em>###</em>. For a quick reference to Rmd syntax, see <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">here</a></p>
 <p><br></p>
 <p><img src="4_1_assets/WallaceRMDa.png" /> <br></p>
 <p>You might want to open a new R window and try running some of this code. Just note that if you close your <code>wallace</code> session you’ll lose your progress in the web browser (but your Rmd will be unaffected).</p>
@@ -574,7 +574,19 @@ run_wallace() # this will open the Wallace GUI in a web browser</code></pre>
 </div>
 <div id="improving-the-model" class="section level1">
 <h1><span class="header-section-number">11</span> Improving the model</h1>
-<p>Let’s revisit that crappy prediction into northern Canada. This issue derived from a poor choice of modeling domain.</p>
+<p>Let’s revisit that crappy prediction into northern Canada. This issue derived from a poor choice of modeling domain and an overfit model. Try rerunning the analysis by extending the domain to include many locations where the species does not occur (see below) and using a simpler model that includes only linear and quadtratic features.</p>
+<p><br></p>
+<div class="figure">
+<img src="4_1_assets/WallaceNexta.png" />
+
+</div>
+<p><br></p>
+<p>Here are the improved predictions that avoid prediction in northern Canada.</p>
+<p><br></p>
+<div class="figure">
+<img src="4_1_assets/WallaceNexta.png" />
+
+</div>
 </div>
 
 

@@ -118,7 +118,19 @@ In order to check whether you've built a decent model, you need some data to val
 <br>
 Take a moment to scroll through the log window at the top of the screen and review all the steps you've taken so far.
 
+
 # Model
+
+<div>
+<object data="4_1_assets/4_1_SDMs_Similarity.pdf" type="application/pdf" width="100%" height="700px">
+  <p>It appears you don't have a PDF plugin for this browser.
+   No biggie... you can <a href="4_1_assets/4_1_SDMs_Similarity.pdf">click here to
+  download the PDF file.</a></p>
+ </object>
+ </div>
+
+ <p><a href="4_1_assets/4_1_SDMs_Similarity.pdf">Download the PDF of the presentation</a></p>
+
 
 Finally, we're going to make use of that results tab in the middle of the screen. Let's build a Maxent model; this is a machine learning method that fits wiggly functions to patterns in the data. Its great for exploring complex patterns. If you construct it with a particular set of decisions it becomes very similar to a simple GLM. So it can conver a wide spectrum of complexity. If you want more details, ask Cory; he's written a lot of papers on this so he may talk for while....
 
@@ -131,7 +143,10 @@ Below I've chosen some modeling options:
     + P = Product, e.g. interaction terms of the form temp*precip
     + H = Hinge, e.g. piecewise linear functions. Taking all possible pairs of these between data points, you can build a very flexible function, similar to a GAM (generalized additive model).
     + T = Threshold, e.g. step functions between each pair of data points
-    
+
+<br>
+![](4_1_assets/hinge_threshold.png)
+
   - Select regularization multipliers between 1-3
     + regularization is a way to reduce model complexity. Higher values = smoother, less complex models. Its kind of like using AIC during model fitting to toss out certain predictors. Just ask for more details.
   - RM Step Value = 1
@@ -231,9 +246,26 @@ Rmd files combine regular text with *code chunks*, shown by the red arrow below.
 
 You might want to open a new R window and try running some of this code. Just note that if you close your `wallace` session you'll lose your progress in the web browser (but your Rmd will be unaffected).
 
+If you use RStudio, you can open this Rmd an click to *knit* to compile your workflow into a sharable html document. Just in case you encountered an error, you can see mine [here](https://cmerow.github.io/RDataScience/4_1_assets/Outputs/wallace-session-2017-01-26.html)
+
+Note that you can change anything you like in this code to build upon your workflow. Future versions of `wallace` will enable you to upload such modified Rmds to `wallace` to fill in all the options you chose and pick up where you left off in a previous analysis in the GUI.
+
 At the moment we don't have anything built into `wallace` for post-processing, so you can use R directly to build from the code created above.
 
 # Improving the model
+
+<div>
+<object data="4_1_assets/4_1_SDMs_Decisions.pdf" type="application/pdf" width="100%" height="700px">
+  <p>It appears you don't have a PDF plugin for this browser.
+   No biggie... you can <a href="4_1_assets/4_1_SDMs_Decisions.pdf">click here to
+  download the PDF file.</a></p>
+ </object>
+ </div>
+
+ <p><a href="4_1_assets/4_1_SDMs_Decisions.pdf">Download the PDF of the presentation</a></p>
+
+[<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](4_1_Wallace_SDMs.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  
+
 
 Let's revisit that crappy prediction into northern Canada. This issue derived from a poor choice of modeling domain and an overfit model. Try rerunning the analysis by extending the domain to include many locations where the species does not occur (see below) and using a simpler model that includes only linear and quadtratic features.
 

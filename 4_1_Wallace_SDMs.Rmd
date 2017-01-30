@@ -32,6 +32,8 @@ For `wallace` to work, **you need the latest version of R** (or at least later t
 
 Load necessary libraries. 
 ```{r, message=F,eval=FALSE}
+if (!require('devtools')) install.packages('devtools')
+devtools::install_github('rstudio/leaflet')
 install.packages('knitr',dep=T) # you need the latest version, even if you already have it
 install.packages('wallace',dep=T)
 library(wallace)

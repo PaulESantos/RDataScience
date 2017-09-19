@@ -28,6 +28,18 @@ left:
       - text: "2.3 More Raster Data"
         href: 06_RasterTwo.html
       - text: "-----------------"
+      - text: "Module 3: Reproducible and Interactive Research"
+      - text: "3.1 Research Reports with R markdown"
+        href: 07_Reproducible.html
+      - text: "3.2 Version control with Github"
+        href: 11_Git.html
+      - text: "3.3 Interactive presentations"
+        href: 07_Reproducible.html
+      - text: "3.4 Developing Web Applications with Shiny"
+        href: 07_Reproducible.html
+      - text: "3.5 Developing R websites (like this)"
+        href: 07_Reproducible.html
+      - text: "-----------------"
   - text: "Ecoinformatics"
     menu:
       - text: "0 Workshop Schedule"

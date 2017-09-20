@@ -8,34 +8,9 @@ output:
 ---
 
 
-# Background
+# Git to manage 'versions' of files
 
-> "The goal of reproducible research is to tie specific instructions to data analysis and experimental data so that scholarship can be recreated, better understood and verified."  <small> Max Kuhn, CRAN Task View: Reproducible Research </small>
-
-
-## Our work exists on a spectrum of reproducibility
-<img src="11_assets/peng-spectrum.jpg" alt="alt text" width="800">
-
-<small>Peng 2011, Science 334(6060) pp. 1226-1227</small>
-
-In this module you will explore the use of software called Git to manage 'versions' of files.  Similar to 'track-changes' in Microsoft Word, Git keeps track of any edits and makes it possible to track who made the change and when.  Git (and other version control software) are most commonly used to manage collaboratively edited code, but it can keep track of any file. 
-
-## Benefits are straightforward
-
-- **Verification & Reliability**: Find and fix bugs. Today's results == tomorrow's.
-- **Transparency**: increased citation count, broader impact, improved institutional memory
-- **Efficiency**: Reduces duplication of effort. Payoff in the (not so) long run
-- **Flexibility**: When you don’t 'point-and-click' you gain many new analytic options.
-
-## Common practices of many scientists
-
-- Enter data in Excel
-- Use Excel for data cleaning & descriptive statistics
-- Import data into SPSS/SAS/Stata for further analysis
-- Use point-and-click options to run statistical analyses
-- Copy & paste output to Word document, repeatedly
-
-These steps can be very difficult to reproduce (even for the same person at a later date)!
+Similar to 'track-changes' in Microsoft Word, Git keeps track of any edits and makes it possible to track who made the change and when.  Git is most commonly used to manage collaboratively edited code, but it can keep track of any file. 
 
 # Version Control
 
@@ -51,51 +26,67 @@ These steps can be very difficult to reproduce (even for the same person at a la
 
 - Learning curve
 
-## Git
-<img src="11_assets/git.png" alt="alt text" width="30%">
 
-* **Strong support for non-linear development:** Rapid branching and merging,  specific tools for visualizing and navigating a non-linear development history. 
-* **Distributed development:** No central server needed, each user has a full copy
-* **Efficient handling of large projects:** Designed to manage the Linux OS
-* **Cryptographic authentication of history:** The ID of a particular version depends uponthe complete history. Once published, it is not possible to change the old versions without it being noticed. 
+<img src="07_assets/git.png" alt="alt text" width="25%">
+<img src="07_assets/github.png" alt="alt text" width="25%">
+<img src="07_assets/bitbucket.png" alt="alt text" width="25%">
 
-## Git Has Integrity
-Everything _checksummed_ before storage and then referred by _checksum_. 
+## Environment for reproducible research   {.columns-2}
 
-> It’s impossible to change the contents of any file or directory without Git knowing. You can’t lose information in transit or get file corruption without Git being able to detect it.
+<img src="07_assets/rstudio.png" alt="alt text" width="10%">
 
-## Checksum
-A way of reducing digital information to a unique ID:
+* integrated R console
+* deep support for markdown and git
+* package development tools, etc. etc.
 
-<img src="11_assets/checksum.jpg" alt="alt text" width="50%">
+> RStudio 'projects' make version control & document preparation simple
 
-A 40-character hexadecimal SHA-1 hash: `24b9da6552252987aa493b52f8696cd6d3b00373`
 
-Git doesn't care about filenames, extensions, etc.  It's the information that matters...
+## Depositing code and data
+
+**Payoffs**
+- Free space for hosting (and paid options)
+- Assignment of persistent DOIs
+- Tracking citation metrics 
+
+**Costs**
+- Sometimes license restrictions (CC-BY & CC0)
+- Limited or no private storage space
+
+
+<img src="07_assets/figshare.png" alt="alt text" width="30%">
+<img src="07_assets/dryad.png" alt="alt text" width="30%">
+<img src="07_assets/zenodo.png" alt="alt text" width="30%">
+
+
+## A hierarchy of reproducibility 
+
+- **Good**: Use code with an integrated development environment (IDE). Minimize pointing and clicking (RStudio)
+- **Better**: Use version control. Help yourself keep track of changes, fix bugs and improve project management (RStudio & Git & GitHub or BitBucket)
+- **Best**: Use embedded narrative and code to explicitly link code, text and data, save yourself time, save reviewers time, improve your code. (RStudio & Git & GitHub or BitBucket & rmarkdown & knitr & data repository)
+
+##
+
+<img src="07_assets/VictoriaStoddenIASSISTJune2010-reasons-to.png" alt="alt text" width="800">
+<small>Stodden (IASSIST 2010) sampled American academics registered at the Machine Learning conference NIPS (134 responses from 593 requests (23%). Red = communitarian norms, Blue = private incentives</small>
+
+##
+
+<img src="07_assets/VictoriaStoddenIASSISTJune2010-reasons.png" alt="alt text" width="800">
+<small>Stodden (IASSIST 2010) sampled American academics registered at the Machine Learning conference NIPS (134 responses from 593 requests (23%). Red = communitarian norms, Blue = private incentives</small>
+
 
 #  Git Tutorial: let's get started
+<!-- <img src="11_assets/git.png" alt="alt text" width="30%"> -->
 
-
-<div class="well">
-## Your turn
-Take 15 minutes or so at [this site to walk through some basic git commands](https://try.github.io/levels/1/challenges/1)<br>
-<a href=https://try.github.io/levels/1/challenges/1> <img src="11_assets/trygit.png" alt="alt text" width="75%"></a>
-
-</div>
-</div>
-
-## The 3 states of files
-
-### staged, modified, committed
+ The 3 states of files: Staged, Modified, Committed
 <img src="11_assets/staging.png" alt="alt text" width="75%">
 
-The important stuff is hidden in the `.git` folder.
+The important stuff is hidden in the `.git` folder (which might be hidden on your computer)
 
 ## Github
-> GitHub is a web-based Git repository hosting service. It offers all of the distributed version control and source code management (SCM) functionality of Git as well as adding its own features. It provides access control and several collaboration features such as bug tracking, feature requests, task management, and wikis for every project. <small> <a href=https://en.wikipedia.org/wiki/GitHub> Wikipedia </a> </small>
 
-There are other ways to use Git, you can host your own server or use another private company, such as BitBucket.
-
+> GitHub is a web-based Git repository hosting service. It provides several collaboration features such as bug tracking, feature requests, task management, and wikis for every project. <small> <a href=https://en.wikipedia.org/wiki/GitHub> Wikipedia </a> </small>
 
 You can think of GitHub as part:
 
@@ -268,11 +259,21 @@ And click `knit HTML` to generate the output
 
 <br>
 
+## Git Jargon
+<img src="11_assets/git.png" alt="alt text" width="30%">
 
-## Motivations: Claerbout's principle
+* **Strong support for non-linear development:** Rapid branching and merging,  specific tools for visualizing and navigating a non-linear development history. 
+* **Distributed development:** No central server needed, each user has a full copy
+* **Efficient handling of large projects:** Designed to manage the Linux OS
+* **Cryptographic authentication of history:** The ID of a particular version depends upon the complete history. Once published, it is not possible to change the old versions without it being noticed. 
 
-> "An article about computational result is advertising, not scholarship. The actual scholarship is the full software environment, code and data, that produced the result." <small> Claerbout and Karrenbach, Proceedings of the 62nd Annual International Meeting of the Society of Exploration Geophysics. 1992</small>
+<div class="well">
+## Command line git
+Take 15 minutes or so at [this site to walk through some basic git commands](https://try.github.io/levels/1/challenges/1)<br>
+<a href=https://try.github.io/levels/1/challenges/1> <img src="11_assets/trygit.png" alt="alt text" width="75%"></a>
 
+</div>
+</div>
 ## Colophon
 
 * [Slides based on Ben Marwick's presentation to the UW Center for Statistics and Social Sciences (12 March 2014)](https://github.com/benmarwick/CSSS-Primer-Reproducible-Research) ([OrcID](http://orcid.org/0000-0001-7879-4531))

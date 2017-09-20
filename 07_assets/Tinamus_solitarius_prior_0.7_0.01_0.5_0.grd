@@ -1,0 +1,30 @@
+[general]
+creator=R package 'raster'
+created=2017-09-19 18:40:49
+[georeference]
+nrows=229
+ncols=194
+xmin=-65.5
+ymin=-38.8333333333333
+xmax=-33.1666666666667
+ymax=-0.666666666666664
+projection=+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0
+[data]
+datatype=FLT4S
+byteorder=little
+nbands=1
+bandorder=BIL
+categorical=FALSE
+minvalue=3.48054434225638e-12
+maxvalue=0.00021925105322437
+nodatavalue=-3.4e+38
+[legend]
+legendtype=
+values=
+color=
+[description]
+layername=layer
+history=0.70.010.506.221452145214529.8447421572173e-08210.6361920702749690.6939604956389650.11251392499071744426148031probrateskewshiftupperlowerfitbufferpinsidepinside_fitbufferprangencellsnNAcellsnormalize
+[metadata]
+parms=numeric:0.7#,#0.01#,#0.5#,#0#,#6.22145214521452#,#9.8447421572173e-08#,#21#,#0.636192070274969#,#0.693960495638965#,#0.112513924990717#,#44426#,#14803#,#1
+pnames=character:prob#,#rate#,#skew#,#shift#,#upper#,#lower#,#fitbuffer#,#pinside#,#pinside_fitbuffer#,#prange#,#ncells#,#nNAcells#,#normalize

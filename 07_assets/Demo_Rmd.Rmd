@@ -1,0 +1,61 @@
+---
+title: "Untitled"
+author: "Cory Merow"
+date: "9/19/2017"
+output: 
+  html_document:
+      keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+```{r, message=F}
+library(dplyr)
+library(ggplot2)
+library(maps)
+library(spocc)
+```
+
+```{r, warning=F} 
+## define which species to query
+sp='Turdus migratorius'
+
+## run the query and convert to data.frame()
+d = occ(query=sp, from='ebird',limit = 100) %>% occ2df()
+```
+
+## Step 3: Map it
+
+```{r, fig.width=6}
+# Load coastline
+map=map_data("world")
+
+ggplot(d,aes(x=longitude,y=latitude))+
+  geom_polygon(aes(x=long,y=lat,group=group,order=order),data=map)+
+  geom_point(col="red")+
+  coord_equal()
+```
+

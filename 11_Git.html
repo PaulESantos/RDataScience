@@ -9,6 +9,7 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Cory Merow &amp; Adam Wilson" />
 
 
 <title>Version Control (with Git)</title>
@@ -421,41 +422,15 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Version Control (with Git)</h1>
+<h4 class="author"><em>Cory Merow &amp; Adam Wilson</em></h4>
+<h4 class="date"><em>9/19/2017</em></h4>
 
 </div>
 
 
-<div id="background" class="section level1">
-<h1><span class="header-section-number">1</span> Background</h1>
-<blockquote>
-<p>“The goal of reproducible research is to tie specific instructions to data analysis and experimental data so that scholarship can be recreated, better understood and verified.” <small> Max Kuhn, CRAN Task View: Reproducible Research </small></p>
-</blockquote>
-<div id="our-work-exists-on-a-spectrum-of-reproducibility" class="section level2">
-<h2><span class="header-section-number">1.1</span> Our work exists on a spectrum of reproducibility</h2>
-<p><img src="11_assets/peng-spectrum.jpg" alt="alt text" width="800"></p>
-<p><small>Peng 2011, Science 334(6060) pp. 1226-1227</small></p>
-<p>In this module you will explore the use of software called Git to manage ‘versions’ of files. Similar to ‘track-changes’ in Microsoft Word, Git keeps track of any edits and makes it possible to track who made the change and when. Git (and other version control software) are most commonly used to manage collaboratively edited code, but it can keep track of any file.</p>
-</div>
-<div id="benefits-are-straightforward" class="section level2">
-<h2><span class="header-section-number">1.2</span> Benefits are straightforward</h2>
-<ul>
-<li><strong>Verification &amp; Reliability</strong>: Find and fix bugs. Today’s results == tomorrow’s.</li>
-<li><strong>Transparency</strong>: increased citation count, broader impact, improved institutional memory</li>
-<li><strong>Efficiency</strong>: Reduces duplication of effort. Payoff in the (not so) long run</li>
-<li><strong>Flexibility</strong>: When you don’t ‘point-and-click’ you gain many new analytic options.</li>
-</ul>
-</div>
-<div id="common-practices-of-many-scientists" class="section level2">
-<h2><span class="header-section-number">1.3</span> Common practices of many scientists</h2>
-<ul>
-<li>Enter data in Excel</li>
-<li>Use Excel for data cleaning &amp; descriptive statistics</li>
-<li>Import data into SPSS/SAS/Stata for further analysis</li>
-<li>Use point-and-click options to run statistical analyses</li>
-<li>Copy &amp; paste output to Word document, repeatedly</li>
-</ul>
-<p>These steps can be very difficult to reproduce (even for the same person at a later date)!</p>
-</div>
+<div id="git-to-manage-versions-of-files" class="section level1">
+<h1><span class="header-section-number">1</span> Git to manage ‘versions’ of files</h1>
+<p>Similar to ‘track-changes’ in Microsoft Word, Git keeps track of any edits and makes it possible to track who made the change and when. Git is most commonly used to manage collaboratively edited code, but it can keep track of any file.</p>
 </div>
 <div id="version-control" class="section level1">
 <h1><span class="header-section-number">2</span> Version Control</h1>
@@ -467,57 +442,54 @@ div.tocify {
 <li>Can track changes in any file type (ideally plain text)</li>
 <li>Can revert file to any point in its tracked history</li>
 </ul>
-<p><strong>Costs</strong></p>
-<ul>
-<li>Learning curve</li>
-</ul>
+<p><strong>Costs</strong> - Learning curve</p>
+<p><img src="07_assets/git.png" alt="alt text" width="25%"> <img src="07_assets/github.png" alt="alt text" width="25%"> <img src="07_assets/bitbucket.png" alt="alt text" width="25%"></p>
 </div>
-<div id="git" class="section level2">
-<h2><span class="header-section-number">2.2</span> Git</h2>
-<p><img src="11_assets/git.png" alt="alt text" width="30%"></p>
+<div id="environment-for-reproducible-research" class="section level2 columns-2">
+<h2><span class="header-section-number">2.2</span> Environment for reproducible research</h2>
+<p><img src="07_assets/rstudio.png" alt="alt text" width="10%"></p>
 <ul>
-<li><strong>Strong support for non-linear development:</strong> Rapid branching and merging, specific tools for visualizing and navigating a non-linear development history.</li>
-<li><strong>Distributed development:</strong> No central server needed, each user has a full copy</li>
-<li><strong>Efficient handling of large projects:</strong> Designed to manage the Linux OS</li>
-<li><strong>Cryptographic authentication of history:</strong> The ID of a particular version depends uponthe complete history. Once published, it is not possible to change the old versions without it being noticed.</li>
+<li>integrated R console</li>
+<li>deep support for markdown and git</li>
+<li>package development tools, etc. etc.</li>
 </ul>
-</div>
-<div id="git-has-integrity" class="section level2">
-<h2><span class="header-section-number">2.3</span> Git Has Integrity</h2>
-<p>Everything <em>checksummed</em> before storage and then referred by <em>checksum</em>.</p>
 <blockquote>
-<p>It’s impossible to change the contents of any file or directory without Git knowing. You can’t lose information in transit or get file corruption without Git being able to detect it.</p>
+<p>RStudio ‘projects’ make version control &amp; document preparation simple</p>
 </blockquote>
 </div>
-<div id="checksum" class="section level2">
-<h2><span class="header-section-number">2.4</span> Checksum</h2>
-<p>A way of reducing digital information to a unique ID:</p>
-<p><img src="11_assets/checksum.jpg" alt="alt text" width="50%"></p>
-<p>A 40-character hexadecimal SHA-1 hash: <code>24b9da6552252987aa493b52f8696cd6d3b00373</code></p>
-<p>Git doesn’t care about filenames, extensions, etc. It’s the information that matters…</p>
+<div id="depositing-code-and-data" class="section level2">
+<h2><span class="header-section-number">2.3</span> Depositing code and data</h2>
+<p><strong>Payoffs</strong> - Free space for hosting (and paid options) - Assignment of persistent DOIs - Tracking citation metrics</p>
+<p><strong>Costs</strong> - Sometimes license restrictions (CC-BY &amp; CC0) - Limited or no private storage space</p>
+<p><img src="07_assets/figshare.png" alt="alt text" width="30%"> <img src="07_assets/dryad.png" alt="alt text" width="30%"> <img src="07_assets/zenodo.png" alt="alt text" width="30%"></p>
+</div>
+<div id="a-hierarchy-of-reproducibility" class="section level2">
+<h2><span class="header-section-number">2.4</span> A hierarchy of reproducibility</h2>
+<ul>
+<li><strong>Good</strong>: Use code with an integrated development environment (IDE). Minimize pointing and clicking (RStudio)</li>
+<li><strong>Better</strong>: Use version control. Help yourself keep track of changes, fix bugs and improve project management (RStudio &amp; Git &amp; GitHub or BitBucket)</li>
+<li><strong>Best</strong>: Use embedded narrative and code to explicitly link code, text and data, save yourself time, save reviewers time, improve your code. (RStudio &amp; Git &amp; GitHub or BitBucket &amp; rmarkdown &amp; knitr &amp; data repository)</li>
+</ul>
+</div>
+<div id="section" class="section level2">
+<h2><span class="header-section-number">2.5</span> </h2>
+<p><img src="07_assets/VictoriaStoddenIASSISTJune2010-reasons-to.png" alt="alt text" width="800"> <small>Stodden (IASSIST 2010) sampled American academics registered at the Machine Learning conference NIPS (134 responses from 593 requests (23%). Red = communitarian norms, Blue = private incentives</small></p>
+</div>
+<div id="section-1" class="section level2">
+<h2><span class="header-section-number">2.6</span> </h2>
+<p><img src="07_assets/VictoriaStoddenIASSISTJune2010-reasons.png" alt="alt text" width="800"> <small>Stodden (IASSIST 2010) sampled American academics registered at the Machine Learning conference NIPS (134 responses from 593 requests (23%). Red = communitarian norms, Blue = private incentives</small></p>
 </div>
 </div>
 <div id="git-tutorial-lets-get-started" class="section level1">
 <h1><span class="header-section-number">3</span> Git Tutorial: let’s get started</h1>
-<div class="well">
-<h2 id="your-turn"><span class="header-section-number">3</span> Your turn</h2>
-<p>Take 15 minutes or so at <a href="https://try.github.io/levels/1/challenges/1">this site to walk through some basic git commands</a><br> <a href=https://try.github.io/levels/1/challenges/1> <img src="11_assets/trygit.png" alt="alt text" width="75%"></a></p>
-</div>
-</div>
-<div id="the-3-states-of-files" class="section level2">
-<h2><span class="header-section-number">3.1</span> The 3 states of files</h2>
-<div id="staged-modified-committed" class="section level3">
-<h3><span class="header-section-number">3.1.1</span> staged, modified, committed</h3>
-<p><img src="11_assets/staging.png" alt="alt text" width="75%"></p>
-<p>The important stuff is hidden in the <code>.git</code> folder.</p>
-</div>
-</div>
+<!-- <img src="11_assets/git.png" alt="alt text" width="30%"> -->
+<p>The 3 states of files: Staged, Modified, Committed <img src="11_assets/staging.png" alt="alt text" width="75%"></p>
+<p>The important stuff is hidden in the <code>.git</code> folder (which might be hidden on your computer)</p>
 <div id="github" class="section level2">
-<h2><span class="header-section-number">3.2</span> Github</h2>
+<h2><span class="header-section-number">3.1</span> Github</h2>
 <blockquote>
-<p>GitHub is a web-based Git repository hosting service. It offers all of the distributed version control and source code management (SCM) functionality of Git as well as adding its own features. It provides access control and several collaboration features such as bug tracking, feature requests, task management, and wikis for every project. <small> <a href=https://en.wikipedia.org/wiki/GitHub> Wikipedia </a> </small></p>
+<p>GitHub is a web-based Git repository hosting service. It provides several collaboration features such as bug tracking, feature requests, task management, and wikis for every project. <small> <a href=https://en.wikipedia.org/wiki/GitHub> Wikipedia </a> </small></p>
 </blockquote>
-<p>There are other ways to use Git, you can host your own server or use another private company, such as BitBucket.</p>
 <p>You can think of GitHub as part:</p>
 <ul>
 <li>Server to back up your files</li>
@@ -526,23 +498,23 @@ div.tocify {
 <li>Platform to collaboratively develop code (or other files)</li>
 </ul>
 <div id="example-this-course-website-is-managed-using-git-github" class="section level3">
-<h3><span class="header-section-number">3.2.1</span> Example: this course website is managed using Git &amp; GitHub</h3>
+<h3><span class="header-section-number">3.1.1</span> Example: this course website is managed using Git &amp; GitHub</h3>
 <p><a href=https://github.com/adammwilson/RDataScience/tree/gh-pages> <img src="11_assets/githubcoursewebsite.png" alt="alt text" width="100%"></a></p>
 </div>
 </div>
 <div id="install-git-on-your-computer" class="section level2">
-<h2><span class="header-section-number">3.3</span> Install Git on your computer</h2>
+<h2><span class="header-section-number">3.2</span> Install Git on your computer</h2>
 <div id="windows-and-osx" class="section level3">
-<h3><span class="header-section-number">3.3.1</span> Windows and OSX</h3>
+<h3><span class="header-section-number">3.2.1</span> Windows and OSX</h3>
 <p><a href="http://git-scm.com/downloads" class="uri">http://git-scm.com/downloads</a></p>
 </div>
 <div id="linux" class="section level3">
-<h3><span class="header-section-number">3.3.2</span> Linux</h3>
+<h3><span class="header-section-number">3.2.2</span> Linux</h3>
 <p><code>sudo apt-get install git</code> or similar</p>
 </div>
 </div>
 <div id="creating-an-account-on-github" class="section level2">
-<h2><span class="header-section-number">3.4</span> Creating an account on <a href="github.com">GitHub</a></h2>
+<h2><span class="header-section-number">3.3</span> Creating an account on <a href="github.com">GitHub</a></h2>
 <ol style="list-style-type: decimal">
 <li>Create a GitHub account at <a href="https://github.com/" class="uri">https://github.com/</a>
 <ul>
@@ -560,7 +532,7 @@ div.tocify {
 </ol>
 </div>
 <div id="in-rstudio-clone-the-repository" class="section level2">
-<h2><span class="header-section-number">3.5</span> In RStudio: <code>clone</code> the repository</h2>
+<h2><span class="header-section-number">3.4</span> In RStudio: <code>clone</code> the repository</h2>
 <ol style="list-style-type: decimal">
 <li>Go to RStudio
 <ul>
@@ -577,9 +549,9 @@ div.tocify {
 <p>To set up a connection that doesn’t require you to type in your password every time, <a href="GitSSHNotes.html">see here</a></p>
 </div>
 <div id="commit-to-github-from-within-rstudio" class="section level2">
-<h2><span class="header-section-number">3.6</span> Commit to GitHub from within RStudio</h2>
+<h2><span class="header-section-number">3.5</span> Commit to GitHub from within RStudio</h2>
 <div id="steps" class="section level3">
-<h3><span class="header-section-number">3.6.1</span> Steps:</h3>
+<h3><span class="header-section-number">3.5.1</span> Steps:</h3>
 <ol style="list-style-type: decimal">
 <li>Edit: make changes to a file in the repository you cloned above</li>
 <li>Stage: tell git which changes you want to commit</li>
@@ -589,43 +561,43 @@ div.tocify {
 </div>
 </div>
 <div id="staging" class="section level2">
-<h2><span class="header-section-number">3.7</span> Staging</h2>
+<h2><span class="header-section-number">3.6</span> Staging</h2>
 <p><img src="11_assets/Stage.png" alt="alt text" width="75%"></p>
 <p>Select which changed files (added, deleted, or edited) you want to commit.</p>
 </div>
 <div id="committing" class="section level2">
-<h2><span class="header-section-number">3.8</span> Committing</h2>
+<h2><span class="header-section-number">3.7</span> Committing</h2>
 <p><img src="11_assets/Commit.png" alt="alt text" width="100%"></p>
 <p>Add a <em>commit message</em> and click commit.</p>
 </div>
 <div id="syncing-push" class="section level2">
-<h2><span class="header-section-number">3.9</span> Syncing (<code>push</code>)</h2>
+<h2><span class="header-section-number">3.8</span> Syncing (<code>push</code>)</h2>
 <p><img src="11_assets/Push.png" alt="alt text" width="100%"></p>
 <p>Click the green arrow to sync with GitHub.</p>
 </div>
 <div id="git-file-lifecycle" class="section level2">
-<h2><span class="header-section-number">3.10</span> Git File Lifecycle</h2>
+<h2><span class="header-section-number">3.9</span> Git File Lifecycle</h2>
 <p><img src="11_assets/lifecycle.png" alt="alt text" width="100%"></p>
 </div>
 <div id="git-command-line-from-rstudio" class="section level2">
-<h2><span class="header-section-number">3.11</span> Git command line from RStudio</h2>
+<h2><span class="header-section-number">3.10</span> Git command line from RStudio</h2>
 <p>RStudio has limited functionality.</p>
 <p><img src="11_assets/CommandLine.png" alt="alt text" width="75%"></p>
 </div>
 <div id="git-help" class="section level2">
-<h2><span class="header-section-number">3.12</span> Git help</h2>
+<h2><span class="header-section-number">3.11</span> Git help</h2>
 <pre><code>$ git help &lt;verb&gt;
 $ git &lt;verb&gt; --help
 $ man git-&lt;verb&gt;</code></pre>
 <p>For example, you can get the manpage help for the config command by running <code>git help config</code></p>
 </div>
 <div id="git-status" class="section level2">
-<h2><span class="header-section-number">3.13</span> Git status</h2>
+<h2><span class="header-section-number">3.12</span> Git status</h2>
 <p><img src="11_assets/GitCL.png" alt="alt text" width="75%"></p>
 <p>Similar to info in git tab in RStudio</p>
 </div>
 <div id="git-config" class="section level2">
-<h2><span class="header-section-number">3.14</span> Git config</h2>
+<h2><span class="header-section-number">3.13</span> Git config</h2>
 <p><code>git config</code> shows you all the git configuration settings:</p>
 <ul>
 <li><code>user.email</code></li>
@@ -633,12 +605,12 @@ $ man git-&lt;verb&gt;</code></pre>
 </ul>
 </div>
 <div id="branching" class="section level2">
-<h2><span class="header-section-number">3.15</span> Branching</h2>
+<h2><span class="header-section-number">3.14</span> Branching</h2>
 <p>Branches used to develop features isolated from each other. <img src="11_assets/Merge.png" alt="alt text" width="100%"></p>
 <p>Default: <em>master</em> branch. Use other branches for development/collaboration and merge them back upon completion.</p>
 </div>
 <div id="basic-branching" class="section level2">
-<h2><span class="header-section-number">3.16</span> Basic Branching</h2>
+<h2><span class="header-section-number">3.15</span> Basic Branching</h2>
 <pre><code>$ git checkout -b devel   # create new branch and switch to it
 
 
@@ -647,19 +619,19 @@ $ git merge devel  #merge in changes from devel branch</code></pre>
 <p>But we won’t do much with branching in this course…</p>
 </div>
 <div id="git-can-do-far-more" class="section level2">
-<h2><span class="header-section-number">3.17</span> Git can do far more!</h2>
+<h2><span class="header-section-number">3.16</span> Git can do far more!</h2>
 <p>Check out the (free) book <a href="https://git-scm.com/book/en/v2">ProGIT</a></p>
 <p><img src="11_assets/progit2.png" alt="alt text" width="30%"></p>
 <p>Or the <a href="https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf">cheatsheet</a>.</p>
 </div>
 <div id="philosphy" class="section level2">
-<h2><span class="header-section-number">3.18</span> Philosphy</h2>
+<h2><span class="header-section-number">3.17</span> Philosphy</h2>
 <p>Remember, the data and code are <em>real</em>, the products (tables, figures) are ephemeral…</p>
 </div>
 <div id="git-and-rmarkdown" class="section level2">
-<h2><span class="header-section-number">3.19</span> Git and RMarkdown</h2>
+<h2><span class="header-section-number">3.18</span> Git and RMarkdown</h2>
 <div id="visualize-.md-on-github" class="section level3">
-<h3><span class="header-section-number">3.19.1</span> Visualize .md on GitHub</h3>
+<h3><span class="header-section-number">3.18.1</span> Visualize .md on GitHub</h3>
 <p>Update the YAML header to keep the markdown file</p>
 <p>From this:</p>
 <pre class="r"><code>title: &quot;Untitled&quot;
@@ -675,10 +647,10 @@ output:
 </div>
 </div>
 <div id="visualize-example" class="section level2">
-<h2><span class="header-section-number">3.20</span> Visualize example</h2>
+<h2><span class="header-section-number">3.19</span> Visualize example</h2>
 <p><img src="11_assets/ghmd.png" alt="alt text" width="50%"></p>
 <div id="explore-markdown-git" class="section level3">
-<h3><span class="header-section-number">3.20.1</span> Explore markdown&lt;-&gt;Git</h3>
+<h3><span class="header-section-number">3.19.1</span> Explore markdown&lt;-&gt;Git</h3>
 <ol style="list-style-type: decimal">
 <li>Use <em>File -&gt; New File -&gt; R Markdown</em> to create a new markdown file.<br />
 </li>
@@ -691,14 +663,23 @@ output:
 <p><br></p>
 </div>
 </div>
-<div id="motivations-claerbouts-principle" class="section level2">
-<h2><span class="header-section-number">3.21</span> Motivations: Claerbout’s principle</h2>
-<blockquote>
-<p>“An article about computational result is advertising, not scholarship. The actual scholarship is the full software environment, code and data, that produced the result.” <small> Claerbout and Karrenbach, Proceedings of the 62nd Annual International Meeting of the Society of Exploration Geophysics. 1992</small></p>
-</blockquote>
+<div id="git-jargon" class="section level2">
+<h2><span class="header-section-number">3.20</span> Git Jargon</h2>
+<p><img src="11_assets/git.png" alt="alt text" width="30%"></p>
+<ul>
+<li><strong>Strong support for non-linear development:</strong> Rapid branching and merging, specific tools for visualizing and navigating a non-linear development history.</li>
+<li><strong>Distributed development:</strong> No central server needed, each user has a full copy</li>
+<li><strong>Efficient handling of large projects:</strong> Designed to manage the Linux OS</li>
+<li><strong>Cryptographic authentication of history:</strong> The ID of a particular version depends upon the complete history. Once published, it is not possible to change the old versions without it being noticed.</li>
+</ul>
+<div class="well">
+<h2 id="command-line-git"><span class="header-section-number">3.20</span> Command line git</h2>
+<p>Take 15 minutes or so at <a href="https://try.github.io/levels/1/challenges/1">this site to walk through some basic git commands</a><br> <a href=https://try.github.io/levels/1/challenges/1> <img src="11_assets/trygit.png" alt="alt text" width="75%"></a></p>
+</div>
+</div>
 </div>
 <div id="colophon" class="section level2">
-<h2><span class="header-section-number">3.22</span> Colophon</h2>
+<h2><span class="header-section-number">3.21</span> Colophon</h2>
 <ul>
 <li><a href="https://github.com/benmarwick/CSSS-Primer-Reproducible-Research">Slides based on Ben Marwick’s presentation to the UW Center for Statistics and Social Sciences (12 March 2014)</a> (<a href="http://orcid.org/0000-0001-7879-4531">OrcID</a>)</li>
 <li>Git Slides based on materials from Dr. Çetinkaya-Rundel</li>

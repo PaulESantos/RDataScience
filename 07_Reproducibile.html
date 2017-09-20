@@ -428,8 +428,21 @@ div.tocify {
 </div>
 
 
+<div id="getting-started" class="section level1">
+<h1><span class="header-section-number">1</span> Getting started</h1>
+<p>You may need to install some software for this sequence of 5 tutorials.</p>
+<ul>
+<li><strong>RStudio</strong> (convienient way to interact with R) : <a href="https://www.rstudio.com/products/rstudio/download/#download" class="uri">https://www.rstudio.com/products/rstudio/download/#download</a></li>
+<li><strong>git</strong> (version control): <br> <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></li>
+<li>Create a <strong>GitHub</strong> account (sharing code online) at <a href="https://github.com/" class="uri">https://github.com/</a></li>
+<li><strong>R packages</strong> (for these demos): install.packages(c(‘knitr’,‘shiny’,‘dplyr’,‘ggplot2’,‘maps’,spocc), dep=T)</li>
+<li><strong>pandoc</strong> (to convert among document formats like html, pdf, docx): <a href="http://pandoc.org/installing.html" class="uri">http://pandoc.org/installing.html</a></li>
+</ul>
+<!-- --------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------- -->
+</div>
 <div id="overview" class="section level1">
-<h1><span class="header-section-number">1</span> Overview</h1>
+<h1><span class="header-section-number">2</span> Overview</h1>
 <ul>
 <li>3.1 Research Reports with R markdown</li>
 <li>3.2 Version control with Github</li>
@@ -439,7 +452,7 @@ div.tocify {
 </ul>
 <p>The same set of R Markdown tools is used for all these!</p>
 <div id="benefits-are-straightforward" class="section level2">
-<h2><span class="header-section-number">1.1</span> Benefits are straightforward</h2>
+<h2><span class="header-section-number">2.1</span> Benefits are straightforward</h2>
 <ul>
 <li><strong>Verification &amp; Reliability</strong>: Find and fix bugs.</li>
 <li><strong>Transparency</strong>: Increased citation count, broader impact, institutional memory</li>
@@ -448,7 +461,7 @@ div.tocify {
 </ul>
 </div>
 <div id="but-limitations-are-substantial" class="section level2">
-<h2><span class="header-section-number">1.2</span> But limitations are substantial</h2>
+<h2><span class="header-section-number">2.2</span> But limitations are substantial</h2>
 <ul>
 <li>Classified/sensitive/big data</li>
 <li>Nondisclosure agreements &amp; intellectual property</li>
@@ -458,159 +471,68 @@ div.tocify {
 <li>Inertia &amp; embarassment</li>
 </ul>
 </div>
-<div id="our-work-exists-on-a-spectrum-of-reproducibility" class="section level2">
-<h2><span class="header-section-number">1.3</span> Our work exists on a spectrum of reproducibility</h2>
+<div id="a-spectrum-of-reproducibility" class="section level2">
+<h2><span class="header-section-number">2.3</span> A spectrum of reproducibility</h2>
 <p><img src="07_assets/peng-spectrum.jpg" alt="alt text" width="800"></p>
 <p><small>Peng 2011, Science 334(6060) pp. 1226-1227</small></p>
 </div>
-<div id="click-trails-are-ephemeral-dangerous" class="section level2 columns-2">
-<h2><span class="header-section-number">1.4</span> Click trails are ephemeral &amp; dangerous</h2>
+<div id="code-click-trails" class="section level2 columns-2">
+<h2><span class="header-section-number">2.4</span> Code &gt; Click trails</h2>
 <ul>
-<li>Lots of human effort for tedious &amp; time-wasting tasks</li>
-<li>Error-prone due to manual &amp; ad hoc data handling</li>
-<li>Difficult to record - hard to reconstruct a ‘click history’</li>
-<li>Tiny changes in data or method require extensive reworking</li>
+<li>Clicks = Lots of human effort for tedious &amp; time-wasting tasks</li>
+<li>Clicks = Error-prone due to manual &amp; ad hoc data handling</li>
+<li>Clicks = Difficult to record - hard to reconstruct a ‘click history’</li>
+<li>Code = Improved transparency, automation, maintanability, accessibility, standardisation, modularity, portability, efficiency, communicability of process (what more could we want?)</li>
+<li>Code = Plain text files readable for a <em>long</em> time</li>
 </ul>
-<p><br><br><br><br></p>
-<p><img src="07_assets/contrails.jpg" alt="alt text" width="400"></p>
-</div>
-<div id="scripted-analyses-are-superior" class="section level2 columns-2">
-<h2><span class="header-section-number">1.5</span> Scripted analyses are superior</h2>
-<p><img src="07_assets/open-science.png" alt="alt text" width="250px"></p>
-<ul>
-<li>Plain text files readable for a <em>long</em> time</li>
-<li>Improved transparency, automation, maintanability, accessibility, standardisation, modularity, portability, efficiency, communicability of process (what more could we want?)</li>
-<li>Steeper learning curve</li>
-</ul>
-</div>
-<div id="literate-programming-for-and-against" class="section level2 columns-2">
-<h2><span class="header-section-number">1.6</span> Literate programming: for and against</h2>
-<p><strong>For</strong></p>
-<ul>
-<li>Text &amp; code in one place, in logical order</li>
-<li>Tables and figures automatically updated</li>
-<li>Automatic test when building document</li>
-</ul>
-<p><strong>Against</strong></p>
-<ul>
-<li>Text and code in one place; can be hard to read</li>
-<li>Can slow down the processing of documents (use caching!)</li>
-</ul>
+<!-- ## Literate programming: for and against   {.columns-2} -->
+<!-- **Pros** -->
+<!-- - Text & code in one place, in logical order -->
+<!-- - Tables and figures automatically updated -->
+<!-- - Automatic test when building document -->
+<!-- **Cons** -->
+<!-- - Text and code in one place; can be hard to read -->
+<!-- - Can slow down the processing of documents (use caching!) -->
 </div>
 </div>
 <div id="reproducible-research-in-r" class="section level1">
-<h1><span class="header-section-number">2</span> Reproducible Research in R</h1>
-<div id="need-a-programming-language" class="section level2 columns-2">
-<h2><span class="header-section-number">2.1</span> Need a programming language</h2>
-<p>The machine-readable part: R</p>
+<h1><span class="header-section-number">3</span> Reproducible Research in R</h1>
 <ul>
-<li>R: Free, open source, cross-platform, highly interactive, huge user community in academica and private sector</li>
-<li>R packages an ideal ‘Compendium’?</li>
-<li>Scriptability → R</li>
-<li>Literate programming → R Markdown</li>
-<li>Version control → Git / GitHub</li>
-</ul>
-<p><img src="07_assets/r-project.jpg" alt="alt text" width="100"></p>
-</div>
-<div id="need-a-document-formatting-language" class="section level2 columns-2">
-<h2><span class="header-section-number">2.2</span> Need a document formatting language</h2>
-<p><img src="07_assets/markdown.png" alt="alt text" width="100"></p>
-<p>Markdown: lightweight document formatting syntax. Easy to write, read and publish as-is.</p>
-<p>The human-readable part</p>
-<p><code>rmarkdown</code>: - minor extensions to allow R code display and execution - embed images in html files (convenient for sharing) - equations</p>
-<p>e.g.</p>
+<li>Programming language:
 <ul>
-<li><code>*</code> for bullet</li>
-<li><code>_</code> for underline</li>
+<li>The machine-readable part: R</li>
+</ul></li>
+<li>Document formatting language
+<ul>
+<li>Markdown: lightweight document formatting syntax. Easy to write, read and publish as-is.</li>
+</ul></li>
+<li>Human-readable part
+<ul>
+<li><code>rmarkdown</code>: minor extensions to allow R code display and execution, embed images in html files, equations</li>
+</ul></li>
 </ul>
-</div>
-<div id="dynamic-documents-in-r" class="section level2 columns-2">
-<h2><span class="header-section-number">2.3</span> Dynamic documents in R</h2>
-<p><code>knitr</code> - descendant of Sweave</p>
-<p>Engine for dynamic report generation in R</p>
-<p><img src="07_assets/knitr.png" alt="alt text" width="200"></p>
-<p><br></p>
+<p><code>knitr</code>: Dynamic documents in R {.columns-2}</p>
 <ul>
 <li>Narrative and code in the same file or explicitly linked</li>
 <li>When data or narrative are updated, the document is automatically updated</li>
-<li>Data treated as ‘read only’</li>
-<li>Output treated as disposable</li>
 </ul>
-</div>
-<div id="pandoc-document-converter" class="section level2 columns-2">
-<h2><span class="header-section-number">2.4</span> Pandoc: document converter</h2>
-<p><img src="07_assets/pandoc-workflow-rmd-md.png" alt="alt text" width="100%"> <small><small><small><a href="http://kieranhealy.org/blog/archives/2014/01/23/plain-text/" class="uri">http://kieranhealy.org/blog/archives/2014/01/23/plain-text/</a> </small></small></small></p>
-<p>A universal document converter, open source, cross-platform</p>
-<ul>
-<li>Write code and narrative in rmarkdown<br />
-</li>
-<li>knitr-&gt;markdown (with computation)<br />
-</li>
-<li>use pandoc to get HTML/PDF/DOCX</li>
-</ul>
-</div>
-</div>
-<div id="version-control" class="section level1">
-<h1><span class="header-section-number">3</span> Version Control</h1>
-<div id="tracking-changes-with-version-control" class="section level2">
-<h2><span class="header-section-number">3.1</span> Tracking changes with version control</h2>
-<p><strong>Payoffs</strong></p>
-<ul>
-<li>Eases collaboration</li>
-<li>Can track changes in any file type (ideally plain text)</li>
-<li>Can revert file to any point in its tracked history</li>
-</ul>
-<p><strong>Costs</strong> - Learning curve</p>
-<p><img src="07_assets/git.png" alt="alt text" width="25%"> <img src="07_assets/github.png" alt="alt text" width="25%"> <img src="07_assets/bitbucket.png" alt="alt text" width="25%"></p>
-</div>
-<div id="environment-for-reproducible-research" class="section level2 columns-2">
-<h2><span class="header-section-number">3.2</span> Environment for reproducible research</h2>
-<p><img src="07_assets/rstudio.png" alt="alt text" width="10%"></p>
-<ul>
-<li>integrated R console</li>
-<li>deep support for markdown and git</li>
-<li>package development tools, etc. etc.</li>
-</ul>
-<blockquote>
-<p>RStudio ‘projects’ make version control &amp; document preparation simple</p>
-</blockquote>
-</div>
-<div id="depositing-code-and-data" class="section level2">
-<h2><span class="header-section-number">3.3</span> Depositing code and data</h2>
-<p><strong>Payoffs</strong> - Free space for hosting (and paid options) - Assignment of persistent DOIs - Tracking citation metrics</p>
-<p><strong>Costs</strong> - Sometimes license restrictions (CC-BY &amp; CC0) - Limited or no private storage space</p>
-<p><img src="07_assets/figshare.png" alt="alt text" width="30%"> <img src="07_assets/dryad.png" alt="alt text" width="30%"> <img src="07_assets/zenodo.png" alt="alt text" width="30%"></p>
-</div>
-<div id="a-hierarchy-of-reproducibility" class="section level2">
-<h2><span class="header-section-number">3.4</span> A hierarchy of reproducibility</h2>
-<ul>
-<li><strong>Good</strong>: Use code with an integrated development environment (IDE). Minimize pointing and clicking (RStudio)</li>
-<li><strong>Better</strong>: Use version control. Help yourself keep track of changes, fix bugs and improve project management (RStudio &amp; Git &amp; GitHub or BitBucket)</li>
-<li><strong>Best</strong>: Use embedded narrative and code to explicitly link code, text and data, save yourself time, save reviewers time, improve your code. (RStudio &amp; Git &amp; GitHub or BitBucket &amp; rmarkdown &amp; knitr &amp; data repository)</li>
-</ul>
-</div>
-<div id="section" class="section level2">
-<h2><span class="header-section-number">3.5</span> </h2>
-<p><img src="07_assets/VictoriaStoddenIASSISTJune2010-reasons-to.png" alt="alt text" width="800"> <small>Stodden (IASSIST 2010) sampled American academics registered at the Machine Learning conference NIPS (134 responses from 593 requests (23%). Red = communitarian norms, Blue = private incentives</small></p>
-</div>
-<div id="section-1" class="section level2">
-<h2><span class="header-section-number">3.6</span> </h2>
-<p><img src="07_assets/VictoriaStoddenIASSISTJune2010-reasons.png" alt="alt text" width="800"> <small>Stodden (IASSIST 2010) sampled American academics registered at the Machine Learning conference NIPS (134 responses from 593 requests (23%). Red = communitarian norms, Blue = private incentives</small></p>
-</div>
+<!-- --------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------- -->
 </div>
 <div id="demo-lets-get-started" class="section level1">
 <h1><span class="header-section-number">4</span> Demo: let’s get started</h1>
-<p><a href="07_assets/demo/Demo.Rmd"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here</a>. Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.</p>
-<div id="r-markdown" class="section level2">
-<h2><span class="header-section-number">4.1</span> R Markdown</h2>
-<p>Cheatsheet:</p>
-<p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"> <img src="07_assets/rmarkdown.png" alt="alt text" width="400"></a></p>
+<div id="r-markdown-cheatsheet" class="section level2">
+<h2><span class="header-section-number">4.1</span> R Markdown Cheatsheet</h2>
+<p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"> <img src="07_assets/rmarkdown.png" alt="alt text" width="700"></a></p>
 <p><small><small><small><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf</a></small></small></small></p>
 </div>
 <div id="create-new-file" class="section level2">
 <h2><span class="header-section-number">4.2</span> Create new file</h2>
-<p><strong>File -&gt; New File -&gt; RMarkdown -&gt; Document -&gt; HTML</strong></p>
-<p><img src="07_assets/rmarkdownwindow.png" alt="alt text" width="500"></p>
+<p>In Rstudio: <strong>File -&gt; New File -&gt; RMarkdown -&gt; Document -&gt; HTML</strong></p>
+<p><img src="07_assets/rmarkdownwindow.png" alt="alt text" width="600"></p>
+<p>This will open a document that looks like this:</p>
+<p><img src="07_assets/Example_knitr_Template.png" alt="alt text" width="750"></p>
+<!-- <img src="07_assets/Example_knitr_Template.png" alt="alt text" width="700"> -->
 </div>
 <div id="step-1-load-packages" class="section level2">
 <h2><span class="header-section-number">4.3</span> Step 1: Load packages</h2>
@@ -618,7 +540,7 @@ div.tocify {
 <pre class="r"><code>#```{r,eval=F}
 CODE HERE
 #```</code></pre>
-<p>Load these packages in a code chunk (you may need to install some packages):</p>
+<p>Add a new <em>code chunk</em> at the bottom of this template file to load these packages (you may need to install some packages):</p>
 <pre class="r"><code>library(dplyr)
 library(ggplot2)
 library(maps)
@@ -629,15 +551,14 @@ library(spocc)</code></pre>
 </div>
 <div id="step-2-load-data" class="section level2">
 <h2><span class="header-section-number">4.4</span> Step 2: Load data</h2>
-<p>Now use the <code>occ()</code> function to download all the <em>occurrence</em> records for the American robin (<em>Turdus migratorius</em>) from the <a href="gbif.org">Global Biodiversity Information Facility</a>.</p>
+<p>Now use the <code>occ()</code> function in <strong>new</strong> <em>code chunk</em> to download all the <em>occurrence</em> records for the American robin (<em>Turdus migratorius</em>) from the <a href="gbif.org">Global Biodiversity Information Facility</a>.</p>
 <p><img src="07_assets/Turdus-migratorius-002.jpg" alt="alt text" width="200"></p>
 <p><small><small><small>Licensed under CC BY-SA 3.0 via <a href="https://commons.wikimedia.org/wiki/File:Turdus-migratorius-002.jpg#/media/File:Turdus-migratorius-002.jpg">Wikimedia Commons</a></small></small></small></p>
 <pre class="r"><code>## define which species to query
 sp=&#39;Turdus migratorius&#39;
 
 ## run the query and convert to data.frame()
-d = occ(query=sp, from=&#39;ebird&#39;,limit = 1000) %&gt;% occ2df()</code></pre>
-<p>This can take a few seconds.</p>
+d = occ(query=sp, from=&#39;ebird&#39;,limit = 100) %&gt;% occ2df()</code></pre>
 </div>
 <div id="step-3-map-it" class="section level2">
 <h2><span class="header-section-number">4.5</span> Step 3: Map it</h2>
@@ -653,13 +574,12 @@ ggplot(d,aes(x=longitude,y=latitude))+
 </div>
 <div id="step-4" class="section level2">
 <h2><span class="header-section-number">4.6</span> Step 4:</h2>
-<p>Update the YAML header to keep the markdown file</p>
-<p>From this:</p>
+<p>Update the YAML header to keep the markdown file from this:</p>
 <pre class="r"><code>title: &quot;Untitled&quot;
 author: &quot;Adam M. Wilson&quot;
 date: &quot;October 31, 2016&quot;
 output: html_document</code></pre>
-<p>To this:</p>
+<p>To this (you need to save the markdown (md) document to make the html):</p>
 <pre class="r"><code>title: &quot;Demo&quot;
 author: &quot;Adam M. Wilson&quot;
 date: &quot;October 31, 2016&quot;
@@ -667,26 +587,59 @@ output:
   html_document:
       keep_md: true</code></pre>
 <p>And click <code>knit HTML</code> to generate the output</p>
+<p><img src="07_assets/knitbutton.png" alt="alt text" width="600"></p>
+<p>kniting produces a number of files all extracted from the Rmd you wrote, seen below</p>
+<p><img src="07_assets/rmd_file_list.png" alt="alt text" width="600"></p>
+<ul>
+<li>.Rmd - you wrote this</li>
+<li>.md - plain markdown, with the R code already run</li>
+<li>.R - just the R code chunks, useful for rerunning just the code</li>
+<li>.html - the output file for others to view</li>
+<li>/YourDocumentName_files - any files generated from running the R code</li>
+</ul>
+<p>In case you had trouble generating this document, <a href="07_assets/demo/Demo.Rmd"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> the R Script associated with this page is available here</a>.</p>
 </div>
 <div id="step-5-explore-markdown-functions" class="section level2">
 <h2><span class="header-section-number">4.7</span> Step 5: Explore markdown functions</h2>
 <ol style="list-style-type: decimal">
 <li>Use the Cheatsheet to add sections and some example narrative.<br />
 </li>
-<li>Try changing changing the species name to your favorite species and re-run the report.</li>
 <li>Add more figures or different versions of a figure</li>
 <li>Check out the <code>kable()</code> function for tables (e.g. <code>kable(head(d))</code>)</li>
+<li>Some example of slightly more complex Rmd files:</li>
 </ol>
-<p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"> <img src="07_assets/rmarkdown.png" alt="alt text" width="400"></a></p>
+<ul>
+<li><a href="07_assets/bossMaps_demo_rmd.Rmd"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> the vignette from the R package <em>bossMaps</em></a>. <!-- Additions to note:  --> <!--     * the _knitr::opts_chunk$set_ allows you to change some settings throughout the document --> <!--     * code chunk argument _message=F_ to suppress function messages --> <!--     * code chunk argument _fig.width_ to customize the size of a --></li>
+<li><a href="http://rmarkdown.rstudio.com/gallery.html"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> the R markdown gallery, with examples of interactive documents, websites, books, and presentations, that we’ll demonstrate in the next tutorials</a>.</li>
+</ul>
+<!-- --------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------- -->
+</div>
+</div>
+<div id="more-background" class="section level1">
+<h1><span class="header-section-number">5</span> More Background</h1>
+<div id="pandoc-document-converter" class="section level2 columns-2">
+<h2><span class="header-section-number">5.1</span> Pandoc: document converter</h2>
+<p>How does markdown magically convert between document types (html, pdf, docx)?</p>
+<p>A universal document converter, open source, cross-platform</p>
+<ul>
+<li>Write code and narrative in rmarkdown<br />
+</li>
+<li>knitr-&gt;markdown (with computation)<br />
+</li>
+<li>use pandoc to get HTML/PDF/DOCX</li>
+<li>its also very easy and useful from the command line: <a href="https://pandoc.org/demos.html" class="uri">https://pandoc.org/demos.html</a></li>
+</ul>
+<p><img src="07_assets/pandoc-workflow-rmd-md.png" alt="alt text" width="100%"> <small><small><small><a href="http://kieranhealy.org/blog/archives/2014/01/23/plain-text/" class="uri">http://kieranhealy.org/blog/archives/2014/01/23/plain-text/</a> </small></small></small></p>
 </div>
 <div id="colophon" class="section level2">
-<h2><span class="header-section-number">4.8</span> Colophon</h2>
+<h2><span class="header-section-number">5.2</span> Colophon</h2>
 <ul>
 <li><a href="https://github.com/benmarwick/CSSS-Primer-Reproducible-Research">Slides based on Ben Marwick’s presentation to the UW Center for Statistics and Social Sciences (12 March 2014)</a> (<a href="http://orcid.org/0000-0001-7879-4531">OrcID</a>)</li>
 </ul>
 </div>
 <div id="references" class="section level2">
-<h2><span class="header-section-number">4.9</span> References</h2>
+<h2><span class="header-section-number">5.3</span> References</h2>
 <p>See Rmd file for full references and sources</p>
 </div>
 </div>

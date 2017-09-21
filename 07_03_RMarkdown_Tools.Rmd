@@ -149,12 +149,26 @@ All the content for this website was generated from R Markdown documents. You ca
 
 **We encourage others to use and modify our content on their own websites.** It'd be nice if you mentioned us (Adam Wilson and Cory Merow).
 
+<br>
+
+## Demo
+
+1. Download a website template based on this site  [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> here](07_03_assets/Demo_R_Website.zip).
+
+2. Unzip the directory and open a new RStudio project, setting this as the directory
+
+3. Under the build tab, you should see 'build website'. Click it and you have a website.
+<img src="07_03_assets/build_website.png" alt="alt text" width="750">
+
+4. If you don't see this button, set the project build tools to website (click project name on the top right, then project options)
+<img src="07_03_assets/build_tools.png" alt="alt text" width="750">
+
+<br>
+
 ## Tips
 
 There a few tricks to get this up and running once you've created an RStudio project and added the cloned version our repo:
 
-  * Set the project build tools to website (click project name on the top right, then project options)
-<img src="07_03_assets/build_tools.png" alt="alt text" width="750">
   * All the .Rmd files for the website need to be in the same directory (that's why the github repo looks a little messy). 
   * You simply write the Rmd, click Run Document (analogous to knit), and the other files are built automatically
   * There are a couple of website-specific files to edit: 
@@ -163,8 +177,6 @@ There a few tricks to get this up and running once you've created an RStudio pro
     + _navbar.html: set up the tabs along the tops of pages
     + index.Rmd: set up the welcome page
   
-* To set up some of the meta-info for the website, click **Build Website** (which appears after you've set the project build tools to 'Website')
-<img src="07_03_assets/build_website.png" alt="alt text" width="750">
 
 
 

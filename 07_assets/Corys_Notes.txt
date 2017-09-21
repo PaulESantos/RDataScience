@@ -1,0 +1,23 @@
+This is not a workshop on fancy documents, it on communicating your research
+why do you need fancy documents
+
+Your job is to research or teach, so this kind of extracurricular stuff needs to have a high fancy/easy ratio to be practical. It does.
+
+- combine reading/listening with doing
+- keep students engaged
+-
+
+Goal - show the easy version of this as fast as possible to get you started and know what's availalbe
+R markdown team has super clear tutorials, this is just a quick start.
+
+
+
+
+
+Show examples of doc types at beginning:
+
+wallace vignette
+IPM guide
+biodiversity talk
+This website
+Wallace

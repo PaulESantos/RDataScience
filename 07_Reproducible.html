@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Cory Merow &amp; Adam Wilson" />
+
+
+<title>Reproducible and Interactive Research</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="cm_yeti_bootswatch.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 66px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+
+.section h2 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h3 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h4 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h5 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+.section h6 {
+  padding-top: 71px;
+  margin-top: -71px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Ecology, Statistics, and Data Science with R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Head2_Schedule.html">Schedule</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    R Intro
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Head1_CourseContent.html">About Course Content</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Module 1: Introduction to R</li>
+    <li>
+      <a href="00_CourseIntroductionFrame.html">1.0 Course Introduction</a>
+    </li>
+    <li>
+      <a href="01_Rintro.html">1.1 First Steps</a>
+    </li>
+    <li>
+      <a href="02_DataWrangling.html">1.2 Data Wrangling</a>
+    </li>
+    <li>
+      <a href="03_Plotting.html">1.3 Plotting</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Module 2: Spatial Analyses</li>
+    <li>
+      <a href="04_Spatial.html">2.1 Spatial Data</a>
+    </li>
+    <li>
+      <a href="05_Raster.html">2.2 Spatial Raster Data</a>
+    </li>
+    <li>
+      <a href="06_RasterTwo.html">2.3 More Raster Data</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Module 3: Reproducible and Interactive Research</li>
+    <li>
+      <a href="07_Reproducible.html">3.1 Research Reports with R markdown</a>
+    </li>
+    <li>
+      <a href="11_Git.html">3.2 Version control with Github</a>
+    </li>
+    <li>
+      <a href="07_03_RMarkdown_Tools.html">3.3 RMarkdown Tools: Interactive Presentations, Apps, Websites</a>
+    </li>
+    <li class="divider"></li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Ecoinformatics
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="3_1_Ecoinf_Schedule.html">0 Workshop Schedule</a>
+    </li>
+    <li>
+      <a href="3_8_BIEN_intro.html">1 (BIEN) Botanical Information and Ecology Network</a>
+    </li>
+    <li>
+      <a href="3_7_TNRS.html">2 Taxonomic Name Resolution</a>
+    </li>
+    <li>
+      <a href="3_3_RBIEN_tutorial.html">3 Accessing Plant Biodiversity Data</a>
+    </li>
+    <li>
+      <a href="3_4_wallace.html">4 A streamlined modeling workflow: Wallace</a>
+    </li>
+    <li>
+      <a href="3_5_Minxent.html">5 Integrating biogeographic data </a>
+    </li>
+    <li>
+      <a href="3_2_Networks.html">6 Network Associations</a>
+    </li>
+    <li>
+      <a href="3_6_Teaching_Ecoinformatics.html">7 Teaching Econformatics</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Ecological Modeling
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="4_1_Wallace_SDMs.html">Range Models with Wallace</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="Head3_Resources.html">Resources</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/cmerow/RDataScience/tree/gh-pages">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Reproducible and Interactive Research</h1>
+<h4 class="author"><em>Cory Merow &amp; Adam Wilson</em></h4>
+<h4 class="date"><em>9/19/2017</em></h4>
+
+</div>
+
+
+<div id="getting-started" class="section level1">
+<h1><span class="header-section-number">1</span> Getting started</h1>
+<p>You may need to install some software for this sequence of 3 tutorials.</p>
+<ul>
+<li><strong>RStudio</strong> (convienient way to interact with R) :<br> <a href="https://www.rstudio.com/products/rstudio/download/#download" class="uri">https://www.rstudio.com/products/rstudio/download/#download</a></li>
+<li><strong>git</strong> (version control): <br> <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></li>
+<li>Create a <strong>GitHub</strong> account (sharing code online) at <br> <a href="https://github.com/" class="uri">https://github.com/</a></li>
+<li><strong>R packages</strong> (for these demos):<br> <code>install.packages(c('knitr','shiny','dplyr','ggplot2','maps','spocc',''wallace'), dep=T)</code></li>
+<li><strong>pandoc</strong> (to convert among document formats like html, pdf, docx): <br><a href="http://pandoc.org/installing.html" class="uri">http://pandoc.org/installing.html</a> <!-- --------------------------------------------------------------------------------------- --> <!-- --------------------------------------------------------------------------------------- --></li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+<div id="overview" class="section level1">
+<h1><span class="header-section-number">2</span> Overview</h1>
+<ul>
+<li>Research Reports with R markdown</li>
+<li>Version control with Github</li>
+<li>Interactive presentations</li>
+<li>Developing Web Applications with Shiny</li>
+<li>Developing R websites (like this)</li>
+</ul>
+<p>The same set of tools is used for all these!</p>
+<p><br></p>
+<div id="benefits-are-straightforward" class="section level2">
+<h2><span class="header-section-number">2.1</span> Benefits are straightforward</h2>
+<ul>
+<li><strong>Verification &amp; Reliability</strong>: Find and fix bugs.</li>
+<li><strong>Transparency</strong>: Increased citation count, broader impact, institutional memory</li>
+<li><strong>Efficiency</strong>: Reduces duplication of effort, Colleagues like you and ask for advice</li>
+<li><strong>Flexibility</strong>: When you don’t ‘point-and-click’ you gain many new analytic options.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="but-limitations-are-substantial" class="section level2">
+<h2><span class="header-section-number">2.2</span> But limitations are substantial</h2>
+<ul>
+<li>Classified/sensitive/big data</li>
+<li>Nondisclosure agreements &amp; intellectual property</li>
+<li>Competition</li>
+<li>Few expect reproducibility</li>
+<li>No uniform standards</li>
+<li>Inertia &amp; embarassment</li>
+</ul>
+<p><br></p>
+</div>
+<div id="a-spectrum-of-reproducibility" class="section level2">
+<h2><span class="header-section-number">2.3</span> A spectrum of reproducibility</h2>
+<p><img src="07_assets/peng-spectrum.jpg" alt="alt text" width="800"></p>
+<p><small>Peng 2011, Science 334(6060) pp. 1226-1227</small></p>
+<p><br></p>
+</div>
+<div id="code-click-trails" class="section level2 columns-2">
+<h2><span class="header-section-number">2.4</span> Code &gt; Click trails</h2>
+<ul>
+<li>Clicks = Lots of human effort for tedious &amp; time-wasting tasks</li>
+<li>Clicks = Error-prone due to manual &amp; ad hoc data handling</li>
+<li>Clicks = Difficult to record - hard to reconstruct a ‘click history’</li>
+<li>Code = Improved transparency, automation, maintanability, accessibility, standardisation, modularity, portability, efficiency, communicability of process (what more could we want?)</li>
+<li>Code = Plain text files readable for a <em>long</em> time</li>
+</ul>
+<!-- ## Literate programming: for and against   {.columns-2} -->
+<!-- **Pros** -->
+<!-- - Text & code in one place, in logical order -->
+<!-- - Tables and figures automatically updated -->
+<!-- - Automatic test when building document -->
+<!-- **Cons** -->
+<!-- - Text and code in one place; can be hard to read -->
+<!-- - Can slow down the processing of documents (use caching!) -->
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+<div id="reproducible-research-in-r" class="section level1">
+<h1><span class="header-section-number">3</span> Reproducible Research in R</h1>
+<ul>
+<li>Programming language:
+<ul>
+<li>The machine-readable part: R</li>
+</ul></li>
+<li>Document formatting language
+<ul>
+<li>Markdown: lightweight document formatting syntax. Easy to write, read and publish as-is.</li>
+</ul></li>
+<li>Human-readable part
+<ul>
+<li><code>rmarkdown</code>: minor extensions to allow R code display and execution, embed images in html files, equations</li>
+</ul></li>
+</ul>
+<p><code>knitr</code>: Dynamic documents in R {.columns-2}</p>
+<ul>
+<li>Narrative and code in the same file or explicitly linked</li>
+<li>When data or narrative are updated, the document is automatically updated</li>
+</ul>
+<!-- --------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------- -->
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+<div id="demo" class="section level1">
+<h1><span class="header-section-number">4</span> Demo</h1>
+<p><br></p>
+<div id="r-markdown-cheatsheet" class="section level2">
+<h2><span class="header-section-number">4.1</span> R Markdown Cheatsheet</h2>
+<p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"> <img src="07_assets/rmarkdown.png" alt="alt text" width="700"></a></p>
+<p><small><small><small><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf</a></small></small></small></p>
+<p>The <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">reference guide</a> is a little more comprehensive</p>
+<p><br></p>
+</div>
+<div id="create-new-file" class="section level2">
+<h2><span class="header-section-number">4.2</span> Create new file</h2>
+<p>In Rstudio: <strong>File -&gt; New File -&gt; RMarkdown -&gt; Document -&gt; HTML</strong></p>
+<p><img src="07_assets/rmarkdownwindow.png" alt="alt text" width="600"></p>
+<p>This will open a document that looks like this:</p>
+<p><img src="07_assets/Example_knitr_Template.png" alt="alt text" width="750"></p>
+<!-- <img src="07_assets/Example_knitr_Template.png" alt="alt text" width="700"> -->
+<p><br></p>
+</div>
+<div id="step-1-load-packages" class="section level2">
+<h2><span class="header-section-number">4.3</span> Step 1: Load packages</h2>
+<p>All R code to be run must be in a <em>code chunk</em> like this:</p>
+<pre class="r"><code>#```{r,eval=F}
+CODE HERE
+#```</code></pre>
+<p>Add a new <em>code chunk</em> at the bottom of this template file to load these packages (you may need to install some packages):</p>
+<pre class="r"><code>library(dplyr)
+library(ggplot2)
+library(maps)
+library(spocc)</code></pre>
+<blockquote>
+<p>Do you think you should put <code>install.packages()</code> calls in your script?</p>
+</blockquote>
+<p><br></p>
+</div>
+<div id="step-2-load-data" class="section level2">
+<h2><span class="header-section-number">4.4</span> Step 2: Load data</h2>
+<p>Now use the <code>occ()</code> function in <strong>new</strong> <em>code chunk</em> to download all the <em>occurrence</em> records for the American robin (<em>Turdus migratorius</em>) from the <a href="gbif.org">Global Biodiversity Information Facility</a>.</p>
+<p><img src="07_assets/Turdus-migratorius-002.jpg" alt="alt text" width="200"></p>
+<p><small><small><small>Licensed under CC BY-SA 3.0 via <a href="https://commons.wikimedia.org/wiki/File:Turdus-migratorius-002.jpg#/media/File:Turdus-migratorius-002.jpg">Wikimedia Commons</a></small></small></small></p>
+<pre class="r"><code>## define which species to query
+sp=&#39;Turdus migratorius&#39;
+
+## run the query and convert to data.frame()
+d = occ(query=sp, from=&#39;ebird&#39;,limit = 100) %&gt;% occ2df()</code></pre>
+<p><br></p>
+</div>
+<div id="step-3-map-it" class="section level2">
+<h2><span class="header-section-number">4.5</span> Step 3: Map it</h2>
+<pre class="r"><code># Load coastline
+map=map_data(&quot;world&quot;)
+
+ggplot(d,aes(x=longitude,y=latitude))+
+  geom_polygon(aes(x=long,y=lat,group=group,order=order),data=map)+
+  geom_point(col=&quot;red&quot;)+
+  coord_equal()</code></pre>
+<pre><code>## Warning: Ignoring unknown aesthetics: order</code></pre>
+<p><img src="07_Reproducible_files/figure-html/unnamed-chunk-4-1.png" /><!-- --></p>
+<p><br></p>
+</div>
+<div id="step-4-yaml-header" class="section level2">
+<h2><span class="header-section-number">4.6</span> Step 4: YAML header</h2>
+<p>Update the YAML header to keep the markdown file from this:</p>
+<pre class="r"><code>title: &quot;Untitled&quot;
+author: &quot;Adam M. Wilson&quot;
+date: &quot;October 31, 2016&quot;
+output: html_document</code></pre>
+<p>To this (you need to save the markdown (md) document to make the html):</p>
+<pre class="r"><code>title: &quot;Demo&quot;
+author: &quot;Adam M. Wilson&quot;
+date: &quot;October 31, 2016&quot;
+output: 
+  html_document:
+      keep_md: true</code></pre>
+<p>And click <code>knit HTML</code> to generate the output</p>
+<p><img src="07_assets/knitbutton.png" alt="alt text" width="600"></p>
+<p>Changing this YAML header is all that’s needed to change among document types. Try experimenting. (pdf won’t work unless you have latex installed.)</p>
+<p><img src="07_assets/yaml.png" alt="alt text" width="600"></p>
+<p><br></p>
+</div>
+<div id="files" class="section level2">
+<h2><span class="header-section-number">4.7</span> Files</h2>
+<p>kniting produces a number of files all extracted from the Rmd you wrote, seen below</p>
+<p><img src="07_assets/rmd_file_list.png" alt="alt text" width="600"></p>
+<ul>
+<li>.Rmd - you wrote this</li>
+<li>.md - plain markdown, with the R code already run</li>
+<li>.R - just the R code chunks, useful for rerunning just the code</li>
+<li>.html - the output file for others to view</li>
+<li>/YourDocumentName_files - any files generated from running the R code</li>
+</ul>
+<p>In case you had trouble generating this document, <a href="07_assets/demo/Demo.Rmd"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> the R Script associated with this page is available here</a>.</p>
+<p><br></p>
+</div>
+<div id="step-5-explore-markdown-functions" class="section level2">
+<h2><span class="header-section-number">4.8</span> Step 5: Explore markdown functions</h2>
+<ol style="list-style-type: decimal">
+<li>Use the Cheatsheet to add sections and some example narrative.<br />
+</li>
+<li>Add more figures or different versions of a figure</li>
+<li>Check out the <code>kable()</code> function for tables (e.g. <code>kable(head(d))</code>)</li>
+<li>Some example of slightly more complex Rmd files:</li>
+</ol>
+<ul>
+<li><a href="07_assets/bossMaps_demo_rmd.Rmd"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> the vignette from the R package <em>bossMaps</em></a>. <!-- Additions to note:  --> <!--     * the _knitr::opts_chunk$set_ allows you to change some settings throughout the document --> <!--     * code chunk argument _message=F_ to suppress function messages --> <!--     * code chunk argument _fig.width_ to customize the size of a --></li>
+<li>The <a href="http://rmarkdown.rstudio.com/gallery.html">R markdown gallery</a> with examples of interactive documents, websites, books, and presentations, that we’ll demonstrate in the next tutorials</li>
+</ul>
+<p><br></p>
+</div>
+<div id="step-6-tips" class="section level2">
+<h2><span class="header-section-number">4.9</span> Step 6: Tips</h2>
+<ul>
+<li>Caching will speed up compiling</li>
+</ul>
+<pre class="r"><code>#```{r,eval=F}
+knitr::opts_chunk$set(cache=TRUE)
+#```</code></pre>
+<ul>
+<li>Hide the code, just show the results</li>
+</ul>
+<pre class="r"><code>#```{r, echo=FALSE}</code></pre>
+<ul>
+<li>Don’t evaluate the code (maybe its slow or broken)</li>
+</ul>
+<pre class="r"><code>#```{r, eval=FALSE}</code></pre>
+<!-- --------------------------------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------------------------------- -->
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+<div id="more-background" class="section level1">
+<h1><span class="header-section-number">5</span> More Background</h1>
+<div id="key-references" class="section level2">
+<h2><span class="header-section-number">5.1</span> Key References</h2>
+<ul>
+<li><a href="http://rmarkdown.rstudio.com/">Rmarkdown homepage</a></li>
+<li><a href="http://rmarkdown.rstudio.com/html_document_format.html">html document format options</a> for the YAML header</li>
+<li><a href="http://rmarkdown.rstudio.com/authoring_rcodechunks.html">using code chunks</a></li>
+</ul>
+<p><br></p>
+</div>
+<div id="pandoc-document-converter" class="section level2 columns-2">
+<h2><span class="header-section-number">5.2</span> Pandoc: document converter</h2>
+<p>How does markdown magically convert between document types (html, pdf, docx)?</p>
+<p>A universal document converter, open source, cross-platform</p>
+<ul>
+<li>Write code and narrative in rmarkdown<br />
+</li>
+<li>knitr-&gt;markdown (with computation)<br />
+</li>
+<li>use pandoc to get HTML/PDF/DOCX</li>
+<li>its also very easy and useful from the command line: <a href="https://pandoc.org/demos.html" class="uri">https://pandoc.org/demos.html</a></li>
+</ul>
+<p><img src="07_assets/pandoc-workflow-rmd-md.png" alt="alt text" width="100%"> <small><small><small><a href="http://kieranhealy.org/blog/archives/2014/01/23/plain-text/" class="uri">http://kieranhealy.org/blog/archives/2014/01/23/plain-text/</a> </small></small></small></p>
+<p><br></p>
+</div>
+<div id="colophon" class="section level2">
+<h2><span class="header-section-number">5.3</span> Colophon</h2>
+<ul>
+<li><a href="https://github.com/benmarwick/CSSS-Primer-Reproducible-Research">Slides based on Ben Marwick’s presentation to the UW Center for Statistics and Social Sciences (12 March 2014)</a> (<a href="http://orcid.org/0000-0001-7879-4531">OrcID</a>)</li>
+</ul>
+<p><br></p>
+</div>
+<div id="references" class="section level2">
+<h2><span class="header-section-number">5.4</span> References</h2>
+<p>See Rmd file for full references and sources</p>
+</div>
+</div>
+
+
+<!-- give the footer some space -->
+<br/>
+<br/>
+
+<footer id="site-footer">
+  <div id="footer1">
+  <a href="https://cmerow.github.io"><img src="img/cory.png" alt="logo" width=40px></a>
+  <!--
+  <a href="http://adamwilson.us/#contact"><i class="fa fa-envelope fa-2x"></i></a> 
+  <a href="https://twitter.com/AdamWilsonLab"><i class="fa fa-twitter fa-2x"></i></a> 
+  <a href="https://github.com/AdamMWilson"><i class="fa fa-github fa-2x"></i></a>
+  -->
+  </div>
+  <div id="footer2">
+  <a rel="license" property="http://creativecommons.org/ns#license"
+  href="http://creativecommons.org/licenses/by/4.0/" ><img src="img/cc-by.svg" alt="cc-by"/></a> 
+  </div>
+</footer>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+
+</body>
+</html>

@@ -337,13 +337,7 @@ div.tocify {
       <a href="11_Git.html">3.2 Version control with Github</a>
     </li>
     <li>
-      <a href="07_Reproducible.html">3.3 Interactive presentations</a>
-    </li>
-    <li>
-      <a href="07_Reproducible.html">3.4 Developing Web Applications with Shiny</a>
-    </li>
-    <li>
-      <a href="07_Reproducible.html">3.5 Developing R websites (like this)</a>
+      <a href="07_03_RMarkdown_Tools.html">3.3 RMarkdown Tools: Interactive Presentations, Apps, Websites</a>
     </li>
     <li class="divider"></li>
   </ul>
@@ -435,11 +429,12 @@ div.tocify {
 <li><strong>RStudio</strong> (convienient way to interact with R) : <a href="https://www.rstudio.com/products/rstudio/download/#download" class="uri">https://www.rstudio.com/products/rstudio/download/#download</a></li>
 <li><strong>git</strong> (version control): <br> <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></li>
 <li>Create a <strong>GitHub</strong> account (sharing code online) at <a href="https://github.com/" class="uri">https://github.com/</a></li>
-<li><strong>R packages</strong> (for these demos): install.packages(c(‘knitr’,‘shiny’,‘dplyr’,‘ggplot2’,‘maps’,spocc), dep=T)</li>
+<li><strong>R packages</strong> (for these demos): <code>install.packages(c('knitr','shiny','dplyr','ggplot2','maps','spocc',''wallace'), dep=T)</code></li>
 <li><strong>pandoc</strong> (to convert among document formats like html, pdf, docx): <a href="http://pandoc.org/installing.html" class="uri">http://pandoc.org/installing.html</a></li>
 </ul>
 <!-- --------------------------------------------------------------------------------------- -->
 <!-- --------------------------------------------------------------------------------------- -->
+<p><br><br><br><br></p>
 </div>
 <div id="overview" class="section level1">
 <h1><span class="header-section-number">2</span> Overview</h1>
@@ -493,6 +488,7 @@ div.tocify {
 <!-- **Cons** -->
 <!-- - Text and code in one place; can be hard to read -->
 <!-- - Can slow down the processing of documents (use caching!) -->
+<p><br><br><br><br></p>
 </div>
 </div>
 <div id="reproducible-research-in-r" class="section level1">
@@ -518,13 +514,17 @@ div.tocify {
 </ul>
 <!-- --------------------------------------------------------------------------------------- -->
 <!-- --------------------------------------------------------------------------------------- -->
+<p><br></p>
+<hr />
+<p><br></p>
 </div>
-<div id="demo-lets-get-started" class="section level1">
-<h1><span class="header-section-number">4</span> Demo: let’s get started</h1>
+<div id="demo" class="section level1">
+<h1><span class="header-section-number">4</span> Demo</h1>
 <div id="r-markdown-cheatsheet" class="section level2">
 <h2><span class="header-section-number">4.1</span> R Markdown Cheatsheet</h2>
 <p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"> <img src="07_assets/rmarkdown.png" alt="alt text" width="700"></a></p>
 <p><small><small><small><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf</a></small></small></small></p>
+<p>The <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">reference guide</a> is a little more comprehensive</p>
 </div>
 <div id="create-new-file" class="section level2">
 <h2><span class="header-section-number">4.2</span> Create new file</h2>
@@ -610,16 +610,42 @@ output:
 </ol>
 <ul>
 <li><a href="07_assets/bossMaps_demo_rmd.Rmd"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> the vignette from the R package <em>bossMaps</em></a>. <!-- Additions to note:  --> <!--     * the _knitr::opts_chunk$set_ allows you to change some settings throughout the document --> <!--     * code chunk argument _message=F_ to suppress function messages --> <!--     * code chunk argument _fig.width_ to customize the size of a --></li>
-<li><a href="http://rmarkdown.rstudio.com/gallery.html"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> the R markdown gallery, with examples of interactive documents, websites, books, and presentations, that we’ll demonstrate in the next tutorials</a>.</li>
+<li>The <a href="http://rmarkdown.rstudio.com/gallery.html">R markdown gallery</a> with examples of interactive documents, websites, books, and presentations, that we’ll demonstrate in the next tutorials</li>
 </ul>
+</div>
+<div id="step-6-tips" class="section level2">
+<h2><span class="header-section-number">4.8</span> Step 6: Tips</h2>
+<ul>
+<li>Caching will speed up compiling</li>
+</ul>
+<pre class="r"><code>#```{r,eval=F}
+knitr::opts_chunk$set(cache=TRUE)
+#```</code></pre>
+<ul>
+<li>Hide the code, just show the results</li>
+</ul>
+<pre class="r"><code>#```{r, echo=FALSE}</code></pre>
+<ul>
+<li>Don’t evaluate the code (maybe its slow or broken)</li>
+</ul>
+<pre class="r"><code>#```{r, eval=FALSE}</code></pre>
 <!-- --------------------------------------------------------------------------------------- -->
 <!-- --------------------------------------------------------------------------------------- -->
+<p><br><br><br><br></p>
 </div>
 </div>
 <div id="more-background" class="section level1">
 <h1><span class="header-section-number">5</span> More Background</h1>
+<div id="key-references" class="section level2">
+<h2><span class="header-section-number">5.1</span> Key References</h2>
+<ul>
+<li><a href="http://rmarkdown.rstudio.com/">Rmarkdown homepage</a></li>
+<li><a href="http://rmarkdown.rstudio.com/html_document_format.html">html document format</a></li>
+<li><a href="http://rmarkdown.rstudio.com/authoring_rcodechunks.html">using code chunks</a></li>
+</ul>
+</div>
 <div id="pandoc-document-converter" class="section level2 columns-2">
-<h2><span class="header-section-number">5.1</span> Pandoc: document converter</h2>
+<h2><span class="header-section-number">5.2</span> Pandoc: document converter</h2>
 <p>How does markdown magically convert between document types (html, pdf, docx)?</p>
 <p>A universal document converter, open source, cross-platform</p>
 <ul>
@@ -633,13 +659,13 @@ output:
 <p><img src="07_assets/pandoc-workflow-rmd-md.png" alt="alt text" width="100%"> <small><small><small><a href="http://kieranhealy.org/blog/archives/2014/01/23/plain-text/" class="uri">http://kieranhealy.org/blog/archives/2014/01/23/plain-text/</a> </small></small></small></p>
 </div>
 <div id="colophon" class="section level2">
-<h2><span class="header-section-number">5.2</span> Colophon</h2>
+<h2><span class="header-section-number">5.3</span> Colophon</h2>
 <ul>
 <li><a href="https://github.com/benmarwick/CSSS-Primer-Reproducible-Research">Slides based on Ben Marwick’s presentation to the UW Center for Statistics and Social Sciences (12 March 2014)</a> (<a href="http://orcid.org/0000-0001-7879-4531">OrcID</a>)</li>
 </ul>
 </div>
 <div id="references" class="section level2">
-<h2><span class="header-section-number">5.3</span> References</h2>
+<h2><span class="header-section-number">5.4</span> References</h2>
 <p>See Rmd file for full references and sources</p>
 </div>
 </div>

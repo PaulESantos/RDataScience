@@ -1,0 +1,118 @@
+---
+title: "Demo with ioslides"
+author: Cory
+date: Sept, 20, 2017
+output: ioslides_presentation
+runtime: shiny
+---
+
+## Example Heading 
+
+  Headings are specified by #, ##, or ----  
+  
+## Text formatting
+
+**bold**
+
+`code`
+
+equations: $H=-\sum_{i=1}^S p_i \log_b  p_i$
+
+## R code
+
+```{r}
+x=rnorm(10)
+y=rnorm(10)
+plot(x,y)
+```
+
+<!-- ---------------------------------------------------------------------------------- -->
+<!-- I like putting these bars (-------) between slides to make it easier to read the code, but its optional -->
+<!-- Note that the above is a comment that isn't shown in the compiled document (use CMD +Shift +C in RStudio to Comment) -->
+## Lists
+
+* list element 1
+    + subelement (this line needs to start with a tab, not a space)
+* list element 2
+    + subelement
+
+<!-- ---------------------------------------------------------------------------------- -->
+## Interactive slides
+
+```{r, echo=FALSE}
+# echo=F hides the code
+library(vegan)
+data(BCI)
+```
+
+```{r echo = FALSE}
+# inputPanel defines the grey border around the slider
+# sliderInput sets up a slide bar and names the output `nreps` so it can be accessed in the plot below
+inputPanel(
+  sliderInput("nreps", label = "Number of replicate samples", min = 2, max = 100, value = 3)
+)
+```
+
+```{r echo = FALSE}
+# renderPlot({}) simply wraps around the code you'd use to make a plot
+# the value input$nreps (in the for loop) takes the output from the slidebar above
+renderPlot({
+  spa <- specaccum(BCI,method='random')
+  plot(spa$sites,spa$perm[,1],
+      xlab='# sites',ylab='# species', main='species accumulation curves',
+      type='l',las=1,bty='n',ylim=c(80,230))
+  for (i in seq_len(NCOL(spa$perm[,1:input$nreps]))){
+    lines(spa$sites, spa$perm[,i])}
+  })
+```
+
+<!-- ---------------------------------------------------------------------------------- -->
+## More complex interaction    
+
+```{r echo = FALSE}
+# users can define 2 inputs, sp.ac.mod and nsites1
+inputPanel(
+  selectInput("sp.ac.mod", label = "Model",choices = c('none','Lomolino','Arrhenius'), selected = 'none'),
+  sliderInput("nsites1", label = "Number of 1 ha plots", min = 50, max = 100, value = 50)
+)
+```
+   
+```{r,echo=FALSE}
+renderPlot({
+  spa <- specaccum(BCI)
+  par(mar=c(13,4,3,10))
+  plot(spa, ci.type="poly", col="black", lwd=2, ci.lty=0, ci.col="lightblue", ylab='# species',xlab='# sites',main='A species accumulation curve',xlim=c(0,100),bty='n',ylim=c(70,270), las=1) #makes a prettier plot
+  # sp.ac.mod is used here
+  if(input$sp.ac.mod=='Lomolino'){
+    mod1 <- fitspecaccum(spa, "lomolino")
+    # nsites1 is used here
+    p1=predict(mod1,newdata=1:input$nsites1)
+    lines(1:input$nsites1, p1, add = TRUE, col='red3', lwd=2)
+    abline(h=p1[length(p1)],lty=2,col='red3')
+    abline(v=input$nsites1,lty=2,col='red3')
+    text(input$nsites1-3,p1[length(p1)]-20,round(p1[length(p1)],1),col='red3')
+
+  }
+  if(input$sp.ac.mod=='Arrhenius'){
+    mod2 <- fitspecaccum(spa, "arrh")
+    # nsites1 is used here
+    p2=predict(mod2,newdata=1:input$nsites1)
+    lines(1:input$nsites1, p2, add = TRUE, col='steelblue3', lwd=2)
+    abline(h=p2[length(p2)],lty=2,col='steelblue3')
+    abline(v=input$nsites1,lty=2,col='steelblue3')
+    text(input$nsites1-3,p2[length(p2)]-20,round(p2[length(p2)],1),col='steelblue3')
+  }
+})
+```  
+
+---
+**Tips**
+
+* note that '---' creates a slide with no label
+* pres p on this screen to see notes 
+
+  <div class="notes">
+  Notes for the presenter
+  </div>
+  
+* slides can be hosted on your website, or on http://www.shinyapps.io/

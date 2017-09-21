@@ -9,9 +9,10 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Cory Merow" />
 
 
-<title>Course Introduction</title>
+<title>RMarkdown Tools: Interactive Presentations, Apps, Websites</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -414,23 +415,80 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Course Introduction</h1>
+<h1 class="title toc-ignore">RMarkdown Tools: Interactive Presentations, Apps, Websites</h1>
+<h4 class="author"><em>Cory Merow</em></h4>
+<h4 class="date"><em>9/19/2017</em></h4>
 
 </div>
 
 
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">1</span> Introduction</h1>
-<div>
-<object data="00_CourseIntroduction/Intro.pdf" type="application/pdf" width="100%" height="600px">
-<p>
-It appears you don’t have a PDF plugin for this browser. No biggie… you can <a href="00_CourseIntroduction/Intro.pdf">click here to download the PDF file.</a>
-</p>
-</object>
+<blockquote>
+<p>This tutorial is a quick start guide extending the basic R Markdown skills from __ to getting started with interactive presentations, apps that can be hosted online or run locally, and R-based websites. The RStudio team has excellent complete tutorials on each of these (); this tutorial is meant to show how easy it is to get started with some key features.</p>
+</blockquote>
+<div id="interactive-presentations-with-ioslides" class="section level1">
+<h1><span class="header-section-number">1</span> Interactive presentations (with ioSlides)</h1>
+<div id="motivation" class="section level2">
+<h2><span class="header-section-number">1.1</span> Motivation</h2>
+<p>Interactive Slides …</p>
+<ul>
+<li>allow you or students to tinker with inputs and see the results on the fly</li>
+<li>are completely reproducible and sharable</li>
+<li>update presentation automatically if code changes</li>
+<li>maintain simplicity in presentations</li>
+</ul>
 </div>
-<p>
-<a href="00_CourseIntroduction/Intro.pdf">Download the PDF</a>
-</p>
+<div id="getting-started" class="section level2">
+<h2><span class="header-section-number">1.2</span> Getting Started</h2>
+<p>To create an ioslides presentation from R Markdown you specify the ioslides_presentation output format in the front-matter of your document.</p>
+<pre class="r"><code>---
+title: &quot;Demo with ioslides&quot;
+author: Cory Merow
+date: Sept, 20, 2017
+output: ioslides_presentation
+runtime: shiny
+---
+
+## Example Heading 
+
+  Headings are specified by #, ##, or ----  
+  
+## Text formatting
+
+**bold**
+
+`code`
+
+equations: $H=-\sum_{i=1}^S p_i \log_b  p_i$
+
+## Lists
+
+* list element 1
+    + subelement (this line needs to start with a tab, not a space)
+* list element 2
+    + subelement</code></pre>
+<ul>
+<li>Download the extended version of this demo to see interactive components <a href="07_03assets/Demo_ioslides.Rmd"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> here</a>.</li>
+</ul>
+<p>More on <a href="http://rmarkdown.rstudio.com/authoring_basics.html">basic authoring</a></p>
+</div>
+<div id="display-modes" class="section level2">
+<h2><span class="header-section-number">1.3</span> Display Modes</h2>
+<p>The following single character keyboard shortcuts enable alternate display modes:</p>
+<ul>
+<li>‘f’ enable fullscreen mode</li>
+<li>‘w’ toggle widescreen mode</li>
+<li>‘o’ enable overview mode</li>
+<li>‘h’ enable code highlight mode</li>
+<li>‘p’ show presenter notes</li>
+</ul>
+</div>
+</div>
+<div id="applications-with-shiny" class="section level1">
+<h1><span class="header-section-number">2</span> Applications (with Shiny)</h1>
+</div>
+<div id="websites-like-this" class="section level1">
+<h1><span class="header-section-number">3</span> Websites (like this)</h1>
+<!-- ## Colophon -->
 </div>
 
 

@@ -33,12 +33,8 @@ left:
         href: 07_Reproducible.html
       - text: "3.2 Version control with Github"
         href: 11_Git.html
-      - text: "3.3 Interactive presentations"
-        href: 07_Reproducible.html
-      - text: "3.4 Developing Web Applications with Shiny"
-        href: 07_Reproducible.html
-      - text: "3.5 Developing R websites (like this)"
-        href: 07_Reproducible.html
+      - text: "3.3 RMarkdown Tools: Interactive Presentations, Apps, Websites"
+        href: 07_03_RMarkdown_Tools.html
       - text: "-----------------"
   - text: "Ecoinformatics"
     menu:

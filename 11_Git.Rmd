@@ -74,6 +74,11 @@ Similar to 'track-changes' in Microsoft Word, Git keeps track of any edits and m
 <small>Stodden (IASSIST 2010) sampled American academics registered at the Machine Learning conference NIPS (134 responses from 593 requests (23%). Red = communitarian norms, Blue = private incentives</small>
 
 
+<br>
+
+***
+
+<br>
 #  Git Tutorial: let's get started
 <!-- <img src="11_assets/git.png" alt="alt text" width="30%"> -->
 
@@ -219,6 +224,19 @@ Practice modifying a file and pushing it to one another's repos.
 
 ## Conflicts
 A conflict can occur if two people simultaneously edit the same file and haven't pushed it. This can be resolved by merging if the bits of code don't overlap, but requires someone to choose which version of the code to keep if they do overlap. **Either avoid working on the same bits of code simultaneously, or read on to learn more advanced git functions.**
+
+## Tips
+
+* reference a specific line of code in a link by adding (e.g.) #L18 to the html address to go to line 18
+* track 'issues' such as bugs or to-dos and track a discussion on them using github's Issues tab
+
+<img src="11_assets/github_issues.png" alt="alt text" width="90%">
+
+<br>
+
+***
+
+<br>
 
 # More git, if you're bored
 

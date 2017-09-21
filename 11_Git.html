@@ -337,13 +337,7 @@ div.tocify {
       <a href="11_Git.html">3.2 Version control with Github</a>
     </li>
     <li>
-      <a href="07_Reproducible.html">3.3 Interactive presentations</a>
-    </li>
-    <li>
-      <a href="07_Reproducible.html">3.4 Developing Web Applications with Shiny</a>
-    </li>
-    <li>
-      <a href="07_Reproducible.html">3.5 Developing R websites (like this)</a>
+      <a href="07_03_RMarkdown_Tools.html">3.3 RMarkdown Tools: Interactive Presentations, Apps, Websites</a>
     </li>
     <li class="divider"></li>
   </ul>
@@ -475,13 +469,12 @@ div.tocify {
 <div id="or-not-to-share" class="section level2">
 <h2><span class="header-section-number">2.4</span> Or not to share</h2>
 <p><img src="07_assets/VictoriaStoddenIASSISTJune2010-reasons.png" alt="alt text" width="800"> <small>Stodden (IASSIST 2010) sampled American academics registered at the Machine Learning conference NIPS (134 responses from 593 requests (23%). Red = communitarian norms, Blue = private incentives</small></p>
+<p><br></p>
+<hr />
+<p><br> # Git Tutorial: let’s get started <!-- <img src="11_assets/git.png" alt="alt text" width="30%"> --></p>
 </div>
-</div>
-<div id="git-tutorial-lets-get-started" class="section level1">
-<h1><span class="header-section-number">3</span> Git Tutorial: let’s get started</h1>
-<!-- <img src="11_assets/git.png" alt="alt text" width="30%"> -->
 <div id="github" class="section level2">
-<h2><span class="header-section-number">3.1</span> Github</h2>
+<h2><span class="header-section-number">2.5</span> Github</h2>
 <p>You can think of GitHub as part:</p>
 <ul>
 <li>Server to back up your files</li>
@@ -490,23 +483,23 @@ div.tocify {
 <li>Platform to collaboratively develop code (or other files)</li>
 </ul>
 <div id="example-this-course-website-is-managed-using-git-github" class="section level3">
-<h3><span class="header-section-number">3.1.1</span> Example: this course website is managed using Git &amp; GitHub</h3>
+<h3><span class="header-section-number">2.5.1</span> Example: this course website is managed using Git &amp; GitHub</h3>
 <p><a href=https://github.com/adammwilson/RDataScience/tree/gh-pages> <img src="11_assets/githubcoursewebsite.png" alt="alt text" width="100%"></a></p>
 </div>
 </div>
 <div id="install-git-on-your-computer" class="section level2">
-<h2><span class="header-section-number">3.2</span> Install Git on your computer</h2>
+<h2><span class="header-section-number">2.6</span> Install Git on your computer</h2>
 <div id="windows-and-osx" class="section level3">
-<h3><span class="header-section-number">3.2.1</span> Windows and OSX</h3>
+<h3><span class="header-section-number">2.6.1</span> Windows and OSX</h3>
 <p><a href="http://git-scm.com/downloads" class="uri">http://git-scm.com/downloads</a></p>
 </div>
 <div id="linux" class="section level3">
-<h3><span class="header-section-number">3.2.2</span> Linux</h3>
+<h3><span class="header-section-number">2.6.2</span> Linux</h3>
 <p><code>sudo apt-get install git</code> or similar</p>
 </div>
 </div>
 <div id="creating-an-account-on-github" class="section level2">
-<h2><span class="header-section-number">3.3</span> Creating an account on <a href="github.com">GitHub</a></h2>
+<h2><span class="header-section-number">2.7</span> Creating an account on <a href="github.com">GitHub</a></h2>
 <ol style="list-style-type: decimal">
 <li>Create a GitHub account at <a href="https://github.com/" class="uri">https://github.com/</a>
 <ul>
@@ -522,7 +515,7 @@ div.tocify {
 <img src="11_assets/github_create_repo.png" alt="alt text" width="600"></p>
 </div>
 <div id="in-rstudio-clone-the-repository" class="section level2">
-<h2><span class="header-section-number">3.4</span> In RStudio: <code>clone</code> the repository</h2>
+<h2><span class="header-section-number">2.8</span> In RStudio: <code>clone</code> the repository</h2>
 <ol style="list-style-type: decimal">
 <li><p>Go to RStudio</p>
 <ul>
@@ -541,9 +534,9 @@ div.tocify {
 <!-- To set up a connection that doesn't require you to type in your password every time, [see here](GitSSHNotes.html)     -->
 </div>
 <div id="commit-save-to-github-from-within-rstudio" class="section level2">
-<h2><span class="header-section-number">3.5</span> Commit (save) to GitHub from within RStudio</h2>
+<h2><span class="header-section-number">2.9</span> Commit (save) to GitHub from within RStudio</h2>
 <div id="steps" class="section level3">
-<h3><span class="header-section-number">3.5.1</span> Steps:</h3>
+<h3><span class="header-section-number">2.9.1</span> Steps:</h3>
 <ol style="list-style-type: decimal">
 <li>Edit: make changes to a file in the repository you cloned above</li>
 <li>Stage: tell git which changes you want to commit (save)</li>
@@ -555,22 +548,22 @@ div.tocify {
 </div>
 </div>
 <div id="staging" class="section level2">
-<h2><span class="header-section-number">3.6</span> Staging</h2>
+<h2><span class="header-section-number">2.10</span> Staging</h2>
 <p><img src="11_assets/Stage.png" alt="alt text" width="75%"></p>
 <p>Select which changed files (added, deleted, or edited) you want to commit. Staging allows you to choose just a certain subset of modified files to associate with a commit. (If you always save all your changes in the same commit, this maybe isn’t intuitive…)</p>
 </div>
 <div id="committing" class="section level2">
-<h2><span class="header-section-number">3.7</span> Committing</h2>
+<h2><span class="header-section-number">2.11</span> Committing</h2>
 <p><img src="11_assets/Commit.png" alt="alt text" width="100%"></p>
 <p>Add a <em>commit message</em> and click commit.</p>
 </div>
 <div id="syncing-push" class="section level2">
-<h2><span class="header-section-number">3.8</span> Syncing (<code>push</code>)</h2>
+<h2><span class="header-section-number">2.12</span> Syncing (<code>push</code>)</h2>
 <p><img src="11_assets/Push.png" alt="alt text" width="100%"></p>
 <p>Click the green arrow to sync with GitHub.</p>
 </div>
 <div id="add-your-rmd" class="section level2">
-<h2><span class="header-section-number">3.9</span> Add your Rmd</h2>
+<h2><span class="header-section-number">2.13</span> Add your Rmd</h2>
 <p>Try adding the Rmd (and associated .md, R, files) you created in the last tutorial (or any other Rmd) to your working folder and push it to github.</p>
 <p>In case you don’t have one handy, use this <a href="07_assets/demo/Demo.Rmd"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> the R Script associated with this page is available here</a>.</p>
 <!-- ## Git and RMarkdown -->
@@ -597,18 +590,29 @@ div.tocify {
 <!-- <br> -->
 </div>
 <div id="invite-a-collaborator" class="section level2">
-<h2><span class="header-section-number">3.10</span> Invite a collaborator</h2>
+<h2><span class="header-section-number">2.14</span> Invite a collaborator</h2>
 <p>Now add another github user to your repo (e.g. the person sitting next to you).</p>
 <p><img src="11_assets/github_settings.png" alt="alt text" width="80%"></p>
 <p>Practice modifying a file and pushing it to one another’s repos.</p>
 </div>
 <div id="conflicts" class="section level2">
-<h2><span class="header-section-number">3.11</span> Conflicts</h2>
+<h2><span class="header-section-number">2.15</span> Conflicts</h2>
 <p>A conflict can occur if two people simultaneously edit the same file and haven’t pushed it. This can be resolved by merging if the bits of code don’t overlap, but requires someone to choose which version of the code to keep if they do overlap. <strong>Either avoid working on the same bits of code simultaneously, or read on to learn more advanced git functions.</strong></p>
+</div>
+<div id="tips" class="section level2">
+<h2><span class="header-section-number">2.16</span> Tips</h2>
+<ul>
+<li>reference a specific line of code in a link by adding (e.g.) #L18 to the html address to go to line 18</li>
+<li>track ‘issues’ such as bugs or to-dos and track a discussion on them using github’s Issues tab</li>
+</ul>
+<p><img src="11_assets/github_issues.png" alt="alt text" width="90%"></p>
+<p><br></p>
+<hr />
+<p><br></p>
 </div>
 </div>
 <div id="more-git-if-youre-bored" class="section level1">
-<h1><span class="header-section-number">4</span> More git, if you’re bored</h1>
+<h1><span class="header-section-number">3</span> More git, if you’re bored</h1>
 <!-- ## Git Jargon -->
 <!-- <img src="11_assets/git.png" alt="alt text" width="30%"> -->
 <!-- * **Strong support for non-linear development:** Rapid branching and merging,  specific tools for visualizing and navigating a non-linear development history.  -->
@@ -618,24 +622,24 @@ div.tocify {
 <!-- ## Git File Lifecycle -->
 <!-- <img src="11_assets/lifecycle.png" alt="alt text" width="100%"> -->
 <div id="git-command-line-from-rstudio" class="section level2">
-<h2><span class="header-section-number">4.1</span> Git command line from RStudio</h2>
+<h2><span class="header-section-number">3.1</span> Git command line from RStudio</h2>
 <p>RStudio has limited functionality.</p>
 <p><img src="11_assets/CommandLine.png" alt="alt text" width="75%"></p>
 </div>
 <div id="git-help" class="section level2">
-<h2><span class="header-section-number">4.2</span> Git help</h2>
+<h2><span class="header-section-number">3.2</span> Git help</h2>
 <pre><code>$ git help &lt;verb&gt;
 $ git &lt;verb&gt; --help
 $ man git-&lt;verb&gt;</code></pre>
 <p>For example, you can get the manpage help for the config command by running <code>git help config</code></p>
 </div>
 <div id="git-status" class="section level2">
-<h2><span class="header-section-number">4.3</span> Git status</h2>
+<h2><span class="header-section-number">3.3</span> Git status</h2>
 <p><img src="11_assets/GitCL.png" alt="alt text" width="75%"></p>
 <p>Similar to info in git tab in RStudio</p>
 </div>
 <div id="git-config" class="section level2">
-<h2><span class="header-section-number">4.4</span> Git config</h2>
+<h2><span class="header-section-number">3.4</span> Git config</h2>
 <p><code>git config</code> shows you all the git configuration settings:</p>
 <ul>
 <li><code>user.email</code></li>
@@ -643,12 +647,12 @@ $ man git-&lt;verb&gt;</code></pre>
 </ul>
 </div>
 <div id="branching" class="section level2">
-<h2><span class="header-section-number">4.5</span> Branching</h2>
+<h2><span class="header-section-number">3.5</span> Branching</h2>
 <p>Branches used to develop features isolated from each other. <img src="11_assets/Merge.png" alt="alt text" width="100%"></p>
 <p>Default: <em>master</em> branch. Use other branches for development/collaboration and merge them back upon completion.</p>
 </div>
 <div id="basic-branching" class="section level2">
-<h2><span class="header-section-number">4.6</span> Basic Branching</h2>
+<h2><span class="header-section-number">3.6</span> Basic Branching</h2>
 <pre><code>$ git checkout -b devel   # create new branch and switch to it
 
 
@@ -656,23 +660,23 @@ $ git checkout master  #switch back to master
 $ git merge devel  #merge in changes from devel branch</code></pre>
 <p>But we won’t do much with branching in this course…</p>
 <div class="well">
-<h2 id="command-line-git"><span class="header-section-number">4.6</span> Command line git</h2>
+<h2 id="command-line-git"><span class="header-section-number">3.6</span> Command line git</h2>
 <p>Take 15 minutes or so at <a href="https://try.github.io/levels/1/challenges/1">this site to walk through some basic git commands</a><br> <a href=https://try.github.io/levels/1/challenges/1> <img src="11_assets/trygit.png" alt="alt text" width="75%"></a></p>
 </div>
 </div>
 </div>
 <div id="git-can-do-far-more" class="section level2">
-<h2><span class="header-section-number">4.7</span> Git can do far more!</h2>
+<h2><span class="header-section-number">3.7</span> Git can do far more!</h2>
 <p>Check out the (free) book <a href="https://git-scm.com/book/en/v2">ProGIT</a></p>
 <p><img src="11_assets/progit2.png" alt="alt text" width="30%"></p>
 <p>Or the <a href="https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf">cheatsheet</a>.</p>
 </div>
 <div id="philosphy" class="section level2">
-<h2><span class="header-section-number">4.8</span> Philosphy</h2>
+<h2><span class="header-section-number">3.8</span> Philosphy</h2>
 <p>Remember, the data and code are <em>real</em>, the products (tables, figures) are ephemeral…</p>
 </div>
 <div id="colophon" class="section level2">
-<h2><span class="header-section-number">4.9</span> Colophon</h2>
+<h2><span class="header-section-number">3.9</span> Colophon</h2>
 <ul>
 <li><a href="https://github.com/benmarwick/CSSS-Primer-Reproducible-Research">Slides based on Ben Marwick’s presentation to the UW Center for Statistics and Social Sciences (12 March 2014)</a> (<a href="http://orcid.org/0000-0001-7879-4531">OrcID</a>)</li>
 <li>Git Slides based on materials from Dr. Çetinkaya-Rundel</li>

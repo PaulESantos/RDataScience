@@ -11,11 +11,13 @@ You may need to install some software for this sequence of 5 tutorials.
 - **RStudio** (convienient way to interact with R) : https://www.rstudio.com/products/rstudio/download/#download 
 - **git** (version control): <br> https://git-scm.com/downloads
 - Create a **GitHub** account (sharing code online) at [https://github.com/](https://github.com/)
-- **R packages** (for these demos): install.packages(c('knitr','shiny','dplyr','ggplot2','maps',spocc), dep=T)
+- **R packages** (for these demos): `install.packages(c('knitr','shiny','dplyr','ggplot2','maps','spocc',''wallace'), dep=T)`
 - **pandoc** (to convert among document formats like html, pdf, docx): http://pandoc.org/installing.html
 
 <!-- --------------------------------------------------------------------------------------- -->
 <!-- --------------------------------------------------------------------------------------- -->
+<br><br><br><br>
+
 # Overview
 
 - 3.1 Research Reports with R markdown
@@ -68,6 +70,8 @@ The same set of R Markdown tools is used for all these!
 <!-- - Text and code in one place; can be hard to read -->
 <!-- - Can slow down the processing of documents (use caching!) -->
 
+<br><br><br><br>
+
 # Reproducible Research in R
 
 - Programming language:  
@@ -84,7 +88,13 @@ The same set of R Markdown tools is used for all these!
 
 <!-- --------------------------------------------------------------------------------------- -->
 <!-- --------------------------------------------------------------------------------------- -->
-#  Demo: let's get started
+<br>
+
+***
+
+<br>
+
+#  Demo
 
 ## R Markdown Cheatsheet
 
@@ -92,6 +102,7 @@ The same set of R Markdown tools is used for all these!
 
 <small><small><small>[https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)</small></small></small>
 
+The [reference guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) is a little more comprehensive
 
 ## Create new file
 In Rstudio:
@@ -214,12 +225,38 @@ In case you had trouble generating this document, [<i class="fa fa-file-code-o f
   <!--     * the _knitr::opts_chunk$set_ allows you to change some settings throughout the document -->
   <!--     * code chunk argument _message=F_ to suppress function messages -->
   <!--     * code chunk argument _fig.width_ to customize the size of a -->
-  - [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> the R markdown gallery, with examples of interactive documents, websites, books, and presentations, that we'll demonstrate in the next tutorials](http://rmarkdown.rstudio.com/gallery.html).
+* The [R markdown gallery](http://rmarkdown.rstudio.com/gallery.html) with examples of interactive documents, websites, books, and presentations, that we'll demonstrate in the next tutorials
 
+## Step 6: Tips
 
+* Caching will speed up compiling
+
+```r
+#```{r,eval=F}
+knitr::opts_chunk$set(cache=TRUE)
+#```
+```
+* Hide the code, just show the results
+
+```r
+#```{r, echo=FALSE}
+```
+* Don't evaluate the code (maybe its slow or broken)
+
+```r
+#```{r, eval=FALSE}
+```
 <!-- --------------------------------------------------------------------------------------- -->
 <!-- --------------------------------------------------------------------------------------- -->
+<br><br><br><br>
+
 # More Background
+
+## Key References
+
+* [Rmarkdown homepage](http://rmarkdown.rstudio.com/)
+* [html document format](http://rmarkdown.rstudio.com/html_document_format.html)
+* [using code chunks](http://rmarkdown.rstudio.com/authoring_rcodechunks.html)
 
 ## Pandoc: document converter  {.columns-2}
 

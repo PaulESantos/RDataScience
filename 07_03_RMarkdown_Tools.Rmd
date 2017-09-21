@@ -153,7 +153,9 @@ All the content for this website was generated from R Markdown documents. You ca
 
 ## Demo
 
-1. Download a website template based on this site  [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> here](07_03_assets/Demo_R_Website.zip).
+1. Download a website template based on this site [here](https://www.dropbox.com/s/2oeu1pwlz0it1xb/Demo_R_Website.zip?dl=0)
+
+<!-- [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> here](07_03_assets/Demo_R_Website.zip). -->
 
 2. Unzip the directory and open a new RStudio project, setting this as the directory
 

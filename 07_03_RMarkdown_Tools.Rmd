@@ -64,6 +64,7 @@ Elements like these can be places directly in your presentation.
 # echo=F hides the code
 library(vegan)
 data(BCI)
+library(shiny)
 ```
 
 ```{r echo = FALSE}

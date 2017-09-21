@@ -972,11 +972,6 @@ p +  theme_solarized(light=FALSE)
 dev.off()
 ```
 
-```
-## quartz_off_screen 
-##                 2
-```
-
 <img src="03_assets/test1.png" alt="alt text" width="80%">
 
 
@@ -987,11 +982,6 @@ dev.off()
 png("03_assets/test2.png",width=600,height=300)
 p +  theme_solarized(light=FALSE, base_size=24)
 dev.off()
-```
-
-```
-## quartz_off_screen 
-##                 2
 ```
 <img src="03_assets/test2.png" alt="alt text" width="80%">
 

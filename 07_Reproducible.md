@@ -11,7 +11,7 @@ You may need to install some software for this sequence of 3 tutorials.
 - **RStudio** (convienient way to interact with R) :<br> https://www.rstudio.com/products/rstudio/download/#download 
 - **git** (version control): <br> https://git-scm.com/downloads
 - Create a **GitHub** account (sharing code online) at <br> [https://github.com/](https://github.com/)
-- **R packages** (for these demos):<br> `install.packages(c('knitr','shiny','dplyr','ggplot2','maps','spocc',''wallace'), dep=T)`
+- **R packages** (for these demos):<br> `install.packages(c('knitr','shiny','dplyr','ggplot2','maps','spocc',''wallace','rmarkdown'), dep=T)`
 - **pandoc** (to convert among document formats like html, pdf, docx): <br>http://pandoc.org/installing.html
 <!-- --------------------------------------------------------------------------------------- -->
 <!-- --------------------------------------------------------------------------------------- -->

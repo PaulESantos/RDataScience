@@ -23,6 +23,8 @@ For `wallace` to work, **you need the latest version of R** (or at least later t
 Load necessary libraries. 
 
 ```r
+if (!require('devtools')) install.packages('devtools')
+devtools::install_github('rstudio/leaflet')
 install.packages('knitr',dep=T) # you need the latest version, even if you already have it
 install.packages('wallace',dep=T)
 library(wallace)
@@ -45,7 +47,10 @@ Typing `run_wallace()` will give you the following in your web browser:
 
 Start by getting about 300 records of **Acer rubrum** (red maple) from GBIF. Throughout, I'll use a red arrow in the images below to indicate which buttons I'm referring to.
 
-To download the data click [here](https://github.com/cmerow/RDataScience/blob/gh-pages/4_1_assets/Outputs/a_rubrum_gbif.csv)
+<!-- To download the data click [here](https://github.com/cmerow/RDataScience/blob/gh-pages/4_1_assets/Outputs/a_rubrum_gbif.csv) -->
+<!-- # ```{r} -->
+<!-- # download.file(url='https://github.com/cmerow/RDataScience/blob/gh-pages/4_1_assets/Outputs/a_rubrum_gbif.csv',destfile='/Users/ctg/Desktop/acer.csv') -->
+<!-- # ``` -->
 
 <br>
 ![](4_1_assets/Wallace1a.png)

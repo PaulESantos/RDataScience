@@ -18,11 +18,11 @@ Interactive Slides ...
 
   * allow you or students to tinker with inputs and see the results on the fly
   * are completely reproducible and sharable
-  * update presentation automatically if code changes 
+  * update presentation automatically if code changes
   * maintain simplicity in presentations
 
 ## Getting Started
-To create an ioslides presentation from R Markdown you specify the ioslides_presentation output format in the front-matter of your document. Open a new file with 
+To create an ioslides presentation from R Markdown you specify the ioslides_presentation output format in the front-matter of your document. Open a new file with
 **File -> New File -> RMarkdown -> Presentation -> HTML(ioslides) **
 and paste in the following chunks:
 
@@ -35,10 +35,10 @@ output: ioslides_presentation
 runtime: shiny
 ---
 
-## Example Heading 
+## Example Heading
 
-  Headings are specified by #, ##, or ----  
-  
+  Headings are specified by #, ##, or ----
+
 ## Text formatting
 
 **bold**
@@ -70,22 +70,22 @@ library(shiny)
 ```{r echo = FALSE}
 # inputPanel defines the grey border around the slider
 # sliderInput sets up a slide bar and names the output `nreps` so it can be accessed in the plot below
-inputPanel(
-  sliderInput("nreps", label = "Number of replicate samples", min = 2, max = 100, value = 3)
-)
+# inputPanel(
+#   sliderInput("nreps", label = "Number of replicate samples", min = 2, max = 100, value = 3)
+# )
 ```
 
 ```{r echo = FALSE}
 # renderPlot({}) simply wraps around the code you'd use to make a plot
 # the value input$nreps (in the for loop) takes the output from the slidebar above
-renderPlot({
-  spa <- specaccum(BCI,method='random')
-  plot(spa$sites,spa$perm[,1],
-      xlab='# sites',ylab='# species', main='species accumulation curves',
-      type='l',las=1,bty='n',ylim=c(80,230))
-  for (i in seq_len(NCOL(spa$perm[,1:input$nreps]))){
-    lines(spa$sites, spa$perm[,i])}
-  })
+# renderPlot({
+#   spa <- specaccum(BCI,method='random')
+#   plot(spa$sites,spa$perm[,1],
+#       xlab='# sites',ylab='# species', main='species accumulation curves',
+#       type='l',las=1,bty='n',ylim=c(80,230))
+#   for (i in seq_len(NCOL(spa$perm[,1:input$nreps]))){
+#     lines(spa$sites, spa$perm[,i])}
+#   })
 ```
 
 **Download the extended version of this demo to see interactive components**  [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> here](07_03assets/Demo_ioslides.Rmd).
@@ -145,7 +145,7 @@ In case you're curious, here's the [source code for wallace](https://github.com/
 
 # Websites (like this)
 
-All the content for this website was generated from R Markdown documents. You can download of fork the repo [here](https://github.com/cmerow/RDataScience) to make your own. 
+All the content for this website was generated from R Markdown documents. You can download of fork the repo [here](https://github.com/cmerow/RDataScience) to make your own.
 
 **We encourage others to use and modify our content on their own websites.** It'd be nice if you mentioned us (Adam Wilson and Cory Merow).
 
@@ -171,14 +171,14 @@ All the content for this website was generated from R Markdown documents. You ca
 
 There a few tricks to get this up and running once you've created an RStudio project and added the cloned version our repo:
 
-  * All the .Rmd files for the website need to be in the same directory (that's why the github repo looks a little messy). 
+  * All the .Rmd files for the website need to be in the same directory (that's why the github repo looks a little messy).
   * You simply write the Rmd, click Run Document (analogous to knit), and the other files are built automatically
-  * There are a couple of website-specific files to edit: 
+  * There are a couple of website-specific files to edit:
 
     + _site.html: sitewide formatting options
     + _navbar.html: set up the tabs along the tops of pages
     + index.Rmd: set up the welcome page
-  
+
 
 
 

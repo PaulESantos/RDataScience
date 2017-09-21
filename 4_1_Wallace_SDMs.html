@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -329,6 +329,17 @@ div.tocify {
       <a href="06_RasterTwo.html">2.3 More Raster Data</a>
     </li>
     <li class="divider"></li>
+    <li class="dropdown-header">Module 3: Reproducible and Interactive Research</li>
+    <li>
+      <a href="07_Reproducible.html">3.1 Research Reports with R markdown</a>
+    </li>
+    <li>
+      <a href="11_Git.html">3.2 Version control with Github</a>
+    </li>
+    <li>
+      <a href="07_03_RMarkdown_Tools.html">3.3 RMarkdown Tools: Interactive Presentations, Apps, Websites</a>
+    </li>
+    <li class="divider"></li>
   </ul>
 </li>
 <li class="dropdown">
@@ -426,7 +437,9 @@ It appears you don’t have a PDF plugin for this browser. No biggie… you can 
 <h1><span class="header-section-number">1</span> Setup</h1>
 <p>For <code>wallace</code> to work, <strong>you need the latest version of R</strong> (or at least later than version 3.2.4). Download for <a href="https://cran.r-project.org/bin/windows/base/">Windows</a> or <a href="https://cran.r-project.org/bin/macosx/">Mac</a>.</p>
 <p>Load necessary libraries.</p>
-<pre class="r"><code>install.packages(&#39;knitr&#39;,dep=T) # you need the latest version, even if you already have it
+<pre class="r"><code>if (!require(&#39;devtools&#39;)) install.packages(&#39;devtools&#39;)
+devtools::install_github(&#39;rstudio/leaflet&#39;)
+install.packages(&#39;knitr&#39;,dep=T) # you need the latest version, even if you already have it
 install.packages(&#39;wallace&#39;,dep=T)
 library(wallace)
 run_wallace() # this will open the Wallace GUI in a web browser</code></pre>
@@ -438,7 +451,10 @@ run_wallace() # this will open the Wallace GUI in a web browser</code></pre>
 <div id="get-occurrence-data" class="section level1">
 <h1><span class="header-section-number">2</span> Get Occurrence Data</h1>
 <p>Start by getting about 300 records of <strong>Acer rubrum</strong> (red maple) from GBIF. Throughout, I’ll use a red arrow in the images below to indicate which buttons I’m referring to.</p>
-<p>To download the data click <a href="https://github.com/cmerow/RDataScience/blob/gh-pages/4_1_assets/Outputs/a_rubrum_gbif.csv">here</a></p>
+<!-- To download the data click [here](https://github.com/cmerow/RDataScience/blob/gh-pages/4_1_assets/Outputs/a_rubrum_gbif.csv) -->
+<!-- # ```{r} -->
+<!-- # download.file(url='https://github.com/cmerow/RDataScience/blob/gh-pages/4_1_assets/Outputs/a_rubrum_gbif.csv',destfile='/Users/ctg/Desktop/acer.csv') -->
+<!-- # ``` -->
 <p><br> <img src="4_1_assets/Wallace1a.png" /></p>
 <p><br> While you’re at it, download the data for later use (bottom left).</p>
 <p>Notice that there are tabs along the top, and you can view the sources of the occurrence data. Later you can choose to ditch some if it looks suspect.</p>

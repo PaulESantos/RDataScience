@@ -9,9 +9,10 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Cory Merow" />
 
 
-<title></title>
+<title>RMarkdown Tools: Interactive Presentations, Apps, Websites</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,6 +29,7 @@
 <script src="site_libs/highlightjs-1.1/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -159,7 +161,7 @@ $(document).ready(function () {
 <!-- tabsets -->
 <script>
 $(document).ready(function () {
-  window.buildTabsets("TOC");
+  window.buildTabsets("section-TOC");
 });
 </script>
 
@@ -199,17 +201,17 @@ $(document).ready(function ()  {
     options.smoothScroll = true;
 
     // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
+    var toc = $("#section-TOC").tocify(options).data("toc-tocify");
 });
 </script>
 
 <style type="text/css">
 
-#TOC {
+#section-TOC {
   margin: 25px 0px 20px 0px;
 }
 @media (max-width: 768px) {
-#TOC {
+#section-TOC {
   position: relative;
   width: 100%;
 }
@@ -264,7 +266,7 @@ div.tocify {
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
 <div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
+<div id="section-TOC" class="tocify">
 </div>
 </div>
 
@@ -401,7 +403,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div class="fluid-row" id="section-header">
 
 <div class="btn-group pull-right">
 <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
@@ -413,22 +415,20 @@ div.tocify {
 
 
 
+<h1 class="title toc-ignore">RMarkdown Tools: Interactive Presentations, Apps, Websites</h1>
+<h4 class="author"><em>Cory Merow</em></h4>
+<h4 class="date"><em>9/19/2017</em></h4>
 
 </div>
 
 
-<div id="rmarkdown-tools-interactive-presentations-apps-websites" class="section level1">
-<h1><span class="header-section-number">1</span> RMarkdown Tools: Interactive Presentations, Apps, Websites</h1>
-<p>Cory Merow<br />
-9/19/2017</p>
 <blockquote>
 <p>This tutorial is a quick start guide extending the basic R Markdown skills from __ to getting started with interactive presentations, apps that can be hosted online or run locally, and R-based websites. The RStudio team has excellent complete tutorials on each of these (); this tutorial is meant to show how easy it is to get started with some key features.</p>
 </blockquote>
-</div>
-<div id="interactive-presentations-with-ioslides" class="section level1">
-<h1><span class="header-section-number">2</span> Interactive presentations (with ioSlides)</h1>
-<div id="motivation" class="section level2">
-<h2><span class="header-section-number">2.1</span> Motivation</h2>
+<div id="section-interactive-presentations-with-ioslides" class="section level1">
+<h1><span class="header-section-number">1</span> Interactive presentations (with ioSlides)</h1>
+<div id="section-motivation" class="section level2">
+<h2><span class="header-section-number">1.1</span> Motivation</h2>
 <p>Interactive Slides …</p>
 <ul>
 <li>allow you or students to tinker with inputs and see the results on the fly</li>
@@ -437,9 +437,9 @@ div.tocify {
 <li>maintain simplicity in presentations</li>
 </ul>
 </div>
-<div id="getting-started" class="section level2">
-<h2><span class="header-section-number">2.2</span> Getting Started</h2>
-<p>To create an ioslides presentation from R Markdown you specify the ioslides_presentation output format in the front-matter of your document.</p>
+<div id="section-getting-started" class="section level2">
+<h2><span class="header-section-number">1.2</span> Getting Started</h2>
+<p>To create an ioslides presentation from R Markdown you specify the ioslides_presentation output format in the front-matter of your document. Open a new file with <strong>File -&gt; New File -&gt; RMarkdown -&gt; Presentation -&gt; HTML(ioslides) </strong> and paste in the following chunks:</p>
 <pre class="r"><code>---
 title: &quot;Demo with ioslides&quot;
 author: Cory Merow
@@ -448,10 +448,10 @@ output: ioslides_presentation
 runtime: shiny
 ---
 
-## Example Heading 
+## Example Heading
 
-  Headings are specified by #, ##, or ----  
-  
+  Headings are specified by #, ##, or ----
+
 ## Text formatting
 
 **bold**
@@ -466,13 +466,19 @@ equations: $H=-\sum_{i=1}^S p_i \log_b  p_i$
     + subelement (this line needs to start with a tab, not a space)
 * list element 2
     + subelement</code></pre>
-<ul>
-<li>Download the extended version of this demo to see interactive components <a href="07_03assets/Demo_ioslides.Rmd"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> here</a>.</li>
-</ul>
-<p>More on <a href="http://rmarkdown.rstudio.com/authoring_basics.html">basic authoring</a></p>
 </div>
-<div id="display-modes" class="section level2">
-<h2><span class="header-section-number">2.3</span> Display Modes</h2>
+<div id="section-interactive-web-elements" class="section level2">
+<h2><span class="header-section-number">1.3</span> Interactive web elements</h2>
+<p>Elements like these can be places directly in your presentation.</p>
+<pre><code>## Loading required package: permute</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## This is vegan 2.4-1</code></pre>
+<p><strong>Download the extended version of this demo to see interactive components</strong> <a href="07_03assets/Demo_ioslides.Rmd"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> here</a>.</p>
+<p>More on <a href="http://rmarkdown.rstudio.com/authoring_basics.html">basic markdown authoring</a></p>
+<p>Comprehensive <a href="http://rmarkdown.rstudio.com/ioslides_presentation_format.html">ioslides tutorial</a></p>
+</div>
+<div id="section-display-modes" class="section level2">
+<h2><span class="header-section-number">1.4</span> Display Modes</h2>
 <p>The following single character keyboard shortcuts enable alternate display modes:</p>
 <ul>
 <li>‘f’ enable fullscreen mode</li>
@@ -481,14 +487,71 @@ equations: $H=-\sum_{i=1}^S p_i \log_b  p_i$
 <li>‘h’ enable code highlight mode</li>
 <li>‘p’ show presenter notes</li>
 </ul>
+<p><br></p>
+<hr />
+<p><br></p>
 </div>
 </div>
-<div id="applications-with-shiny" class="section level1">
-<h1><span class="header-section-number">3</span> Applications (with Shiny)</h1>
+<div id="section-applications-with-shiny" class="section level1">
+<h1><span class="header-section-number">2</span> Applications (with Shiny)</h1>
+<p>If you find the interactive components useful, it only a small jump to full app development with <code>shiny</code></p>
+<p>This isn’t R markdown, but rather another way to use interactive widgets.</p>
+<div id="section-motivation-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Motivation</h2>
+<ul>
+<li>Dynamically interacting with research helps others understand your work</li>
+<li>Allows point-and-click that’s actually reproducible with code</li>
+</ul>
 </div>
-<div id="websites-like-this" class="section level1">
-<h1><span class="header-section-number">4</span> Websites (like this)</h1>
+<div id="section-a-simple-demo" class="section level2">
+<h2><span class="header-section-number">2.2</span> A simple demo</h2>
+<p>The simplest starting point is <a href="https://shiny.rstudio.com/gallery/kmeans-example.html">here</a></p>
+<p><a href="https://shiny.rstudio.com/gallery/">Shiny app gallery</a></p>
+</div>
+<div id="section-a-fancy-example-wallace" class="section level2">
+<h2><span class="header-section-number">2.3</span> A fancy example: Wallace</h2>
+<pre class="r"><code># install.packages(&#39;wallace&#39;)  # only if you haven&#39;t already
+library(wallace)
+run_wallace()</code></pre>
+<p>In case you’re curious, here’s the <a href="https://github.com/wallaceEcoMod/wallace">source code for wallace</a></p>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+<div id="section-websites-like-this" class="section level1">
+<h1><span class="header-section-number">3</span> Websites (like this)</h1>
+<p>All the content for this website was generated from R Markdown documents. You can download of fork the repo <a href="https://github.com/cmerow/RDataScience">here</a> to make your own.</p>
+<p><strong>We encourage others to use and modify our content on their own websites.</strong> It’d be nice if you mentioned us (Adam Wilson and Cory Merow).</p>
+<p><br></p>
+<div id="section-demo" class="section level2">
+<h2><span class="header-section-number">3.1</span> Demo</h2>
+<ol style="list-style-type: decimal">
+<li>Download a website template based on this site <a href="https://www.dropbox.com/s/2oeu1pwlz0it1xb/Demo_R_Website.zip?dl=0">here</a></li>
+</ol>
+<!-- [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> here](07_03_assets/Demo_R_Website.zip). -->
+<ol start="2" style="list-style-type: decimal">
+<li><p>Unzip the directory and open a new RStudio project, setting this as the directory</p></li>
+<li><p>Under the build tab, you should see ‘build website’. Click it and you have a website. <img src="07_03_assets/build_website.png" alt="alt text" width="750"></p></li>
+<li><p>If you don’t see this button, set the project build tools to website (click project name on the top right, then project options) <img src="07_03_assets/build_tools.png" alt="alt text" width="750"></p></li>
+</ol>
+<p><br></p>
+</div>
+<div id="section-tips" class="section level2">
+<h2><span class="header-section-number">3.2</span> Tips</h2>
+<p>There a few tricks to get this up and running once you’ve created an RStudio project and added the cloned version our repo:</p>
+<ul>
+<li>All the .Rmd files for the website need to be in the same directory (that’s why the github repo looks a little messy).</li>
+<li>You simply write the Rmd, click Run Document (analogous to knit), and the other files are built automatically</li>
+<li><p>There are a couple of website-specific files to edit:</p>
+<ul>
+<li>_site.html: sitewide formatting options</li>
+<li>_navbar.html: set up the tabs along the tops of pages</li>
+<li>index.Rmd: set up the welcome page</li>
+</ul></li>
+</ul>
 <!-- ## Colophon -->
+</div>
 </div>
 
 

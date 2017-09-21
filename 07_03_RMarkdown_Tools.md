@@ -68,11 +68,13 @@ Elements like these can be places directly in your presentation.
 ## This is vegan 2.4-1
 ```
 
+These are commented out because they won't render on the site; download the example below to see them in action.
 
 
 
 
-**Download the extended version of this demo to see interactive components**  [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> here](07_03assets/Demo_ioslides.Rmd).
+
+**Download the extended version of this demo to see interactive components**  [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> here](07_03_assets/Demo_ioslides.Rmd).
 
 More on [basic markdown authoring](http://rmarkdown.rstudio.com/authoring_basics.html)
 
@@ -96,9 +98,8 @@ The following single character keyboard shortcuts enable alternate display modes
 
 # Applications (with Shiny)
 
+Ok, so this isn't R markdown, but its another way to use interactive widgets shown above that is related.
 If you find the interactive components useful, it only a small jump to full app development with `shiny`
-
-This isn't R markdown, but rather another way to use interactive widgets.
 
 ## Motivation
 

@@ -58,6 +58,10 @@ left:
     menu:
     - text: "Range Models with Wallace"
       href: 4_1_Wallace_SDMs.html   
+    - text: "Introduction to Demography"
+      href: 20_Intro_Demography.html   
+    - text: "Introduction to Integral Projection Models"
+      href: 21_Intro_IPMs.html   
   - text: "Resources"
     href: Head3_Resources.html
 right:

@@ -286,14 +286,7 @@ best.var = names(env)
 
 # number of non-NA cells
 nc = cellStats(!is.na(priors[[1]]), sum)
-```
 
-```
-## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
-## NOTE: rgdal::checkCRSArgs: no proj_defs.dat in PROJ.4 shared files
-```
-
-```r
 data$weight[data$presence == 0] = nc / sum(data$presence == 0)
 
 ## Set up models

@@ -71,7 +71,7 @@ head(d)
   </script>
 </div>
 
-New recruits are stored at the end and were only observed in the second survey (2002)
+New recruits are stored at the end and were only observed in the second survey (2002). Hence their size value is NA and sizeNext value is an integer.
 
 
 ```r
@@ -98,14 +98,20 @@ hist(d$sizeNext[is.na(d$size)],main='Size of Recruits')
 
 Note that we use NAs for missing or non-applicable data rather than 0 or some other indicator because this causes them to be automatically excluded from r's regression functions.
 
-The model we'll build takes the general form
+The model we'll build takes the general form (note that equations may not render in all browsers)
+
+
 $ n[z',t+1]=\int{ ( P[z',z]+ F[z',z] ) n[z,t] dz} $
+
 
 where z' is size at time t+1 and z is size at time t. P is the growth/survival kernel and F is the fecundity kernel. these will be decomposed further as:
 
+
 $ P[z',z]=growth[z',z] * survival[z] $ 
 
+
 $ F[z',z]=floweringProbability[z] * seedsPerIndividual[z] * establishmentProbability * recruitSize[z'] $
+
 
 We'll begin building the regressions for each of these vital rates in the next section.
 
@@ -282,17 +288,20 @@ These functions represent the modeler's decision about how to decompose the life
 ## vital rate functions
 
 # 1. probability of surviving
+# this is a logistic funcion
 s.x=function(x,params) {
 	u=exp(params$surv.int+params$surv.slope*x)
 	return(u/(1+u))
 }
 
 # 2. growth function
+# this is a normal distribution
 g.yx=function(xp,x,params) { 			
 	dnorm(xp,mean=params$growth.int+params$growth.slope*x,sd=params$growth.sd)
 }
 
 # 3. reproduction function      
+# this is a constant times a normal distribution times an exponential function
 f.yx=function(xp,x,params) { 		
 	params$establishment.prob*
 	dnorm(xp,mean=params$recruit.size.mean,sd=params$recruit.size.sd)*
@@ -308,7 +317,7 @@ f.yx=function(xp,x,params) {
 
 # Make a kernel
 
-In this section, we combine the vital rate functions to build the discretized IPM kernel, which we’ll call the IPM matrix (e.g. shown in Fig. 2c in the main text).These steps are performed behind the scenes in the IPMpack package used in Appendices C-G for convenience, but we show them here for illustrative purposes. To integrate, we begin by defining the boundary points (b; the edges of the cells defining the matrix), mesh points (y; the centers of the cells defining the matrix and the points at which the matrix is evaluated for the midpoint rule of numerical integration), and step size (h; the widths of the cells). The integration limits (min.size and max.size) span the range of sizes observed in the data set, and then some.
+In this section, we combine the vital rate functions to build the discretized IPM kernel, which we’ll call the IPM matrix (e.g. shown in Fig. 2c in the main text). To integrate, we begin by defining the boundary points (b; the edges of the cells defining the matrix), mesh points (y; the centers of the cells defining the matrix and the points at which the matrix is evaluated for the midpoint rule of numerical integration), and step size (h; the widths of the cells). The integration limits (min.size and max.size) span the range of sizes observed in the data set, and then some.
 
 
 ```r
@@ -326,7 +335,7 @@ y=0.5*(b[1:n]+b[2:(n+1)])
 h=y[2]-y[1]
 ```
 
-Next, we make the IPM matrices. The function outer() evaluates the matrix at all pairwise combinations of the two vectors y and y and returns matrices representing the kernel components for growth and fecundity, respectively. For the numerical integration, we’re using the midpoint rule (the simplest option) estimate the area under a curve. The midpoint rule assumes a rectangular approximation. The heights of the rectangles are given by the outer function and the width of the rectangles is h. 
+Next, we make the IPM matrices. The function outer() evaluates the matrix at all pairwise combinations of the two vectors y and y and returns matrices representing the kernel components for growth and fecundity, respectively. For the numerical integration, we’re using the midpoint rule (the simplest option) to estimate the area under a curve. The midpoint rule assumes a rectangular approximation. The heights of the rectangles are given by the outer function and the width of the rectangles is h. 
 
 
 ```r
@@ -356,7 +365,7 @@ image(y,y,t(K)^.3,main='full kernel^0.3')			# plot it
 
 ![](21_Intro_IPMs_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
 
-So what did the outer function just do to make the kernel? the way we've used it, it takes all pairwise combinations of the the first argument (y) with the second (also y), and does some operation to those combinations. here are a few examples:
+So what did the outer function just do to make the kernel? the way we've used it, it takes all pairwise combinations of the the first argument (y) with the second (also y), and does some operation to those combinations. Here are a few examples:
 
 
 ```r
@@ -443,7 +452,6 @@ image(y,y,t(sens),xlab="Size (t)",ylab="Size (t+1)", main="Sensitivity")
  </object>
  </div>
  
-
 
 
 Thus far we have fit vital rate models (growth, survival, fecundity) assuming that all individuals experience the same environmental conditions. These models use environmental coavariates in the vital rate regressions to characterize environmental conditions. Using GIS information on how environmental conditions vary across a landscape allows you to predict the vital rates across the landscape and build population models there.

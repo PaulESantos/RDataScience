@@ -477,7 +477,7 @@ It appears you don’t have a PDF plugin for this browser. No biggie… you can 
 {"columns":[{"label":["size"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["sizeNext"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["surv"],"name":[3],"type":["int"],"align":["right"]},{"label":["fec.seed"],"name":[4],"type":["int"],"align":["right"]},{"label":["fec.flower"],"name":[5],"type":["int"],"align":["right"]}],"data":[{"1":"3.09","2":"NA","3":"0","4":"NA","5":"NA"},{"1":"2.81","2":"NA","3":"0","4":"NA","5":"NA"},{"1":"4.46","2":"6.07","3":"1","4":"15","5":"1"},{"1":"1.68","2":"NA","3":"0","4":"NA","5":"NA"},{"1":"3.99","2":"NA","3":"0","4":"NA","5":"NA"},{"1":"4.07","2":"NA","3":"0","4":"NA","5":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<p>New recruits are stored at the end and were only observed in the second survey (2002)</p>
+<p>New recruits are stored at the end and were only observed in the second survey (2002). Hence their size value is NA and sizeNext value is an integer.</p>
 <pre class="r"><code>tail(d)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -492,7 +492,8 @@ plot(d$size,d$fec.seed,main=&#39;Seeds&#39;) # jittered to see easier
 hist(d$sizeNext[is.na(d$size)],main=&#39;Size of Recruits&#39;)</code></pre>
 <p><img src="21_Intro_IPMs_files/figure-html/unnamed-chunk-5-1.png" /><!-- --></p>
 <p>Note that we use NAs for missing or non-applicable data rather than 0 or some other indicator because this causes them to be automatically excluded from r’s regression functions.</p>
-<p>The model we’ll build takes the general form $ n[z’,t+1]= $</p>
+<p>The model we’ll build takes the general form (note that equations may not render in all browsers)</p>
+<p>$ n[z’,t+1]= $</p>
 <p>where z’ is size at time t+1 and z is size at time t. P is the growth/survival kernel and F is the fecundity kernel. these will be decomposed further as:</p>
 <p>$ P[z’,z]=growth[z’,z] * survival[z] $</p>
 <p>$ F[z’,z]=floweringProbability[z] * seedsPerIndividual[z] * establishmentProbability * recruitSize[z’] $</p>
@@ -634,17 +635,20 @@ hist(d$sizeNext[is.na(d$size)],main=&#39;Size of Recruits&#39;,freq=FALSE)
 <pre class="r"><code>## vital rate functions
 
 # 1. probability of surviving
+# this is a logistic funcion
 s.x=function(x,params) {
     u=exp(params$surv.int+params$surv.slope*x)
     return(u/(1+u))
 }
 
 # 2. growth function
+# this is a normal distribution
 g.yx=function(xp,x,params) {            
     dnorm(xp,mean=params$growth.int+params$growth.slope*x,sd=params$growth.sd)
 }
 
 # 3. reproduction function      
+# this is a constant times a normal distribution times an exponential function
 f.yx=function(xp,x,params) {        
     params$establishment.prob*
     dnorm(xp,mean=params$recruit.size.mean,sd=params$recruit.size.sd)*
@@ -656,7 +660,7 @@ f.yx=function(xp,x,params) {
 </div>
 <div id="make-a-kernel" class="section level1">
 <h1><span class="header-section-number">5</span> Make a kernel</h1>
-<p>In this section, we combine the vital rate functions to build the discretized IPM kernel, which we’ll call the IPM matrix (e.g. shown in Fig. 2c in the main text).These steps are performed behind the scenes in the IPMpack package used in Appendices C-G for convenience, but we show them here for illustrative purposes. To integrate, we begin by defining the boundary points (b; the edges of the cells defining the matrix), mesh points (y; the centers of the cells defining the matrix and the points at which the matrix is evaluated for the midpoint rule of numerical integration), and step size (h; the widths of the cells). The integration limits (min.size and max.size) span the range of sizes observed in the data set, and then some.</p>
+<p>In this section, we combine the vital rate functions to build the discretized IPM kernel, which we’ll call the IPM matrix (e.g. shown in Fig. 2c in the main text). To integrate, we begin by defining the boundary points (b; the edges of the cells defining the matrix), mesh points (y; the centers of the cells defining the matrix and the points at which the matrix is evaluated for the midpoint rule of numerical integration), and step size (h; the widths of the cells). The integration limits (min.size and max.size) span the range of sizes observed in the data set, and then some.</p>
 <pre class="r"><code># 1. boundary points b, mesh points y and step size h
     # integration limits - these limits span the range of sizes observed in the data set, and then some.
 min.size=.9*min(c(d$size,d$sizeNext),na.rm=T)
@@ -669,7 +673,7 @@ b=min.size+c(0:n)*(max.size-min.size)/n
 y=0.5*(b[1:n]+b[2:(n+1)])
 # width of the cells
 h=y[2]-y[1]</code></pre>
-<p>Next, we make the IPM matrices. The function outer() evaluates the matrix at all pairwise combinations of the two vectors y and y and returns matrices representing the kernel components for growth and fecundity, respectively. For the numerical integration, we’re using the midpoint rule (the simplest option) estimate the area under a curve. The midpoint rule assumes a rectangular approximation. The heights of the rectangles are given by the outer function and the width of the rectangles is h.</p>
+<p>Next, we make the IPM matrices. The function outer() evaluates the matrix at all pairwise combinations of the two vectors y and y and returns matrices representing the kernel components for growth and fecundity, respectively. For the numerical integration, we’re using the midpoint rule (the simplest option) to estimate the area under a curve. The midpoint rule assumes a rectangular approximation. The heights of the rectangles are given by the outer function and the width of the rectangles is h.</p>
 <pre class="r"><code># 2. make component kernels
 par(mfrow=c(2,3)) 
 
@@ -693,7 +697,7 @@ image(y,y,t(K),main=&#39;full kernel&#39;)          # plot it
 # sometimes it&#39;s hard to see both the fecundity part of the kernel swamps the growth/survival part, so here&#39;s a plotting trick to level out the kernel
 image(y,y,t(K)^.3,main=&#39;full kernel^0.3&#39;)           # plot it</code></pre>
 <p><img src="21_Intro_IPMs_files/figure-html/unnamed-chunk-10-1.png" /><!-- --></p>
-<p>So what did the outer function just do to make the kernel? the way we’ve used it, it takes all pairwise combinations of the the first argument (y) with the second (also y), and does some operation to those combinations. here are a few examples:</p>
+<p>So what did the outer function just do to make the kernel? the way we’ve used it, it takes all pairwise combinations of the the first argument (y) with the second (also y), and does some operation to those combinations. Here are a few examples:</p>
 <pre class="r"><code>tmp1=outer(y,y,&#39;+&#39;)
 image(y,y,t(tmp1))</code></pre>
 <p><img src="21_Intro_IPMs_files/figure-html/unnamed-chunk-11-1.png" /><!-- --></p>

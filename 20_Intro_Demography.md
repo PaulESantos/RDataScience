@@ -106,6 +106,8 @@ levels(andre$CLASS)  # note that you need "dead" as a class for the first year t
 ## [1] "A1"   "A2"   "A3"   "A4"   "dead" "J"
 ```
 
+There are 4 types of adults (A), juveniles (J), and dead individuals.
+
 <br>
 
 ***
@@ -132,19 +134,9 @@ str(andre)
 ##  $ SEEDS    : num  71.8 0 71.8 0 71.8 ...
 ```
 
-<br>
-
-***
-
-<br>
-
-# Pick a starting population vector
-
-This is the # of individuals in each class/stage at the start of your model. You should play around with this to see how it effects the outcome.  My model is insensitive to realistic changes in this vector.
-
 
 ```r
-#  Here are the "options", the number in each class observed annually
+#  Here are the number in each class observed annually
 (n_options<-ddply (andre, c("YEAR"), function (df) return(table(df$CLASS))))
 ```
 
@@ -153,6 +145,17 @@ This is the # of individuals in each class/stage at the start of your model. You
 {"columns":[{"label":["YEAR"],"name":[1],"type":["int"],"align":["right"]},{"label":["A1"],"name":[2],"type":["int"],"align":["right"]},{"label":["A2"],"name":[3],"type":["int"],"align":["right"]},{"label":["A3"],"name":[4],"type":["int"],"align":["right"]},{"label":["A4"],"name":[5],"type":["int"],"align":["right"]},{"label":["dead"],"name":[6],"type":["int"],"align":["right"]},{"label":["J"],"name":[7],"type":["int"],"align":["right"]}],"data":[{"1":"1994","2":"6","3":"3","4":"2","5":"2","6":"0","7":"13"},{"1":"1995","2":"31","3":"17","4":"13","5":"11","6":"5","7":"81"},{"1":"1996","2":"49","3":"15","4":"14","5":"6","6":"52","7":"16"},{"1":"1997","2":"36","3":"19","4":"10","5":"4","6":"30","7":"2"},{"1":"1998","2":"10","3":"22","4":"13","5":"17","6":"9","7":"0"},{"1":"1999","2":"8","3":"16","4":"24","5":"11","6":"3","7":"0"},{"1":"2000","2":"6","3":"17","4":"17","5":"8","6":"11","7":"0"},{"1":"2001","2":"1","3":"11","4":"16","5":"14","6":"6","7":"0"},{"1":"2002","2":"13","3":"14","4":"6","5":"0","6":"9","7":"0"},{"1":"2003","2":"4","3":"8","4":"6","5":"0","6":"14","7":"1"},{"1":"2004","2":"0","3":"0","4":"0","5":"0","6":"19","7":"0"},{"1":"2011","2":"22","3":"23","4":"12","5":"6","6":"0","7":"173"},{"1":"2012","2":"6","3":"1","4":"0","5":"1","6":"172","7":"34"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
+
+<br>
+
+***
+
+<br>
+
+# Pick a starting population vector
+
+This is the # of individuals in each class/stage at the start of your model. You'll use this to start simulations and see how the population changes. You should play around with this to see how it effects the outcome.  My model is insensitive to realistic changes in this vector.
+
 
 ```r
 # picked starting population vector from 1995, the first year with 9 observed populations
@@ -604,13 +607,14 @@ n         # n is our starting population vector, ie the # of individuals in each
 ## 0.2759615 0.5866189 0.7496229 0.7619048 0.8333333
 ```
 
+
 <br>
 
 ***
 
 <br>
 
-# Sensitivity and Elasticity
+# Appendix: Sensitivity and Elasticity
 
 SENSITIVITY is a measure of the amount of change in $\lambda$ give a small change in a matrix element.
 
@@ -739,7 +743,7 @@ barplot(surv_row_e,xlab="Stage class",main="Elasticity for Growth and Survival")
 barplot(fert_row_e, xlab="Stage class",main="Elasticity for Fertility")
 ```
 
-![](20_Intro_Demography_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+![](20_Intro_Demography_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
 
 Not surprisingly, small adult growth and survival contributes most to lambda while large adult reproduction is the most important component of fertility.
 

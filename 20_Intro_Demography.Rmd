@@ -89,6 +89,8 @@ str(andre)
 levels(andre$CLASS)  # note that you need "dead" as a class for the first year that an individual is dead. After that it can be omitted.
 ```
 
+There are 4 types of adults (A), juveniles (J), and dead individuals.
+
 <br>
 
 ***
@@ -106,6 +108,12 @@ juveniles produced the next year based on a few fruit and seed counts and a lot 
 str(andre)
 ```
 
+```{r}
+#  Here are the number in each class observed annually
+(n_options<-ddply (andre, c("YEAR"), function (df) return(table(df$CLASS))))
+
+```
+
 <br>
 
 ***
@@ -114,12 +122,9 @@ str(andre)
 
 # Pick a starting population vector
 
-This is the # of individuals in each class/stage at the start of your model. You should play around with this to see how it effects the outcome.  My model is insensitive to realistic changes in this vector.
+This is the # of individuals in each class/stage at the start of your model. You'll use this to start simulations and see how the population changes. You should play around with this to see how it effects the outcome.  My model is insensitive to realistic changes in this vector.
 
 ```{r}
-#  Here are the "options", the number in each class observed annually
-(n_options<-ddply (andre, c("YEAR"), function (df) return(table(df$CLASS))))
-
 # picked starting population vector from 1995, the first year with 9 observed populations
 n95<-c(81,31,17,13,11)
 n=n95  # this must be called "n" for popbio
@@ -227,13 +232,14 @@ n         # n is our starting population vector, ie the # of individuals in each
 (surv_row <- projsums-fert_row) # survival probability of an individual in each age class
 ```
 
+
 <br>
 
 ***
 
 <br>
 
-# Sensitivity and Elasticity
+# Appendix: Sensitivity and Elasticity
 
 SENSITIVITY is a measure of the amount of change in $\lambda$ give a small change in a matrix element.
 

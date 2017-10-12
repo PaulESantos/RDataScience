@@ -309,6 +309,35 @@ image(y,y,t(elas),xlab="Size (t)",ylab="Size (t+1)",main="Elasticity")
 image(y,y,t(sens),xlab="Size (t)",ylab="Size (t+1)", main="Sensitivity")
 ```
 
+<br>
+
+***
+
+<br>
+
+# Links to Species' Ranges
+
+<div>
+<object data="21_assets/Range_IPMs_Short.pdf" type="application/pdf" width="100%" height="650px"> 
+  <p>It appears you don't have a PDF plugin for this browser.
+   No biggie... you can <a href="21_assets/Range_IPMs_Short.pdf">click here to
+  download the PDF file.</a></p>  
+ </object>
+ </div>
+ 
+
+
+
+Thus far we have fit vital rate models (growth, survival, fecundity) assuming that all individuals experience the same environmental conditions. These models use environmental coavariates in the vital rate regressions to characterize environmental conditions. Using GIS information on how environmental conditions vary across a landscape allows you to predict the vital rates across the landscape and build population models there.
+
+
+Linked below are some more advanced exercises that reproduce a simplified version of the analysis from my paper on garlic mustard invasion in the northeast US. 
+
+ <p><a href="21_assets/Range_IPMs_demo.zip.pdf">Download the demo code</a></p>  
+
+
+
+
 
 
 

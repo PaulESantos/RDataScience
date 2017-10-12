@@ -57,8 +57,10 @@ The document is organized as follows
 
 # Data exploration
  
-	To read in the data you'll have to set your own file path here. The csv can be downloaded 
-	 <p><a href="21_assets/Exercises/Intro_to_IPMs_Exercises_Data.csv">here</a></p>  
+To read in the data you'll have to set your own file path here. 
+	
+<p><a href="21_assets/Exercises/Intro_to_IPMs_Exercises_Data.csv">Download the data csv</a></p>  
+	
 
 ```{r}  	
 d=read.csv('21_assets/Exercises/Intro_to_IPMs_Exercises_Data.csv')

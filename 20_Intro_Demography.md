@@ -18,7 +18,16 @@ Cory Merow
 
  <p><a href="20_assets/Intro_to_demography_short.pdf">Download the PDF of the presentation</a></p>
 
-[<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](20_Intro_Demography.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.
+The R Script associated with this page is available
+
+ <p><a href="20_assets/Exercises/Matrix_Models_Intro.r">here</a></p>
+
+
+ <!-- <p><a href="20_assets/Intro_to_demography_short.pdf">Download the PDF of the presentation</a></p> -->
+
+<!-- (20_Intro_Demography.R).  -->
+
+Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.
 
 <br>
 

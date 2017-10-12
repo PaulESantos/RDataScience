@@ -61,6 +61,10 @@ The crux for plants is that its challenging to 1) count all seeds produced annua
 Our field data had surivival for each year, mean plant diameter, and inflorescence count classes.  From this I found the median inflorescence number for each class MEDIAN_INLF. I assigned each plant to CLASS based on its xDIAM_cm.  I convinced myself that this had biological meaning by looking at the relationship between size class and survival.  Whatever classes or stages you use, you should be confident that they are meaningful for your study species. OR use an integral projection model (IPM) instead. These allow you to use continuous variables like size or age rather than classes.
 
 
+ <p><a href="20_assets/Exercises/karadat.csv">Download the data </a></p>
+
+
+
 ```r
 #  Load libraries
 library(popbio)

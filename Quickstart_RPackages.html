@@ -505,6 +505,7 @@ div.tocify {
 <li><strong>R packages</strong> (for these demos):<br> <code>install.packages(c('knitr','shiny','dplyr','ggplot2','maps','spocc',''wallace','rmarkdown'), dep=T)</code></li>
 <li><strong>pandoc</strong> (to convert among document formats like html, pdf, docx): <br><a href="http://pandoc.org/installing.html" class="uri">http://pandoc.org/installing.html</a> <!-- ----------------------------------------------------------------------------- --> <!-- ----------------------------------------------------------------------------- --></li>
 </ul>
+<p><br></p>
 </div>
 <div id="overview" class="section level1">
 <h1><span class="header-section-number">2</span> Overview</h1>
@@ -512,36 +513,235 @@ div.tocify {
 <li>Quickly generate a working example, and work backwards to understand the components</li>
 <li>Sharing code</li>
 <li>Reproducible research</li>
+<li>Future you will appreciate you more</li>
 <li>Advancing your programming skills for <em>other</em> applications</li>
 </ul>
+<blockquote>
+<p>For anyone using this document outside of a lecture, please note that this lesson is designed to distill the key features of a package for publishing reproducible research. This approach cuts a lot of corners on nerdy details that can take beginners a lot of time to wade through, keeping them away from the science that motivates their efforts. This approach is <em>not</em> designed for generic packages that will be broadly used. There are many other, better resources for <a href="http://r-pkgs.had.co.nz/">that</a>.</p>
+</blockquote>
+<p><br></p>
 <div id="topics-well-cover" class="section level2">
 <h2><span class="header-section-number">2.1</span> Topics we’ll cover</h2>
 <ul>
-<li>Package strucutre - what are all the different files for?</li>
+<li>Package structure - what are all the different files for?</li>
 <li>Writing Functions</li>
-<li>Checking packages</li>
-<li>R markdown</li>
+<li>Documentation (with Roxygen2)</li>
+<li>The ******* DESCRIPTION file</li>
+<li>Checking and Building packages</li>
 <li>Distributing packages (github)</li>
+<li>General Tips</li>
+<li>Things to read more about</li>
 </ul>
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
+<p><br></p>
 </div>
 </div>
 <div id="package-structure" class="section level1">
 <h1><span class="header-section-number">3</span> Package structure</h1>
-<p>Four required components :</p>
+<p>Let’s start by making your first package. Start a new project in RStudio (File…New Project). A box pops, where you can choose ‘New Directory’, followed by ‘R Package’ to get to this screen:</p>
+<p><img src="Quickstart_RPackages_assets/RStudio_Package.png" /></p>
+<p><br> Think of a name for your package. I’m choosing <code>Merow2017Nature</code> because that might be the name of a paper I’m sharing code for. Note that you should <strong>check the box</strong> ‘Create a git repository’. We’ll come back to that later. Selecting ‘Create project’ will build a template with all the essential files for a package. Done. You made a package.</p>
+<p>Packages have four required components:</p>
 <ul>
 <li>a file called DESCRIPTION. It contains metadata about the package</li>
 <li>a directory called R. It cas the code</li>
 <li>a directory called man. It has the documentation (and not men, counterintuitively)</li>
 <li>a file called NAMESPACE. I lists functions in the package (automatically generated, so not interesting)</li>
 </ul>
-<p>Then there are some optional components which we’ll get to later for sharing data, vignettes, etc..</p>
+<p><br></p>
+<p><img src="Quickstart_RPackages_assets/Package_Template.png" /></p>
+<p>Then there are some optional files too. The .Rproj one stores info for developing with RStudio, while .gitignore and .Rbuildignore will come up later, along with some others we haven’t made yet for sharing data, vignettes, etc.</p>
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
+<p><br></p>
 </div>
 <div id="writing-functions" class="section level1">
 <h1><span class="header-section-number">4</span> Writing Functions</h1>
+<p>Tips BREAK THIS INTO A SEPARATE LESSON - default values for arguments - passing arguments - simplifying arguments with lists - hidden functions don’t need documentation - functions can be organized in files however you like in the <strong>R</strong> folder of your package</p>
+<pre class="r"><code># thanks to software carpentry for the nice demo functions!
+fahrenheit_to_celsius &lt;- function(temp_F) {
+  # Converts Fahrenheit to Celsius
+  temp_C &lt;- (temp_F - 32) * 5 / 9
+  return(temp_C)
+}
+celsius_to_kelvin &lt;- function(temp_C) {
+  # Converts Celsius to Kelvin
+  temp_K &lt;- temp_C + 273.15
+  return(temp_K)
+}
+fahrenheit_to_kelvin &lt;- function(temp_F) {
+  # Converts Fahrenheit to Kelvin using fahrenheit_to_celsius() and celsius_to_kelvin()
+  temp_C &lt;- fahrenheit_to_celsius(temp_F)
+  temp_K &lt;- celsius_to_kelvin(temp_C)
+  return(temp_K)
+}</code></pre>
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+<p><br></p>
+</div>
+<div id="documentation-with-roxygen2" class="section level1">
+<h1><span class="header-section-number">5</span> Documentation (with Roxygen2)</h1>
+<p>Roxygen2 is where its at; I haven’t noticed anyone use anything else in years.</p>
+<p>roxygen2 reads lines that begin with #’ as comments to create the documentation for your package. Descriptive tags are preceded with the @ symbol. For example, <span class="citation">@param</span> has information about the input parameters for the function.</p>
+<pre class="r"><code>#&#39; Converts Fahrenheit to Celsius
+#&#39;
+#&#39; This function converts input temperatures in Fahrenheit to Celsius.
+#&#39; @param temp_F The temperature in Fahrenheit.
+#&#39; @return The temperature in Celsius.
+#&#39; @export
+#&#39; @examples
+#&#39; fahrenheit_to_kelvin(32)
+
+fahrenheit_to_celsius &lt;- function(temp_F) {
+  temp_C &lt;- (temp_F - 32) * 5 / 9
+  return(temp_C)
+}</code></pre>
+<p>To build the documentation after writing the chunk above, use:</p>
+<pre class="r"><code>devtools::document()</code></pre>
+<p>A list of all available tags is here. You’re likely to need 6-7 more of them, like <code>@note</code>, <code>@references</code>, <code>@author</code>. You might use <code>@details</code>, <code>@family</code>, <code>@seealso</code> if you’re fancy.</p>
+<pre class="r"><code>names(roxygen2:::default_tags())</code></pre>
+<pre><code>##  [1] &quot;evalNamespace&quot;     &quot;export&quot;            &quot;exportClass&quot;      
+##  [4] &quot;exportMethod&quot;      &quot;exportPattern&quot;     &quot;import&quot;           
+##  [7] &quot;importClassesFrom&quot; &quot;importFrom&quot;        &quot;importMethodsFrom&quot;
+## [10] &quot;rawNamespace&quot;      &quot;S3method&quot;          &quot;useDynLib&quot;        
+## [13] &quot;aliases&quot;           &quot;author&quot;            &quot;backref&quot;          
+## [16] &quot;concept&quot;           &quot;describeIn&quot;        &quot;description&quot;      
+## [19] &quot;details&quot;           &quot;docType&quot;           &quot;encoding&quot;         
+## [22] &quot;evalRd&quot;            &quot;example&quot;           &quot;examples&quot;         
+## [25] &quot;family&quot;            &quot;field&quot;             &quot;format&quot;           
+## [28] &quot;inherit&quot;           &quot;inheritParams&quot;     &quot;inheritDotParams&quot; 
+## [31] &quot;inheritSection&quot;    &quot;keywords&quot;          &quot;method&quot;           
+## [34] &quot;name&quot;              &quot;md&quot;                &quot;noMd&quot;             
+## [37] &quot;noRd&quot;              &quot;note&quot;              &quot;param&quot;            
+## [40] &quot;rdname&quot;            &quot;rawRd&quot;             &quot;references&quot;       
+## [43] &quot;return&quot;            &quot;section&quot;           &quot;seealso&quot;          
+## [46] &quot;slot&quot;              &quot;source&quot;            &quot;template&quot;         
+## [49] &quot;templateVar&quot;       &quot;title&quot;             &quot;usage&quot;</code></pre>
+<p>The NAMESPACE file is one for the 4 essential files in a package, and is automatically generated when you use <code>document()</code>. It lists all the functions that are exported, which means that other user have easy access to them when they install and load your package, as well as functions you imported from other packages using <code>@importFrom</code> in your roxygen2 documentation. Here’s an example:</p>
+<p><img src="Quickstart_RPackages_assets/Demo_Namespace.png" /></p>
+<p>roxygen2 configuration in RStudio:</p>
+<p><img src="Quickstart_RPackages_assets/roxygen2_config.png" /> <!-- ----------------------------------------------------------------------------- --> <!-- ----------------------------------------------------------------------------- --> <br></p>
+</div>
+<div id="the-description-file" class="section level1">
+<h1><span class="header-section-number">6</span> The ******* DESCRIPTION file</h1>
+<p>The DESCRIPTION file contains all the metadata needed for your pacakge. Seems pretty straighforward. Lots of obvious info to provide. But you can spend a lot of time debugging cryptic errors if you don’t get the syntax perfect.</p>
+<p>Here’s an example of one from our <code>maskRangeR</code> package. <img src="Quickstart_RPackages_assets/DemoDescription.png" /></p>
+<p>Here are some very interesting details that are important to save you time:</p>
+<ul>
+<li>The <strong>Title</strong> field must capitalize the first letter of each word.</li>
+<li>Just use <code>as.person()</code> for the <strong>Author</strong> field. Previously there were more flexible ways to specify this, but its a standard now.</li>
+<li><strong>Description</strong> must be a paragraph. And don’t think a paragraph is two sentences long, buddy, or CRAN will tell you otherwise. They now subcontract with the paragraph police.</li>
+<li>My <strong>LICENSE</strong> field has a standard MIT license and refers to an optional second file, called LICENSE, which lives in you root directory and includes any other specifications you want.</li>
+<li>In <strong>Imports</strong> and <strong>Suggests</strong>, make sure packages are on their own lines, tab indented, and have no spaces between lines.</li>
+<li>You probably shouldn’t have as many dependencies as I do here. It can make it tough to maintain your package if other’s change. But it works often. A better solution is just to import the specific function you need from another package, if you only need 1 or 2 functions from that package.</li>
+</ul>
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+<p><br></p>
+</div>
+<div id="checking-building-and-installing-packages" class="section level1">
+<h1><span class="header-section-number">7</span> Checking, Building and Installing packages</h1>
+<p>These three steps are lumped together here because you’re often jumping back and forth between them as you’re honing in on a working package.</p>
+<p>Note that you can use the point and click interface on RStudio’s Build menu or <code>check()</code>, <code>build()</code>, and <code>install()</code> for these steps if you averse to clicks.</p>
+<p><img src="Quickstart_RPackages_assets/Build.png" /></p>
+<div id="check" class="section level2">
+<h2><span class="header-section-number">7.1</span> Check</h2>
+<p>To ensure you’ve followed the right protocols for building your package, R offers a series of checking tools. There are options, but it’s safest just to check with CRAN’s standards as they’re rigorous.</p>
+</div>
+<div id="build" class="section level2">
+<h2><span class="header-section-number">7.2</span> Build</h2>
+</div>
+<div id="install" class="section level2">
+<h2><span class="header-section-number">7.3</span> Install</h2>
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+<p><br></p>
+</div>
+</div>
+<div id="distributing-packages-github" class="section level1">
+<h1><span class="header-section-number">8</span> Distributing packages (github)</h1>
+<p>I’m just going to demonstrate the super simple clicky version of using github with RStudio. If you want more features or to try the command line, try this easy <a href="https://swcarpentry.github.io/git-novice/">tutorial</a>. There are many others too; no need to reproduce here. (There’s a reproducibility joke here somewhere that I’m missing ….)</p>
+<p>Follow <a href="https://help.github.com/en/articles/adding-an-existing-project-to-github-using-the-command-line">these instructions</a> to create a new github repo and add the package you’ve been working with to . Follow these steps to</p>
+<p><code>install_github()</code> <!-- ----------------------------------------------------------------------------- --> <!-- ----------------------------------------------------------------------------- --> <br></p>
+</div>
+<div id="general-tips" class="section level1">
+<h1><span class="header-section-number">9</span> General Tips</h1>
+<p><strong>Debugging</strong> with <code>browser()</code>. <code>browser()</code> and <code>debug()</code> provide complementary ways to explore errors and see exactly what’s going on inside your function, in the environment its working with. Each allows you to step through the function line by line to explore problems. <code>browser()</code> is inserted inside the function on the line you want to begin exploring at. Try running this:</p>
+<pre class="r"><code>fahrenheit_to_kelvin &lt;- function(temp_F) {
+  # Converts Fahrenheit to Kelvin using fahrenheit_to_celsius() and celsius_to_kelvin()
+  temp_C &lt;- fahrenheit_to_celsius(temp_F)
+  browser()
+  temp_K &lt;- celsius_to_kelvin(temp_C)
+  return(temp_K)
+}
+fahrenheit_to_kelvin(17)</code></pre>
+<pre><code>## Called from: fahrenheit_to_kelvin(17)
+## debug at &lt;text&gt;#5: temp_K &lt;- celsius_to_kelvin(temp_C)
+## debug at &lt;text&gt;#6: return(temp_K)</code></pre>
+<pre><code>## [1] 264.8167</code></pre>
+<p>There are three key commands to advance through the lines of code when in <code>browser()</code> or <code>debug()</code>: - <code>n</code> evaluate this line and move to next - <code>c</code> continue running lines till the function ends or breaks - <code>Q</code> get out of debug mode. Within debug mode, you can type any of the usual commands you’d use in R to see what objects in the environment look like, or to run other tests.</p>
+<p>Alternatively to <code>browser()</code>, you can call <code>debug(yourFunctionName)</code> to step through every line, as though you had put your <code>browser()</code> command on line 1 of your function. <code>undebug()</code> gets you out of debug mode.</p>
+<p><strong>Adding a welcome message</strong>. Here’s an example from one my packages. Put this function in your R directory.</p>
+<pre class="r"><code>.onAttach &lt;- function(libname,pkgname) {
+  packageStartupMessage(&#39;Type, vignette(&quot;rmm_directory&quot;) for an overview of functions&#39;)
+}</code></pre>
+<ul>
+<li></li>
+</ul>
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+<p><br></p>
+</div>
+<div id="demo" class="section level1">
+<h1><span class="header-section-number">10</span> Demo!</h1>
+<p>Here’s the plan. I want you to see what a fully functional R package looks like, but I don’t want it to include a bunch of stats that obscure the challenge of understanding the package structure. So we’ll fix an version of my <code>rangeModelMetadata</code> package that I’ve intentionally introduced errors to. This package just works with text to create a metadata object for species distribution models.</p>
+<ol style="list-style-type: decimal">
+<li>Create a new package called <code>intentionallyBrokenRangeModelMetada</code></li>
+<li>Download these <!--  [files](https://cmerow.github.io/RDataScience/Quickstart_RPackages_assets/intentionallyBrokenRangeModelMetadata.zip).  --></li>
+<li>Put the files in your root directory (the one called intentionallyBrokenRangeModelMetada)</li>
+<li>Run <code>devtools::document()</code> just to be sure all the manuals are built.<br />
+</li>
+<li>Run <code>check()</code> either from the command line or through RStudio.</li>
+<li>Start debugging with any problems you find, rerunning <code>check()</code> periodically to see if you’ve succeeded. Hint: I’ve only introduced 1 error per function.</li>
+<li>You’re done when there are no more NOTES, WARNINGS or ERRORS.</li>
+</ol>
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+<p><br></p>
+</div>
+<div id="next-steps" class="section level1">
+<h1><span class="header-section-number">11</span> Next steps</h1>
+<p>Almost always, the answer you need is well explained in Hadley Wickham’s online book <a href="http://r-pkgs.had.co.nz/">here</a>.</p>
+<p>I just found this, so don’t know it well, but ROpenSci does a ton of smart <a href="https://devguide.ropensci.org/">stuff</a>.</p>
+<p>Obviously there’s the CRAN book on R extensions <a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html">here</a>. It tends to be long and winding and hard to search. Don’t bother with it unless you’re having trouble sleeping.</p>
+<ul>
+<li><strong>R markdown</strong>. A way to share project reports and vignettes with code, text, figures, etc.
+<ul>
+<li>Party line: Super flexible, great for html</li>
+<li>What I really think: It’s really awesome. See this <a href="https://cmerow.github.io/RDataScience/07_Reproducible.html">lesson</a> next. Sweave is prettier but less flexible.</li>
+</ul></li>
+<li><strong>Unit testing</strong>. A way to automatically check your code every time its built. <a href="https://kbroman.org/pkg_primer/pages/tests.html">Example</a>
+<ul>
+<li>Party line: this is the best way to ensure your code does what it says.</li>
+<li>What I really think: it takes a fair amount of time to think of, and code, nontrivial tests. If you’re just sharing code from a publication, its probably not necessary.</li>
+</ul></li>
+<li><strong>S3 and S4 methods</strong>. So functions like <code>plot</code> and <code>print</code> work with objects from your code.
+<ul>
+<li>Party line: These represent the true power of the object-oriented coding that makes R appealing.</li>
+<li>What I really think: Meh, you can just use a list and do most of the same stuff.</li>
+</ul></li>
+<li><strong>Collaborating with git</strong>.
+<ul>
+<li>Party line: git is super powerful for teams of people working on code concurrently to avoid breaking one another’s work.</li>
+<li>What I really think: git is awesome for tracking your edits and sharing on github. I don’t do much fancy branching, merging or pull requesting, because I spend more time fixing mistakes I thought I understood. This is clearly because I’m just a gitiot and not git’s fault…</li>
+</ul></li>
+<li><strong>Including data sets</strong>. <a href="https://kbroman.org/pkg_primer/pages/data.html">Example</a>
+<ul>
+<li>Party line: Its not complicated.</li>
+<li>What I really think: I tend to include a lot, as users may find it easier access existing data. Note that on CRAN your package can’t be over a few Mb but on github, files can be up to 50 Mb. Consider RData files and RDS files; they’re usually fast and reasonably compressed, preserving the exact R object you saved. You can put them in /inst/ext/ if you’re lazy and don’t want to write documentation. Reference them with <code>system.file()</code>.</li>
+</ul></li>
+</ul>
 </div>
 
 

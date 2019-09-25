@@ -1,5 +1,7 @@
-# BIEN (Botanical Information and Ecology Network)
-Brian Enquist, Brian McGill  
+---
+title: "BIEN (Botanical Information and Ecology Network)"
+author: "Brian Enquist, Brian McGill"
+---
 
 
 

@@ -1,5 +1,10 @@
-# Incorporating Expert Range Maps in SDMs
-Cory Merow, Adam Wilson  
+---
+title: "Incorporating Expert Range Maps in SDMs"
+author: Cory Merow, Adam Wilson
+output:
+  html_document:
+    code_folding: show
+---
 
 
 

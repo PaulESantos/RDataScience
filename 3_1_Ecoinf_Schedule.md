@@ -1,5 +1,7 @@
-# Workshop Schedule
-2017 International Biogeography Meeting  
+---
+title: "Workshop Schedule"
+author: 2017 International Biogeography Meeting
+---
 
 |  Time  |  Presenters  |  Title   
 |--------|:-------------|:-----------------------------------------------------|

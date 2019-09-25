@@ -1,6 +1,11 @@
-# SDMs with Wallace
-Cory Merow  
-1/25/2017  
+---
+title: "SDMs with Wallace"
+author: "Cory Merow"
+date: "1/25/2017"
+output:
+  html_document:
+    code_folding: show
+---
 
 
 

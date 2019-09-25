@@ -1,4 +1,7 @@
-# Course Schedule
+---
+title: "Course Schedule"
+toc: false
+---
 
 Course content is designed to be flexible to accommodate student interest and abilities. 
 

@@ -1,4 +1,6 @@
-# Introduction to R
+---
+title: "Introduction to R"
+---
 
 
 

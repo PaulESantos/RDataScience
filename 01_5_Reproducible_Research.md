@@ -1,6 +1,11 @@
-# Reproducible Research
-Cory Merow  
-9/21/2017  
+---
+title: "Reproducible Research"
+author: "Cory Merow"
+date: "9/21/2017"
+output:
+  html_document:
+    code_folding: show
+---
 
 
 

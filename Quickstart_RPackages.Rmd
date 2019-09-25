@@ -1,0 +1,60 @@
+---
+title: "Quickstart Guide to R Package Building"
+author: "Cory Merow"
+date: "9/24/2019"
+output:
+  html_document:
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE)
+```
+
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+# Getting started
+
+You may need to install some software for this sequence of 3 tutorials.
+
+- **RStudio** (convienient way to interact with R) :<br> https://www.rstudio.com/products/rstudio/download/#download 
+- **git** (version control): <br> https://git-scm.com/downloads
+- Create a **GitHub** account (sharing code online) at <br> [https://github.com/](https://github.com/)
+- **R packages** (for these demos):<br> `install.packages(c('knitr','shiny','dplyr','ggplot2','maps','spocc',''wallace','rmarkdown'), dep=T)`
+- **pandoc** (to convert among document formats like html, pdf, docx): <br>http://pandoc.org/installing.html
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+
+
+# Overview
+
+- Quickly generate a working example, and work backwards to understand the components
+- Sharing code
+- Reproducible research
+- Advancing your programming skills for *other* applications
+
+
+## Topics we'll cover
+
+- Package strucutre - what are all the different files for?
+- 
+
+
+
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+# Package structure
+
+Four required components :
+
+- a file called DESCRIPTION. It contains metadata about the package
+- a directory called R. It cas the code
+- a directory called man. It has the documentation (and not men, counterintuitively)
+- a file called NAMESPACE. I lists functions in the package (automatically generated, so not interesting)
+
+Then there are some optional components which we'll get to later for sharing data, vignettes, etc.. 
+
+
+
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->

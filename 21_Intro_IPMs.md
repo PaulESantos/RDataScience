@@ -1,6 +1,11 @@
-# Introduction to Integral Projection Models
-Cory Merow  
-10/5/2017  
+---
+title: "Introduction to Integral Projection Models"
+author: "Cory Merow"
+date: "10/5/2017"
+output:
+  html_document:
+    code_folding: show
+---
 
 > This tutorial gives a practical overview of building stage-structured (e.g. size, age) population models use integral projection models.
 

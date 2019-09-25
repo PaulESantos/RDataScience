@@ -1,4 +1,6 @@
-# A quick introduction to spatial data analysis
+---
+title: "A quick introduction to spatial data analysis"
+---
 
 
 

@@ -1,4 +1,7 @@
-# Ecology, Statistics, and Data Science with R
+---
+title: "Ecology, Statistics, and Data Science with R"
+toc: false
+---
 
 <a href="https://cmerow.github.io"> Cory Merow</a><br>
 Department of Ecology and Evolutionary Biology <br> 

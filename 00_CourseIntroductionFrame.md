@@ -1,4 +1,6 @@
-# Course Introduction
+---
+title: "Course Introduction"
+---
 
 
 # Introduction

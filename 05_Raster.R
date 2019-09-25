@@ -3,6 +3,7 @@
 #' ---
 #' 
 #' 
+
 #' 
 #' <div>
 #' <iframe src="05_presentation/05_Spatial.html" width="100%" height="700px"> </iframe>
@@ -107,10 +108,12 @@ df=data.frame(
   id=c(1,2,3,4))
 
 #' 
+
 #' 
 #' <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo1">Show Solution</button>
 #' <div id="demo1" class="collapse">
 #' 
+
 #' 
 #' </div>
 #' </div>
@@ -130,6 +133,7 @@ str(meuse)
 #' <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo2">Show Solution</button>
 #' <div id="demo2" class="collapse">
 #' 
+
 #' 
 #' </div>
 #' </div>
@@ -244,6 +248,7 @@ za@data
 #' <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo1">Show Solution</button>
 #' <div id="demo1" class="collapse">
 #' 
+
 #' </div>
 #' </div>
 #' 
@@ -325,6 +330,7 @@ values(r)[1:10]
 #' <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo2">Show Solution</button>
 #' <div id="demo2" class="collapse">
 #' 
+
 #' </div>
 #' </div>
 #' 
@@ -514,6 +520,7 @@ aggregate(r1, 3, fun=mean) %>%
 #' <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo3">Show Solution</button>
 #' <div id="demo3" class="collapse">
 #' 
+
 #' </div>
 #' </div>
 #' 
@@ -543,6 +550,7 @@ plot(rf_range2)
 #' <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo4">Show Solution</button>
 #' <div id="demo4" class="collapse">
 #' 
+
 #' </div>
 #' </div>
 #' 

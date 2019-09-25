@@ -1,5 +1,8 @@
-# Wallace
-Jamie Kass, Matt Aiello-Lammens  
+---
+title: "Wallace"
+author: Jamie Kass, Matt Aiello-Lammens
+output: html_document
+---
 
 <!-- Scroll down to the section beginning # *Wallace* below - this top stuff is just for the website  -->
 

@@ -1,5 +1,7 @@
-# Ecology Lab: SDM using Maxent
-Drew Kerkhoff  
+---
+title: "Ecology Lab: SDM using Maxent"
+author: "Drew Kerkhoff"
+---
  
 
 

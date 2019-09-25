@@ -1,6 +1,11 @@
-# Version Control (with Git)
-Cory Merow & Adam Wilson  
-9/19/2017  
+---
+title: "Version Control (with Git)"
+author: "Cory Merow & Adam Wilson"
+date: "9/19/2017"
+output:
+  html_document:
+    code_folding: show
+---
 
 > This tutorial is a quick start guide to sharing your code on github using Rstudio. Command line is optional.
 

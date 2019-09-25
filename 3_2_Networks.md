@@ -1,5 +1,7 @@
-# Community Network Analysis
-Naia Morueta-Holme  
+---
+title: "Community Network Analysis"
+author: "Naia Morueta-Holme"
+---
 
 
 

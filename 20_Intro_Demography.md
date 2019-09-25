@@ -1,6 +1,11 @@
-# Introduction to Demography
-Cory Merow  
-10/5/2017  
+---
+title: "Introduction to Demography"
+author: "Cory Merow"
+date: "10/5/2017"
+output:
+  html_document:
+    code_folding: show
+---
 
 
 

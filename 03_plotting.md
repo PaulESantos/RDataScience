@@ -1,4 +1,7 @@
-# Getting Graphic
+---
+title: "Getting Graphic"
+subtitle: "Base graphics and `ggplot2`"
+---
 
 
 

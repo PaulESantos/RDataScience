@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -24,11 +25,12 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
-<link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -37,10 +39,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -75,9 +79,7 @@ h6 {
 
 <link rel="stylesheet" href="cm_yeti_bootswatch.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -96,8 +98,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -113,7 +121,6 @@ body {
   padding-top: 71px;
   margin-top: -71px;
 }
-
 .section h2 {
   padding-top: 71px;
   margin-top: -71px;
@@ -133,6 +140,43 @@ body {
 .section h6 {
   padding-top: 71px;
   margin-top: -71px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -154,55 +198,68 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 <style type="text/css">
 .code-folding-btn { margin-bottom: 4px; }
 </style>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 
-
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -251,8 +308,6 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -261,6 +316,16 @@ div.tocify {
 
 
 </style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
@@ -294,7 +359,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    R Intro
+    R
      
     <span class="caret"></span>
   </a>
@@ -328,26 +393,44 @@ div.tocify {
       <a href="06_RasterTwo.html">2.3 More Raster Data</a>
     </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Module 3: Reproducible and Interactive Research</li>
+    <li class="dropdown-header">Module 3: Building R packages</li>
     <li>
-      <a href="07_Reproducible.html">3.1 Research Reports with R markdown</a>
+      <a href="Quickstart_RPackages.html">3.1 Quickstart guide</a>
+    </li>
+    <li class="dropdown-header">Module 4: Reproducible and Interactive Research</li>
+    <li>
+      <a href="07_Reproducible.html">4.1 Research Reports with R markdown</a>
     </li>
     <li>
-      <a href="11_Git.html">3.2 Version control with Github</a>
+      <a href="11_Git.html">4.2 Version control with Github</a>
     </li>
     <li>
-      <a href="07_03_RMarkdown_Tools.html">3.3 RMarkdown Tools: Interactive Presentations, Apps, Websites</a>
+      <a href="07_03_RMarkdown_Tools.html">4.3 RMarkdown Tools: Interactive Presentations, Apps, Websites</a>
     </li>
     <li class="divider"></li>
   </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Ecoinformatics
+    Ecological Modeling
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="101SDMs.html">Introduction to Species Distribution Models</a>
+    </li>
+    <li>
+      <a href="4_1_Wallace_SDMs.html">Range Models with Wallace</a>
+    </li>
+    <li>
+      <a href="20_Intro_Demography.html">Introduction to Demography</a>
+    </li>
+    <li>
+      <a href="21_Intro_IPMs.html">Introduction to Integral Projection Models</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Ecoinformatics Workshop</li>
     <li>
       <a href="3_1_Ecoinf_Schedule.html">0 Workshop Schedule</a>
     </li>
@@ -371,24 +454,6 @@ div.tocify {
     </li>
     <li>
       <a href="3_6_Teaching_Ecoinformatics.html">7 Teaching Econformatics</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Ecological Modeling
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="4_1_Wallace_SDMs.html">Range Models with Wallace</a>
-    </li>
-    <li>
-      <a href="20_Intro_Demography.html">Introduction to Demography</a>
-    </li>
-    <li>
-      <a href="21_Intro_IPMs.html">Introduction to Integral Projection Models</a>
     </li>
   </ul>
 </li>
@@ -421,7 +486,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Getting Graphic</h1>
-<h3 class="subtitle"><em>Base graphics and <code>ggplot2</code></em></h3>
+<h3 class="subtitle">Base graphics and <code>ggplot2</code></h3>
 
 </div>
 
@@ -496,111 +561,113 @@ It appears you don’t have a PDF plugin for this browser. No biggie… you can 
 </tr>
 </tbody>
 </table>
-<p>```</p>
-<p>Here’s what the data look like:</p>
-<pre class="r"><code>library(ggplot2);library(knitr)
+<pre><code>
+Here&#39;s what the data look like:
+
+```r
+library(ggplot2);library(knitr)
 kable(head(mtcars))</code></pre>
 <table>
 <thead>
 <tr class="header">
 <th></th>
-<th align="right">mpg</th>
-<th align="right">cyl</th>
-<th align="right">disp</th>
-<th align="right">hp</th>
-<th align="right">drat</th>
-<th align="right">wt</th>
-<th align="right">qsec</th>
-<th align="right">vs</th>
-<th align="right">am</th>
-<th align="right">gear</th>
-<th align="right">carb</th>
+<th>mpg c</th>
+<th>yl d</th>
+<th align="left">isp</th>
+<th>hp d</th>
+<th align="left">rat</th>
+<th align="center">wt</th>
+<th>qsec v</th>
+<th>s a</th>
+<th>m g</th>
+<th>ear c</th>
+<th align="left">arb</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Mazda RX4</td>
-<td align="right">21.0</td>
-<td align="right">6</td>
-<td align="right">160</td>
-<td align="right">110</td>
-<td align="right">3.90</td>
-<td align="right">2.620</td>
-<td align="right">16.46</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">4</td>
+<td>21.0</td>
+<td>6</td>
+<td align="left">160</td>
+<td>110</td>
+<td align="left">3.90</td>
+<td align="center">2.620</td>
+<td>16.46</td>
+<td>0</td>
+<td>1</td>
+<td>4</td>
+<td align="left">4</td>
 </tr>
 <tr class="even">
 <td>Mazda RX4 Wag</td>
-<td align="right">21.0</td>
-<td align="right">6</td>
-<td align="right">160</td>
-<td align="right">110</td>
-<td align="right">3.90</td>
-<td align="right">2.875</td>
-<td align="right">17.02</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">4</td>
+<td>21.0</td>
+<td>6</td>
+<td align="left">160</td>
+<td>110</td>
+<td align="left">3.90</td>
+<td align="center">2.875</td>
+<td>17.02</td>
+<td>0</td>
+<td>1</td>
+<td>4</td>
+<td align="left">4</td>
 </tr>
 <tr class="odd">
 <td>Datsun 710</td>
-<td align="right">22.8</td>
-<td align="right">4</td>
-<td align="right">108</td>
-<td align="right">93</td>
-<td align="right">3.85</td>
-<td align="right">2.320</td>
-<td align="right">18.61</td>
-<td align="right">1</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">1</td>
+<td>22.8</td>
+<td>4</td>
+<td align="left">108</td>
+<td>93</td>
+<td align="left">3.85</td>
+<td align="center">2.320</td>
+<td>18.61</td>
+<td>1</td>
+<td>1</td>
+<td>4</td>
+<td align="left">1</td>
 </tr>
 <tr class="even">
 <td>Hornet 4 Drive</td>
-<td align="right">21.4</td>
-<td align="right">6</td>
-<td align="right">258</td>
-<td align="right">110</td>
-<td align="right">3.08</td>
-<td align="right">3.215</td>
-<td align="right">19.44</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">1</td>
+<td>21.4</td>
+<td>6</td>
+<td align="left">258</td>
+<td>110</td>
+<td align="left">3.08</td>
+<td align="center">3.215</td>
+<td>19.44</td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td align="left">1</td>
 </tr>
 <tr class="odd">
 <td>Hornet Sportabout</td>
-<td align="right">18.7</td>
-<td align="right">8</td>
-<td align="right">360</td>
-<td align="right">175</td>
-<td align="right">3.15</td>
-<td align="right">3.440</td>
-<td align="right">17.02</td>
-<td align="right">0</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">2</td>
+<td>18.7</td>
+<td>8</td>
+<td align="left">360</td>
+<td>175</td>
+<td align="left">3.15</td>
+<td align="center">3.440</td>
+<td>17.02</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+<td align="left">2</td>
 </tr>
 <tr class="even">
 <td>Valiant</td>
-<td align="right">18.1</td>
-<td align="right">6</td>
-<td align="right">225</td>
-<td align="right">105</td>
-<td align="right">2.76</td>
-<td align="right">3.460</td>
-<td align="right">20.22</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">1</td>
+<td>18.1</td>
+<td>6</td>
+<td align="left">225</td>
+<td>105</td>
+<td align="left">2.76</td>
+<td align="center">3.460</td>
+<td>20.22</td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td align="left">1</td>
 </tr>
 </tbody>
 </table>
@@ -850,7 +917,7 @@ p + geom_point()</code></pre>
 <p><img src="03_assets/ggplotStat01.png" alt="alt text" width="100%"></p>
 <ul>
 <li>Each stat creates additional variables with a common <code>..name..</code> syntax</li>
-<li>Often two ways: <code>stat_bin(geom=&quot;bar&quot;)</code> OR <code>geom_bar(stat=&quot;bin&quot;)</code></li>
+<li>Often two ways: <code>stat_bin(geom="bar")</code> OR <code>geom_bar(stat="bin")</code></li>
 </ul>
 <p><img src="03_assets/ggplotStat02.png" alt="alt text" width="100%"></p>
 </div>
@@ -1212,6 +1279,54 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 

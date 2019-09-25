@@ -2,63 +2,86 @@
 library(dplyr)
 library(tidyr)
 
+
 ## ----results='hide', warning=F-------------------------------------------
 library(nycflights13)
+
 
 ## ------------------------------------------------------------------------
 head(flights)
 
+
 ## ------------------------------------------------------------------------
 glimpse(flights)
+
 
 ## ------------------------------------------------------------------------
 select(flights,year, month, day)
 
+
 ## ------------------------------------------------------------------------
 select(flights,-tailnum)
+
 
 ## ------------------------------------------------------------------------
 select(flights,contains("time"))
 
+
 ## ------------------------------------------------------------------------
 select(flights,year,carrier,destination=dest)
+
 
 ## ------------------------------------------------------------------------
 filter(flights, month == 1, day == 1)
 
+
 ## ------------------------------------------------------------------------
 flights[flights$month == 1 & flights$day == 1, ]
+
 
 ## ----eval=F--------------------------------------------------------------
 ## filter(flights, month == 1, day == 1)`
 
+
+
+
 ## ------------------------------------------------------------------------
 filter(flights, month == 1 | month == 2)
+
+
+
 
 ## ------------------------------------------------------------------------
 slice(flights, 1:10)
 
+
 ## ------------------------------------------------------------------------
 arrange(flights, year, month, day)
+
 
 ## ----eval=F--------------------------------------------------------------
 ## flights[order(flights$year, flights$month, flights$day), ]
 
+
 ## ------------------------------------------------------------------------
 arrange(flights, desc(arr_delay))
 
+
 ## ----eval=F--------------------------------------------------------------
 ## flights[order(desc(flights$arr_delay)), ]
+
 
 ## ------------------------------------------------------------------------
 distinct(
   select(flights,carrier)
 )
 
+
 ## ------------------------------------------------------------------------
 select(
   mutate(flights,ave_speed=distance/(air_time/60)),
   distance, air_time,ave_speed)
+
 
 ## ------------------------------------------------------------------------
 a1 <- group_by(flights, year, month, day)
@@ -68,6 +91,7 @@ a3 <- summarise(a2,
                 dep = mean(dep_delay, na.rm = TRUE))
 a4 <- filter(a3, arr > 30 | dep > 30)
 head(a4)
+
 
 ## ------------------------------------------------------------------------
 filter(
@@ -82,6 +106,7 @@ filter(
   arr > 30 | dep > 30
 )
 
+
 ## ------------------------------------------------------------------------
 flights %>%
   group_by(year, month, day) %>%
@@ -92,10 +117,12 @@ flights %>%
   ) %>%
   filter(arr > 30 | dep > 30)
 
+
 ## ------------------------------------------------------------------------
 flights %>%
   group_by(origin) %>%
   summarise(meanDelay = mean(dep_delay,na.rm=T))
+
 
 ## ------------------------------------------------------------------------
 flights %>% 
@@ -103,13 +130,22 @@ flights %>%
   summarise(meanDelay = mean(dep_delay,na.rm=T),
             sdDelay =   sd(dep_delay,na.rm=T))
 
+
+
+
+
+
 ## ------------------------------------------------------------------------
 flights%>%
   select(-year,-month,-day,-hour,-minute,-dep_time,-dep_delay)%>%
   glimpse()
 
+
 ## ------------------------------------------------------------------------
 glimpse(airports)
+
+
+
 
 ## ---- result=F, warning=F------------------------------------------------
 library(geosphere)
@@ -117,6 +153,7 @@ library(maps)
 library(ggplot2)
 library(sp)
 library(rgeos)
+
 
 ## ------------------------------------------------------------------------
 data=
@@ -157,6 +194,7 @@ gcircles <- left_join(rts.ff,
                       by="id") # join attributes, we keep them all, just in case
 
 
+
 ## ----fig.width=10,fig.height=6,dpi=300-----------------------------------
 base = ggplot()
 worldmap <- map_data("world",
@@ -170,6 +208,7 @@ wrld <- c(geom_polygon(
   alpha = 1,
   data = worldmap
 ))
+
 
 ## ------------------------------------------------------------------------
 base + wrld +

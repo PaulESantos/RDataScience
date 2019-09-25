@@ -2,6 +2,7 @@
 #' title: "Introduction to R"
 #' ---
 #' 
+
 #' 
 #' <div>
 #' <object data="01_assets/01_Rintro.pdf" type="application/pdf" width="100%" height="600px"> 
@@ -42,6 +43,7 @@ x+2
 #' <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo1">Show Solution</button>
 #' <div id="demo1" class="collapse">
 #' 
+
 #' </div>
 #' </div>
 #' 
@@ -112,6 +114,7 @@ mean(x)
 #' <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo2">Show Solution</button>
 #' <div id="demo2" class="collapse">
 #' 
+
 #' </div>
 #' </div>
 #' 
@@ -190,6 +193,7 @@ result
 #' <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo3">Show Solution</button>
 #' <div id="demo3" class="collapse">
 #' 
+
 #' Try it:
 ## ------------------------------------------------------------------------
 x3
@@ -197,6 +201,7 @@ mycount(x3)
 
 #' oops!
 #' 
+
 #' Try it:
 ## ------------------------------------------------------------------------
 x3
@@ -255,6 +260,7 @@ y[2,3]
 #' <button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo4">Show Solution</button>
 #' <div id="demo4" class="collapse">
 #' 
+
 #' </div>
 #' </div>
 #' 

@@ -1,6 +1,12 @@
-# RMarkdown Tools: Interactive Presentations, Apps, Websites
-Cory Merow  
-9/19/2017  
+---
+title: "RMarkdown Tools: Interactive Presentations, Apps, Websites"
+author: "Cory Merow"
+date: "9/19/2017"
+output:
+  html_document:
+    code_folding: show
+runtime: shiny
+---
 
 > This tutorial is a quick start guide extending the basic R Markdown skills from __ to getting started with interactive presentations, apps that can be hosted online or run locally, and R-based websites. The RStudio team has excellent complete tutorials on each of these (); this tutorial is meant to show how easy it is to get started with some key features.
 
@@ -65,7 +71,7 @@ Elements like these can be places directly in your presentation.
 ```
 
 ```
-## This is vegan 2.4-1
+## This is vegan 2.5-5
 ```
 
 These are commented out because they won't render on the site; download the example below to see them in action.

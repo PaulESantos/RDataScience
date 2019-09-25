@@ -1,6 +1,11 @@
-# Reproducible and Interactive Research
-Cory Merow & Adam Wilson  
-9/19/2017  
+---
+title: "Reproducible and Interactive Research"
+author: "Cory Merow & Adam Wilson"
+date: "9/19/2017"
+output:
+  html_document:
+    code_folding: show
+---
 
 
 
@@ -13,8 +18,8 @@ You may need to install some software for this sequence of 3 tutorials.
 - Create a **GitHub** account (sharing code online) at <br> [https://github.com/](https://github.com/)
 - **R packages** (for these demos):<br> `install.packages(c('knitr','shiny','dplyr','ggplot2','maps','spocc',''wallace','rmarkdown'), dep=T)`
 - **pandoc** (to convert among document formats like html, pdf, docx): <br>http://pandoc.org/installing.html
-<!-- --------------------------------------------------------------------------------------- -->
-<!-- --------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
 
 <br>
 

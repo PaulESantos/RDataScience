@@ -1,4 +1,7 @@
-# Resources
+---
+title: "Resources"
+toc: false
+---
 
 ## Getting Started with R
 

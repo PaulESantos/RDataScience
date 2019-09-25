@@ -5,7 +5,7 @@ left:
     href: index.html
   - text: "Schedule"
     href: Head2_Schedule.html
-  - text: "R Intro"
+  - text: "R"
     menu:
       - text: "About Course Content"
         href: Head1_CourseContent.html
@@ -28,40 +28,45 @@ left:
       - text: "2.3 More Raster Data"
         href: 06_RasterTwo.html
       - text: "-----------------"
-      - text: "Module 3: Reproducible and Interactive Research"
-      - text: "3.1 Research Reports with R markdown"
+      - text: "Module 3: Building R packages"
+      - text: "3.1 Quickstart guide"
+        href: Quickstart_RPackages.html
+      - text: "Module 4: Reproducible and Interactive Research"
+      - text: "4.1 Research Reports with R markdown"
         href: 07_Reproducible.html
-      - text: "3.2 Version control with Github"
+      - text: "4.2 Version control with Github"
         href: 11_Git.html
-      - text: "3.3 RMarkdown Tools: Interactive Presentations, Apps, Websites"
+      - text: "4.3 RMarkdown Tools: Interactive Presentations, Apps, Websites"
         href: 07_03_RMarkdown_Tools.html
       - text: "-----------------"
-  - text: "Ecoinformatics"
-    menu:
-      - text: "0 Workshop Schedule"
-        href: 3_1_Ecoinf_Schedule.html
-      - text: "1 (BIEN) Botanical Information and Ecology Network"
-        href: 3_8_BIEN_intro.html
-      - text: "2 Taxonomic Name Resolution"
-        href: 3_7_TNRS.html
-      - text: "3 Accessing Plant Biodiversity Data"
-        href: 3_3_RBIEN_tutorial.html
-      - text: "4 A streamlined modeling workflow: Wallace"
-        href: 3_4_wallace.html   
-      - text: "5 Integrating biogeographic data "
-        href: 3_5_Minxent.html  
-      - text: "6 Network Associations"
-        href: 3_2_Networks.html
-      - text: "7 Teaching Econformatics"
-        href: 3_6_Teaching_Ecoinformatics.html   
   - text: "Ecological Modeling"
     menu:
+    - text: "Introduction to Species Distribution Models"
+      href: 101SDMs.html
     - text: "Range Models with Wallace"
       href: 4_1_Wallace_SDMs.html   
     - text: "Introduction to Demography"
       href: 20_Intro_Demography.html   
     - text: "Introduction to Integral Projection Models"
       href: 21_Intro_IPMs.html   
+    - text: "-----------------"
+    - text: "Ecoinformatics Workshop"
+    - text: "0 Workshop Schedule"
+      href: 3_1_Ecoinf_Schedule.html
+    - text: "1 (BIEN) Botanical Information and Ecology Network"
+      href: 3_8_BIEN_intro.html
+    - text: "2 Taxonomic Name Resolution"
+      href: 3_7_TNRS.html
+    - text: "3 Accessing Plant Biodiversity Data"
+      href: 3_3_RBIEN_tutorial.html
+    - text: "4 A streamlined modeling workflow: Wallace"
+      href: 3_4_wallace.html   
+    - text: "5 Integrating biogeographic data "
+      href: 3_5_Minxent.html  
+    - text: "6 Network Associations"
+      href: 3_2_Networks.html
+    - text: "7 Teaching Econformatics"
+      href: 3_6_Teaching_Ecoinformatics.html   
   - text: "Resources"
     href: Head3_Resources.html
 right:

@@ -1,4 +1,6 @@
-# Data Wrangling
+---
+title       : "Data Wrangling"
+---
 
 
 

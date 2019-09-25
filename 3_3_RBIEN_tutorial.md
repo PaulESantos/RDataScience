@@ -1,5 +1,7 @@
-# RBIEN Tutorial
-Brian Maitner  
+---
+title: "RBIEN Tutorial"
+author: "Brian Maitner"
+---
 
 
 [<i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here](3_3_RBIEN_tutorial.R).  Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.  

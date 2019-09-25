@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="Brian Maitner" />
@@ -29,7 +30,8 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -78,9 +80,7 @@ h6 {
 
 <link rel="stylesheet" href="cm_yeti_bootswatch.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -99,8 +99,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -116,7 +122,6 @@ body {
   padding-top: 71px;
   margin-top: -71px;
 }
-
 .section h2 {
   padding-top: 71px;
   margin-top: -71px;
@@ -136,6 +141,43 @@ body {
 .section h6 {
   padding-top: 71px;
   margin-top: -71px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -157,55 +199,68 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 <style type="text/css">
 .code-folding-btn { margin-bottom: 4px; }
 </style>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 
-
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -254,8 +309,6 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -264,6 +317,16 @@ div.tocify {
 
 
 </style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
@@ -297,7 +360,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    R Intro
+    R
      
     <span class="caret"></span>
   </a>
@@ -331,15 +394,19 @@ div.tocify {
       <a href="06_RasterTwo.html">2.3 More Raster Data</a>
     </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Module 3: Reproducible and Interactive Research</li>
+    <li class="dropdown-header">Module 3: Building R packages</li>
     <li>
-      <a href="07_Reproducible.html">3.1 Research Reports with R markdown</a>
+      <a href="Quickstart_RPackages.html">3.1 Quickstart guide</a>
+    </li>
+    <li class="dropdown-header">Module 4: Reproducible and Interactive Research</li>
+    <li>
+      <a href="07_Reproducible.html">4.1 Research Reports with R markdown</a>
     </li>
     <li>
-      <a href="11_Git.html">3.2 Version control with Github</a>
+      <a href="11_Git.html">4.2 Version control with Github</a>
     </li>
     <li>
-      <a href="07_03_RMarkdown_Tools.html">3.3 RMarkdown Tools: Interactive Presentations, Apps, Websites</a>
+      <a href="07_03_RMarkdown_Tools.html">4.3 RMarkdown Tools: Interactive Presentations, Apps, Websites</a>
     </li>
     <li class="divider"></li>
   </ul>
@@ -420,7 +487,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">RBIEN Tutorial</h1>
-<h4 class="author"><em>Brian Maitner</em></h4>
+<h4 class="author">Brian Maitner</h4>
 
 </div>
 
@@ -442,7 +509,7 @@ library(sp) # A package for spatial data</code></pre>
 <p>The function names follow a consistent naming strategy, and mostly consist of 3 parts:</p>
 <ol style="list-style-type: decimal">
 <li>The prefix “BIEN_”</li>
-<li>The type of data being accessed, e.g. “occurrence_”</li>
+<li>The type of data being accessed, e.g. “occurrence_”</li>
 <li>How you’ll be querying the data. For example, the suffix “state” refers to functions that return data for a specified state.</li>
 </ol>
 <p>As a complete example, the function <code>BIEN_occurrence_species</code> returns occurrence records for a given species (or set of species).</p>
@@ -682,18 +749,16 @@ head(LUQUILLO_full)</code></pre>
 <p>If we’re interested in Specific Leaf Area, we see that this is called “Specific leaf area (SLA)” in the database. Now that we know the proper spelling, we can use the function <code>BIEN_trait_trait</code> to download all observations of that trait.</p>
 <pre class="r"><code>SLA &lt;- BIEN_trait_trait(trait = &quot;Specific leaf area (SLA)&quot;)</code></pre>
 <p>Note that the units have been standardized and that there is a full set of attribution data for each trait.</p>
-</div>
-</div>
-<div id="taxonomy-data" class="section level1">
-<h1><span class="header-section-number">8</span> Taxonomy Data</h1>
+<p>#Taxonomy Data</p>
 <p>While there are existing packages that query taxonomic data (e.g. those included in the taxize package), the RBIEN taxonomy functions access the taxonomic information that underlies the BIEN database, ensuring consistency.</p>
 <ol style="list-style-type: decimal">
 <li><p><code>BIEN_taxonomy_family</code> Downloads all taxonomic information for a given family.</p></li>
 <li><p><code>BIEN_taxonomy_genus</code></p></li>
 <li><p><code>BIEN_taxonomy_species</code></p></li>
 </ol>
+</div>
 <div id="example-6-taxonomic-data" class="section level2">
-<h2><span class="header-section-number">8.1</span> Example 6: Taxonomic data</h2>
+<h2><span class="header-section-number">7.2</span> Example 6: Taxonomic data</h2>
 <p>Let’s say we’re interested in the genus <em>Asclepias</em>, and we’d like to get an idea of how many species there are in this genus and what higher taxa it falls within.</p>
 <pre class="r"><code>Asclepias_taxonomy&lt;-BIEN_taxonomy_genus(genus = &quot;Asclepias&quot;)
 
@@ -713,7 +778,7 @@ Asclepias_species&lt;-unique(Asclepias_taxonomy$scrubbed_species_binomial[Asclep
 </div>
 </div>
 <div id="phylogenies" class="section level1">
-<h1><span class="header-section-number">9</span> Phylogenies</h1>
+<h1><span class="header-section-number">8</span> Phylogenies</h1>
 <p>The BIEN database currently contains 101 phylogenies for new world plants. This includes 100 replicated phylogenies that include nearly all New World plant species (“complete phylogenies”) and 1 phylogeny containing only those New World plant species for which molecular data was available (“conservative phylogeny”). Currently, there are 2 functions available:</p>
 <ol style="list-style-type: decimal">
 <li><p><code>BIEN_phylogeny_complete</code> This function will return a specified number of the replicated “complete” phylogenies. Note that each phylogeny is several Mb in size, so downloading many may take a while on slow connections.</p></li>
@@ -726,7 +791,7 @@ Asclepias_species&lt;-unique(Asclepias_taxonomy$scrubbed_species_binomial[Asclep
 <li><p><code>replicates</code> This function allows you to specify WHICH of the 100 phylogenies to download, rather than having them selected randomly.</p></li>
 </ul>
 <div id="example-7-phylogenies" class="section level2">
-<h2><span class="header-section-number">9.1</span> Example 7: Phylogenies</h2>
+<h2><span class="header-section-number">8.1</span> Example 7: Phylogenies</h2>
 <p>Let’s download the conservative phylogeny.</p>
 <pre class="r"><code>phylo &lt;- BIEN_phylogeny_conservative()
 
@@ -740,7 +805,7 @@ phylo_species &lt;- phylo$tip.label</code></pre>
 </div>
 </div>
 <div id="stem-data" class="section level1">
-<h1><span class="header-section-number">10</span> Stem Data</h1>
+<h1><span class="header-section-number">9</span> Stem Data</h1>
 <p>The BIEN datbase contains stem data associated with many of the plots. This is typically either diameter at breast height or diameter at ground height. At present, there is only one stem function (although expect more in the future):</p>
 <ol style="list-style-type: decimal">
 <li><code>BIEN_stem_species</code> This function downloads all of the stem data for a given species (or set of species)</li>
@@ -750,7 +815,7 @@ phylo_species &lt;- phylo$tip.label</code></pre>
 <!-- ## Example 8: Stem data  -->
 </div>
 <div id="species-lists" class="section level1">
-<h1><span class="header-section-number">11</span> Species lists</h1>
+<h1><span class="header-section-number">10</span> Species lists</h1>
 <p>These functions begin with the prefix “BIEN_list_” and allow you to quickly get a list of all the species in a geographic unit. Functions include:</p>
 <ol style="list-style-type: decimal">
 <li><p><code>BIEN_list_country</code> Returns all species found within a country.</p></li>
@@ -759,7 +824,7 @@ phylo_species &lt;- phylo$tip.label</code></pre>
 </ol>
 <p>Some of the same arguments we saw in the occurrence functions appear here as well, including <code>cultivate</code>, <code>only.new.world</code>, and <code>print.query</code>.</p>
 <div id="example-9-species-list-for-a-country" class="section level2">
-<h2><span class="header-section-number">11.1</span> Example 9: Species list for a country</h2>
+<h2><span class="header-section-number">10.1</span> Example 9: Species list for a country</h2>
 <p>Let’s return to our previous example. What if we just need a list of the species in the Bahamas, rather than the specific details of each occurrence record? We can instead use the function <code>BIEN_list_country</code> to download a list of species, which should be much faster than using <code>BIEN_occurrence_country</code> to get a species list.</p>
 <pre class="r"><code>Bahamas_species_list&lt;-BIEN_list_country(country = &quot;Bahamas&quot;)
 
@@ -770,14 +835,14 @@ Haiti_DR &lt;- BIEN_list_country(country = country_vector)</code></pre>
 </div>
 </div>
 <div id="metadata" class="section level1">
-<h1><span class="header-section-number">12</span> Metadata</h1>
+<h1><span class="header-section-number">11</span> Metadata</h1>
 <p>The BIEN metadata functions are still in development. Currently, there are 2 functions:</p>
 <ol style="list-style-type: decimal">
 <li><p><code>BIEN_metadata_database_version</code> Returns the current version number of the BIEN database and the release date.</p></li>
 <li><p><code>BIEN_metadata_match_data</code> Rudimentary function to check for changed records between old and current queries.</p></li>
 </ol>
 <div id="example-10-metadata" class="section level2">
-<h2><span class="header-section-number">12.1</span> Example 10: Metadata</h2>
+<h2><span class="header-section-number">11.1</span> Example 10: Metadata</h2>
 <p>To check what the current version of the BIEN database is (which we recommend reporting when using BIEN data):</p>
 <pre class="r"><code>BIEN_metadata_database_version()</code></pre>
 <div data-pagedtable="false">
@@ -788,7 +853,7 @@ Haiti_DR &lt;- BIEN_list_country(country = country_vector)</code></pre>
 </div>
 </div>
 <div id="custom-queries" class="section level1">
-<h1><span class="header-section-number">13</span> Custom Queries</h1>
+<h1><span class="header-section-number">12</span> Custom Queries</h1>
 <p>We recommend avoiding custom queries where possible. If you have an idea for a new function/functionality, contacting the package maintainer or submitting a note on the Github site for the package may be a better idea. However, if you need to write your own SQL query, we recommend that you familiarize yourself with both postgresql and the BIEN database structure first. Most of our functions have the argument “print.query” which will display the SQL query that the function utilized. These queries can provide a starting point for custum queries (by adding or omitting parts of them). These queries can then be executed using the function <code>BIEN_sql</code>.</p>
 <ol style="list-style-type: decimal">
 <li><code>BIEN_sql</code> This function returns the results of a postgresql query. This function is typically used as an internal function, but can be used for writing custom queries.</li>
@@ -796,7 +861,7 @@ Haiti_DR &lt;- BIEN_list_country(country = country_vector)</code></pre>
 <p>Arguments:</p>
 <p>The argument <code>query</code> is the only one likely to be of use to users. The other arguments are included for primarily for developmental purposes.</p>
 <div id="example-11-writing-your-own-query" class="section level2">
-<h2><span class="header-section-number">13.1</span> Example 11: Writing your own query</h2>
+<h2><span class="header-section-number">12.1</span> Example 11: Writing your own query</h2>
 <p>Let’s return to our example from above where we downloaded the occurrence records for <em>Xanthium strumarium</em>. Let’s take a look at the query that underlies that:</p>
 <pre class="r"><code>Xanthium_strumarium &lt;- BIEN_occurrence_species(species = &quot;Xanthium strumarium&quot;,print.query = T)</code></pre>
 <pre><code>## [1] &quot;SELECT scrubbed_species_binomial, latitude, longitude,date_collected,datasource,dataset,dataowner,custodial_institution_codes,collection_code FROM view_full_occurrence_individual WHERE scrubbed_species_binomial in ( &#39;Xanthium strumarium&#39; ) AND (is_cultivated = 0 OR is_cultivated IS NULL) AND is_new_world = 1 AND higher_plant_group IS NOT NULL AND (is_geovalid = 1 OR is_geovalid IS NULL) ORDER BY scrubbed_species_binomial;&quot;</code></pre>
@@ -850,6 +915,54 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 

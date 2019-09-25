@@ -10,10 +10,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Cory" />
+<meta name="author" content="Cory Merow" />
 
 
-<title>Quickstart_RPackages</title>
+<title>Quickstart Guide to R Package Building</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -486,31 +486,62 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Quickstart_RPackages</h1>
-<h4 class="author">Cory</h4>
+<h1 class="title toc-ignore">Quickstart Guide to R Package Building</h1>
+<h4 class="author">Cory Merow</h4>
 <h4 class="date">9/24/2019</h4>
 
 </div>
 
 
-<div id="r-markdown" class="section level2">
-<h2><span class="header-section-number">0.1</span> R Markdown</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+<div id="getting-started" class="section level1">
+<h1><span class="header-section-number">1</span> Getting started</h1>
+<p>You may need to install some software for this sequence of 3 tutorials.</p>
+<ul>
+<li><strong>RStudio</strong> (convienient way to interact with R) :<br> <a href="https://www.rstudio.com/products/rstudio/download/#download" class="uri">https://www.rstudio.com/products/rstudio/download/#download</a></li>
+<li><strong>git</strong> (version control): <br> <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></li>
+<li>Create a <strong>GitHub</strong> account (sharing code online) at <br> <a href="https://github.com/">https://github.com/</a></li>
+<li><strong>R packages</strong> (for these demos):<br> <code>install.packages(c('knitr','shiny','dplyr','ggplot2','maps','spocc',''wallace','rmarkdown'), dep=T)</code></li>
+<li><strong>pandoc</strong> (to convert among document formats like html, pdf, docx): <br><a href="http://pandoc.org/installing.html" class="uri">http://pandoc.org/installing.html</a> <!-- ----------------------------------------------------------------------------- --> <!-- ----------------------------------------------------------------------------- --></li>
+</ul>
 </div>
-<div id="including-plots" class="section level2">
-<h2><span class="header-section-number">0.2</span> Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="Quickstart_RPackages_files/figure-html/pressure-1.png" /><!-- --></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+<div id="overview" class="section level1">
+<h1><span class="header-section-number">2</span> Overview</h1>
+<ul>
+<li>Quickly generate a working example, and work backwards to understand the components</li>
+<li>Sharing code</li>
+<li>Reproducible research</li>
+<li>Advancing your programming skills for <em>other</em> applications</li>
+</ul>
+<div id="topics-well-cover" class="section level2">
+<h2><span class="header-section-number">2.1</span> Topics we’ll cover</h2>
+<ul>
+<li>Package strucutre - what are all the different files for?</li>
+<li>Writing Functions</li>
+<li>Checking packages</li>
+<li>R markdown</li>
+<li>Distributing packages (github)</li>
+</ul>
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+</div>
+</div>
+<div id="package-structure" class="section level1">
+<h1><span class="header-section-number">3</span> Package structure</h1>
+<p>Four required components :</p>
+<ul>
+<li>a file called DESCRIPTION. It contains metadata about the package</li>
+<li>a directory called R. It cas the code</li>
+<li>a directory called man. It has the documentation (and not men, counterintuitively)</li>
+<li>a file called NAMESPACE. I lists functions in the package (automatically generated, so not interesting)</li>
+</ul>
+<p>Then there are some optional components which we’ll get to later for sharing data, vignettes, etc..</p>
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+</div>
+<div id="writing-functions" class="section level1">
+<h1><span class="header-section-number">4</span> Writing Functions</h1>
 </div>
 
 

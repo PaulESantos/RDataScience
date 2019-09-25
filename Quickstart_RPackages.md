@@ -1,37 +1,63 @@
 ---
-title: "Quickstart_RPackages"
-author: "Cory"
+title: "Quickstart Guide to R Package Building"
+author: "Cory Merow"
 date: "9/24/2019"
-output: html_document
+output:
+  html_document:
+    code_folding: show
 ---
 
 
 
-## R Markdown
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+# Getting started
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+You may need to install some software for this sequence of 3 tutorials.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+- **RStudio** (convienient way to interact with R) :<br> https://www.rstudio.com/products/rstudio/download/#download 
+- **git** (version control): <br> https://git-scm.com/downloads
+- Create a **GitHub** account (sharing code online) at <br> [https://github.com/](https://github.com/)
+- **R packages** (for these demos):<br> `install.packages(c('knitr','shiny','dplyr','ggplot2','maps','spocc',''wallace','rmarkdown'), dep=T)`
+- **pandoc** (to convert among document formats like html, pdf, docx): <br>http://pandoc.org/installing.html
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
 
 
-```r
-summary(cars)
-```
+# Overview
 
-```
-##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00
-```
+- Quickly generate a working example, and work backwards to understand the components
+- Sharing code
+- Reproducible research
+- Advancing your programming skills for *other* applications
 
-## Including Plots
 
-You can also embed plots, for example:
+## Topics we'll cover
 
-![](Quickstart_RPackages_files/figure-html/pressure-1.png)<!-- -->
+- Package strucutre - what are all the different files for?
+- Writing Functions
+- Checking packages
+- R markdown
+- Distributing packages (github)
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+# Package structure
+
+Four required components :
+
+- a file called DESCRIPTION. It contains metadata about the package
+- a directory called R. It cas the code
+- a directory called man. It has the documentation (and not men, counterintuitively)
+- a file called NAMESPACE. I lists functions in the package (automatically generated, so not interesting)
+
+Then there are some optional components which we'll get to later for sharing data, vignettes, etc.. 
+
+
+
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+
+# Writing Functions

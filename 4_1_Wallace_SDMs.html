@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="Cory Merow" />
@@ -29,7 +30,8 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -78,9 +80,7 @@ h6 {
 
 <link rel="stylesheet" href="cm_yeti_bootswatch.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -99,8 +99,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -116,7 +122,6 @@ body {
   padding-top: 71px;
   margin-top: -71px;
 }
-
 .section h2 {
   padding-top: 71px;
   margin-top: -71px;
@@ -136,6 +141,43 @@ body {
 .section h6 {
   padding-top: 71px;
   margin-top: -71px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -157,55 +199,68 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 <style type="text/css">
 .code-folding-btn { margin-bottom: 4px; }
 </style>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 
-
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -254,8 +309,6 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -264,6 +317,16 @@ div.tocify {
 
 
 </style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
@@ -297,7 +360,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    R Intro
+    R
      
     <span class="caret"></span>
   </a>
@@ -331,15 +394,19 @@ div.tocify {
       <a href="06_RasterTwo.html">2.3 More Raster Data</a>
     </li>
     <li class="divider"></li>
-    <li class="dropdown-header">Module 3: Reproducible and Interactive Research</li>
+    <li class="dropdown-header">Module 3: Building R packages</li>
     <li>
-      <a href="07_Reproducible.html">3.1 Research Reports with R markdown</a>
+      <a href="Quickstart_RPackages.html">3.1 Quickstart guide</a>
+    </li>
+    <li class="dropdown-header">Module 4: Reproducible and Interactive Research</li>
+    <li>
+      <a href="07_Reproducible.html">4.1 Research Reports with R markdown</a>
     </li>
     <li>
-      <a href="11_Git.html">3.2 Version control with Github</a>
+      <a href="11_Git.html">4.2 Version control with Github</a>
     </li>
     <li>
-      <a href="07_03_RMarkdown_Tools.html">3.3 RMarkdown Tools: Interactive Presentations, Apps, Websites</a>
+      <a href="07_03_RMarkdown_Tools.html">4.3 RMarkdown Tools: Interactive Presentations, Apps, Websites</a>
     </li>
     <li class="divider"></li>
   </ul>
@@ -420,8 +487,8 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">SDMs with Wallace</h1>
-<h4 class="author"><em>Cory Merow</em></h4>
-<h4 class="date"><em>1/25/2017</em></h4>
+<h4 class="author">Cory Merow</h4>
+<h4 class="date">1/25/2017</h4>
 
 </div>
 
@@ -472,10 +539,7 @@ run_wallace() # this will open the Wallace GUI in a web browser</code></pre>
 <p><br> <img src="4_1_assets/Wallace2a.png" /></p>
 <p><br> The samples may exhibit spatial autocorrelation, which is best to account for in the model or remove before modeling. For example, there might be a bunch of samples near cities because these are mostly from iNaturalist (citizen science) and citizen often live near cities. So lets spatially thin the points and make sure they’re all at least 10km from one another. It takes a sec. That left me with 163 points for modeling (yours may be different).</p>
 <p><br></p>
-<div class="figure">
-<img src="4_1_assets/Wallace2b.png" />
-
-</div>
+<p><img src="4_1_assets/Wallace2b.png" /></p>
 <p><br></p>
 <p>Download these points for later reference.</p>
 </div>
@@ -491,10 +555,7 @@ run_wallace() # this will open the Wallace GUI in a web browser</code></pre>
 <h1><span class="header-section-number">5</span> Prep environmental data</h1>
 <p>Now we need to choose the extent of the modeling domain. This jargon means that we have to define a sensible region to fit the model. Contrary to many publications, species ranges are not typically best modeling on domains defined by squares or political boundaries. Press some buttons on this screen to explore the options, but end up with something like what I show below. We’ll explore the consequences shortly. Press the <strong>Mask</strong> button to trim the environmental layers to this polygon and download the result.</p>
 <p><br></p>
-<div class="figure">
-<img src="4_1_assets/Wallace4a.png" />
-
-</div>
+<p><img src="4_1_assets/Wallace4a.png" /></p>
 <p><br></p>
 </div>
 <div id="partition-occurrences" class="section level1">
@@ -518,7 +579,8 @@ It appears you don’t have a PDF plugin for this browser. No biggie… you can 
 <p>Finally, we’re going to make use of that results tab in the middle of the screen. Let’s build a Maxent model; this is a machine learning method that fits wiggly functions to patterns in the data. Its great for exploring complex patterns. If you construct it with a particular set of decisions it becomes very similar to a simple GLM. So it can conver a wide spectrum of complexity. If you want more details, ask Cory; he’s written a lot of papers on this so he may talk for while….</p>
 <p>Below I’ve chosen some modeling options:</p>
 <ul>
-<li>Select the Maxent button</li>
+<li>Select the Maxent button
+<ul>
 <li>Select LQH features. These are the shapes that can be fit to the data:
 <ul>
 <li>L = Linear, e.g. temp + precip</li>
@@ -527,16 +589,17 @@ It appears you don’t have a PDF plugin for this browser. No biggie… you can 
 <li>H = Hinge, e.g. piecewise linear functions. Taking all possible pairs of these between data points, you can build a very flexible function, similar to a GAM (generalized additive model).</li>
 <li>T = Threshold, e.g. step functions between each pair of data points</li>
 </ul></li>
+</ul></li>
 </ul>
 <p><br> <img src="4_1_assets/hinge_threshold.png" /></p>
 <ul>
 <li>Select regularization multipliers between 1-3
 <ul>
 <li>regularization is a way to reduce model complexity. Higher values = smoother, less complex models. Its kind of like using AIC during model fitting to toss out certain predictors. Just ask for more details.</li>
-</ul></li>
 <li>RM Step Value = 1
 <ul>
 <li>how large of step to take between values in the slide bar above.</li>
+</ul></li>
 </ul></li>
 </ul>
 <p>This takes about 2 min; you’re building 3 model types and 4 folds for each, and you’re using a load of features…</p>
@@ -556,37 +619,22 @@ It appears you don’t have a PDF plugin for this browser. No biggie… you can 
 <p><img src="4_1_assets/Wallace7b.png" /> <br></p>
 <p>We can also map the predictions. At first glance it looks like a decent model because the presence points correspond to regions of higher suitability.</p>
 <p><br></p>
-<div class="figure">
-<img src="4_1_assets/Wallace7c.png" />
-
-</div>
+<p><img src="4_1_assets/Wallace7c.png" /></p>
 <p><br></p>
 </div>
 <div id="project" class="section level1">
 <h1><span class="header-section-number">9</span> Project</h1>
 <p>Next we can evaluate the models ability to project first to new locations (extending the domain) and new times (2070). First, extend the domain by drawing a polygon like the one below. Double-clicking on each of the 4 corners of this one draws the polygon. Next, press <code>Select</code> and then <code>Project</code> to build the new map.</p>
 <p><br></p>
-<div class="figure">
-<img src="4_1_assets/Wallace8a.png" />
-
-</div>
+<p><img src="4_1_assets/Wallace8a.png" /></p>
 <p><br></p>
 <p>Below are the predictions to a much larger region. Looks like northern Canada should get ready for a red maple invasion… So it appears we’ve fit a response that doesn’t generalize well to other regions. One way to determine how that happened is to look back at the response curves to determine which predictors are contributing to high suitability in northern Canada. This is best done with MESS plots in the maxent software package, and we haven’t included those in <code>wallace</code> just yet. So we’ll explore another way to avoid this poor prediction below.</p>
 <p>As another example, of <code>wallace</code>’s features, we can also project to future climate scenarios. Select the options as below and forecast the future range of A. rubrum under an extreme climate change scenario. <br></p>
-<div class="figure">
-<img src="4_1_assets/Wallace8b.png" />
-
-</div>
+<p><img src="4_1_assets/Wallace8b.png" /></p>
 <p><br></p>
-<div class="figure">
-<img src="4_1_assets/Wallace8c.png" />
-
-</div>
+<p><img src="4_1_assets/Wallace8c.png" /></p>
 <p><br></p>
-<div class="figure">
-<img src="4_1_assets/Wallace8d.png" />
-
-</div>
+<p><img src="4_1_assets/Wallace8d.png" /></p>
 <p><br></p>
 </div>
 <div id="extracting-the-code" class="section level1">
@@ -594,10 +642,7 @@ It appears you don’t have a PDF plugin for this browser. No biggie… you can 
 <p>A major advantage of <code>wallace</code> compared to other GUI-based software is that you can extract all the code used to run the analysis. This allows you to recall what you did, share it, or modify it. The code is best extracted in <strong>R markdown</strong> format, which is a convienient format for combining R and text (and actually forms the basis of this website). Other formats are also available; for example Microsoft Word output mught be useful if you live in the ’90s.</p>
 <p>To download the code, select Rmd and click Download. You may need to go to your R window and allow R to set up a cache to proceed. Extraction takes a minute; currently it has to rerun all the analyses we just did. We’ll fix this in an upcoming release to avoid the redundancy.</p>
 <p><br></p>
-<div class="figure">
-<img src="4_1_assets/Wallace9a.png" />
-
-</div>
+<p><img src="4_1_assets/Wallace9a.png" /></p>
 <p><br></p>
 <p>Now, you should have an .Rmd file that contains your complete analysis. Sometimes, if you make a bunch of mistakes while playing with the GUI, you might get an error when extracting the .Rmd. If that happens, you can download mine <a href="https://cmerow.github.io/RDataScience/4_1_assets/Outputs/wallace-session-2017-01-26.Rmd">here</a></p>
 <p>Rmd files combine regular text with <strong>code chunks</strong>, shown by the red arrow below. Modules from <code>wallace</code> are indicated as headers denoted by <strong>###</strong>. For a quick reference to Rmd syntax, see <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">here</a></p>
@@ -623,17 +668,11 @@ It appears you don’t have a PDF plugin for this browser. No biggie… you can 
 <p><a href="4_1_Wallace_SDMs.R"><i class="fa fa-file-code-o fa-3x" aria-hidden="true"></i> The R Script associated with this page is available here</a>. Download this file and open it (or copy-paste into a new script) with RStudio so you can follow along.</p>
 <p>Let’s revisit that crappy prediction into northern Canada. This issue derived from a poor choice of modeling domain and an overfit model. Try rerunning the analysis by extending the domain to include many locations where the species does not occur (see below) and using a simpler model that includes only linear and quadtratic features.</p>
 <p><br></p>
-<div class="figure">
-<img src="4_1_assets/WallaceNexta.png" />
-
-</div>
+<p><img src="4_1_assets/WallaceNexta.png" /></p>
 <p><br></p>
 <p>Here are the improved predictions that avoid prediction in northern Canada.</p>
 <p><br></p>
-<div class="figure">
-<img src="4_1_assets/WallaceNexta.png" />
-
-</div>
+<p><img src="4_1_assets/WallaceNexta.png" /></p>
 </div>
 
 
@@ -673,6 +712,54 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 

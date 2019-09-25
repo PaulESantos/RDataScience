@@ -37,7 +37,10 @@ You may need to install some software for this sequence of 3 tutorials.
 ## Topics we'll cover
 
 - Package strucutre - what are all the different files for?
-- 
+- Writing Functions
+- Checking packages
+- R markdown
+- Distributing packages (github)
 
 
 
@@ -58,3 +61,5 @@ Then there are some optional components which we'll get to later for sharing dat
 
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
+
+# Writing Functions

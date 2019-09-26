@@ -94,7 +94,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -503,8 +502,18 @@ div.tocify {
 <li><strong>git</strong> (version control): <br> <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></li>
 <li>Create a <strong>GitHub</strong> account (sharing code online) at <br> <a href="https://github.com/">https://github.com/</a></li>
 <li><strong>R packages</strong> (for these demos):<br> <code>install.packages(c('knitr','shiny','rmarkdown'), dep=T)</code></li>
-<li><strong>pandoc</strong> (to convert among document formats like html, pdf, docx): <br><a href="http://pandoc.org/installing.html" class="uri">http://pandoc.org/installing.html</a> <!-- ----------------------------------------------------------------------------- --> <!-- ----------------------------------------------------------------------------- --></li>
+<li><strong>pandoc</strong> (to convert among document formats like html, pdf, docx): <br><a href="http://pandoc.org/installing.html" class="uri">http://pandoc.org/installing.html</a></li>
 </ul>
+<div class="well">
+<button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo2">
+Tangential Tip
+</button>
+<div id="demo2" class="collapse">
+<p>These are sprinkled throughout. Only read them if everything is going really well…</p>
+</div>
+</div>
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
 <p><br></p>
 </div>
 <div id="why-build-a-package" class="section level1">
@@ -519,6 +528,15 @@ div.tocify {
 <blockquote>
 <p>For anyone using this document outside of a lecture, please note that this lesson is designed to distill the key features of a package for <em>publishing reproducible research</em>. These are my opinions on the key features or package building and which details are worth the time they take. This approach cuts details that can take beginners a lot of time to wade through, keeping them away from the science that motivates their efforts. This approach is <em>not</em> designed for generic packages that will be broadly used. There are many better resources for <a href="http://r-pkgs.had.co.nz/">that</a>.</p>
 </blockquote>
+<p>The first practical advantage to using a package is that it’s easy to re-load your code. You can either run devtools::load_all(), or in RStudio press Ctrl/Cmd + Shift + L, which also saves all open files, saving you a keystroke.</p>
+<div class="well">
+<button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo21">
+Tangential Tip
+</button>
+<div id="demo21" class="collapse">
+<p><a href="http://r-pkgs.had.co.nz/r.html">Hadley says:</a>: The first practical advantage to using a package is that it’s easy to re-load your code. You can either run devtools::load_all(), or in RStudio press Ctrl/Cmd + Shift + L, which also saves all open files, saving you a keystroke.</p>
+</div>
+</div>
 <p><br></p>
 <div id="topics-well-cover" class="section level2">
 <h2><span class="header-section-number">2.1</span> Topics we’ll cover</h2>
@@ -527,7 +545,7 @@ div.tocify {
 <li>Package structure - what are all the different files for?</li>
 <li>Writing Functions</li>
 <li>Documentation (with Roxygen2)</li>
-<li>The ******* DESCRIPTION file</li>
+<li>The ****** DESCRIPTION file</li>
 <li>Checking and Building packages</li>
 <li>Distributing packages (github)</li>
 <li>General Tips</li>
@@ -715,34 +733,34 @@ Tangential Tip
 <h2><span class="header-section-number">8.1</span> .gitignore</h2>
 <p>It is useful to avoid sending all your files to github; some may be used for testing, are too large, are temp filess or helper files that no one cares about.</p>
 <p>The .gitignore file in your root directory stores rules for what to ignore.Here’s what I always include in my .gitignore, borrowed from various smarter people. Try putting this in your package and see if it breaks.</p>
-<pre class="r"><code>Meta
-doc
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
-
-# History files
-.Rapp.history
-# Session Data files
-# Example code in package build process
-*-Ex.R
-# Output files from R CMD build
-/*.tar.gz
-# Output files from R CMD check
-/*.Rcheck/
-# RStudio files
-.Rproj.user/
-# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
-.httr-oauth
-# knitr and R markdown default cache directories
-/*_cache/
-/cache/
-# Temporary files created by R markdown
-*.utf8.md
-*.knit.md
-.DS_Store
-.Rbuildignore</code></pre>
+<pre class="r"><code># Meta
+# doc
+# .Rproj.user
+# .Rhistory
+# .RData
+# .Ruserdata
+# 
+# # History files
+# .Rapp.history
+# # Session Data files
+# # Example code in package build process
+# *-Ex.R
+# # Output files from R CMD build
+# /*.tar.gz
+# # Output files from R CMD check
+# /*.Rcheck/
+# # RStudio files
+# .Rproj.user/
+# # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+# .httr-oauth
+# # knitr and R markdown default cache directories
+# /*_cache/
+# /cache/
+# # Temporary files created by R markdown
+# *.utf8.md
+# *.knit.md
+# .DS_Store
+# .Rbuildignore</code></pre>
 <p>Importantly * is a wildcard symbol, so something like *-Ex.R means ignore all the files that end in -Ex.R. Or you can list every single file manually if you’re into that sort of thing.</p>
 <p>Note that you might want to stop ‘tracking’ a file with git. <a href="http://www.codeblocq.com/2016/01/Untrack-files-already-added-to-git-repository-based-on-gitignore/">Here</a> are instructions.</p>
 <p>git is super powerful for teams of people working on code concurrently to avoid breaking one another’s work. But it takes some learning. git is awesome for tracking your edits and sharing on github with the simple approach shown here. I don’t do much fancy branching, merging or pull requesting, because I spend more time fixing mistakes I thought I understood. This is clearly because I’m just a gitiot and not git’s fault. But I’d recommend saving your time learning git more fully until you really really need it.</p>
@@ -758,8 +776,7 @@ doc
 <li>Create a new package called <code>intentionallyBrokenRangeModelMetada</code></li>
 <li>Download these <a href="https://cmerow.github.io/RDataScience/Quickstart_RPackages_assets/intentionallyBrokenRangeModelMetadata.zip">files</a>.</li>
 <li>Put the files in your root directory (the one called intentionallyBrokenRangeModelMetada)</li>
-<li>Run <code>devtools::document()</code> just to be sure all the manuals are built.<br />
-</li>
+<li>Run <code>devtools::document()</code> just to be sure all the manuals are built.</li>
 <li>Run <code>check()</code> either from the command line or through RStudio.</li>
 <li>Start debugging with any problems you find, rerunning <code>check()</code> periodically to see if you’ve succeeded. Hint: I’ve only introduced 1 error per function.</li>
 <li>You’re done when there are no more NOTES, WARNINGS or ERRORS.</li>
@@ -774,42 +791,46 @@ doc
 <p><br></p>
 <div id="vignettes" class="section level2">
 <h2><span class="header-section-number">10.1</span> Vignettes</h2>
-<p>Vignettes are super important. If someone is going to read one thing you write in your package, it’s likely the vignette. Its easiest to write vignettes with <strong>R markdown</strong>. R markdown is also a way to share project reports and make websites like this, so learning it enables more options. Here’s a full <a href="https://cmerow.github.io/RDataScience/07_Reproducible.html">lesson</a> I made; we’ll just skim it here.</p>
-</div>
-<div id="r-markdown-cheatsheet" class="section level2">
-<h2><span class="header-section-number">10.2</span> R Markdown Cheatsheet</h2>
+<p>Vignettes are super important. If someone is going to read one thing you write in your package, it’s likely the vignette. Its easiest to write vignettes with <strong>R markdown</strong>. R markdown is also a way to share project reports and make websites like this, so learning it enables more options. Here’s a full <a href="https://cmerow.github.io/RDataScience/07_Reproducible.html">lesson</a> I made; we’ll just skim it here. Let’s make a vignette for the demo package you were building (<strong>not the one you just debugged</strong>, so you’ll have to switch projects in RStudio.)</p>
 <p>Here are some super useful guides; really they contain almost all you need to know, and I think you can just experiment after skimming them.</p>
 <p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"> <img src="07_assets/rmarkdown.png" alt="alt text" width="700"></a></p>
 <p><small><small><small><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf</a></small></small></small></p>
 <p>The <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">reference guide</a> is a little more comprehensive</p>
 <p><br></p>
 <div id="create-new-file" class="section level3">
-<h3><span class="header-section-number">10.2.1</span> Create new file</h3>
+<h3><span class="header-section-number">10.1.1</span> Create new file</h3>
 <p>In Rstudio: <strong>File -&gt; New File -&gt; RMarkdown -&gt; Document -&gt; HTML</strong></p>
 <p><img src="07_assets/rmarkdownwindow.png" alt="alt text" width="600"></p>
 <p>This will open a document that looks like this:</p>
 <p><img src="07_assets/Example_knitr_Template.png" alt="alt text" width="750"></p>
 <!-- <img src="07_assets/Example_knitr_Template.png" alt="alt text" width="700"> -->
+<p>You’ll need to make a folder called /vignettes/ in your root directory, and save it there. This is a .Rmd file.</p>
 <p><br></p>
 </div>
 <div id="step-1-load-packages" class="section level3">
-<h3><span class="header-section-number">10.2.2</span> Step 1: Load packages</h3>
+<h3><span class="header-section-number">10.1.2</span> Step 1: Load packages</h3>
 <p>All R code to be run must be in a <em>code chunk</em> like this:</p>
 <pre class="r"><code>#```{r,eval=F}
 CODE HERE
 #```</code></pre>
-<p>Add a new <em>code chunk</em> at the bottom of this template file to load these packages (you may need to install some packages):</p>
-<pre class="r"><code>library(dplyr)
-library(ggplot2)
-library(maps)
-library(spocc)</code></pre>
-<p>Note that the doc/ folder is created, and this is where your vignettes are stored when the package is built. This is kind of confusing because it seems redundant with the vignettes folder.</p>
+<p>Add a new <em>code chunk</em> at the bottom of this template file.</p>
+<pre class="r"><code>celsius_to_kelvin(0)</code></pre>
+<pre><code>## [1] 273.15</code></pre>
+<pre class="r"><code>fahrenheit_to_kelvin(32)</code></pre>
+<pre><code>## [1] 273.15</code></pre>
+<p>To see how this will look when built, press CMD+Shift+K (to ‘knit’ the document using the <code>knitr</code> package).</p>
+<p>Let’s add a plot.</p>
+</div>
+<div id="building-the-vignette" class="section level3">
+<h3><span class="header-section-number">10.1.3</span> Building the vignette</h3>
+<p>Although you can build your vignettes with the <em>Knit</em> button in RStudio to test them out, you need to formally build them for the package with <code>devtools::build_vignettes()</code>. Try it out.</p>
+<p>Note that the doc/ folder is created, and this is where your vignettes are stored when the package is built. This is kind of confusing because it seems redundant with the vignettes folder. Don’t edit these, always be sure to edit the files in the /vignettes/ folder.</p>
 <!-- ----------------------------------------------------------------------------- -->
 <p><br></p>
 </div>
 </div>
 <div id="junk-drawer-instextdata" class="section level2">
-<h2><span class="header-section-number">10.3</span> Junk drawer: /inst/extdata</h2>
+<h2><span class="header-section-number">10.2</span> Junk drawer: /inst/extdata</h2>
 <p>Particularly when sharing code for a single paper, it can be helpful to include a variety of auxilary files used for this or that. Maybe they’re scripts you use with the package, or data you’re too lazy to write documentation for, or notes to future you. For these, create the inst/ folder in your root directory, and the extdata/ folder in that. Put anything you like there.</p>
 <p>It can be helpful to access those files when the package is installed with something like:</p>
 <pre class="r"><code>ddFile=system.file(&quot;extdata/dataDictionary.csv&quot;,package=&#39;rangeModelMetadata&#39;)

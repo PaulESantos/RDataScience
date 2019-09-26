@@ -20,6 +20,16 @@ You may need to install some software for this sequence of 3 tutorials.
 - Create a **GitHub** account (sharing code online) at <br> [https://github.com/](https://github.com/)
 - **R packages** (for these demos):<br> `install.packages(c('knitr','shiny','rmarkdown'), dep=T)`
 - **pandoc** (to convert among document formats like html, pdf, docx): <br>http://pandoc.org/installing.html
+
+<div class="well">
+<button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo2">Tangential Tip</button>
+<div id="demo2" class="collapse">
+
+These are sprinkled throughout. Only read them if everything is going really well...
+
+</div>
+</div>
+
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
 
@@ -36,6 +46,16 @@ You may need to install some software for this sequence of 3 tutorials.
 
 > For anyone using this document outside of a lecture, please note that this lesson is designed to distill the key features of a package for *publishing reproducible research*. These are my opinions on the key features or package building and which details are worth the time they take. This approach cuts details that can take beginners a lot of time to wade through, keeping them away from the science that motivates their efforts. This approach is *not* designed for generic packages that will be broadly used. There are many better resources for [that](http://r-pkgs.had.co.nz/).
 
+The first practical advantage to using a package is that it’s easy to re-load your code. You can either run devtools::load_all(), or in RStudio press Ctrl/Cmd + Shift + L, which also saves all open files, saving you a keystroke.
+
+<div class="well">
+<button data-toggle="collapse" class="btn btn-primary btn-sm round" data-target="#demo21">Tangential Tip</button>
+<div id="demo21" class="collapse">
+
+[Hadley says:](http://r-pkgs.had.co.nz/r.html): The first practical advantage to using a package is that it’s easy to re-load your code. You can either run devtools::load_all(), or in RStudio press Ctrl/Cmd + Shift + L, which also saves all open files, saving you a keystroke.
+</div>
+</div>
+
 <br>
 
 ## Topics we'll cover
@@ -44,7 +64,7 @@ We'll quickly generate a working example, and work backwards to understand the c
 - Package structure - what are all the different files for?
 - Writing Functions 
 - Documentation (with Roxygen2)
-- The ******* DESCRIPTION file
+- The ****** DESCRIPTION file
 - Checking and Building packages
 - Distributing packages (github)
 - General Tips
@@ -58,6 +78,7 @@ These are sprinkled throughout. Only read them if everything is going really wel
 
 </div>
 </div>
+
 
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
@@ -254,7 +275,7 @@ Note that you can use the point and click interface on RStudio's Build menu or `
 To ensure you've followed the right protocols when designing your package, R offers checking tools. There are options, but it's safest just to check with CRAN's standards as they're rigorous. To check for problems, either click the  *Check* button shown above or type `check()` in the console. A very long litany of obscure details will likely follow. You're looking for NOTES, WARNINGS and ERRORS. Don't worry about everything else. The goal is to address these issues such that none remain when you run `check()` the final time. `check()`  the package we've been building to try for yourself. We'll do some more elaborate checks in a demo below.
 
 ## Install
-Once you've passed all the checks, you can click *Install and Restart* or type `install()` in the console. Now your package is loaded in R and ready to use. 
+Once you've passed all the checks, you can click *Install and Restart* or type `install()` in the console. Now your package is loaded in R and ready to use.
 
 ## Build
 If you'd like to share a zipped up version of the package, e.g., as you'd submit to CRAN, choose *Build Source Package* from the drop down menu.
@@ -273,14 +294,14 @@ I'm just going to demonstrate the super simple clicky version of using github wi
 
 Follow [these instructions](https://help.github.com/en/articles/adding-an-existing-project-to-github-using-the-command-line) to create a new github repo and add the package you've been working with to it. Then follow these steps to save your changes on the github website.
 
-1. Modify any file in you repo and save the file. 
+1. Modify any file in you repo and save the file.
 2. Under the *Git* tab in RStudio, notice that the file is now listed:
 <br>
 
 ![](Quickstart_RPackages_assets/changeTracked.png)
 <br>
 
-3. Select the checkbox under *Staged* and click *Commit*. Here you save edits and provide a 'commit message' describing them very briefly (e.g., in case you need to revert to them later). 
+3. Select the checkbox under *Staged* and click *Commit*. Here you save edits and provide a 'commit message' describing them very briefly (e.g., in case you need to revert to them later).
 4. To get these changes on github for everyone to see, click *Push*.
 
 That's it; your code is tracked and on github. Of course there are many more powerful ways to use git to collaborate with multiple code authors, to explore ideas and revert back to older ones if they fail, etc. But all these few steps are all you really need to share packages online. More detailed instructions are [here](https://cfss.uchicago.edu/setup/git-with-rstudio/).
@@ -289,40 +310,40 @@ Now, others can install your package using `install_github()`.
 
 ## .gitignore
 
-It is useful to avoid sending all your files to github; some may be used for testing, are too large, are temp filess or helper files that no one cares about. 
+It is useful to avoid sending all your files to github; some may be used for testing, are too large, are temp filess or helper files that no one cares about.
 
 The .gitignore file in your root directory stores rules for what to ignore.Here's what I always include in my .gitignore, borrowed from various smarter people. Try putting this in your package and see if it breaks.
 
 
 ```r
-Meta
-doc
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
-
-# History files
-.Rapp.history
-# Session Data files
-# Example code in package build process
-*-Ex.R
-# Output files from R CMD build
-/*.tar.gz
-# Output files from R CMD check
-/*.Rcheck/
-# RStudio files
-.Rproj.user/
-# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
-.httr-oauth
-# knitr and R markdown default cache directories
-/*_cache/
-/cache/
-# Temporary files created by R markdown
-*.utf8.md
-*.knit.md
-.DS_Store
-.Rbuildignore
+# Meta
+# doc
+# .Rproj.user
+# .Rhistory
+# .RData
+# .Ruserdata
+# 
+# # History files
+# .Rapp.history
+# # Session Data files
+# # Example code in package build process
+# *-Ex.R
+# # Output files from R CMD build
+# /*.tar.gz
+# # Output files from R CMD check
+# /*.Rcheck/
+# # RStudio files
+# .Rproj.user/
+# # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+# .httr-oauth
+# # knitr and R markdown default cache directories
+# /*_cache/
+# /cache/
+# # Temporary files created by R markdown
+# *.utf8.md
+# *.knit.md
+# .DS_Store
+# .Rbuildignore
 ```
 
 Importantly * is a wildcard symbol, so something like *-Ex.R means ignore all the files that end in -Ex.R. Or you can list every single file manually if you're into that sort of thing.
@@ -338,12 +359,12 @@ git is super powerful for teams of people working on code concurrently to avoid 
 
 # Demo
 
-Here's the plan. I want you to see what a fully functional R package looks like, but I don't want it to include a bunch of stats that obscure the challenge of understanding the package structure. So we'll fix a version of my `rangeModelMetadata` package that I've intentionally introduced errors to. This package just works with text to create an `list` or CSV of text that represents metadata for species distribution models. 
+Here's the plan. I want you to see what a fully functional R package looks like, but I don't want it to include a bunch of stats that obscure the challenge of understanding the package structure. So we'll fix a version of my `rangeModelMetadata` package that I've intentionally introduced errors to. This package just works with text to create an `list` or CSV of text that represents metadata for species distribution models.
 
 1. Create a new package called `intentionallyBrokenRangeModelMetada`
 2. Download these [files](https://cmerow.github.io/RDataScience/Quickstart_RPackages_assets/intentionallyBrokenRangeModelMetadata.zip).
 3. Put the files in your root directory (the one called intentionallyBrokenRangeModelMetada)
-4. Run `devtools::document()` just to be sure all the manuals are built.  
+4. Run `devtools::document()` just to be sure all the manuals are built.
 5. Run `check()` either from the command line or through RStudio.
 6. Start debugging with any problems you find, rerunning `check()` periodically to see if you've succeeded. Hint: I've only introduced 1 error per function.
 7. You're done when there are no more NOTES, WARNINGS or ERRORS.
@@ -359,10 +380,7 @@ Here's the plan. I want you to see what a fully functional R package looks like,
 <br>
 
 ## Vignettes
-Vignettes are super important. If someone is going to read one thing you write in your package, it's likely the vignette. Its easiest to write vignettes with **R markdown**. R markdown is also a way to share project reports and make websites like this, so learning it enables more options. Here's a full [lesson](https://cmerow.github.io/RDataScience/07_Reproducible.html) I made; we'll just skim it here. 
-
-
-## R Markdown Cheatsheet
+Vignettes are super important. If someone is going to read one thing you write in your package, it's likely the vignette. Its easiest to write vignettes with **R markdown**. R markdown is also a way to share project reports and make websites like this, so learning it enables more options. Here's a full [lesson](https://cmerow.github.io/RDataScience/07_Reproducible.html) I made; we'll just skim it here. Let's make a vignette for the demo package you were building (**not the one you just debugged**, so you'll have to switch projects in RStudio.)
 
 Here are some super useful guides; really they contain almost all you need to know, and I think you can just experiment after skimming them.
 
@@ -387,6 +405,8 @@ This will open a document that looks like this:
 
 <!-- <img src="07_assets/Example_knitr_Template.png" alt="alt text" width="700"> -->
 
+You'll need to make a folder called /vignettes/ in your root directory, and save it there. This is a .Rmd file.
+
 <br>
 
 ### Step 1: Load packages
@@ -399,18 +419,36 @@ CODE HERE
 #```
 ```
 
-Add a new _code chunk_ at the bottom of this template file to load these packages (you may need to install some packages):
+Add a new _code chunk_ at the bottom of this template file.
 
 
 ```r
-library(dplyr)
-library(ggplot2)
-library(maps)
-library(spocc)
+celsius_to_kelvin(0)
 ```
 
+```
+## [1] 273.15
+```
 
-Note that the doc/ folder is created, and this is where your vignettes are stored when the package is built. This is kind of confusing because it seems redundant with the vignettes folder. 
+```r
+fahrenheit_to_kelvin(32)
+```
+
+```
+## [1] 273.15
+```
+
+To see how this will look when built, press CMD+Shift+K (to 'knit' the document using the `knitr` package).
+
+Let's add a plot.
+
+
+
+### Building the vignette
+
+Although you can build your vignettes with the *Knit* button in RStudio to test them out, you need to formally build them for the package with `devtools::build_vignettes()`. Try it out.
+
+Note that the doc/ folder is created, and this is where your vignettes are stored when the package is built. This is kind of confusing because it seems redundant with the vignettes folder. Don't edit these, always be sure to edit the files in the /vignettes/ folder.
 
 <!-- ----------------------------------------------------------------------------- -->
 <br>
@@ -479,7 +517,7 @@ There are three key commands to advance through the lines of code when in `brows
  - `Q` get out of debug mode.
  Within debug mode, you can type any of the usual commands you'd use in R to see what objects in the environment look like, or to run other tests.
 
-Alternatively to `browser()`, you can call `debug(yourFunctionName)` to step through every line, as though you had put your `browser()` command on line 1 of your function. `undebug()` gets you out of debug mode. 
+Alternatively to `browser()`, you can call `debug(yourFunctionName)` to step through every line, as though you had put your `browser()` command on line 1 of your function. `undebug()` gets you out of debug mode.
 
 <!-- ----------------------------------------------------------------------------- -->
 <br>
@@ -502,9 +540,9 @@ Here's an example from one my packages. Put this function in your R directory.
 
 # Next steps
 
-Almost always, the answer you need is breifly and well explained in Hadley Wickham's online book [here](http://r-pkgs.had.co.nz/). 
+Almost always, the answer you need is breifly and well explained in Hadley Wickham's online book [here](http://r-pkgs.had.co.nz/).
 
-I just found this, so don't know it well, but ROpenSci does a ton of smart [stuff](https://devguide.ropensci.org/). 
+I just found this, so don't know it well, but ROpenSci does a ton of smart [stuff](https://devguide.ropensci.org/).
 
 Obviously there's the CRAN book on R extensions [here](https://cran.r-project.org/doc/manuals/r-release/R-exts.html).
 It tends to be long and winding and hard to search. Don't bother with it unless you're having trouble sleeping.
@@ -515,12 +553,12 @@ It tends to be long and winding and hard to search. Don't bother with it unless 
 
 - **S3 and S4 methods**. So functions like `plot` and `print` work with objects from your code.
   + Party line: These represent the true power of the object-oriented coding that makes R appealing.
-  + What I really think: Meh, you can just use a list and do most of the same stuff. 
+  + What I really think: Meh, you can just use a list and do most of the same stuff.
 
 - **Including data sets**. [Example](https://kbroman.org/pkg_primer/pages/data.html)
   + Party line: Its not complicated.
   + What I really think: I tend to include a lot, as users may find it easier access existing data. Note that on CRAN your package can't be over a few Mb but on github, files can be up to 50 Mb. Consider RData files and RDS files; they're usually fast and reasonably compressed, preserving the exact R object you saved. You can put them in /inst/ext/ if you're lazy and don't want to write documentation. Reference them with `system.file()`.
-  
+
 - **Shiny apps**. Like [Wallace](https://wallaceecomod.github.io/)! or this [Gallery](https://shiny.rstudio.com/gallery/) of apps.
   + Party line: Make your code interactive.
   + What I really think: I see 2 major use cases: (1) big complicated apps like Wallace that helop visualize a workflow, and (2) little snippets that you might put on your website to show off your work. I don't see them as super useful for intermediate scales, where it takes significant effort to build the app, but it only does a part of an analysis or a very specific analysis.

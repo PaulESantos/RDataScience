@@ -20,7 +20,7 @@ You may need to install some software for this sequence of 3 tutorials.
 - **RStudio** (convenient way to interact with R) :<br> https://www.rstudio.com/products/rstudio/download/#download 
 - **git** (version control): <br> https://git-scm.com/downloads
 - Create a **GitHub** account (sharing code online) at <br> [https://github.com/](https://github.com/)
-- **R packages** (for these demos):<br> `install.packages(c('knitr','shiny','dplyr','ggplot2','maps','spocc',''wallace','rmarkdown'), dep=T)`
+- **R packages** (for these demos):<br> `install.packages(c('knitr','shiny','rmarkdown'), dep=T)`
 - **pandoc** (to convert among document formats like html, pdf, docx): <br>http://pandoc.org/installing.html
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
@@ -36,7 +36,7 @@ You may need to install some software for this sequence of 3 tutorials.
 - Future you will appreciate you more
 - Advancing your programming skills for *other* applications
 
-> For anyone using this document outside of a lecture, please note that this lesson is designed to distill the key features of a package for publishing reproducible research. This approach cuts a lot of corners on details that can take beginners a lot of time to wade through, keeping them away from the science that motivates their efforts. This approach is *not* designed for generic packages that will be broadly used. There are many other, better resources for [that](http://r-pkgs.had.co.nz/).
+> For anyone using this document outside of a lecture, please note that this lesson is designed to distill the key features of a package for *publishing reproducible research*. These are my opinions on the key features or package building and which details are worth the time they take. This approach cuts details that can take beginners a lot of time to wade through, keeping them away from the science that motivates their efforts. This approach is *not* designed for generic packages that will be broadly used. There are many better resources for [that](http://r-pkgs.had.co.nz/).
 
 <br>
 
@@ -438,3 +438,7 @@ It tends to be long and winding and hard to search. Don't bother with it unless 
 - **Including data sets**. [Example](https://kbroman.org/pkg_primer/pages/data.html)
   + Party line: Its not complicated.
   + What I really think: I tend to include a lot, as users may find it easier access existing data. Note that on CRAN your package can't be over a few Mb but on github, files can be up to 50 Mb. Consider RData files and RDS files; they're usually fast and reasonably compressed, preserving the exact R object you saved. You can put them in /inst/ext/ if you're lazy and don't want to write documentation. Reference them with `system.file()`.
+  
+- **Shiny apps**. Like [Wallace](https://wallaceecomod.github.io/)! or this [Gallery](https://shiny.rstudio.com/gallery/) of apps.
+  + Party line: Make your code interactive.
+  + What I really think: I see 2 major use cases: (1) big complicated apps like Wallace that helop visualize a workflow, and (2) little snippets that you might put on your website to show off your work. I don't see them as super useful for intermediate scales, where it takes significant effort to build the app, but it only does a part of an analysis or a very specific analysis.

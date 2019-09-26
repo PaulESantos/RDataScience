@@ -502,7 +502,7 @@ div.tocify {
 <li><strong>RStudio</strong> (convenient way to interact with R) :<br> <a href="https://www.rstudio.com/products/rstudio/download/#download" class="uri">https://www.rstudio.com/products/rstudio/download/#download</a></li>
 <li><strong>git</strong> (version control): <br> <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></li>
 <li>Create a <strong>GitHub</strong> account (sharing code online) at <br> <a href="https://github.com/">https://github.com/</a></li>
-<li><strong>R packages</strong> (for these demos):<br> <code>install.packages(c('knitr','shiny','dplyr','ggplot2','maps','spocc',''wallace','rmarkdown'), dep=T)</code></li>
+<li><strong>R packages</strong> (for these demos):<br> <code>install.packages(c('knitr','shiny','rmarkdown'), dep=T)</code></li>
 <li><strong>pandoc</strong> (to convert among document formats like html, pdf, docx): <br><a href="http://pandoc.org/installing.html" class="uri">http://pandoc.org/installing.html</a> <!-- ----------------------------------------------------------------------------- --> <!-- ----------------------------------------------------------------------------- --></li>
 </ul>
 <p><br></p>
@@ -856,6 +856,11 @@ fahrenheit_to_kelvin(17)</code></pre>
 <ul>
 <li>Party line: Its not complicated.</li>
 <li>What I really think: I tend to include a lot, as users may find it easier access existing data. Note that on CRAN your package can’t be over a few Mb but on github, files can be up to 50 Mb. Consider RData files and RDS files; they’re usually fast and reasonably compressed, preserving the exact R object you saved. You can put them in /inst/ext/ if you’re lazy and don’t want to write documentation. Reference them with <code>system.file()</code>.</li>
+</ul></li>
+<li><strong>Shiny apps</strong>. Like <a href="https://wallaceecomod.github.io/">Wallace</a>! or this <a href="https://shiny.rstudio.com/gallery/">Gallery</a> of apps.
+<ul>
+<li>Party line: Make your code interactive.</li>
+<li>What I really think: I see 2 major use cases: (1) big complicated apps like Wallace that helop visualize a workflow, and (2) little snippets that you might put on your website to show off your work. I don’t see them as super useful for intermediate scales, where it takes significant effort to build the app, but it only does a part of an analysis or a very specific analysis.</li>
 </ul></li>
 </ul>
 </div>

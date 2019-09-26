@@ -299,7 +299,7 @@ The .gitignore file in your root directory stores rules for what to ignore.Here'
 # .Rhistory
 # .RData
 # .Ruserdata
-# 
+#
 # # History files
 # .Rapp.history
 # # Session Data files
@@ -372,6 +372,7 @@ The [reference guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdo
 <br>
 
 ### Create new file
+
 In Rstudio:
 **File -> New File -> RMarkdown -> Document -> HTML**
 
@@ -392,7 +393,7 @@ You'll need to make a folder called /vignettes/ in your root directory, and save
 All R code to be run must be in a _code chunk_ like this:
 ```{r, eval=F,asis=T}
 #```{r,eval=F}
-CODE HERE
+# CODE HERE
 #```
 ```
 

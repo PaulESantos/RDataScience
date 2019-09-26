@@ -733,34 +733,35 @@ Tangential Tip
 <h2><span class="header-section-number">8.1</span> .gitignore</h2>
 <p>It is useful to avoid sending all your files to github; some may be used for testing, are too large, are temp filess or helper files that no one cares about.</p>
 <p>The .gitignore file in your root directory stores rules for what to ignore.Here’s what I always include in my .gitignore, borrowed from various smarter people. Try putting this in your package and see if it breaks.</p>
-<pre class="r"><code># Meta
-# doc
-# .Rproj.user
-# .Rhistory
-# .RData
-# .Ruserdata
-# 
-# # History files
-# .Rapp.history
-# # Session Data files
-# # Example code in package build process
-# *-Ex.R
-# # Output files from R CMD build
-# /*.tar.gz
-# # Output files from R CMD check
-# /*.Rcheck/
-# # RStudio files
-# .Rproj.user/
-# # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
-# .httr-oauth
-# # knitr and R markdown default cache directories
-# /*_cache/
-# /cache/
-# # Temporary files created by R markdown
-# *.utf8.md
-# *.knit.md
-# .DS_Store
-# .Rbuildignore</code></pre>
+<pre class="r"><code>## # Meta
+## # doc
+## # .Rproj.user
+## # .Rhistory
+## # .RData
+## # .Ruserdata
+## #
+## # # History files
+## # .Rapp.history
+## # # Session Data files
+## # # Example code in package build process
+## # *-Ex.R
+## # # Output files from R CMD build
+## # /*.tar.gz
+## # # Output files from R CMD check
+## # /*.Rcheck/
+## # # RStudio files
+## # .Rproj.user/
+## # # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+## # .httr-oauth
+## # # knitr and R markdown default cache directories
+## # /*_cache/
+## # /cache/
+## # # Temporary files created by R markdown
+## # *.utf8.md
+## # *.knit.md
+## # .DS_Store
+## # .Rbuildignore
+## </code></pre>
 <p>Importantly * is a wildcard symbol, so something like *-Ex.R means ignore all the files that end in -Ex.R. Or you can list every single file manually if you’re into that sort of thing.</p>
 <p>Note that you might want to stop ‘tracking’ a file with git. <a href="http://www.codeblocq.com/2016/01/Untrack-files-already-added-to-git-repository-based-on-gitignore/">Here</a> are instructions.</p>
 <p>git is super powerful for teams of people working on code concurrently to avoid breaking one another’s work. But it takes some learning. git is awesome for tracking your edits and sharing on github with the simple approach shown here. I don’t do much fancy branching, merging or pull requesting, because I spend more time fixing mistakes I thought I understood. This is clearly because I’m just a gitiot and not git’s fault. But I’d recommend saving your time learning git more fully until you really really need it.</p>
@@ -810,9 +811,9 @@ Tangential Tip
 <div id="step-1-load-packages" class="section level3">
 <h3><span class="header-section-number">10.1.2</span> Step 1: Load packages</h3>
 <p>All R code to be run must be in a <em>code chunk</em> like this:</p>
-<pre class="r"><code>#```{r,eval=F}
-CODE HERE
-#```</code></pre>
+<pre class="r"><code>## #```{r,eval=F}
+## # CODE HERE
+## #```</code></pre>
 <p>Add a new <em>code chunk</em> at the bottom of this template file.</p>
 <pre class="r"><code>celsius_to_kelvin(0)</code></pre>
 <pre><code>## [1] 273.15</code></pre>
@@ -833,8 +834,8 @@ CODE HERE
 <h2><span class="header-section-number">10.2</span> Junk drawer: /inst/extdata</h2>
 <p>Particularly when sharing code for a single paper, it can be helpful to include a variety of auxilary files used for this or that. Maybe they’re scripts you use with the package, or data you’re too lazy to write documentation for, or notes to future you. For these, create the inst/ folder in your root directory, and the extdata/ folder in that. Put anything you like there.</p>
 <p>It can be helpful to access those files when the package is installed with something like:</p>
-<pre class="r"><code>ddFile=system.file(&quot;extdata/dataDictionary.csv&quot;,package=&#39;rangeModelMetadata&#39;)
-system(paste0(&#39;open &#39;, ddFile, &#39; -a &quot;Microsoft Excel&quot;&#39;))</code></pre>
+<pre class="r"><code>## ddFile=system.file(&quot;extdata/dataDictionary.csv&quot;,package=&#39;rangeModelMetadata&#39;)
+## system(paste0(&#39;open &#39;, ddFile, &#39; -a &quot;Microsoft Excel&quot;&#39;))</code></pre>
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
 </div>
@@ -878,9 +879,9 @@ fahrenheit_to_kelvin(17)</code></pre>
 <div id="adding-a-welcome-message" class="section level2">
 <h2><span class="header-section-number">11.3</span> Adding a welcome message</h2>
 <p>Here’s an example from one my packages. Put this function in your R directory.</p>
-<pre class="r"><code>.onAttach &lt;- function(libname,pkgname) {
-  packageStartupMessage(&#39;Type, vignette(&quot;rmm_directory&quot;) for an overview of functions&#39;)
-}</code></pre>
+<pre class="r"><code>## .onAttach &lt;- function(libname,pkgname) {
+##   packageStartupMessage(&#39;Type, vignette(&quot;rmm_directory&quot;) for an overview of functions&#39;)
+## }</code></pre>
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
 <p><br></p>

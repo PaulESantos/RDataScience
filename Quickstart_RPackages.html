@@ -517,7 +517,7 @@ div.tocify {
 <li>Advancing your programming skills for <em>other</em> applications</li>
 </ul>
 <blockquote>
-<p>For anyone using this document outside of a lecture, please note that this lesson is designed to distill the key features of a package for publishing reproducible research. This approach cuts a lot of corners on details that can take beginners a lot of time to wade through, keeping them away from the science that motivates their efforts. This approach is <em>not</em> designed for generic packages that will be broadly used. There are many other, better resources for <a href="http://r-pkgs.had.co.nz/">that</a>.</p>
+<p>For anyone using this document outside of a lecture, please note that this lesson is designed to distill the key features of a package for <em>publishing reproducible research</em>. These are my opinions on the key features or package building and which details are worth the time they take. This approach cuts details that can take beginners a lot of time to wade through, keeping them away from the science that motivates their efforts. This approach is <em>not</em> designed for generic packages that will be broadly used. There are many better resources for <a href="http://r-pkgs.had.co.nz/">that</a>.</p>
 </blockquote>
 <p><br></p>
 <div id="topics-well-cover" class="section level2">
@@ -775,12 +775,41 @@ doc
 <div id="vignettes" class="section level2">
 <h2><span class="header-section-number">10.1</span> Vignettes</h2>
 <p>Vignettes are super important. If someone is going to read one thing you write in your package, it’s likely the vignette. Its easiest to write vignettes with <strong>R markdown</strong>. R markdown is also a way to share project reports and make websites like this, so learning it enables more options. Here’s a full <a href="https://cmerow.github.io/RDataScience/07_Reproducible.html">lesson</a> I made; we’ll just skim it here.</p>
+</div>
+<div id="r-markdown-cheatsheet" class="section level2">
+<h2><span class="header-section-number">10.2</span> R Markdown Cheatsheet</h2>
+<p>Here are some super useful guides; really they contain almost all you need to know, and I think you can just experiment after skimming them.</p>
+<p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"> <img src="07_assets/rmarkdown.png" alt="alt text" width="700"></a></p>
+<p><small><small><small><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf</a></small></small></small></p>
+<p>The <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">reference guide</a> is a little more comprehensive</p>
+<p><br></p>
+<div id="create-new-file" class="section level3">
+<h3><span class="header-section-number">10.2.1</span> Create new file</h3>
+<p>In Rstudio: <strong>File -&gt; New File -&gt; RMarkdown -&gt; Document -&gt; HTML</strong></p>
+<p><img src="07_assets/rmarkdownwindow.png" alt="alt text" width="600"></p>
+<p>This will open a document that looks like this:</p>
+<p><img src="07_assets/Example_knitr_Template.png" alt="alt text" width="750"></p>
+<!-- <img src="07_assets/Example_knitr_Template.png" alt="alt text" width="700"> -->
+<p><br></p>
+</div>
+<div id="step-1-load-packages" class="section level3">
+<h3><span class="header-section-number">10.2.2</span> Step 1: Load packages</h3>
+<p>All R code to be run must be in a <em>code chunk</em> like this:</p>
+<pre class="r"><code>#```{r,eval=F}
+CODE HERE
+#```</code></pre>
+<p>Add a new <em>code chunk</em> at the bottom of this template file to load these packages (you may need to install some packages):</p>
+<pre class="r"><code>library(dplyr)
+library(ggplot2)
+library(maps)
+library(spocc)</code></pre>
 <p>Note that the doc/ folder is created, and this is where your vignettes are stored when the package is built. This is kind of confusing because it seems redundant with the vignettes folder.</p>
 <!-- ----------------------------------------------------------------------------- -->
 <p><br></p>
 </div>
+</div>
 <div id="junk-drawer-instextdata" class="section level2">
-<h2><span class="header-section-number">10.2</span> Junk drawer: /inst/extdata</h2>
+<h2><span class="header-section-number">10.3</span> Junk drawer: /inst/extdata</h2>
 <p>Particularly when sharing code for a single paper, it can be helpful to include a variety of auxilary files used for this or that. Maybe they’re scripts you use with the package, or data you’re too lazy to write documentation for, or notes to future you. For these, create the inst/ folder in your root directory, and the extdata/ folder in that. Put anything you like there.</p>
 <p>It can be helpful to access those files when the package is installed with something like:</p>
 <pre class="r"><code>ddFile=system.file(&quot;extdata/dataDictionary.csv&quot;,package=&#39;rangeModelMetadata&#39;)

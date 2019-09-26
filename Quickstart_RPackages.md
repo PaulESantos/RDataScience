@@ -34,7 +34,7 @@ You may need to install some software for this sequence of 3 tutorials.
 - Future you will appreciate you more
 - Advancing your programming skills for *other* applications
 
-> For anyone using this document outside of a lecture, please note that this lesson is designed to distill the key features of a package for publishing reproducible research. This approach cuts a lot of corners on details that can take beginners a lot of time to wade through, keeping them away from the science that motivates their efforts. This approach is *not* designed for generic packages that will be broadly used. There are many other, better resources for [that](http://r-pkgs.had.co.nz/).
+> For anyone using this document outside of a lecture, please note that this lesson is designed to distill the key features of a package for *publishing reproducible research*. These are my opinions on the key features or package building and which details are worth the time they take. This approach cuts details that can take beginners a lot of time to wade through, keeping them away from the science that motivates their efforts. This approach is *not* designed for generic packages that will be broadly used. There are many better resources for [that](http://r-pkgs.had.co.nz/).
 
 <br>
 
@@ -361,6 +361,53 @@ Here's the plan. I want you to see what a fully functional R package looks like,
 ## Vignettes
 Vignettes are super important. If someone is going to read one thing you write in your package, it's likely the vignette. Its easiest to write vignettes with **R markdown**. R markdown is also a way to share project reports and make websites like this, so learning it enables more options. Here's a full [lesson](https://cmerow.github.io/RDataScience/07_Reproducible.html) I made; we'll just skim it here. 
 
+
+## R Markdown Cheatsheet
+
+Here are some super useful guides; really they contain almost all you need to know, and I think you can just experiment after skimming them.
+
+<a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"> <img src="07_assets/rmarkdown.png" alt="alt text" width="700"></a>
+
+<small><small><small>[https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)</small></small></small>
+
+
+The [reference guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) is a little more comprehensive
+
+<br>
+
+### Create new file
+In Rstudio:
+**File -> New File -> RMarkdown -> Document -> HTML**
+
+<img src="07_assets/rmarkdownwindow.png" alt="alt text" width="600">
+
+This will open a document that looks like this:
+
+<img src="07_assets/Example_knitr_Template.png" alt="alt text" width="750">
+
+<!-- <img src="07_assets/Example_knitr_Template.png" alt="alt text" width="700"> -->
+
+<br>
+
+### Step 1: Load packages
+
+All R code to be run must be in a _code chunk_ like this:
+
+```r
+#```{r,eval=F}
+CODE HERE
+#```
+```
+
+Add a new _code chunk_ at the bottom of this template file to load these packages (you may need to install some packages):
+
+
+```r
+library(dplyr)
+library(ggplot2)
+library(maps)
+library(spocc)
+```
 
 
 Note that the doc/ folder is created, and this is where your vignettes are stored when the package is built. This is kind of confusing because it seems redundant with the vignettes folder. 

@@ -733,35 +733,34 @@ Tangential Tip
 <h2><span class="header-section-number">8.1</span> .gitignore</h2>
 <p>It is useful to avoid sending all your files to github; some may be used for testing, are too large, are temp filess or helper files that no one cares about.</p>
 <p>The .gitignore file in your root directory stores rules for what to ignore.Here’s what I always include in my .gitignore, borrowed from various smarter people. Try putting this in your package and see if it breaks.</p>
-<pre class="r"><code>## # Meta
-## # doc
-## # .Rproj.user
-## # .Rhistory
-## # .RData
-## # .Ruserdata
-## #
-## # # History files
-## # .Rapp.history
-## # # Session Data files
-## # # Example code in package build process
-## # *-Ex.R
-## # # Output files from R CMD build
-## # /*.tar.gz
-## # # Output files from R CMD check
-## # /*.Rcheck/
-## # # RStudio files
-## # .Rproj.user/
-## # # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
-## # .httr-oauth
-## # # knitr and R markdown default cache directories
-## # /*_cache/
-## # /cache/
-## # # Temporary files created by R markdown
-## # *.utf8.md
-## # *.knit.md
-## # .DS_Store
-## # .Rbuildignore
-## </code></pre>
+<pre class="r"><code># Meta
+# doc
+# .Rproj.user
+# .Rhistory
+# .RData
+# .Ruserdata
+#
+# # History files
+# .Rapp.history
+# # Session Data files
+# # Example code in package build process
+# *-Ex.R
+# # Output files from R CMD build
+# /*.tar.gz
+# # Output files from R CMD check
+# /*.Rcheck/
+# # RStudio files
+# .Rproj.user/
+# # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+# .httr-oauth
+# # knitr and R markdown default cache directories
+# /*_cache/
+# /cache/
+# # Temporary files created by R markdown
+# *.utf8.md
+# *.knit.md
+# .DS_Store
+# .Rbuildignore</code></pre>
 <p>Importantly * is a wildcard symbol, so something like *-Ex.R means ignore all the files that end in -Ex.R. Or you can list every single file manually if you’re into that sort of thing.</p>
 <p>Note that you might want to stop ‘tracking’ a file with git. <a href="http://www.codeblocq.com/2016/01/Untrack-files-already-added-to-git-repository-based-on-gitignore/">Here</a> are instructions.</p>
 <p>git is super powerful for teams of people working on code concurrently to avoid breaking one another’s work. But it takes some learning. git is awesome for tracking your edits and sharing on github with the simple approach shown here. I don’t do much fancy branching, merging or pull requesting, because I spend more time fixing mistakes I thought I understood. This is clearly because I’m just a gitiot and not git’s fault. But I’d recommend saving your time learning git more fully until you really really need it.</p>
@@ -811,16 +810,37 @@ Tangential Tip
 <div id="step-1-load-packages" class="section level3">
 <h3><span class="header-section-number">10.1.2</span> Step 1: Load packages</h3>
 <p>All R code to be run must be in a <em>code chunk</em> like this:</p>
-<pre class="r"><code>## #```{r,eval=F}
-## # CODE HERE
-## #```</code></pre>
+<pre class="r"><code>#```{r,eval=F}
+# CODE HERE
+#```</code></pre>
 <p>Add a new <em>code chunk</em> at the bottom of this template file.</p>
 <pre class="r"><code>celsius_to_kelvin(0)</code></pre>
 <pre><code>## [1] 273.15</code></pre>
 <pre class="r"><code>fahrenheit_to_kelvin(32)</code></pre>
 <pre><code>## [1] 273.15</code></pre>
 <p>To see how this will look when built, press CMD+Shift+K (to ‘knit’ the document using the <code>knitr</code> package).</p>
-<p>Let’s add a plot.</p>
+<p>Let’s add a plot, which will show up in the doc.</p>
+<pre class="r"><code>far=seq(0,220,length=100)
+kel=fahrenheit_to_kelvin(far)
+plot(far,kel)</code></pre>
+<p><img src="Quickstart_RPackages_files/figure-html/unnamed-chunk-8-1.png" /><!-- --></p>
+<p>To create the document in html, just hit CMD+Shift+K to knit.</p>
+<p>Next, try exploring some more features of Rmds, outlined in the cheatsheets above. I find that some of the most useful additonal tools are:</p>
+<ol style="list-style-type: decimal">
+<li><p>Supplying arguments to a chunk of code (section 5 of the cheatsheet), to avoid evaluation or hide results (<code>eval=FALSE</code> or <code>results='hide'</code>). E.g., this can be a good way to load past results for code thats slow.</p></li>
+<li><p>Adding images, e.g., to show figures from a paper.</p></li>
+<li><p>Adding latex equations by surrounding code with $$. E.g., $$\alpha$$ gives <br /><span class="math display"><em>α</em></span><br /></p></li>
+<li><p>Changing options in the YAML header to make the doc fancier. Try replacing</p></li>
+</ol>
+<pre class="r"><code>output: html_document</code></pre>
+<p>with</p>
+<pre class="r"><code>output:
+  rmarkdown::html_vignette:
+    toc: true
+    number_sections: true
+    toc_depth: 3</code></pre>
+<!-- ----------------------------------------------------------------------------- -->
+<p><br></p>
 </div>
 <div id="building-the-vignette" class="section level3">
 <h3><span class="header-section-number">10.1.3</span> Building the vignette</h3>
@@ -834,8 +854,8 @@ Tangential Tip
 <h2><span class="header-section-number">10.2</span> Junk drawer: /inst/extdata</h2>
 <p>Particularly when sharing code for a single paper, it can be helpful to include a variety of auxilary files used for this or that. Maybe they’re scripts you use with the package, or data you’re too lazy to write documentation for, or notes to future you. For these, create the inst/ folder in your root directory, and the extdata/ folder in that. Put anything you like there.</p>
 <p>It can be helpful to access those files when the package is installed with something like:</p>
-<pre class="r"><code>## ddFile=system.file(&quot;extdata/dataDictionary.csv&quot;,package=&#39;rangeModelMetadata&#39;)
-## system(paste0(&#39;open &#39;, ddFile, &#39; -a &quot;Microsoft Excel&quot;&#39;))</code></pre>
+<pre class="r"><code>ddFile=system.file(&quot;extdata/dataDictionary.csv&quot;,package=&#39;rangeModelMetadata&#39;)
+system(paste0(&#39;open &#39;, ddFile, &#39; -a &quot;Microsoft Excel&quot;&#39;))</code></pre>
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
 </div>
@@ -846,13 +866,45 @@ Tangential Tip
 <p><br></p>
 <div id="writing-functions-1" class="section level2">
 <h2><span class="header-section-number">11.1</span> Writing Functions</h2>
-<ul>
-<li>default values for arguments</li>
-<li>passing arguments</li>
-<li>simplifying arguments with lists</li>
-<li>hidden functions don’t need documentation</li>
-<li>functions can be organized in files however you like in the <strong>R</strong> folder of your package</li>
-</ul>
+<p><strong>Hidden functions don’t need documentation</strong> If you need helper functions that users won’t need access to you can make them hidden by beginning the function name with a period. Hidden functions don’t require documentation, so this can also be a useful way to avoid check WARNINGS when code is in development. Try adding this function to your package and run <code>check</code> to be sure you don’t get any errors</p>
+<pre class="r"><code>.fahrenheit_to_celsius2 &lt;- function(temp_F) {
+  temp_C &lt;- (temp_F - 32) * 5 / 9
+  return(temp_C)
+}</code></pre>
+<p><strong>Passing arguments</strong> Sometimes other functions are embedded in your function, and you’d like to pass arguments to them. For example, below, I add an option to make a plot and the <code>plot</code> function has a wide range of options that you might want to customize. You can add <code>...</code> to your function’s arguments, and <code>...</code> to the function you’re passing arguments to to acheive this:</p>
+<pre class="r"><code>fahrenheit_to_celsius3 &lt;- function(temp_F,doPlot=F,...) {
+  temp_C &lt;- (temp_F - 32) * 5 / 9
+  if(doPlot) plot(temp_F,temp_C,...)
+  return(temp_C)
+}
+
+far=seq(0,100,by=1)
+fahrenheit_to_celsius3(far,doPlot=T,col=&#39;red&#39;,pch=19,cex=.7)</code></pre>
+<p><img src="Quickstart_RPackages_files/figure-html/unnamed-chunk-13-1.png" /><!-- --></p>
+<pre><code>##   [1] -17.7777778 -17.2222222 -16.6666667 -16.1111111 -15.5555556
+##   [6] -15.0000000 -14.4444444 -13.8888889 -13.3333333 -12.7777778
+##  [11] -12.2222222 -11.6666667 -11.1111111 -10.5555556 -10.0000000
+##  [16]  -9.4444444  -8.8888889  -8.3333333  -7.7777778  -7.2222222
+##  [21]  -6.6666667  -6.1111111  -5.5555556  -5.0000000  -4.4444444
+##  [26]  -3.8888889  -3.3333333  -2.7777778  -2.2222222  -1.6666667
+##  [31]  -1.1111111  -0.5555556   0.0000000   0.5555556   1.1111111
+##  [36]   1.6666667   2.2222222   2.7777778   3.3333333   3.8888889
+##  [41]   4.4444444   5.0000000   5.5555556   6.1111111   6.6666667
+##  [46]   7.2222222   7.7777778   8.3333333   8.8888889   9.4444444
+##  [51]  10.0000000  10.5555556  11.1111111  11.6666667  12.2222222
+##  [56]  12.7777778  13.3333333  13.8888889  14.4444444  15.0000000
+##  [61]  15.5555556  16.1111111  16.6666667  17.2222222  17.7777778
+##  [66]  18.3333333  18.8888889  19.4444444  20.0000000  20.5555556
+##  [71]  21.1111111  21.6666667  22.2222222  22.7777778  23.3333333
+##  [76]  23.8888889  24.4444444  25.0000000  25.5555556  26.1111111
+##  [81]  26.6666667  27.2222222  27.7777778  28.3333333  28.8888889
+##  [86]  29.4444444  30.0000000  30.5555556  31.1111111  31.6666667
+##  [91]  32.2222222  32.7777778  33.3333333  33.8888889  34.4444444
+##  [96]  35.0000000  35.5555556  36.1111111  36.6666667  37.2222222
+## [101]  37.7777778</code></pre>
+<!-- - default values for arguments -->
+<!-- - simplifying arguments with lists -->
+<!-- - functions can be organized in files however you like in the **R** folder of your package -->
 <!-- ----------------------------------------------------------------------------- -->
 <p><br></p>
 </div>
@@ -879,9 +931,9 @@ fahrenheit_to_kelvin(17)</code></pre>
 <div id="adding-a-welcome-message" class="section level2">
 <h2><span class="header-section-number">11.3</span> Adding a welcome message</h2>
 <p>Here’s an example from one my packages. Put this function in your R directory.</p>
-<pre class="r"><code>## .onAttach &lt;- function(libname,pkgname) {
-##   packageStartupMessage(&#39;Type, vignette(&quot;rmm_directory&quot;) for an overview of functions&#39;)
-## }</code></pre>
+<pre class="r"><code>.onAttach &lt;- function(libname,pkgname) {
+  packageStartupMessage(&#39;Type, vignette(&quot;rmm_directory&quot;) for an overview of functions&#39;)
+}</code></pre>
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
 <p><br></p>

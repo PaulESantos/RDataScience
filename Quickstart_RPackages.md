@@ -316,35 +316,34 @@ The .gitignore file in your root directory stores rules for what to ignore.Here'
 
 
 ```r
-## # Meta
-## # doc
-## # .Rproj.user
-## # .Rhistory
-## # .RData
-## # .Ruserdata
-## #
-## # # History files
-## # .Rapp.history
-## # # Session Data files
-## # # Example code in package build process
-## # *-Ex.R
-## # # Output files from R CMD build
-## # /*.tar.gz
-## # # Output files from R CMD check
-## # /*.Rcheck/
-## # # RStudio files
-## # .Rproj.user/
-## # # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
-## # .httr-oauth
-## # # knitr and R markdown default cache directories
-## # /*_cache/
-## # /cache/
-## # # Temporary files created by R markdown
-## # *.utf8.md
-## # *.knit.md
-## # .DS_Store
-## # .Rbuildignore
-## 
+# Meta
+# doc
+# .Rproj.user
+# .Rhistory
+# .RData
+# .Ruserdata
+#
+# # History files
+# .Rapp.history
+# # Session Data files
+# # Example code in package build process
+# *-Ex.R
+# # Output files from R CMD build
+# /*.tar.gz
+# # Output files from R CMD check
+# /*.Rcheck/
+# # RStudio files
+# .Rproj.user/
+# # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+# .httr-oauth
+# # knitr and R markdown default cache directories
+# /*_cache/
+# /cache/
+# # Temporary files created by R markdown
+# *.utf8.md
+# *.knit.md
+# .DS_Store
+# .Rbuildignore
 ```
 
 Importantly * is a wildcard symbol, so something like *-Ex.R means ignore all the files that end in -Ex.R. Or you can list every single file manually if you're into that sort of thing.
@@ -416,9 +415,9 @@ You'll need to make a folder called /vignettes/ in your root directory, and save
 All R code to be run must be in a _code chunk_ like this:
 
 ```r
-## #```{r,eval=F}
-## # CODE HERE
-## #```
+#```{r,eval=F}
+# CODE HERE
+#```
 ```
 
 Add a new _code chunk_ at the bottom of this template file.
@@ -442,9 +441,46 @@ fahrenheit_to_kelvin(32)
 
 To see how this will look when built, press CMD+Shift+K (to 'knit' the document using the `knitr` package).
 
-Let's add a plot.
+Let's add a plot, which will show up in the doc.
 
 
+```r
+far=seq(0,220,length=100)
+kel=fahrenheit_to_kelvin(far)
+plot(far,kel)
+```
+
+![](Quickstart_RPackages_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+
+To create the document in html, just hit CMD+Shift+K to knit.
+
+Next, try exploring some more features of Rmds, outlined in the cheatsheets above. I find that some of the most useful additonal tools are:
+
+1. Supplying arguments to a chunk of code (section 5 of the cheatsheet), to avoid evaluation or hide results (`eval=FALSE` or `results='hide'`). E.g., this can be a good way to load past results for code thats slow.
+
+2. Adding images, e.g., to show figures from a paper.
+
+3. Adding latex equations by surrounding code with \$\$. E.g., \$\$\\alpha\$\$ gives $$\alpha$$ 
+
+4. Changing options in the YAML header to make the doc fancier. Try replacing 
+
+
+```r
+output: html_document
+```
+
+with 
+
+```r
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    number_sections: true
+    toc_depth: 3
+```
+
+<!-- ----------------------------------------------------------------------------- -->
+<br>
 
 ### Building the vignette
 
@@ -463,8 +499,8 @@ It can be helpful to access those files when the package is installed with somet
 
 
 ```r
-## ddFile=system.file("extdata/dataDictionary.csv",package='rangeModelMetadata')
-## system(paste0('open ', ddFile, ' -a "Microsoft Excel"'))
+ddFile=system.file("extdata/dataDictionary.csv",package='rangeModelMetadata')
+system(paste0('open ', ddFile, ' -a "Microsoft Excel"'))
 ```
 
 <!-- ----------------------------------------------------------------------------- -->
@@ -477,11 +513,63 @@ It can be helpful to access those files when the package is installed with somet
 
 ## Writing Functions
 
-- default values for arguments
-- passing arguments
-- simplifying arguments with lists
-- hidden functions don't need documentation
-- functions can be organized in files however you like in the **R** folder of your package
+**Hidden functions don't need documentation**
+If you need helper functions that users won't need access to you can make them hidden by beginning the function name with a period. Hidden functions don't require documentation, so this can also be a useful way to avoid check WARNINGS when code is in development. Try adding this function to your package and run `check` to be sure you don't get any errors
+
+
+```r
+.fahrenheit_to_celsius2 <- function(temp_F) {
+  temp_C <- (temp_F - 32) * 5 / 9
+  return(temp_C)
+}
+```
+
+**Passing arguments**
+Sometimes other functions are embedded in your function, and you'd like to pass arguments to them. For example, below, I add an option to make a plot and the `plot` function has a wide range of options that you might want to customize. You can add `...` to your function's arguments, and `...` to the function you're passing arguments to to acheive this:
+
+
+```r
+fahrenheit_to_celsius3 <- function(temp_F,doPlot=F,...) {
+  temp_C <- (temp_F - 32) * 5 / 9
+  if(doPlot) plot(temp_F,temp_C,...)
+  return(temp_C)
+}
+
+far=seq(0,100,by=1)
+fahrenheit_to_celsius3(far,doPlot=T,col='red',pch=19,cex=.7)
+```
+
+![](Quickstart_RPackages_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+
+```
+##   [1] -17.7777778 -17.2222222 -16.6666667 -16.1111111 -15.5555556
+##   [6] -15.0000000 -14.4444444 -13.8888889 -13.3333333 -12.7777778
+##  [11] -12.2222222 -11.6666667 -11.1111111 -10.5555556 -10.0000000
+##  [16]  -9.4444444  -8.8888889  -8.3333333  -7.7777778  -7.2222222
+##  [21]  -6.6666667  -6.1111111  -5.5555556  -5.0000000  -4.4444444
+##  [26]  -3.8888889  -3.3333333  -2.7777778  -2.2222222  -1.6666667
+##  [31]  -1.1111111  -0.5555556   0.0000000   0.5555556   1.1111111
+##  [36]   1.6666667   2.2222222   2.7777778   3.3333333   3.8888889
+##  [41]   4.4444444   5.0000000   5.5555556   6.1111111   6.6666667
+##  [46]   7.2222222   7.7777778   8.3333333   8.8888889   9.4444444
+##  [51]  10.0000000  10.5555556  11.1111111  11.6666667  12.2222222
+##  [56]  12.7777778  13.3333333  13.8888889  14.4444444  15.0000000
+##  [61]  15.5555556  16.1111111  16.6666667  17.2222222  17.7777778
+##  [66]  18.3333333  18.8888889  19.4444444  20.0000000  20.5555556
+##  [71]  21.1111111  21.6666667  22.2222222  22.7777778  23.3333333
+##  [76]  23.8888889  24.4444444  25.0000000  25.5555556  26.1111111
+##  [81]  26.6666667  27.2222222  27.7777778  28.3333333  28.8888889
+##  [86]  29.4444444  30.0000000  30.5555556  31.1111111  31.6666667
+##  [91]  32.2222222  32.7777778  33.3333333  33.8888889  34.4444444
+##  [96]  35.0000000  35.5555556  36.1111111  36.6666667  37.2222222
+## [101]  37.7777778
+```
+
+
+
+<!-- - default values for arguments -->
+<!-- - simplifying arguments with lists -->
+<!-- - functions can be organized in files however you like in the **R** folder of your package -->
 
 
 <!-- ----------------------------------------------------------------------------- -->
@@ -530,9 +618,9 @@ Here's an example from one my packages. Put this function in your R directory.
 
 
 ```r
-## .onAttach <- function(libname,pkgname) {
-##   packageStartupMessage('Type, vignette("rmm_directory") for an overview of functions')
-## }
+.onAttach <- function(libname,pkgname) {
+  packageStartupMessage('Type, vignette("rmm_directory") for an overview of functions')
+}
 ```
 
 

@@ -406,9 +406,41 @@ fahrenheit_to_kelvin(32)
 
 To see how this will look when built, press CMD+Shift+K (to 'knit' the document using the `knitr` package).
 
-Let's add a plot.
+Let's add a plot, which will show up in the doc.
 
+```{r}
+far=seq(0,220,length=100)
+kel=fahrenheit_to_kelvin(far)
+plot(far,kel)
+```
 
+To create the document in html, just hit CMD+Shift+K to knit.
+
+Next, try exploring some more features of Rmds, outlined in the cheatsheets above. I find that some of the most useful additonal tools are:
+
+1. Supplying arguments to a chunk of code (section 5 of the cheatsheet), to avoid evaluation or hide results (`eval=FALSE` or `results='hide'`). E.g., this can be a good way to load past results for code thats slow.
+
+2. Adding images, e.g., to show figures from a paper.
+
+3. Adding latex equations by surrounding code with \$\$. E.g., \$\$\\alpha\$\$ gives $$\alpha$$ 
+
+4. Changing options in the YAML header to make the doc fancier. Try replacing 
+
+```{r,eval=FALSE}
+output: html_document
+```
+
+with 
+```{r,eval=FALSE}
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    number_sections: true
+    toc_depth: 3
+```
+
+<!-- ----------------------------------------------------------------------------- -->
+<br>
 
 ### Building the vignette
 
@@ -440,11 +472,36 @@ system(paste0('open ', ddFile, ' -a "Microsoft Excel"'))
 
 ## Writing Functions
 
-- default values for arguments
-- passing arguments
-- simplifying arguments with lists
-- hidden functions don't need documentation
-- functions can be organized in files however you like in the **R** folder of your package
+**Hidden functions don't need documentation**
+If you need helper functions that users won't need access to you can make them hidden by beginning the function name with a period. Hidden functions don't require documentation, so this can also be a useful way to avoid check WARNINGS when code is in development. Try adding this function to your package and run `check` to be sure you don't get any errors
+
+```{r}
+.fahrenheit_to_celsius2 <- function(temp_F) {
+  temp_C <- (temp_F - 32) * 5 / 9
+  return(temp_C)
+}
+```
+
+**Passing arguments**
+Sometimes other functions are embedded in your function, and you'd like to pass arguments to them. For example, below, I add an option to make a plot and the `plot` function has a wide range of options that you might want to customize. You can add `...` to your function's arguments, and `...` to the function you're passing arguments to to acheive this:
+
+```{r}
+fahrenheit_to_celsius3 <- function(temp_F,doPlot=F,...) {
+  temp_C <- (temp_F - 32) * 5 / 9
+  if(doPlot) plot(temp_F,temp_C,...)
+  return(temp_C)
+}
+
+far=seq(0,100,by=1)
+fahrenheit_to_celsius3(far,doPlot=T,col='red',pch=19,cex=.7)
+
+```
+
+
+
+<!-- - default values for arguments -->
+<!-- - simplifying arguments with lists -->
+<!-- - functions can be organized in files however you like in the **R** folder of your package -->
 
 
 <!-- ----------------------------------------------------------------------------- -->

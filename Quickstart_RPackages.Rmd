@@ -382,6 +382,9 @@ celsius_to_kelvin(0)
 fahrenheit_to_kelvin(32)
 ```
 
+To see how this will look when built, press CMD+Shift+K (to 'knit' the document using the `knitr` package). 
+
+Let's add a plot. 
 
 
 

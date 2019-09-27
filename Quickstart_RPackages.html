@@ -928,8 +928,15 @@ fahrenheit_to_kelvin(17)</code></pre>
 <!-- ----------------------------------------------------------------------------- -->
 <p><br></p>
 </div>
+<div id="messages" class="section level2">
+<h2><span class="header-section-number">11.3</span> Messages</h2>
+<p>The best packages include a variety of checks at the beginning of functions to determine whether you might’ve input something incorrectly, and giving useful advice if you have. No one polices this; the level of detail you provide is something that you have to be able to sleep with at night. Usually, these tests involve printing something to the console. You might be used to using <code>print</code> or <code>cat</code> to send text to the console. For packages you need to use <code>message</code> or <code>warning</code> for the same tasks so that users can have control over the output, e.g., with <code>supressMessages</code>.</p>
+<p>It’s also useful to include <code>stop</code> to force the function to error out. You can consider wrapping breakable expressions in <code>try</code> to give some more options for handling errors. Try calling function in your demo with a known error (e.g., make the argument a string) and write a try statement to catch it an the write an error message.</p>
+<!-- ----------------------------------------------------------------------------- -->
+<p><br></p>
+</div>
 <div id="adding-a-welcome-message" class="section level2">
-<h2><span class="header-section-number">11.3</span> Adding a welcome message</h2>
+<h2><span class="header-section-number">11.4</span> Adding a welcome message</h2>
 <p>Here’s an example from one my packages. Put this function in your R directory.</p>
 <pre class="r"><code>.onAttach &lt;- function(libname,pkgname) {
   packageStartupMessage(&#39;Type, vignette(&quot;rmm_directory&quot;) for an overview of functions&#39;)
@@ -964,6 +971,11 @@ fahrenheit_to_kelvin(17)</code></pre>
 <ul>
 <li>Party line: Make your code interactive.</li>
 <li>What I really think: I see 2 major use cases: (1) big complicated apps like Wallace that helop visualize a workflow, and (2) little snippets that you might put on your website to show off your work. I don’t see them as super useful for intermediate scales, where it takes significant effort to build the app, but it only does a part of an analysis or a very specific analysis.</li>
+</ul></li>
+<li><strong>CRAN</strong> submissions.
+<ul>
+<li>Party line: Your package has arrived. It’s the real deal.</li>
+<li>What I really think: CRAN is important for widely used packages, as it enforces a number of standards which are probably critical for packages that can be used in ways the developers never even thought of. But if you’re building a more specific package, I find that there are a lot of hoops to jump through which aren’t super important for making a working codebase to share.</li>
 </ul></li>
 </ul>
 </div>

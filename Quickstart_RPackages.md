@@ -612,6 +612,15 @@ Alternatively to `browser()`, you can call `debug(yourFunctionName)` to step thr
 <!-- ----------------------------------------------------------------------------- -->
 <br>
 
+## Messages
+
+The best packages include a variety of checks at the beginning of functions to determine whether you might've input something incorrectly, and giving useful advice if you have. No one polices this; the level of detail you provide is something that you have to be able to sleep with at night. Usually, these tests involve printing something to the console. You might be used to using `print` or `cat` to send text to the console. For packages you need to use `message` or `warning` for the same tasks so that users can have control over the output, e.g., with `supressMessages`. 
+
+It's also useful to include `stop` to force the function to error out. You can consider wrapping breakable expressions in `try` to give some more options for handling errors. Try calling function in your demo with a known error (e.g., make the argument a string) and write a try statement to catch it an the write an error message.
+
+<!-- ----------------------------------------------------------------------------- -->
+<br>
+
 ## Adding a welcome message
 
 Here's an example from one my packages. Put this function in your R directory.
@@ -622,7 +631,6 @@ Here's an example from one my packages. Put this function in your R directory.
   packageStartupMessage('Type, vignette("rmm_directory") for an overview of functions')
 }
 ```
-
 
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
@@ -652,3 +660,7 @@ It tends to be long and winding and hard to search. Don't bother with it unless 
 - **Shiny apps**. Like [Wallace](https://wallaceecomod.github.io/)! or this [Gallery](https://shiny.rstudio.com/gallery/) of apps.
   + Party line: Make your code interactive.
   + What I really think: I see 2 major use cases: (1) big complicated apps like Wallace that helop visualize a workflow, and (2) little snippets that you might put on your website to show off your work. I don't see them as super useful for intermediate scales, where it takes significant effort to build the app, but it only does a part of an analysis or a very specific analysis.
+  
+- **CRAN** submissions.
+  + Party line: Your package has arrived. It's the real deal.
+  + What I really think: CRAN is important for widely used packages, as it enforces a number of standards which are probably critical for packages that can be used in ways the developers never even thought of. But if you're building a more specific package, I find that there are a lot of hoops to jump through which aren't super important for making a working codebase to share.

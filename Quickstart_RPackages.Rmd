@@ -144,7 +144,7 @@ fahrenheit_to_kelvin <- function(temp_F) {
 
 # Documentation (with `roxygen2`)
 
-Documentation is a required element of an R pacakge. `roxygen2` is where its at; I haven't noticed anyone use anything else in years. It's convenient because your code and the documentation live together in the same file and the NAMESPACE file (describing your exported functions and other people's imported functions) is automatically generated.
+Documentation is a required element of an R package. `roxygen2` is where its at; I haven't noticed anyone use anything else in years. It's convenient because your code and the documentation live together in the same file and the NAMESPACE file (describing your exported functions and other people's imported functions) is automatically generated.
 
 `roxygen2` reads lines that begin with #' as comments to create the documentation for your package. Descriptive tags are preceded with the @ symbol. For example, @param has information about the input parameters for the function. Here's a minimal example
 
@@ -288,7 +288,7 @@ Now, others can install your package using `install_github()`.
 
 ## .gitignore
 
-It is useful to avoid sending all your files to github; some may be used for testing, are too large, are temp filess or helper files that no one cares about.
+It is useful to avoid sending all your files to github; some may be used for testing, are too large, are temp files or helper files that no one cares about.
 
 The .gitignore file in your root directory stores rules for what to ignore.Here's what I always include in my .gitignore, borrowed from various smarter people. Try putting this in your package and see if it breaks.
 
@@ -388,7 +388,6 @@ You'll need to make a folder called /vignettes/ in your root directory, and save
 
 <br>
 
-### Step 1: Load packages
 
 All R code to be run must be in a _code chunk_ like this:
 ```{r, eval=F,asis=T}
@@ -416,9 +415,9 @@ plot(far,kel)
 
 To create the document in html, just hit CMD+Shift+K to knit.
 
-Next, try exploring some more features of Rmds, outlined in the cheatsheets above. I find that some of the most useful additonal tools are:
+Next, try exploring some more features of Rmds, outlined in the cheatsheets above. I find that some of the most useful additional tools are:
 
-1. Supplying arguments to a chunk of code (section 5 of the cheatsheet), to avoid evaluation or hide results (`eval=FALSE` or `results='hide'`). E.g., this can be a good way to load past results for code thats slow.
+1. Supplying arguments to a chunk of code (section 5 of the cheatsheet), to avoid evaluation or hide results (`eval=FALSE` or `results='hide'`). E.g., this can be a good way to load past results for code that's slow.
 
 2. Adding images, e.g., to show figures from a paper.
 
@@ -442,8 +441,6 @@ output:
 <!-- ----------------------------------------------------------------------------- -->
 <br>
 
-### Building the vignette
-
 Although you can build your vignettes with the *Knit* button in RStudio to test them out, you need to formally build them for the package with `devtools::build_vignettes()`. Try it out.
 
 Note that the doc/ folder is created, and this is where your vignettes are stored when the package is built. This is kind of confusing because it seems redundant with the vignettes folder. Don't edit these, always be sure to edit the files in the /vignettes/ folder.
@@ -453,7 +450,7 @@ Note that the doc/ folder is created, and this is where your vignettes are store
 
 ## Junk drawer: /inst/extdata
 
-Particularly when sharing code for a single paper, it can be helpful to include a variety of auxilary files used for this or that. Maybe they're scripts you use with the package, or data you're too lazy to write documentation for, or notes to future you. For these, create the inst/ folder in your root directory, and the extdata/ folder in that. Put anything you like there.
+Particularly when sharing code for a single paper, it can be helpful to include a variety of auxiliary files used for this or that. Maybe they're scripts you use with the package, or data you're too lazy to write documentation for, or notes to future you. For these, create the inst/ folder in your root directory, and the extdata/ folder in that. Put anything you like there.
 
 It can be helpful to access those files when the package is installed with something like:
 
@@ -464,6 +461,8 @@ system(paste0('open ', ddFile, ' -a "Microsoft Excel"'))
 
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
+
+<br>
 
 # General Tips
 
@@ -483,9 +482,9 @@ If you need helper functions that users won't need access to you can make them h
 ```
 
 **Passing arguments**
-Sometimes other functions are embedded in your function, and you'd like to pass arguments to them. For example, below, I add an option to make a plot and the `plot` function has a wide range of options that you might want to customize. You can add `...` to your function's arguments, and `...` to the function you're passing arguments to to acheive this:
+Sometimes other functions are embedded in your function, and you'd like to pass arguments to them. For example, below, I add an option to make a plot and the `plot` function has a wide range of options that you might want to customize. You can add `...` to your function's arguments, and `...` to the function you're passing arguments to to achieve this:
 
-```{r}
+```{r,results='hide'}
 fahrenheit_to_celsius3 <- function(temp_F,doPlot=F,...) {
   temp_C <- (temp_F - 32) * 5 / 9
   if(doPlot) plot(temp_F,temp_C,...)
@@ -558,7 +557,7 @@ Here's an example from one my packages. Put this function in your R directory.
 
 # Next steps
 
-Almost always, the answer you need is breifly and well explained in Hadley Wickham's online book [here](http://r-pkgs.had.co.nz/).
+Almost always, the answer you need is briefly and well explained in Hadley Wickham's online book [here](http://r-pkgs.had.co.nz/).
 
 I just found this, so don't know it well, but ROpenSci does a ton of smart [stuff](https://devguide.ropensci.org/).
 
@@ -579,8 +578,8 @@ It tends to be long and winding and hard to search. Don't bother with it unless 
 
 - **Shiny apps**. Like [Wallace](https://wallaceecomod.github.io/)! or this [Gallery](https://shiny.rstudio.com/gallery/) of apps.
   + Party line: Make your code interactive.
-  + What I really think: I see 2 major use cases: (1) big complicated apps like Wallace that helop visualize a workflow, and (2) little snippets that you might put on your website to show off your work. I don't see them as super useful for intermediate scales, where it takes significant effort to build the app, but it only does a part of an analysis or a very specific analysis.
+  + What I really think: I see 2 major use cases: (1) big complicated apps like Wallace that help visualize a workflow, and (2) little snippets that you might put on your website to show off your work. I don't see them as super useful for intermediate scales, where it takes significant effort to build the app, but it only does a part of an analysis or a very specific analysis.
   
 - **CRAN** submissions.
-  + Party line: Your package has arrived. It's the real deal.
-  + What I really think: CRAN is important for widely used packages, as it enforces a number of standards which are probably critical for packages that can be used in ways the developers never even thought of. But if you're building a more specific package, I find that there are a lot of hoops to jump through which aren't super important for making a working codebase to share.
+  + Party line: Your package has arrived. It's fa real.
+  + What I really think: CRAN is important for widely used packages, as it enforces a number of standards which are probably critical for packages that can be used in ways the developers never even thought of. But if you're building a more specific package, I find that there are a lot of hoops to jump through which aren't super important for making a working code base to share.

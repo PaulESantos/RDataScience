@@ -609,7 +609,7 @@ fahrenheit_to_kelvin &lt;- function(temp_F) {
 </div>
 <div id="documentation-with-roxygen2" class="section level1">
 <h1><span class="header-section-number">5</span> Documentation (with <code>roxygen2</code>)</h1>
-<p>Documentation is a required element of an R pacakge. <code>roxygen2</code> is where its at; I haven’t noticed anyone use anything else in years. It’s convenient because your code and the documentation live together in the same file and the NAMESPACE file (describing your exported functions and other people’s imported functions) is automatically generated.</p>
+<p>Documentation is a required element of an R package. <code>roxygen2</code> is where its at; I haven’t noticed anyone use anything else in years. It’s convenient because your code and the documentation live together in the same file and the NAMESPACE file (describing your exported functions and other people’s imported functions) is automatically generated.</p>
 <p><code>roxygen2</code> reads lines that begin with #’ as comments to create the documentation for your package. Descriptive tags are preceded with the @ symbol. For example, <span class="citation">@param</span> has information about the input parameters for the function. Here’s a minimal example</p>
 <pre class="r"><code>#&#39; @title Converts Fahrenheit to Celsius
 #&#39;
@@ -731,7 +731,7 @@ Tangential Tip
 <p>Now, others can install your package using <code>install_github()</code>.</p>
 <div id="gitignore" class="section level2">
 <h2><span class="header-section-number">8.1</span> .gitignore</h2>
-<p>It is useful to avoid sending all your files to github; some may be used for testing, are too large, are temp filess or helper files that no one cares about.</p>
+<p>It is useful to avoid sending all your files to github; some may be used for testing, are too large, are temp files or helper files that no one cares about.</p>
 <p>The .gitignore file in your root directory stores rules for what to ignore.Here’s what I always include in my .gitignore, borrowed from various smarter people. Try putting this in your package and see if it breaks.</p>
 <pre class="r"><code># Meta
 # doc
@@ -806,9 +806,6 @@ Tangential Tip
 <!-- <img src="07_assets/Example_knitr_Template.png" alt="alt text" width="700"> -->
 <p>You’ll need to make a folder called /vignettes/ in your root directory, and save it there. This is a .Rmd file.</p>
 <p><br></p>
-</div>
-<div id="step-1-load-packages" class="section level3">
-<h3><span class="header-section-number">10.1.2</span> Step 1: Load packages</h3>
 <p>All R code to be run must be in a <em>code chunk</em> like this:</p>
 <pre class="r"><code>#```{r,eval=F}
 # CODE HERE
@@ -825,9 +822,9 @@ kel=fahrenheit_to_kelvin(far)
 plot(far,kel)</code></pre>
 <p><img src="Quickstart_RPackages_files/figure-html/unnamed-chunk-8-1.png" /><!-- --></p>
 <p>To create the document in html, just hit CMD+Shift+K to knit.</p>
-<p>Next, try exploring some more features of Rmds, outlined in the cheatsheets above. I find that some of the most useful additonal tools are:</p>
+<p>Next, try exploring some more features of Rmds, outlined in the cheatsheets above. I find that some of the most useful additional tools are:</p>
 <ol style="list-style-type: decimal">
-<li><p>Supplying arguments to a chunk of code (section 5 of the cheatsheet), to avoid evaluation or hide results (<code>eval=FALSE</code> or <code>results='hide'</code>). E.g., this can be a good way to load past results for code thats slow.</p></li>
+<li><p>Supplying arguments to a chunk of code (section 5 of the cheatsheet), to avoid evaluation or hide results (<code>eval=FALSE</code> or <code>results='hide'</code>). E.g., this can be a good way to load past results for code that’s slow.</p></li>
 <li><p>Adding images, e.g., to show figures from a paper.</p></li>
 <li><p>Adding latex equations by surrounding code with $$. E.g., $$\alpha$$ gives <br /><span class="math display"><em>α</em></span><br /></p></li>
 <li><p>Changing options in the YAML header to make the doc fancier. Try replacing</p></li>
@@ -841,9 +838,6 @@ plot(far,kel)</code></pre>
     toc_depth: 3</code></pre>
 <!-- ----------------------------------------------------------------------------- -->
 <p><br></p>
-</div>
-<div id="building-the-vignette" class="section level3">
-<h3><span class="header-section-number">10.1.3</span> Building the vignette</h3>
 <p>Although you can build your vignettes with the <em>Knit</em> button in RStudio to test them out, you need to formally build them for the package with <code>devtools::build_vignettes()</code>. Try it out.</p>
 <p>Note that the doc/ folder is created, and this is where your vignettes are stored when the package is built. This is kind of confusing because it seems redundant with the vignettes folder. Don’t edit these, always be sure to edit the files in the /vignettes/ folder.</p>
 <!-- ----------------------------------------------------------------------------- -->
@@ -852,12 +846,13 @@ plot(far,kel)</code></pre>
 </div>
 <div id="junk-drawer-instextdata" class="section level2">
 <h2><span class="header-section-number">10.2</span> Junk drawer: /inst/extdata</h2>
-<p>Particularly when sharing code for a single paper, it can be helpful to include a variety of auxilary files used for this or that. Maybe they’re scripts you use with the package, or data you’re too lazy to write documentation for, or notes to future you. For these, create the inst/ folder in your root directory, and the extdata/ folder in that. Put anything you like there.</p>
+<p>Particularly when sharing code for a single paper, it can be helpful to include a variety of auxiliary files used for this or that. Maybe they’re scripts you use with the package, or data you’re too lazy to write documentation for, or notes to future you. For these, create the inst/ folder in your root directory, and the extdata/ folder in that. Put anything you like there.</p>
 <p>It can be helpful to access those files when the package is installed with something like:</p>
 <pre class="r"><code>ddFile=system.file(&quot;extdata/dataDictionary.csv&quot;,package=&#39;rangeModelMetadata&#39;)
 system(paste0(&#39;open &#39;, ddFile, &#39; -a &quot;Microsoft Excel&quot;&#39;))</code></pre>
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
+<p><br></p>
 </div>
 </div>
 <div id="general-tips" class="section level1">
@@ -871,7 +866,7 @@ system(paste0(&#39;open &#39;, ddFile, &#39; -a &quot;Microsoft Excel&quot;&#39;
   temp_C &lt;- (temp_F - 32) * 5 / 9
   return(temp_C)
 }</code></pre>
-<p><strong>Passing arguments</strong> Sometimes other functions are embedded in your function, and you’d like to pass arguments to them. For example, below, I add an option to make a plot and the <code>plot</code> function has a wide range of options that you might want to customize. You can add <code>...</code> to your function’s arguments, and <code>...</code> to the function you’re passing arguments to to acheive this:</p>
+<p><strong>Passing arguments</strong> Sometimes other functions are embedded in your function, and you’d like to pass arguments to them. For example, below, I add an option to make a plot and the <code>plot</code> function has a wide range of options that you might want to customize. You can add <code>...</code> to your function’s arguments, and <code>...</code> to the function you’re passing arguments to to achieve this:</p>
 <pre class="r"><code>fahrenheit_to_celsius3 &lt;- function(temp_F,doPlot=F,...) {
   temp_C &lt;- (temp_F - 32) * 5 / 9
   if(doPlot) plot(temp_F,temp_C,...)
@@ -881,27 +876,6 @@ system(paste0(&#39;open &#39;, ddFile, &#39; -a &quot;Microsoft Excel&quot;&#39;
 far=seq(0,100,by=1)
 fahrenheit_to_celsius3(far,doPlot=T,col=&#39;red&#39;,pch=19,cex=.7)</code></pre>
 <p><img src="Quickstart_RPackages_files/figure-html/unnamed-chunk-13-1.png" /><!-- --></p>
-<pre><code>##   [1] -17.7777778 -17.2222222 -16.6666667 -16.1111111 -15.5555556
-##   [6] -15.0000000 -14.4444444 -13.8888889 -13.3333333 -12.7777778
-##  [11] -12.2222222 -11.6666667 -11.1111111 -10.5555556 -10.0000000
-##  [16]  -9.4444444  -8.8888889  -8.3333333  -7.7777778  -7.2222222
-##  [21]  -6.6666667  -6.1111111  -5.5555556  -5.0000000  -4.4444444
-##  [26]  -3.8888889  -3.3333333  -2.7777778  -2.2222222  -1.6666667
-##  [31]  -1.1111111  -0.5555556   0.0000000   0.5555556   1.1111111
-##  [36]   1.6666667   2.2222222   2.7777778   3.3333333   3.8888889
-##  [41]   4.4444444   5.0000000   5.5555556   6.1111111   6.6666667
-##  [46]   7.2222222   7.7777778   8.3333333   8.8888889   9.4444444
-##  [51]  10.0000000  10.5555556  11.1111111  11.6666667  12.2222222
-##  [56]  12.7777778  13.3333333  13.8888889  14.4444444  15.0000000
-##  [61]  15.5555556  16.1111111  16.6666667  17.2222222  17.7777778
-##  [66]  18.3333333  18.8888889  19.4444444  20.0000000  20.5555556
-##  [71]  21.1111111  21.6666667  22.2222222  22.7777778  23.3333333
-##  [76]  23.8888889  24.4444444  25.0000000  25.5555556  26.1111111
-##  [81]  26.6666667  27.2222222  27.7777778  28.3333333  28.8888889
-##  [86]  29.4444444  30.0000000  30.5555556  31.1111111  31.6666667
-##  [91]  32.2222222  32.7777778  33.3333333  33.8888889  34.4444444
-##  [96]  35.0000000  35.5555556  36.1111111  36.6666667  37.2222222
-## [101]  37.7777778</code></pre>
 <!-- - default values for arguments -->
 <!-- - simplifying arguments with lists -->
 <!-- - functions can be organized in files however you like in the **R** folder of your package -->
@@ -948,7 +922,7 @@ fahrenheit_to_kelvin(17)</code></pre>
 </div>
 <div id="next-steps" class="section level1">
 <h1><span class="header-section-number">12</span> Next steps</h1>
-<p>Almost always, the answer you need is breifly and well explained in Hadley Wickham’s online book <a href="http://r-pkgs.had.co.nz/">here</a>.</p>
+<p>Almost always, the answer you need is briefly and well explained in Hadley Wickham’s online book <a href="http://r-pkgs.had.co.nz/">here</a>.</p>
 <p>I just found this, so don’t know it well, but ROpenSci does a ton of smart <a href="https://devguide.ropensci.org/">stuff</a>.</p>
 <p>Obviously there’s the CRAN book on R extensions <a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html">here</a>. It tends to be long and winding and hard to search. Don’t bother with it unless you’re having trouble sleeping.</p>
 <ul>
@@ -970,12 +944,12 @@ fahrenheit_to_kelvin(17)</code></pre>
 <li><strong>Shiny apps</strong>. Like <a href="https://wallaceecomod.github.io/">Wallace</a>! or this <a href="https://shiny.rstudio.com/gallery/">Gallery</a> of apps.
 <ul>
 <li>Party line: Make your code interactive.</li>
-<li>What I really think: I see 2 major use cases: (1) big complicated apps like Wallace that helop visualize a workflow, and (2) little snippets that you might put on your website to show off your work. I don’t see them as super useful for intermediate scales, where it takes significant effort to build the app, but it only does a part of an analysis or a very specific analysis.</li>
+<li>What I really think: I see 2 major use cases: (1) big complicated apps like Wallace that help visualize a workflow, and (2) little snippets that you might put on your website to show off your work. I don’t see them as super useful for intermediate scales, where it takes significant effort to build the app, but it only does a part of an analysis or a very specific analysis.</li>
 </ul></li>
 <li><strong>CRAN</strong> submissions.
 <ul>
-<li>Party line: Your package has arrived. It’s the real deal.</li>
-<li>What I really think: CRAN is important for widely used packages, as it enforces a number of standards which are probably critical for packages that can be used in ways the developers never even thought of. But if you’re building a more specific package, I find that there are a lot of hoops to jump through which aren’t super important for making a working codebase to share.</li>
+<li>Party line: Your package has arrived. It’s fa real.</li>
+<li>What I really think: CRAN is important for widely used packages, as it enforces a number of standards which are probably critical for packages that can be used in ways the developers never even thought of. But if you’re building a more specific package, I find that there are a lot of hoops to jump through which aren’t super important for making a working code base to share.</li>
 </ul></li>
 </ul>
 </div>

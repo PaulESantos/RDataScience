@@ -284,79 +284,7 @@ If you'd like to share a zipped up version of the package, e.g., as you'd submit
 ![](Quickstart_RPackages_assets/buildSource.png)
 
 
-<!-- ----------------------------------------------------------------------------- -->
-<!-- ----------------------------------------------------------------------------- -->
 <br>
-
-# Distributing packages (github)
-
-I'm just going to demonstrate the super simple clicky version of using github with RStudio. If you want more features or to try the command line, try this easy [tutorial](https://swcarpentry.github.io/git-novice/). There are many others too; no need to reproduce here. (There's a reproducibility joke here somewhere that I'm missing ....)
-
-Follow [these instructions](https://help.github.com/en/articles/adding-an-existing-project-to-github-using-the-command-line) to create a new github repo and add the package you've been working with to it. Then follow these steps to save your changes on the github website.
-
-1. Modify any file in you repo and save the file.
-2. Under the *Git* tab in RStudio, notice that the file is now listed:
-<br>
-
-![](Quickstart_RPackages_assets/changeTracked.png)
-<br>
-
-3. Select the checkbox under *Staged* and click *Commit*. Here you save edits and provide a 'commit message' describing them very briefly (e.g., in case you need to revert to them later).
-4. To get these changes on github for everyone to see, click *Push*.
-
-That's it; your code is tracked and on github. Of course there are many more powerful ways to use git to collaborate with multiple code authors, to explore ideas and revert back to older ones if they fail, etc. But all these few steps are all you really need to share packages online. More detailed instructions are [here](https://cfss.uchicago.edu/setup/git-with-rstudio/).
-
-Now, others can install your package using `install_github()`.
-
-## .gitignore
-
-It is useful to avoid sending all your files to github; some may be used for testing, are too large, are temp files or helper files that no one cares about.
-
-The .gitignore file in your root directory stores rules for what to ignore.Here's what I always include in my .gitignore, borrowed from various smarter people. Try putting this in your package and see if it breaks.
-
-
-```r
-# Meta
-# doc
-# .Rproj.user
-# .Rhistory
-# .RData
-# .Ruserdata
-#
-# # History files
-# .Rapp.history
-# # Session Data files
-# # Example code in package build process
-# *-Ex.R
-# # Output files from R CMD build
-# /*.tar.gz
-# # Output files from R CMD check
-# /*.Rcheck/
-# # RStudio files
-# .Rproj.user/
-# # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
-# .httr-oauth
-# # knitr and R markdown default cache directories
-# /*_cache/
-# /cache/
-# # Temporary files created by R markdown
-# *.utf8.md
-# *.knit.md
-# .DS_Store
-# .Rbuildignore
-```
-
-Importantly * is a wildcard symbol, so something like *-Ex.R means ignore all the files that end in -Ex.R. Or you can list every single file manually if you're into that sort of thing.
-
-
-Note that you might want to stop 'tracking' a file with git. [Here](http://www.codeblocq.com/2016/01/Untrack-files-already-added-to-git-repository-based-on-gitignore/) are instructions.
-
-git is super powerful for teams of people working on code concurrently to avoid breaking one another's work. But it takes some learning.  git is awesome for tracking your edits and sharing on github with the simple approach shown here. I don't do much fancy branching, merging or pull requesting, because I spend more time fixing mistakes I thought I understood. This is clearly because I'm just a gitiot and not git's fault. But I'd recommend saving your time learning git more fully until you really really need it.
-
-<!-- ----------------------------------------------------------------------------- -->
-<!-- ----------------------------------------------------------------------------- -->
-<br>
-
 # Demo
 
 Here's the plan. I want you to see what a fully functional R package looks like, but I don't want it to include a bunch of stats that obscure the challenge of understanding the package structure. So we'll fix a version of my `rangeModelMetadata` package that I've intentionally introduced errors to. This package just works with text to create an `list` or CSV of text that represents metadata for species distribution models.
@@ -449,7 +377,7 @@ kel=fahrenheit_to_kelvin(far)
 plot(far,kel)
 ```
 
-![](Quickstart_RPackages_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](Quickstart_RPackages_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 To create the document in html, just hit CMD+Shift+K to knit.
 
@@ -499,6 +427,79 @@ It can be helpful to access those files when the package is installed with somet
 ddFile=system.file("extdata/dataDictionary.csv",package='rangeModelMetadata')
 system(paste0('open ', ddFile, ' -a "Microsoft Excel"'))
 ```
+
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+<br>
+
+## Distributing packages (github)
+
+I'm just going to demonstrate the super simple clicky version of using github with RStudio. If you want more features or to try the command line, try this easy [tutorial](https://swcarpentry.github.io/git-novice/). There are many others too; no need to reproduce here. (There's a reproducibility joke here somewhere that I'm missing ....)
+
+Follow [these instructions](https://help.github.com/en/articles/adding-an-existing-project-to-github-using-the-command-line) to create a new github repo and add the package you've been working with to it. Then follow these steps to save your changes on the github website.
+
+1. Modify any file in you repo and save the file.
+2. Under the *Git* tab in RStudio, notice that the file is now listed:
+<br>
+
+![](Quickstart_RPackages_assets/changeTracked.png)
+<br>
+
+3. Select the checkbox under *Staged* and click *Commit*. Here you save edits and provide a 'commit message' describing them very briefly (e.g., in case you need to revert to them later).
+4. To get these changes on github for everyone to see, click *Push*.
+
+That's it; your code is tracked and on github. Of course there are many more powerful ways to use git to collaborate with multiple code authors, to explore ideas and revert back to older ones if they fail, etc. But all these few steps are all you really need to share packages online. More detailed instructions are [here](https://cfss.uchicago.edu/setup/git-with-rstudio/).
+
+Now, others can install your package using `install_github()`.
+
+## .gitignore
+
+It is useful to avoid sending all your files to github; some may be used for testing, are too large, are temp files or helper files that no one cares about.
+
+The .gitignore file in your root directory stores rules for what to ignore.Here's what I always include in my .gitignore, borrowed from various smarter people. Try putting this in your package and see if it breaks.
+
+
+```r
+# Meta
+# doc
+# .Rproj.user
+# .Rhistory
+# .RData
+# .Ruserdata
+#
+# # History files
+# .Rapp.history
+# # Session Data files
+# # Example code in package build process
+# *-Ex.R
+# # Output files from R CMD build
+# /*.tar.gz
+# # Output files from R CMD check
+# /*.Rcheck/
+# # RStudio files
+# .Rproj.user/
+# # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+# .httr-oauth
+# # knitr and R markdown default cache directories
+# /*_cache/
+# /cache/
+# # Temporary files created by R markdown
+# *.utf8.md
+# *.knit.md
+# .DS_Store
+# .Rbuildignore
+```
+
+Importantly * is a wildcard symbol, so something like *-Ex.R means ignore all the files that end in -Ex.R. Or you can list every single file manually if you're into that sort of thing.
+
+
+Note that you might want to stop 'tracking' a file with git. [Here](http://www.codeblocq.com/2016/01/Untrack-files-already-added-to-git-repository-based-on-gitignore/) are instructions.
+
+git is super powerful for teams of people working on code concurrently to avoid breaking one another's work. But it takes some learning.  git is awesome for tracking your edits and sharing on github with the simple approach shown here. I don't do much fancy branching, merging or pull requesting, because I spend more time fixing mistakes I thought I understood. This is clearly because I'm just a gitiot and not git's fault. But I'd recommend saving your time learning git more fully until you really really need it.
+
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+<br>
 
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->

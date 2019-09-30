@@ -709,13 +709,93 @@ Tangential Tip
 <h2><span class="header-section-number">7.3</span> Build</h2>
 <p>If you’d like to share a zipped up version of the package, e.g., as you’d submit to CRAN, choose <em>Build Source Package</em> from the drop down menu. <br></p>
 <p><img src="Quickstart_RPackages_assets/buildSource.png" /></p>
+<p><br> # Demo</p>
+<p>Here’s the plan. I want you to see what a fully functional R package looks like, but I don’t want it to include a bunch of stats that obscure the challenge of understanding the package structure. So we’ll fix a version of my <code>rangeModelMetadata</code> package that I’ve intentionally introduced errors to. This package just works with text to create an <code>list</code> or CSV of text that represents metadata for species distribution models.</p>
+<ol style="list-style-type: decimal">
+<li>Create a new package called <code>intentionallyBrokenRangeModelMetada</code></li>
+<li>Download these <a href="https://cmerow.github.io/RDataScience/Quickstart_RPackages_assets/intentionallyBrokenRangeModelMetadata.zip">files</a>.</li>
+<li>Put the files in your root directory (the one called intentionallyBrokenRangeModelMetada)</li>
+<li>Run <code>devtools::document()</code> just to be sure all the manuals are built.</li>
+<li>Run <code>check()</code> either from the command line or through RStudio.</li>
+<li>Start debugging with any problems you find, rerunning <code>check()</code> periodically to see if you’ve succeeded. Hint: I’ve only introduced 1 error per function.</li>
+<li>You’re done when there are no more NOTES, WARNINGS or ERRORS.</li>
+</ol>
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
 <p><br></p>
 </div>
 </div>
-<div id="distributing-packages-github" class="section level1">
-<h1><span class="header-section-number">8</span> Distributing packages (github)</h1>
+<div id="optional-useful-package-elements" class="section level1">
+<h1><span class="header-section-number">8</span> Optional (useful) package elements</h1>
+<!-- ----------------------------------------------------------------------------- -->
+<p><br></p>
+<div id="vignettes" class="section level2">
+<h2><span class="header-section-number">8.1</span> Vignettes</h2>
+<p>Vignettes are super important. If someone is going to read one thing you write in your package, it’s likely the vignette. Its easiest to write vignettes with <strong>R markdown</strong>. R markdown is also a way to share project reports and make websites like this, so learning it enables more options. Here’s a full <a href="https://cmerow.github.io/RDataScience/07_Reproducible.html">lesson</a> I made; we’ll just skim it here. Let’s make a vignette for the demo package you were building (<strong>not the one you just debugged</strong>, so you’ll have to switch projects in RStudio.)</p>
+<p>Here are some super useful guides; really they contain almost all you need to know, and I think you can just experiment after skimming them.</p>
+<p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"> <img src="07_assets/rmarkdown.png" alt="alt text" width="700"></a></p>
+<p><small><small><small><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf</a></small></small></small></p>
+<p>The <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">reference guide</a> is a little more comprehensive</p>
+<p><br></p>
+<div id="create-new-file" class="section level3">
+<h3><span class="header-section-number">8.1.1</span> Create new file</h3>
+<p>In Rstudio: <strong>File -&gt; New File -&gt; RMarkdown -&gt; Document -&gt; HTML</strong></p>
+<p><img src="07_assets/rmarkdownwindow.png" alt="alt text" width="600"></p>
+<p>This will open a document that looks like this:</p>
+<p><img src="07_assets/Example_knitr_Template.png" alt="alt text" width="750"></p>
+<!-- <img src="07_assets/Example_knitr_Template.png" alt="alt text" width="700"> -->
+<p>You’ll need to make a folder called /vignettes/ in your root directory, and save it there. This is a .Rmd file.</p>
+<p><br></p>
+<p>All R code to be run must be in a <em>code chunk</em> like this:</p>
+<pre class="r"><code>#```{r,eval=F}
+# CODE HERE
+#```</code></pre>
+<p>Add a new <em>code chunk</em> at the bottom of this template file.</p>
+<pre class="r"><code>celsius_to_kelvin(0)</code></pre>
+<pre><code>## [1] 273.15</code></pre>
+<pre class="r"><code>fahrenheit_to_kelvin(32)</code></pre>
+<pre><code>## [1] 273.15</code></pre>
+<p>To see how this will look when built, press CMD+Shift+K (to ‘knit’ the document using the <code>knitr</code> package).</p>
+<p>Let’s add a plot, which will show up in the doc.</p>
+<pre class="r"><code>far=seq(0,220,length=100)
+kel=fahrenheit_to_kelvin(far)
+plot(far,kel)</code></pre>
+<p><img src="Quickstart_RPackages_files/figure-html/unnamed-chunk-7-1.png" /><!-- --></p>
+<p>To create the document in html, just hit CMD+Shift+K to knit.</p>
+<p>Next, try exploring some more features of Rmds, outlined in the cheatsheets above. I find that some of the most useful additional tools are:</p>
+<ol style="list-style-type: decimal">
+<li><p>Supplying arguments to a chunk of code (section 5 of the cheatsheet), to avoid evaluation or hide results (<code>eval=FALSE</code> or <code>results='hide'</code>). E.g., this can be a good way to load past results for code that’s slow.</p></li>
+<li><p>Adding images, e.g., to show figures from a paper.</p></li>
+<li><p>Adding latex equations by surrounding code with $$. E.g., $$\alpha$$ gives <br /><span class="math display"><em>α</em></span><br /></p></li>
+<li><p>Changing options in the YAML header to make the doc fancier. Try replacing</p></li>
+</ol>
+<pre class="r"><code>output: html_document</code></pre>
+<p>with</p>
+<pre class="r"><code>output:
+  rmarkdown::html_vignette:
+    toc: true
+    number_sections: true
+    toc_depth: 3</code></pre>
+<!-- ----------------------------------------------------------------------------- -->
+<p><br></p>
+<p>Although you can build your vignettes with the <em>Knit</em> button in RStudio to test them out, you need to formally build them for the package with <code>devtools::build_vignettes()</code>. Try it out.</p>
+<p>Note that the doc/ folder is created, and this is where your vignettes are stored when the package is built. This is kind of confusing because it seems redundant with the vignettes folder. Don’t edit these, always be sure to edit the files in the /vignettes/ folder.</p>
+<!-- ----------------------------------------------------------------------------- -->
+<p><br></p>
+</div>
+</div>
+<div id="junk-drawer-instextdata" class="section level2">
+<h2><span class="header-section-number">8.2</span> Junk drawer: /inst/extdata</h2>
+<p>Particularly when sharing code for a single paper, it can be helpful to include a variety of auxiliary files used for this or that. Maybe they’re scripts you use with the package, or data you’re too lazy to write documentation for, or notes to future you. For these, create the inst/ folder in your root directory, and the extdata/ folder in that. Put anything you like there.</p>
+<p>It can be helpful to access those files when the package is installed with something like:</p>
+<pre class="r"><code>ddFile=system.file(&quot;extdata/dataDictionary.csv&quot;,package=&#39;rangeModelMetadata&#39;)
+system(paste0(&#39;open &#39;, ddFile, &#39; -a &quot;Microsoft Excel&quot;&#39;))</code></pre>
+<!-- ----------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------- -->
+<p><br></p>
+</div>
+<div id="distributing-packages-github" class="section level2">
+<h2><span class="header-section-number">8.3</span> Distributing packages (github)</h2>
 <p>I’m just going to demonstrate the super simple clicky version of using github with RStudio. If you want more features or to try the command line, try this easy <a href="https://swcarpentry.github.io/git-novice/">tutorial</a>. There are many others too; no need to reproduce here. (There’s a reproducibility joke here somewhere that I’m missing ….)</p>
 <p>Follow <a href="https://help.github.com/en/articles/adding-an-existing-project-to-github-using-the-command-line">these instructions</a> to create a new github repo and add the package you’ve been working with to it. Then follow these steps to save your changes on the github website.</p>
 <ol style="list-style-type: decimal">
@@ -729,8 +809,9 @@ Tangential Tip
 </ol>
 <p>That’s it; your code is tracked and on github. Of course there are many more powerful ways to use git to collaborate with multiple code authors, to explore ideas and revert back to older ones if they fail, etc. But all these few steps are all you really need to share packages online. More detailed instructions are <a href="https://cfss.uchicago.edu/setup/git-with-rstudio/">here</a>.</p>
 <p>Now, others can install your package using <code>install_github()</code>.</p>
+</div>
 <div id="gitignore" class="section level2">
-<h2><span class="header-section-number">8.1</span> .gitignore</h2>
+<h2><span class="header-section-number">8.4</span> .gitignore</h2>
 <p>It is useful to avoid sending all your files to github; some may be used for testing, are too large, are temp files or helper files that no one cares about.</p>
 <p>The .gitignore file in your root directory stores rules for what to ignore.Here’s what I always include in my .gitignore, borrowed from various smarter people. Try putting this in your package and see if it breaks.</p>
 <pre class="r"><code># Meta
@@ -767,100 +848,17 @@ Tangential Tip
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
 <p><br></p>
-</div>
-</div>
-<div id="demo" class="section level1">
-<h1><span class="header-section-number">9</span> Demo</h1>
-<p>Here’s the plan. I want you to see what a fully functional R package looks like, but I don’t want it to include a bunch of stats that obscure the challenge of understanding the package structure. So we’ll fix a version of my <code>rangeModelMetadata</code> package that I’ve intentionally introduced errors to. This package just works with text to create an <code>list</code> or CSV of text that represents metadata for species distribution models.</p>
-<ol style="list-style-type: decimal">
-<li>Create a new package called <code>intentionallyBrokenRangeModelMetada</code></li>
-<li>Download these <a href="https://cmerow.github.io/RDataScience/Quickstart_RPackages_assets/intentionallyBrokenRangeModelMetadata.zip">files</a>.</li>
-<li>Put the files in your root directory (the one called intentionallyBrokenRangeModelMetada)</li>
-<li>Run <code>devtools::document()</code> just to be sure all the manuals are built.</li>
-<li>Run <code>check()</code> either from the command line or through RStudio.</li>
-<li>Start debugging with any problems you find, rerunning <code>check()</code> periodically to see if you’ve succeeded. Hint: I’ve only introduced 1 error per function.</li>
-<li>You’re done when there are no more NOTES, WARNINGS or ERRORS.</li>
-</ol>
-<!-- ----------------------------------------------------------------------------- -->
-<!-- ----------------------------------------------------------------------------- -->
-<p><br></p>
-</div>
-<div id="optional-useful-package-elements" class="section level1">
-<h1><span class="header-section-number">10</span> Optional (useful) package elements</h1>
-<!-- ----------------------------------------------------------------------------- -->
-<p><br></p>
-<div id="vignettes" class="section level2">
-<h2><span class="header-section-number">10.1</span> Vignettes</h2>
-<p>Vignettes are super important. If someone is going to read one thing you write in your package, it’s likely the vignette. Its easiest to write vignettes with <strong>R markdown</strong>. R markdown is also a way to share project reports and make websites like this, so learning it enables more options. Here’s a full <a href="https://cmerow.github.io/RDataScience/07_Reproducible.html">lesson</a> I made; we’ll just skim it here. Let’s make a vignette for the demo package you were building (<strong>not the one you just debugged</strong>, so you’ll have to switch projects in RStudio.)</p>
-<p>Here are some super useful guides; really they contain almost all you need to know, and I think you can just experiment after skimming them.</p>
-<p><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"> <img src="07_assets/rmarkdown.png" alt="alt text" width="700"></a></p>
-<p><small><small><small><a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf</a></small></small></small></p>
-<p>The <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">reference guide</a> is a little more comprehensive</p>
-<p><br></p>
-<div id="create-new-file" class="section level3">
-<h3><span class="header-section-number">10.1.1</span> Create new file</h3>
-<p>In Rstudio: <strong>File -&gt; New File -&gt; RMarkdown -&gt; Document -&gt; HTML</strong></p>
-<p><img src="07_assets/rmarkdownwindow.png" alt="alt text" width="600"></p>
-<p>This will open a document that looks like this:</p>
-<p><img src="07_assets/Example_knitr_Template.png" alt="alt text" width="750"></p>
-<!-- <img src="07_assets/Example_knitr_Template.png" alt="alt text" width="700"> -->
-<p>You’ll need to make a folder called /vignettes/ in your root directory, and save it there. This is a .Rmd file.</p>
-<p><br></p>
-<p>All R code to be run must be in a <em>code chunk</em> like this:</p>
-<pre class="r"><code>#```{r,eval=F}
-# CODE HERE
-#```</code></pre>
-<p>Add a new <em>code chunk</em> at the bottom of this template file.</p>
-<pre class="r"><code>celsius_to_kelvin(0)</code></pre>
-<pre><code>## [1] 273.15</code></pre>
-<pre class="r"><code>fahrenheit_to_kelvin(32)</code></pre>
-<pre><code>## [1] 273.15</code></pre>
-<p>To see how this will look when built, press CMD+Shift+K (to ‘knit’ the document using the <code>knitr</code> package).</p>
-<p>Let’s add a plot, which will show up in the doc.</p>
-<pre class="r"><code>far=seq(0,220,length=100)
-kel=fahrenheit_to_kelvin(far)
-plot(far,kel)</code></pre>
-<p><img src="Quickstart_RPackages_files/figure-html/unnamed-chunk-8-1.png" /><!-- --></p>
-<p>To create the document in html, just hit CMD+Shift+K to knit.</p>
-<p>Next, try exploring some more features of Rmds, outlined in the cheatsheets above. I find that some of the most useful additional tools are:</p>
-<ol style="list-style-type: decimal">
-<li><p>Supplying arguments to a chunk of code (section 5 of the cheatsheet), to avoid evaluation or hide results (<code>eval=FALSE</code> or <code>results='hide'</code>). E.g., this can be a good way to load past results for code that’s slow.</p></li>
-<li><p>Adding images, e.g., to show figures from a paper.</p></li>
-<li><p>Adding latex equations by surrounding code with $$. E.g., $$\alpha$$ gives <br /><span class="math display"><em>α</em></span><br /></p></li>
-<li><p>Changing options in the YAML header to make the doc fancier. Try replacing</p></li>
-</ol>
-<pre class="r"><code>output: html_document</code></pre>
-<p>with</p>
-<pre class="r"><code>output:
-  rmarkdown::html_vignette:
-    toc: true
-    number_sections: true
-    toc_depth: 3</code></pre>
-<!-- ----------------------------------------------------------------------------- -->
-<p><br></p>
-<p>Although you can build your vignettes with the <em>Knit</em> button in RStudio to test them out, you need to formally build them for the package with <code>devtools::build_vignettes()</code>. Try it out.</p>
-<p>Note that the doc/ folder is created, and this is where your vignettes are stored when the package is built. This is kind of confusing because it seems redundant with the vignettes folder. Don’t edit these, always be sure to edit the files in the /vignettes/ folder.</p>
-<!-- ----------------------------------------------------------------------------- -->
-<p><br></p>
-</div>
-</div>
-<div id="junk-drawer-instextdata" class="section level2">
-<h2><span class="header-section-number">10.2</span> Junk drawer: /inst/extdata</h2>
-<p>Particularly when sharing code for a single paper, it can be helpful to include a variety of auxiliary files used for this or that. Maybe they’re scripts you use with the package, or data you’re too lazy to write documentation for, or notes to future you. For these, create the inst/ folder in your root directory, and the extdata/ folder in that. Put anything you like there.</p>
-<p>It can be helpful to access those files when the package is installed with something like:</p>
-<pre class="r"><code>ddFile=system.file(&quot;extdata/dataDictionary.csv&quot;,package=&#39;rangeModelMetadata&#39;)
-system(paste0(&#39;open &#39;, ddFile, &#39; -a &quot;Microsoft Excel&quot;&#39;))</code></pre>
 <!-- ----------------------------------------------------------------------------- -->
 <!-- ----------------------------------------------------------------------------- -->
 <p><br></p>
 </div>
 </div>
 <div id="general-tips" class="section level1">
-<h1><span class="header-section-number">11</span> General Tips</h1>
+<h1><span class="header-section-number">9</span> General Tips</h1>
 <!-- ----------------------------------------------------------------------------- -->
 <p><br></p>
 <div id="writing-functions-1" class="section level2">
-<h2><span class="header-section-number">11.1</span> Writing Functions</h2>
+<h2><span class="header-section-number">9.1</span> Writing Functions</h2>
 <p><strong>Hidden functions don’t need documentation</strong> If you need helper functions that users won’t need access to you can make them hidden by beginning the function name with a period. Hidden functions don’t require documentation, so this can also be a useful way to avoid check WARNINGS when code is in development. Try adding this function to your package and run <code>check</code> to be sure you don’t get any errors</p>
 <pre class="r"><code>.fahrenheit_to_celsius2 &lt;- function(temp_F) {
   temp_C &lt;- (temp_F - 32) * 5 / 9
@@ -883,7 +881,7 @@ fahrenheit_to_celsius3(far,doPlot=T,col=&#39;red&#39;,pch=19,cex=.7)</code></pre
 <p><br></p>
 </div>
 <div id="debugging" class="section level2">
-<h2><span class="header-section-number">11.2</span> Debugging</h2>
+<h2><span class="header-section-number">9.2</span> Debugging</h2>
 <p><code>browser()</code> and <code>debug()</code> provide complementary ways to explore errors and see exactly what’s going on inside your function, in the environment its working with. Each allows you to step through the function line by line to explore problems. <code>browser()</code> is inserted inside the function on the line you want to begin exploring at. Try running this:</p>
 <pre class="r"><code>fahrenheit_to_kelvin &lt;- function(temp_F) {
   # Converts Fahrenheit to Kelvin using fahrenheit_to_celsius() and celsius_to_kelvin()
@@ -903,14 +901,14 @@ fahrenheit_to_kelvin(17)</code></pre>
 <p><br></p>
 </div>
 <div id="messages" class="section level2">
-<h2><span class="header-section-number">11.3</span> Messages</h2>
+<h2><span class="header-section-number">9.3</span> Messages</h2>
 <p>The best packages include a variety of checks at the beginning of functions to determine whether you might’ve input something incorrectly, and giving useful advice if you have. No one polices this; the level of detail you provide is something that you have to be able to sleep with at night. Usually, these tests involve printing something to the console. You might be used to using <code>print</code> or <code>cat</code> to send text to the console. For packages you need to use <code>message</code> or <code>warning</code> for the same tasks so that users can have control over the output, e.g., with <code>supressMessages</code>.</p>
 <p>It’s also useful to include <code>stop</code> to force the function to error out. You can consider wrapping breakable expressions in <code>try</code> to give some more options for handling errors. Try calling function in your demo with a known error (e.g., make the argument a string) and write a try statement to catch it an the write an error message.</p>
 <!-- ----------------------------------------------------------------------------- -->
 <p><br></p>
 </div>
 <div id="adding-a-welcome-message" class="section level2">
-<h2><span class="header-section-number">11.4</span> Adding a welcome message</h2>
+<h2><span class="header-section-number">9.4</span> Adding a welcome message</h2>
 <p>Here’s an example from one my packages. Put this function in your R directory.</p>
 <pre class="r"><code>.onAttach &lt;- function(libname,pkgname) {
   packageStartupMessage(&#39;Type, vignette(&quot;rmm_directory&quot;) for an overview of functions&#39;)
@@ -921,7 +919,7 @@ fahrenheit_to_kelvin(17)</code></pre>
 </div>
 </div>
 <div id="next-steps" class="section level1">
-<h1><span class="header-section-number">12</span> Next steps</h1>
+<h1><span class="header-section-number">10</span> Next steps</h1>
 <p>Almost always, the answer you need is briefly and well explained in Hadley Wickham’s online book <a href="http://r-pkgs.had.co.nz/">here</a>.</p>
 <p>I just found this, so don’t know it well, but ROpenSci does a ton of smart <a href="https://devguide.ropensci.org/">stuff</a>.</p>
 <p>Obviously there’s the CRAN book on R extensions <a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html">here</a>. It tends to be long and winding and hard to search. Don’t bother with it unless you’re having trouble sleeping.</p>

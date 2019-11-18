@@ -342,9 +342,9 @@ You'll need to make a folder called /vignettes/ in your root directory, and save
 All R code to be run must be in a _code chunk_ like this:
 
 ```r
-#```{r,eval=F}
-# CODE HERE
-#```
+## #```{r,eval=F}
+## # CODE HERE
+## #```
 ```
 
 Add a new _code chunk_ at the bottom of this template file.
@@ -424,8 +424,8 @@ It can be helpful to access those files when the package is installed with somet
 
 
 ```r
-ddFile=system.file("extdata/dataDictionary.csv",package='rangeModelMetadata')
-system(paste0('open ', ddFile, ' -a "Microsoft Excel"'))
+## ddFile=system.file("extdata/dataDictionary.csv",package='rangeModelMetadata')
+## system(paste0('open ', ddFile, ' -a "Microsoft Excel"'))
 ```
 
 <!-- ----------------------------------------------------------------------------- -->
@@ -460,34 +460,35 @@ The .gitignore file in your root directory stores rules for what to ignore.Here'
 
 
 ```r
-# Meta
-# doc
-# .Rproj.user
-# .Rhistory
-# .RData
-# .Ruserdata
-#
-# # History files
-# .Rapp.history
-# # Session Data files
-# # Example code in package build process
-# *-Ex.R
-# # Output files from R CMD build
-# /*.tar.gz
-# # Output files from R CMD check
-# /*.Rcheck/
-# # RStudio files
-# .Rproj.user/
-# # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
-# .httr-oauth
-# # knitr and R markdown default cache directories
-# /*_cache/
-# /cache/
-# # Temporary files created by R markdown
-# *.utf8.md
-# *.knit.md
-# .DS_Store
-# .Rbuildignore
+## # Meta
+## # doc
+## # .Rproj.user
+## # .Rhistory
+## # .RData
+## # .Ruserdata
+## #
+## # # History files
+## # .Rapp.history
+## # # Session Data files
+## # # Example code in package build process
+## # *-Ex.R
+## # # Output files from R CMD build
+## # /*.tar.gz
+## # # Output files from R CMD check
+## # /*.Rcheck/
+## # # RStudio files
+## # .Rproj.user/
+## # # OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+## # .httr-oauth
+## # # knitr and R markdown default cache directories
+## # /*_cache/
+## # /cache/
+## # # Temporary files created by R markdown
+## # *.utf8.md
+## # *.knit.md
+## # .DS_Store
+## # .Rbuildignore
+## 
 ```
 
 Importantly * is a wildcard symbol, so something like *-Ex.R means ignore all the files that end in -Ex.R. Or you can list every single file manually if you're into that sort of thing.
@@ -603,9 +604,9 @@ Here's an example from one my packages. Put this function in your R directory.
 
 
 ```r
-.onAttach <- function(libname,pkgname) {
-  packageStartupMessage('Type, vignette("rmm_directory") for an overview of functions')
-}
+## .onAttach <- function(libname,pkgname) {
+##   packageStartupMessage('Type, vignette("rmm_directory") for an overview of functions')
+## }
 ```
 
 <!-- ----------------------------------------------------------------------------- -->
